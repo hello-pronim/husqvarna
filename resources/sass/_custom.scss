@@ -1,0 +1,27 @@
+
+#app {
+	background:url('/../images/bg_auth.png') no-repeat;
+	background-size: cover;
+	height: 100vh;	
+	.card{
+		background: none;
+		border:none;		
+		.card-header{
+			background: none;
+			border:none;
+			text-align: center;
+			h3{
+				color:$blackblue;
+				font-weight: 700;
+			}
+		}
+		.card-body{
+			.form-group{
+				button[type="submit"]{
+					width: 100%;
+				}
+			}
+		}
+	}
+
+}
