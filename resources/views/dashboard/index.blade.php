@@ -19,14 +19,15 @@
                         <table class="table table-striped table-bordered table-hover dt-responsive" width="100%" id="sample_1">
                             <thead>
                                 <tr>
-                                    <th class="all">First name</th>
-                                    <th class="min-phone-l">Last name</th>
-                                    <th class="min-tablet">Position</th>
-                                    <th class="none">Office</th>
-                                    <th class="none">Age</th>
-                                    <th class="none">Start date</th>
-                                    <th class="desktop">Salary</th>
-                                    <th class="all">Extn.</th>
+                                    <th class="all">アマゾンPO番号</th>
+                                    <th class="min-phone-l">取引業者</th>
+                                    <th class="min-tablet">日付</th>
+                                    <th class="none">配送センター</th>
+                                    <th class="none">ウィンドウ種類</th>
+                                    <th class="none">ウィンドウ開始日</th>
+                                    <th class="none">ウィンドウ終了日</th>
+                                    <th class="desktop">総ケース数</th>
+                                    <th class="all">総額</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -36,6 +37,7 @@
                                     <td>System Architect</td>
                                     <td>Edinburgh</td>
                                     <td>61</td>
+                                    <td>2011/04/25</td>
                                     <td>2011/04/25</td>
                                     <td>$320,800</td>
                                     <td>
@@ -67,6 +69,7 @@
                                     <td>Tokyo</td>
                                     <td>63</td>
                                     <td>2011/07/25</td>
+                                    <td>2011/07/28</td>
                                     <td>$170,750</td>
                                     <td>
                                         <div class="btn-group pull-right">
@@ -97,6 +100,7 @@
                                     <td>San Francisco</td>
                                     <td>66</td>
                                     <td>2009/01/12</td>
+                                    <td>2009/02/12</td>
                                     <td>$86,000</td>
                                     <td>
                                         <div class="btn-group pull-right">
@@ -127,6 +131,7 @@
                                     <td>Edinburgh</td>
                                     <td>22</td>
                                     <td>2012/03/29</td>
+                                    <td>2012/04/29</td>
                                     <td>$433,060</td>
                                     <td>
                                         <div class="btn-group pull-right">
@@ -157,6 +162,7 @@
                                     <td>Tokyo</td>
                                     <td>33</td>
                                     <td>2008/11/28</td>
+                                    <td>2008/12/28</td>
                                     <td>$162,700</td>
                                     <td>
                                         <div class="btn-group pull-right">
@@ -187,6 +193,7 @@
                                     <td>New York</td>
                                     <td>61</td>
                                     <td>2012/12/02</td>
+                                    <td>2012/12/31</td>
                                     <td>$372,000</td>
                                     <td>
                                         <div class="btn-group pull-right">
@@ -217,6 +224,7 @@
                                     <td>San Francisco</td>
                                     <td>59</td>
                                     <td>2012/08/06</td>
+                                    <td>2012/08/10</td>
                                     <td>$137,500</td>
                                     <td>
                                         <div class="btn-group pull-right">
@@ -247,6 +255,7 @@
                                     <td>Tokyo</td>
                                     <td>55</td>
                                     <td>2010/10/14</td>
+                                    <td>2010/10/22</td>
                                     <td>$327,900</td>
                                     <td>
                                         <div class="btn-group pull-right">
@@ -277,6 +286,7 @@
                                     <td>San Francisco</td>
                                     <td>39</td>
                                     <td>2009/09/15</td>
+                                    <td>2009/10/15</td>
                                     <td>$205,500</td>
                                     <td>
                                         <div class="btn-group pull-right">
@@ -307,6 +317,7 @@
                                     <td>Edinburgh</td>
                                     <td>23</td>
                                     <td>2008/12/13</td>
+                                    <td>2008/12/31</td>
                                     <td>$103,600</td>
                                     <td>
                                         <div class="btn-group pull-right">
@@ -337,6 +348,7 @@
                                     <td>London</td>
                                     <td>30</td>
                                     <td>2008/12/19</td>
+                                    <td>2008/12/20</td>
                                     <td>$90,560</td>
                                     <td>
                                         <div class="btn-group pull-right">
@@ -367,6 +379,7 @@
                                     <td>Edinburgh</td>
                                     <td>22</td>
                                     <td>2013/03/03</td>
+                                    <td>2013/03/30</td>
                                     <td>$342,000</td>
                                     <td>
                                         <div class="btn-group pull-right">
@@ -397,6 +410,7 @@
                                     <td>San Francisco</td>
                                     <td>36</td>
                                     <td>2008/10/16</td>
+                                    <td>2008/10/20</td>
                                     <td>$470,600</td>
                                     <td>
                                         <div class="btn-group pull-right">
@@ -427,6 +441,7 @@
                                     <td>London</td>
                                     <td>43</td>
                                     <td>2012/12/18</td>
+                                    <td>2012/12/30</td>
                                     <td>$313,500</td>
                                     <td>
                                         <div class="btn-group pull-right">
@@ -457,6 +472,7 @@
                                     <td>London</td>
                                     <td>19</td>
                                     <td>2010/03/17</td>
+                                    <td>2010/04/17</td>
                                     <td>$385,750</td>
                                     <td>
                                         <div class="btn-group pull-right">
@@ -487,6 +503,7 @@
                                     <td>London</td>
                                     <td>66</td>
                                     <td>2012/11/27</td>
+                                    <td>2012/12/27</td>
                                     <td>$198,500</td>
                                     <td>
                                         <div class="btn-group pull-right">
@@ -517,6 +534,7 @@
                                     <td>New York</td>
                                     <td>64</td>
                                     <td>2010/06/09</td>
+                                    <td>2010/07/09</td>
                                     <td>$725,000</td>
                                     <td>
                                         <div class="btn-group pull-right">
