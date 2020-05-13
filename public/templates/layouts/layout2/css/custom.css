@@ -1,0 +1,18 @@
+.page-header.navbar .top-menu .navbar-nav>li.quick-sidebar-toggler a.logout{
+	padding: 0px;
+}
+.page-header.navbar .top-menu .navbar-nav>li.quick-sidebar-toggler a.logout:hover{
+	background:none;
+}
+.page-header.navbar .page-logo .logo-default{
+	margin-top: 2px;
+	width: 56px;
+	margin-left: 50px;
+}
+.page-header.navbar .page-logo{
+	background: #fff;
+	box-shadow: 0 1px 10px 0 rgba(50,50,50,.2);
+}
+.page-header.navbar .menu-toggler{
+	background-image: url(../img/sidebar_toggler_icon_default.png);
+}

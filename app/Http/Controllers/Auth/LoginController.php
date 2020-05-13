@@ -43,10 +43,16 @@ class LoginController extends Controller
 
     public function validateLogin(Request $request)
     {
-        $request->validate([
-            'メールアドレス' => 'required|email|string',
-            'パスワード' => 'required|string',
-        ]);
+        
+        $attributes = [
+            'email' => 'メールアドレス',
+            'password' => 'パスワード'
+        ];
+
+        $request->validate([            
+            'email' => 'required|email|string',
+            'password' => 'required|string',
+        ], [], $attributes);
     }
-  
+      
 }

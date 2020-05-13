@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
 <div class="container">
@@ -16,8 +16,8 @@
 
                         <div class="form-group row">                            
                             <div class="col-md-6 offset-md-3">
-                                <input id="email" type="email" class="form-control form-rounded @error('メールアドレス') is-invalid @enderror" name="メールアドレス" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="{{ __('メールアドレス') }}">                                
-                                @error('メールアドレス')
+                                <input id="email" type="email" class="form-control form-rounded @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="{{ __('メールアドレス') }}">                                
+                                @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -27,8 +27,8 @@
 
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-3">
-                                <input id="password" type="password" class="form-control form-rounded @error('パスワード') is-invalid @enderror" name="パスワード" required autocomplete="current-password" placeholder="{{ __('パスワード') }}">
-                                @error('パスワード')
+                                <input id="password" type="password" class="form-control form-rounded @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="{{ __('パスワード') }}">
+                                @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -37,7 +37,7 @@
                         </div>
 
                         <!-- <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-md-6 offset-md-3">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
