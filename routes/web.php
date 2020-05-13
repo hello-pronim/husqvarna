@@ -12,16 +12,19 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes(['verify' => true]);
+Auth::routes();
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', 'Auth\LoginController@showLoginForm')->name('home');
 
 Route::group(['middleware' => ['auth']], function(){
 	Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 });
 
-Auth::routes(['verify' => true]);
-Auth::routes();
+Route::get('/register', function(){
+	return false;
+});
+Route::get('/register_nl', 'Auth\RegisterController@showRegistrationForm')->name('register');
+
 
 
