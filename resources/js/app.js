@@ -51,7 +51,7 @@ var DatatablesAjax = function () {
                     }
                 },
                 "language":{
-                    "lengthMenu": "",
+                    "lengthMenu": "_MENU_",
                     "zeroRecords": "",
                     "info": "",
                     "infoEmpty": "",
