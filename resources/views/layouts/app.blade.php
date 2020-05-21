@@ -13,6 +13,7 @@
     <link href="{{ asset('templates/global/plugins/simple-line-icons/simple-line-icons.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('templates/global/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('templates/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('templates/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN PAGE LEVEL PLUGINS -->
     <link href="{{ asset('templates/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css') }}" rel="stylesheet" type="text/css" />
@@ -25,7 +26,11 @@
     <!-- BEGIN THEME LAYOUT STYLES -->
     <link href="{{ asset('templates/layouts/layout2/css/layout.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('templates/layouts/layout2/css/themes/blue.min.css') }}" rel="stylesheet" type="text/css" id="style_color" />
+
+    @yield('additional_css')
+
     <link href="{{ asset('templates/layouts/layout2/css/custom.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" />
     <!-- END THEME LAYOUT STYLES -->
     <link rel="shortcut icon" href="favicon.ico" /> 
 </head>
@@ -50,7 +55,7 @@
             <!-- BEGIN PAGE TOP -->
             <div class="page-top">
                 <!-- BEGIN HEADER SEARCH BOX -->                    
-                <form class="search-form search-form-expanded" action="page_general_search_3.html" method="GET">
+                <form class="search-form search-form-expanded" action="javascript:;" method="GET">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="検索..." name="query">
                         <span class="input-group-btn">
@@ -72,11 +77,11 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-default">
                                 <li>
-                                    <a href="page_user_profile_1.html">
+                                    <a href="javascript:;">
                                         <i class="icon-user"></i> ユーザー情報 </a>
                                 </li>                                   
                                 <li>
-                                    <a href="page_user_login_1.html">
+                                    <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         <i class="icon-key"></i> ログアウト </a>
                                 </li>
                             </ul>
@@ -114,7 +119,7 @@
                 <!-- BEGIN SIDEBAR MENU -->
                 <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
                     <li class="nav-item start active open">
-                        <a href="javascript:;" class="nav-link nav-toggle">
+                        <a href="{{ route('dashboard') }}" class="nav-link nav-toggle">
                             <i class="icon-docs"></i>
                             <span class="title">注文・PO</span>
                             <span class="selected"></span>
@@ -129,7 +134,7 @@
                         </a>                           
                     </li>
                     <li class="nav-item  ">
-                        <a href="javascript:;" class="nav-link nav-toggle">
+                        <a href="{{ route('management') }}" class="nav-link nav-toggle">
                             <i class="icon-settings"></i>
                             <span class="title">管理ツール</span>
                             <span class="arrow"></span>
@@ -173,6 +178,7 @@
     <!-- BEGIN PAGE LEVEL PLUGINS -->
     <script src="{{ asset('templates/global/plugins/moment.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('templates/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('templates/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js') }}" type="text/javascript"></script>    
     <script src="{{ asset('templates/global/plugins/morris/morris.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('templates/global/plugins/morris/raphael-min.js') }}" type="text/javascript"></script>    
     <!-- END PAGE LEVEL PLUGINS -->
@@ -186,6 +192,11 @@
     <script src="{{ asset('templates/layouts/layout2/scripts/layout.min.js') }}" type="text/javascript"></script>    
     
     <!-- END THEME LAYOUT SCRIPTS -->
+
+    @yield('additional_javascript')
+
+    <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>    
+    
     <script>
         $(document).ready(function()
         {

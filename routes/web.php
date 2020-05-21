@@ -18,7 +18,11 @@ Auth::routes();
 Route::get('/', 'Auth\LoginController@showLoginForm')->name('home');
 
 Route::group(['middleware' => ['auth']], function(){
+
 	Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+	Route::post('/po_uploadcsv', 'DashboardController@uploadCSV')->name('po_uploadcsv');
+
+	Route::get('/manage', 'ManageController@index')->name('management');
 });
 
 Route::get('/register', function(){
