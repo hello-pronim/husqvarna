@@ -50,6 +50,13 @@ var DatatablesAjax = function () {
                         return res.data;                        
                     }
                 },
+                "language":{
+                    "lengthMenu": "",
+                    "zeroRecords": "",
+                    "info": "",
+                    "infoEmpty": "",
+                    "infoFiltered": ""
+                },
                 createdRow: function (row, data, dataIndex) {                    
                     $(row).attr('data-id', data[0]);                    
                 },

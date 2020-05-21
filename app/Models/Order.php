@@ -28,7 +28,8 @@ class Order extends Model
 
      public static function getDataFilter($filter)
     {
-        $query = DB::table('orders')->where("po", "like", "%".$filter["search"]["value"]."%")->get();
+        
+        $query = DB::table('orders')->where("po", "like", "%".$filter["search"]["value"]."%");
 
         if( $filter['length'] > 0 ){
             $query->offset($filter['start'])->limit($filter['length']);
