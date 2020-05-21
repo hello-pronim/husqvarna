@@ -50,4 +50,9 @@ return [
     'total_cases' => '総ケース数',
     'total_cost' => '総額',
 
+    'print' => '印刷',
+    'pdf' => 'PDF保存',
+    'excel' => 'エクセル出力',
+    'tools' => '工具', 
+
 ];

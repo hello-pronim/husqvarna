@@ -25,7 +25,7 @@
                                 <tr>
                                     <th> {{ trans("dashboard.email") }} </th>                                    
                                     <th> {{ trans("dashboard.full_name") }} </th>                                    
-                                    <th> {{ trans("dashboard.password") }} </th>
+                                    <!-- <th> {{ trans("dashboard.password") }} </th> -->
                                     <th> {{ trans("dashboard.position") }} </th>
                                     <th> {{ trans("dashboard.company") }} </th>
                                     <th align="center" width="5%"> {{ trans("dashboard.action") }} </th>
@@ -35,11 +35,11 @@
                                 @if(count($users) > 0)
                                     @foreach($users as $key => $value)
                                         <tr class="odd gradeX" data-id="<?= $value['id'] ?>">
-                                            <td> {{ $value['first_name'] }} {{ $value['last_name'] }} </td>
-                                            <td> {{ $value['username'] }} </td>
                                             <td> {{ $value['email'] }} </td>
-                                            <td> {{ $value['type'] }}</td>
-                                            <td> {{ $value['type'] }}</td>
+                                            <td> {{ $value['first_name'] }} {{ $value['last_name'] }} </td>
+                                            <!-- <td> {{ $value['username'] }} </td>-->
+                                            <td> {{ $value['position'] }}</td>
+                                            <td> {{ $value['company'] }}</td>
                                             <td>
                                                 <div class="btn-group pull-right">
                                                     <button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">{{ trans("dashboard.action") }}

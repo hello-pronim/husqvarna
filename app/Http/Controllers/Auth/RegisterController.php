@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -42,7 +44,7 @@ class RegisterController extends Controller
     }
 
     public function showRegistrationForm()
-    {
+    {        
         return view('auth.register');
     }
 
@@ -53,7 +55,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    public function validator(array $data)
     {
         return Validator::make($data, [
             'first_name' => ['required', 'string', 'max:255'],
@@ -64,13 +66,36 @@ class RegisterController extends Controller
     }
 
     /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        if ($response = $this->registered($request, $user)) {
+            return $response;
+        }
+
+        return $request->wantsJson()
+                    ? new Response('', 201)
+                    : redirect($this->redirectPath());
+    }
+
+    /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
-    {
+    public function create(array $data)
+    {        
         return User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],

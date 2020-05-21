@@ -13,7 +13,7 @@
                             <img src="{{ asset('images/amazon-logo.png')}}">
                             <span class="caption-subject bold uppercase">アマゾンPO</span>
                         </div>
-                        <div class="actions">
+                        <!-- <div class="actions">
                             <form method='post' action='{{ route("po_uploadcsv") }}' enctype='multipart/form-data' >
                                 {{ csrf_field() }}
                                 <div class="fileinput fileinput-new" data-provides="fileinput">
@@ -26,6 +26,25 @@
                                 </div>
 
                             </form>
+                        </div> -->
+                        <div class="btn-group pull-right">
+                            <button class="btn green  btn-outline dropdown-toggle" data-toggle="dropdown">{{ trans('dashboard.tools') }}
+                                <i class="fa fa-angle-down"></i>
+                            </button>
+                            <ul class="dropdown-menu pull-right">
+                                <li>
+                                    <a href="javascript:;">
+                                        <i class="fa fa-print"></i> {{ trans('dashboard.print') }} </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <i class="fa fa-file-pdf-o"></i> {{ trans('dashboard.pdf') }} </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <i class="fa fa-file-excel-o"></i> {{ trans('dashboard.excel') }} </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <div class="portlet-body">

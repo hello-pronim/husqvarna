@@ -8,7 +8,7 @@
                 <div class="card-header">{{ trans("dashboard.add_customer") }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register_nl') }}">
                         @csrf
 
                         <div class="form-group row">
