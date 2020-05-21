@@ -21,7 +21,8 @@ Route::group(['middleware' => ['auth']], function(){
 
 	Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 	Route::post('/po_uploadcsv', 'DashboardController@uploadCSV')->name('po_uploadcsv');
-
+	Route::post('/ajax_dashbaord', 'DashboardController@ajax_dashbaord')->name('ajax_dashbaord');
+	
 	Route::get('/manage', 'ManageController@index')->name('management');
 });
 

@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('additional_css')
+    <link href="{{ asset('templates/global/plugins/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('templates/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('templates/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}" rel="stylesheet" type="text/css" />
+@endsection
+
 @section('content')
 <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
@@ -48,22 +54,24 @@
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <table class="table table-striped table-bordered table-hover dt-responsive" width="100%" id="sample_1">
+                        <table class="table table-striped table-bordered table-hover dt-responsive" width="100%" id="dashboard">
                             <thead>
                                 <tr>
+                                    <th class="all"></th>
                                     <th class="all">{{ trans('dashboard.po') }}</th>
                                     <th class="min-phone-l">{{ trans('dashboard.vendor') }}</th>
                                     <th class="min-tablet">{{ trans('dashboard.ordered_on') }}</th>
-                                    <th class="none">{{ trans('dashboard.ship_location') }}</th>
-                                    <th class="none">{{ trans('dashboard.window_type') }}</th>
-                                    <th class="none">{{ trans('dashboard.window_start') }}</th>
-                                    <th class="none">{{ trans('dashboard.window_end') }}</th>
-                                    <th class="desktop">{{ trans('dashboard.total_cases') }}</th>
+                                    <th class="all">{{ trans('dashboard.ship_location') }}</th>
+                                    <th class="all">{{ trans('dashboard.window_type') }}</th>
+                                    <th class="all">{{ trans('dashboard.window_start') }}</th>
+                                    <th class="all">{{ trans('dashboard.window_end') }}</th>
+                                    <th class="all">{{ trans('dashboard.total_cases') }}</th>
                                     <th class="all">{{ trans('dashboard.total_cost') }}</th>
                                     <th class="all">{{ trans('dashboard.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <!--
                                 @foreach($orders as $order)
                                 <tr>
                                     <td>{{ $order->po }}</td>
@@ -93,7 +101,9 @@
                                         </div>                                                
                                     </td>
                                 </tr> 
-                                @endforeach                               
+                                @endforeach   
+
+                                -->                            
                             </tbody>
                         </table>
                     </div>
@@ -104,4 +114,11 @@
     </div>
     <!-- END CONTENT BODY -->
 </div>
+@endsection
+
+@section('additional_javascript')
+    <script src="{{ asset('templates/global/scripts/datatable.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('templates/global/plugins/datatables/datatables.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('templates/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('templates/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}" type="text/javascript"></script>
 @endsection

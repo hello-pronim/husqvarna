@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Session;
-use App\Order;
+use App\Models\Order;
 
 class DashboardController extends Controller
 {
@@ -26,10 +26,23 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $orders = Order::get();        
+        $orders = Order::limit(20)->get();        
 
         $data = array('orders');
         return view('dashboard.index', compact($data));        
+    }
+
+    public function ajax_dashbaord(Request $request)
+    {
+        $orders = array();
+
+        if ( count( $request->input() ) > 0) {
+            $orders = Order::getDataFilter($request->input());
+           
+        }
+        $data = array("data" => $orders);
+        
+        return response()->json($data);
     }
 
     public function uploadCSV(Request $request)
@@ -101,6 +114,8 @@ class DashboardController extends Controller
                             "window_end"    => $importData[6],
                             "total_cases"    => $importData[7],
                             "total_cost"    => $importData[8],
+                            "created_at" => date("Y-m-d H:i:s"),
+                            "updated_at" => date("Y-m-d H:i:s")
                         );
 
                         Order::insertData($insertData);

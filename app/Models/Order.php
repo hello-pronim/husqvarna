@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
@@ -23,5 +24,18 @@ class Order extends Model
         if ($value->count() == 0) {
             DB::table('orders')->insert($data);
         }
+    }
+
+     public static function getDataFilter($filter)
+    {
+        $query = DB::table('orders')->where("po", "like", "%".$filter["search"]["value"]."%")->get();
+
+        if( $filter['length'] > 0 ){
+            $query->offset($filter['start'])->limit($filter['length']);
+        }
+
+        $result = $query->get();
+        
+        return $result;
     }
 }

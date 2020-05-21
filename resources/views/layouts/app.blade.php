@@ -13,6 +13,7 @@
     <link href="{{ asset('templates/global/plugins/simple-line-icons/simple-line-icons.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('templates/global/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('templates/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('templates/global/plugins/bootstrap-sweetalert/sweetalert.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('templates/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN PAGE LEVEL PLUGINS -->
@@ -174,6 +175,7 @@
     <script src="{{ asset('templates/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('templates/global/plugins/jquery.blockui.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('templates/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('templates/global/plugins/bootstrap-sweetalert/sweetalert.min.js') }}" type="text/javascript"></script>
     <!-- END CORE PLUGINS -->
     <!-- BEGIN PAGE LEVEL PLUGINS -->
     <script src="{{ asset('templates/global/plugins/moment.min.js') }}" type="text/javascript"></script>
@@ -196,7 +198,7 @@
     @yield('additional_javascript')
 
     <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>    
-    
+
     <script>
         $(document).ready(function()
         {

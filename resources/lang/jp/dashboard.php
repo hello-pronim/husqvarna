@@ -53,6 +53,6 @@ return [
     'print' => '印刷',
     'pdf' => 'PDF保存',
     'excel' => 'エクセル出力',
-    'tools' => '工具', 
+    'tools' => 'ツール', 
 
 ];
