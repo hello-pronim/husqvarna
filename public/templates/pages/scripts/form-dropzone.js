@@ -34,8 +34,11 @@ var FormDropzone = function () {
 
                         // Add the button to the file preview element.
                         file.previewElement.appendChild(removeButton);
-                    });
-                }            
+                    });                  
+                },
+                success:function(res){
+                  console.log(res);
+                }      
             }
 
 
