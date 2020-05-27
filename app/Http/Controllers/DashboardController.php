@@ -71,6 +71,7 @@ class DashboardController extends Controller
                         // File upload location
                         $location = public_path('uploads/po_csv');
 
+                        if(file_exists($location.$filename)) unlink($location.$filename);
                         // Upload file
                         $file->move($location, $filename);
 
