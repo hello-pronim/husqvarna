@@ -28,7 +28,14 @@ return [
     'return' => '戻る',
 
     'customer_list' => 'お客様一覧',
-    'add_customer' => '新規アカウント作成',    
+    'user_list' => 'ユーザー様一覧',
+    'add_customer' => '新規アカウント作成',
+    'csv_import' => 'CSVインポート',   
+
+    /*menu*/
+    'order_list' => '注文・PO',
+    'label_print' => 'ラベル印刷',
+    'management' =>'管理ツール',
 
     'customer_info' =>"ユーザー情報",
     'first_name' =>"姓",

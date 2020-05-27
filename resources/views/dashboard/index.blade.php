@@ -54,58 +54,28 @@
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <table class="table table-striped table-bordered table-hover dt-responsive" width="100%" id="dashboard">
-                            <thead>
-                                <tr>
-                                    <th class="all"></th>
-                                    <th class="all">{{ trans('dashboard.po') }}</th>
-                                    <th class="min-phone-l">{{ trans('dashboard.vendor') }}</th>
-                                    <th class="min-tablet">{{ trans('dashboard.ordered_on') }}</th>
-                                    <th class="all">{{ trans('dashboard.ship_location') }}</th>
-                                    <th class="all">{{ trans('dashboard.window_type') }}</th>
-                                    <th class="all">{{ trans('dashboard.window_start') }}</th>
-                                    <th class="all">{{ trans('dashboard.window_end') }}</th>
-                                    <th class="all">{{ trans('dashboard.total_cases') }}</th>
-                                    <th class="all">{{ trans('dashboard.total_cost') }}</th>
-                                    <th class="all">{{ trans('dashboard.action') }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!--
-                                @foreach($orders as $order)
-                                <tr>
-                                    <td>{{ $order->po }}</td>
-                                    <td>{{ $order->vendor }}</td>
-                                    <td>{{ $order->ordered_on }}</td>
-                                    <td>{{ $order->ship_location }}</td>
-                                    <td>{{ $order->window_type }}</td>
-                                    <td>{{ $order->window_start }}</td>
-                                    <td>{{ $order->window_end }}</td>
-                                    <td>{{ $order->total_cases }}</td>
-                                    <td>{{ $order->total_cost }}</td>
-                                    <td>
-                                        <div class="btn-group pull-right">
-                                            <button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">{{ trans("dashboard.action") }}
-                                                <i class="fa fa-angle-down"></i>
-                                            </button>
-                                            <ul class="dropdown-menu pull-right">
-                                                <li>
-                                                    <a href="javascript:;">
-                                                        <i class="fa fa-edit"></i> {{ trans("dashboard.edit") }} </a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:;" data-title="{{ trans('dashboard.remove_confirm') }}" data-type="warning" data-allow-outside-click="true" data-show-confirm-button="true" data-show-cancel-button="true" data-cancel-button-class="btn-danger" data-cancel-button-text='{{ trans("dashboard.cancel") }} ' data-confirm-button-text='{{ trans("dashboard.confirm") }} ' data-confirm-button-class="btn-info">
-                                                        <i class="fa fa-remove"></i> {{ trans("dashboard.remove") }} </a>
-                                                </li>                                                        
-                                            </ul>
-                                        </div>                                                
-                                    </td>
-                                </tr> 
-                                @endforeach   
-
-                                -->                            
-                            </tbody>
-                        </table>
+                        <div class="table-container">
+                            <table class="table table-striped table-bordered table-hover dt-responsive" width="100%" id="dashboard">
+                                <thead>
+                                    <tr>
+                                        <th class="never"></th>
+                                        <th class="all">{{ trans('dashboard.po') }}</th>
+                                        <th class="min-phone-l">{{ trans('dashboard.vendor') }}</th>
+                                        <th class="min-tablet">{{ trans('dashboard.ordered_on') }}</th>
+                                        <th class="all">{{ trans('dashboard.ship_location') }}</th>
+                                        <th class="all">{{ trans('dashboard.window_type') }}</th>
+                                        <th class="all">{{ trans('dashboard.window_start') }}</th>
+                                        <th class="all">{{ trans('dashboard.window_end') }}</th>
+                                        <th class="all">{{ trans('dashboard.total_cases') }}</th>
+                                        <th class="all">{{ trans('dashboard.total_cost') }}</th>
+                                        <th class="all">{{ trans('dashboard.action') }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                                        
+                                </tbody>
+                            </table>
+                        </div>    
                     </div>
                 </div>
                 <!-- END EXAMPLE TABLE PORTLET-->

@@ -13,7 +13,8 @@ class DashboardController extends Controller
      * Create a new controller instance.
      *
      * @return void
-     */
+     */    
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -34,15 +35,10 @@ class DashboardController extends Controller
 
     public function ajax_dashbaord(Request $request)
     {
-        $orders = array();
-
-        if ( count( $request->input() ) > 0) {
-            $orders = Order::getDataFilter($request->input());
-           
-        }
-        $data = array("data" => $orders);
+               
+        $response = Order::getDataFilter($request->input());
         
-        return response()->json($data);
+        return response()->json($response);
     }
 
     public function uploadCSV(Request $request)
@@ -50,91 +46,101 @@ class DashboardController extends Controller
         
         //if ($request->input('submit') != null) {
 
-            $file = $request->file('po_csv');
+            $file = $request->file('file');
 
-            // File Details
-            $filename  = $file->getClientOriginalName();
-            $extension = $file->getClientOriginalExtension();
-            $tempPath  = $file->getRealPath();
-            $fileSize  = $file->getSize();
-            $mimeType  = $file->getMimeType();
+            if($file){
+                // File Details
+                $filename  = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension();
+                $tempPath  = $file->getRealPath();
+                $fileSize  = $file->getSize();
+                $mimeType  = $file->getMimeType();
 
-            // Valid File Extensions
-            $valid_extension = array("csv");
+                // Valid File Extensions
+                $valid_extension = array("csv");
 
-            // 2MB in Bytes
-            $maxFileSize = 2097152;
+                // 2MB in Bytes
+                $maxFileSize = 2097152;
 
-            // Check file extension
-            if (in_array(strtolower($extension), $valid_extension)) {
+                // Check file extension
+                if (in_array(strtolower($extension), $valid_extension)) {
 
-                // Check file size
-                if ($fileSize <= $maxFileSize) {
+                    // Check file size
+                    if ($fileSize <= $maxFileSize) {
 
-                    // File upload location
-                    $location = public_path('uploads/po_csv');
+                        // File upload location
+                        $location = public_path('uploads/po_csv');
 
-                    // Upload file
-                    $file->move($location, $filename);
+                        // Upload file
+                        $file->move($location, $filename);
 
-                    // Import CSV to Database
-                    $filepath = $location . "/" . $filename;
+                        // Import CSV to Database
+                        $filepath = $location . "/" . $filename;
 
-                    // Reading file
-                    $file = fopen($filepath, "r");
+                        // Reading file
+                        $file = fopen($filepath, "r");
 
-                    $importData_arr = array();
-                    $i              = 0;
+                        $importData_arr = array();
+                        $i              = 0;
 
-                    while (($filedata = fgetcsv($file, 1000, ",")) !== false) {
-                        $num = count($filedata);
+                        while (($filedata = fgetcsv($file, 1000, ",")) !== false) {
+                            $num = count($filedata);
 
-                        //Skip first row (Remove below comment if you want to skip the first row)
-                        if($i == 0){
+                            //Skip first row (Remove below comment if you want to skip the first row)
+                            if($i == 0){
+                                $i++;
+                                continue;
+                            }
+                            for ($c = 0; $c < $num; $c++) {
+                                $importData_arr[$i][] = $filedata[$c];
+                            }
                             $i++;
-                            continue;
                         }
-                        for ($c = 0; $c < $num; $c++) {
-                            $importData_arr[$i][] = $filedata[$c];
+                        fclose($file);
+
+                        // Insert to MySQL database
+                        foreach ($importData_arr as $importData) {
+
+                            $insertData = array(
+                                "po" => $importData[0],
+                                "vendor"     => $importData[1],
+                                "ordered_on"   => $importData[2],
+                                "ship_location"    => $importData[3],
+                                "window_type"    => $importData[4],
+                                "window_start"    => $importData[5],
+                                "window_end"    => $importData[6],
+                                "total_cases"    => $importData[7],
+                                "total_cost"    => $importData[8],
+                                "created_at" => date("Y-m-d H:i:s"),
+                                "updated_at" => date("Y-m-d H:i:s")
+                            );
+
+                            Order::insertData($insertData);
+
                         }
-                        $i++;
-                    }
-                    fclose($file);
 
-                    // Insert to MySQL database
-                    foreach ($importData_arr as $importData) {
-
-                        $insertData = array(
-                            "po" => $importData[0],
-                            "vendor"     => $importData[1],
-                            "ordered_on"   => $importData[2],
-                            "ship_location"    => $importData[3],
-                            "window_type"    => $importData[4],
-                            "window_start"    => $importData[5],
-                            "window_end"    => $importData[6],
-                            "total_cases"    => $importData[7],
-                            "total_cost"    => $importData[8],
-                            "created_at" => date("Y-m-d H:i:s"),
-                            "updated_at" => date("Y-m-d H:i:s")
-                        );
-
-                        Order::insertData($insertData);
-
+                        //Session::flash('message', 'インポートに成功しました。');
+                        $result=array('success' => true, 'msg' =>'インポートに成功しました。' );
+                    } else {
+                        //Session::flash('message', 'フィアルは大きすぎる。 ファイルは2MB未満でなければなりません。');
+                        $result=array('success' => false, 'msg' =>'フィアルは大きすぎる。 ファイルは2MB未満でなければなりません。' );
                     }
 
-                    Session::flash('message', 'Import Successful.');
                 } else {
-                    Session::flash('message', 'File too large. File must be less than 2MB.');
+                    //Session::flash('message', '無効なファイル拡張子。');
+                    $result=array('success' => false, 'msg' =>'無効なファイル拡張子。' );
                 }
+            }else{
 
-            } else {
-                Session::flash('message', 'Invalid File Extension.');
-            }
-
+                //Session::flash('message', 'ファイルのアップロードに失敗しました。');
+                $result=array('success' => false, 'msg' =>'ファイルのアップロードに失敗しました。' );
+            }    
         //}
 
         // Redirect to index
-        return redirect(route('dashboard'));
+        //return redirect(route('management.csv_import'));
+        return response()->json($result);
+
     }
 
 }

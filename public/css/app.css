@@ -48,3 +48,13 @@
   width: 100%;
 }
 
+.dropzone_icon {
+  font-size: 30px;
+  margin: 30px 0px;
+}
+
+.dropzone .dz-preview .dz-error-message {
+  color: white;
+  top: 157px;
+}
+

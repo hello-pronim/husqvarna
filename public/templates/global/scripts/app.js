@@ -11,7 +11,7 @@ var App = function() {
 
     var resizeHandlers = [];
 
-    var assetsPath = '../assets/';
+    var assetsPath = '../templates/';
 
     var globalImgPath = 'global/img/';
 
@@ -135,6 +135,7 @@ var App = function() {
 
         $('body').on('click', '.portlet > .portlet-title > .tools > a.reload', function(e) {
             e.preventDefault();
+            console.log("sssssssss");
             var el = $(this).closest(".portlet").children(".portlet-body");
             var url = $(this).attr("data-url");
             var error = $(this).attr("data-error-display");
@@ -749,7 +750,7 @@ var App = function() {
         },
 
         // wrApper function to  block element(indicate loading)
-        blockUI: function(options) {
+        blockUI: function(options) {            
             options = $.extend(true, {}, options);
             var html = '';
             if (options.animate) {

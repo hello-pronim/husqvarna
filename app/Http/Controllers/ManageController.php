@@ -22,13 +22,19 @@ class ManageController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function user_list()
     {
         
     	$users = User::all();
 
         $data = array('users' => $users);
 
-        return view('manage.index')->with($data);;
+        return view('manage.user_list')->with($data);;
+    }
+
+    public function csv_import()
+    {
+
+        return view('manage.csv_import');
     }
 }

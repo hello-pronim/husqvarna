@@ -13,7 +13,7 @@
                     <div class="portlet-title">
                         <div class="caption font-dark">
                             <i class="icon-settings font-dark"></i>
-                            <span class="caption-subject bold uppercase">{{ trans("dashboard.customer_list") }}</span>
+                            <span class="caption-subject bold uppercase">{{ trans("dashboard.user_list") }}</span>
                         </div>
                         <div class="pull-right">
                           <button class="btn green" data-toggle="modal" data-target="#add_user_modal">{{ trans("dashboard.add_customer") }}<i class="fa fa-plus"></i></button>

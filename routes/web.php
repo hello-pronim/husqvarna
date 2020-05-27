@@ -23,7 +23,8 @@ Route::group(['middleware' => ['auth']], function(){
 	Route::post('/po_uploadcsv', 'DashboardController@uploadCSV')->name('po_uploadcsv');
 	Route::post('/ajax_dashbaord', 'DashboardController@ajax_dashbaord')->name('ajax_dashbaord');
 	
-	Route::get('/manage', 'ManageController@index')->name('management');
+	Route::get('/manage/user', 'ManageController@user_list')->name('management.user');
+	Route::get('/manage/csv_import', 'ManageController@csv_import')->name('management.csv_import');
 });
 
 Route::get('/register', function(){

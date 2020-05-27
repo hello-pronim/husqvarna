@@ -104,6 +104,11 @@ var DatatablesAjax = function () {
 
   var handleDashboard = function handleDashboard() {
     var table = $("#dashboard");
+
+    if (!$().dataTable) {
+      return;
+    }
+
     var grid = new Datatable();
     grid.init({
       src: $("#dashboard"),
@@ -115,34 +120,70 @@ var DatatablesAjax = function () {
       },
       onDataLoad: function onDataLoad(grid) {// execute some code on ajax data load
       },
-      loadingMessage: 'Loading...',
+      loadingMessage: '読み込んでいます...',
       dataTable: {
         // here you can define a typical datatable settings from http://datatables.net/usage/options                 
         // save datatable state(pagination, sort, etc) in cookie.
+        "dom": "<'row'<'col-md-4 col-sm-12'pli><'col-md-4 col-sm-12'<'data-picker'>><'col-md-4 col-sm-12'f>r>t<'row'<'col-md-4 col-sm-12'pli><'col-md-4 col-sm-12'><'col-md-4 col-sm-12'>>",
         "bStateSave": true,
+        "bFilter": true,
+        "bInfo": true,
+        //"bProcessing" : true,
+        "bPaginate": true,
+        // read the custom filters from saved state and populate the filter inputs
+        "fnStateSaveParams": function fnStateSaveParams(oSettings, sValue) {
+          $("#datatable_ajax tr.filter .form-control").each(function () {
+            sValue[$(this).attr('name')] = $(this).val();
+          });
+          return sValue;
+        },
+        // read the custom filters from saved state and populate the filter inputs
+        "fnStateLoadParams": function fnStateLoadParams(oSettings, oData) {
+          //Load custom filters
+          $("#datatable_ajax tr.filter .form-control").each(function () {
+            var element = $(this);
+
+            if (oData[element.attr('name')]) {
+              element.val(oData[element.attr('name')]);
+            }
+          });
+          return true;
+        },
         "lengthMenu": [[10, 20, 50, 100, 150, -1], [10, 20, 50, 100, 150, "All"] // change per page values here
         ],
         "pageLength": 20,
         // default record count per page
         "ajax": {
-          "url": "/ajax_dashbaord",
-          // ajax source
-          "dataSrc": function dataSrc(res) {
-            for (var i = 0, ien = res.data.length; i < ien; i++) {
-              res.data[i] = $.map(res.data[i], function (value, index) {
-                return [value];
-              });
-            }
+          "url": "/ajax_dashbaord" // ajax source
 
-            return res.data;
-          }
+          /*"dataSrc": function(res){
+               for ( var i=0, ien=res.data.length ; i<ien ; i++ ) {
+                  
+                  res.data[i] = $.map(res.data[i], function(value, index) {                                            
+                                  return [value];
+                                });
+              }         
+               App.unblockUI(table.parents(".table-container"));
+                              return res.data;                        
+          }*/
+
         },
         "language": {
-          "lengthMenu": "_MENU_",
-          "zeroRecords": "",
+          "lengthMenu": "&nbsp;&nbsp; _MENU_",
+          "zeroRecords": "該当する記録が見つかりません。",
           "info": "",
-          "infoEmpty": "",
-          "infoFiltered": ""
+          "infoEmpty": "表示するレコードが見つかりませんでした。",
+          "emptyTable": "テーブル内のデータなし。",
+          "infoFiltered": "",
+          "paginate": {
+            "previous": "Prev",
+            "next": "Next",
+            "last": "Last",
+            "first": "First",
+            "page": "",
+            "pageOf": "&nbsp;"
+          },
+          "search": "検索:"
         },
         createdRow: function createdRow(row, data, dataIndex) {
           $(row).attr('data-id', data[0]);
@@ -154,6 +195,12 @@ var DatatablesAjax = function () {
           "targets": -1,
           "data": null,
           "defaultContent": '<div class="btn-group pull-right">' + '<button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">操作' + '<i class="fa fa-angle-down"></i>' + '</button>' + '<ul class="dropdown-menu pull-right">' + '<li>' + '<a href="javascript:;" class="edit">' + '<i class="fa fa-edit"></i>編集</a>' + '</li>' + '<li>' + '<a href="javascript:;" class="delete" >' + '<i class="fa fa-remove"></i> 削除 </a>' + '</li>' + '</ul>' + '</div>'
+        }, {
+          "targets": -2,
+          "render": function render(data) {
+            return data + "円";
+          },
+          className: 'dt-body-right'
         }],
         "ordering": false,
         "order": [[1, "asc"]] // set first column as a default sort by asc
@@ -162,6 +209,8 @@ var DatatablesAjax = function () {
     });
     table.on('click', '.delete', function (e) {
       e.preventDefault();
+      var nRow = $(this).parents('tr');
+      var data_id = $(nRow).attr("data-id");
       swal({
         title: "",
         text: "削除しますか？",
@@ -174,14 +223,12 @@ var DatatablesAjax = function () {
         closeOnCancel: false
       }, function (isConfirm) {
         if (isConfirm) {
-          swal("Deleted!", "Your imaginary file has been deleted.", "success");
+          grid.getDataTable().ajax.reload();
+          swal("削除しました!", "", "success");
         } else {
-          swal("Cancelled", "Your imaginary file is safe :)", "error");
+          swal("キャンセル", "", "error");
         }
       });
-      var nRow = $(this).parents('tr')[0];
-      grid.fnDeleteRow(nRow);
-      alert("Deleted! Do not forget to do some ajax to sync with backend :)");
     });
   };
 

@@ -44,7 +44,7 @@
         <div class="page-header-inner ">
             <!-- BEGIN LOGO -->
             <div class="page-logo">
-                <a href="index.html">
+                <a href="javascript:;">
                     <img src="{{ asset('images/logo_admin.png') }}" alt="logo" class="logo-default" /> </a>
                 <div class="menu-toggler sidebar-toggler">                        
                 </div>
@@ -56,7 +56,7 @@
             <!-- BEGIN PAGE TOP -->
             <div class="page-top">
                 <!-- BEGIN HEADER SEARCH BOX -->                    
-                <form class="search-form search-form-expanded" action="javascript:;" method="GET">
+                <!-- <form class="search-form search-form-expanded" action="javascript:;" method="GET">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="検索..." name="query">
                         <span class="input-group-btn">
@@ -65,7 +65,7 @@
                             </a>
                         </span>
                     </div>
-                </form>
+                </form> -->
                 <!-- END HEADER SEARCH BOX -->
                 <!-- BEGIN TOP NAVIGATION MENU -->
                 <div class="top-menu">
@@ -122,7 +122,7 @@
                     <li class="nav-item start active open">
                         <a href="{{ route('dashboard') }}" class="nav-link nav-toggle">
                             <i class="icon-docs"></i>
-                            <span class="title">注文・PO</span>
+                            <span class="title">{{ trans('dashboard.order_list') }}</span>
                             <span class="selected"></span>
                             <span class="arrow open"></span>
                         </a>                           
@@ -130,16 +130,28 @@
                     <li class="nav-item  ">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="icon-printer"></i>
-                            <span class="title">ラベル印刷</span>
+                            <span class="title">{{ trans('dashboard.label_print') }}</span>
                             <span class="arrow"></span>
                         </a>                           
                     </li>
                     <li class="nav-item  ">
-                        <a href="{{ route('management') }}" class="nav-link nav-toggle">
+                        <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="icon-settings"></i>
-                            <span class="title">管理ツール</span>
+                            <span class="title">{{ trans('dashboard.management') }}</span>                            
                             <span class="arrow"></span>
                         </a>                            
+                        <ul class="sub-menu">
+                            <li class="nav-item">
+                                <a href="{{ route('management.user') }}" class="nav-link ">
+                                    <span class="title">{{ trans('dashboard.user_list') }}</span>
+                                </a>
+                            </li>
+                            <li class="nav-item  ">
+                                <a href="{{ route('management.csv_import') }}" class="nav-link ">
+                                    <span class="title">{{ trans('dashboard.csv_import') }}</span>
+                                </a>
+                            </li>                                
+                        </ul>
                     </li>                  
                     <li class="nav-item  ">
                         <a href="javascript:;" class="nav-link nav-toggle">
@@ -185,7 +197,7 @@
     <script src="{{ asset('templates/global/plugins/morris/raphael-min.js') }}" type="text/javascript"></script>    
     <!-- END PAGE LEVEL PLUGINS -->
     <!-- BEGIN THEME GLOBAL SCRIPTS -->
-    <script src="{{ asset('templates/global/scripts/app.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('templates/global/scripts/app.js') }}" type="text/javascript"></script>
     <!-- END THEME GLOBAL SCRIPTS -->
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
     <script src="{{ asset('templates/pages/scripts/dashboard.min.js') }}" type="text/javascript"></script>
