@@ -15,6 +15,8 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->tinyInteger('scraping_status')->nullable();
+            $table->tinyInteger('delivery_status')->nullable();
             $table->string('po')->nullable();
             $table->string('vendor')->nullable();
             $table->string('ordered_on')->nullable();
@@ -24,6 +26,7 @@ class CreateOrdersTable extends Migration
             $table->string('window_end')->nullable();
             $table->integer('total_cases')->nullable();
             $table->integer('total_cost')->nullable();
+            $table->string('tracking_no')->nullable();
             $table->timestamps();
         });
     }

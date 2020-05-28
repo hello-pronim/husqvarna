@@ -190,20 +190,33 @@ var DatatablesAjax = function () {
         },
         "columnDefs": [{
           "targets": 0,
-          "visible": false
+          visible: false
+        }, {
+          "targets": 1,
+          "orderable": false,
+          "render": function render(data, type, full, meta) {
+            return '<i class="fa fa-circle green"></i>';
+          }
+        }, {
+          "targets": 2,
+          "orderable": false,
+          "render": function render(data, type, full, meta) {
+            return '<i class="fa fa-circle red"></i>';
+          }
         }, {
           "targets": -1,
           "data": null,
+          "orderable": false,
           "defaultContent": '<div class="btn-group pull-right">' + '<button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">操作' + '<i class="fa fa-angle-down"></i>' + '</button>' + '<ul class="dropdown-menu pull-right">' + '<li>' + '<a href="javascript:;" class="edit">' + '<i class="fa fa-edit"></i>編集</a>' + '</li>' + '<li>' + '<a href="javascript:;" class="delete" >' + '<i class="fa fa-remove"></i> 削除 </a>' + '</li>' + '</ul>' + '</div>'
         }, {
-          "targets": -2,
+          "targets": -3,
           "render": function render(data) {
-            return data + "円";
+            return "¥" + data;
           },
           className: 'dt-body-right'
         }],
-        "ordering": false,
-        "order": [[1, "asc"]] // set first column as a default sort by asc
+        //"ordering": false,
+        "order": [[3, "asc"]] // set first column as a default sort by asc
 
       }
     });

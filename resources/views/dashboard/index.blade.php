@@ -58,7 +58,9 @@
                             <table class="table table-striped table-bordered table-hover dt-responsive" width="100%" id="dashboard">
                                 <thead>
                                     <tr>
-                                        <th class="never"></th>
+                                        <th class="all"></th>
+                                        <th class="all"></th>
+                                        <th class="all"></th>
                                         <th class="all">{{ trans('dashboard.po') }}</th>
                                         <th class="min-phone-l">{{ trans('dashboard.vendor') }}</th>
                                         <th class="min-tablet">{{ trans('dashboard.ordered_on') }}</th>
@@ -68,6 +70,7 @@
                                         <th class="all">{{ trans('dashboard.window_end') }}</th>
                                         <th class="all">{{ trans('dashboard.total_cases') }}</th>
                                         <th class="all">{{ trans('dashboard.total_cost') }}</th>
+                                        <th class="all">{{ trans('dashboard.tracking_no') }}</th>
                                         <th class="all">{{ trans('dashboard.action') }}</th>
                                     </tr>
                                 </thead>

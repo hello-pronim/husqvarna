@@ -22,6 +22,16 @@
   border-radius: 25px;
 }
 
+/* icon font */
+
+i.red {
+  color: #e73d4a;
+}
+
+i.green {
+  color: #32c5d2;
+}
+
 #app {
   background: url("/../images/bg_auth.png") no-repeat;
   background-size: cover;
@@ -48,17 +58,26 @@
   width: 100%;
 }
 
-.caption img.page-logo {
-  max-height: 30px;
+.dropzone {
+  border: 2px dashed #E87E04;
 }
 
-.dropzone_icon {
-  font-size: 30px;
-  margin: 30px 0px;
+.dropzone i,
+.dropzone h3 {
+  color: #E87E04;
 }
 
 .dropzone .dz-preview .dz-error-message {
   color: white;
   top: 157px;
+}
+
+.dropzone .dropzone_icon {
+  font-size: 30px;
+  margin: 30px 0px;
+}
+
+.caption img.page-logo {
+  max-height: 30px;
 }
 

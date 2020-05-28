@@ -104,12 +104,27 @@ var DatatablesAjax = function () {
                 },
                 "columnDefs": [ 
                     {
-                        "targets":0,
-                        "visible":false
+                        "targets":0, 
+                        visible:false,      
+                    },
+                    {
+                        "targets":1,       
+                        "orderable": false,                 
+                        "render":function(data, type, full, meta){                            
+                            return '<i class="fa fa-circle green"></i>';
+                        },
+                    },
+                    {
+                        "targets":2,                        
+                        "orderable": false,
+                        "render":function(data, type, full, meta){                            
+                            return '<i class="fa fa-circle red"></i>';
+                        },
                     },
                     {
                         "targets": -1,
                         "data": null,
+                        "orderable": false,
                         "defaultContent": '<div class="btn-group pull-right">'
                                                 +'<button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">操作'
                                                     +'<i class="fa fa-angle-down"></i>'
@@ -127,16 +142,16 @@ var DatatablesAjax = function () {
                                             +'</div>'
                     },
                     {
-                        "targets":-2,
+                        "targets":-3,
                         "render":function(data){
-                            return data + "円";
+                            return "¥" + data;
                         },
-                        className: 'dt-body-right'
+                        className: 'dt-body-right',                        
                     },
                 ],
-                "ordering": false,
+                //"ordering": false,
                 "order": [
-                    [1, "asc"]
+                    [3, "asc"]
                 ]// set first column as a default sort by asc
             }
         });

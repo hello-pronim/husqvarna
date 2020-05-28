@@ -165,8 +165,11 @@ var Datatable = function() {
             $.fn.dataTableExt.oStdClasses.sFilterInput = "form-control input-xs input-sm input-inline";
             $.fn.dataTableExt.oStdClasses.sLengthSelect = "form-control input-xs input-sm input-inline";
 
-            // initialize a datatable
+            // initialize a datatable   
+
             dataTable = table.DataTable(options.dataTable);
+
+            //dataTable.column(0).visible(false);
 
             // revert back to default
             $.fn.dataTableExt.oStdClasses.sWrapper = tmp.sWrapper;

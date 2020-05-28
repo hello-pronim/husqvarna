@@ -23,8 +23,10 @@
                         <table class="table table-striped table-bordered table-hover table-checkable order-column" id="user_table">
                             <thead>
                                 <tr>
+                                    <th> </th>
                                     <th> {{ trans("dashboard.email") }} </th>                                    
-                                    <th> {{ trans("dashboard.full_name") }} </th>                                    
+                                    <th> {{ trans("dashboard.last_name") }} </th>
+                                    <th> {{ trans("dashboard.first_name") }} </th>
                                     <!-- <th> {{ trans("dashboard.password") }} </th> -->
                                     <th> {{ trans("dashboard.position") }} </th>
                                     <th> {{ trans("dashboard.company") }} </th>
@@ -35,8 +37,16 @@
                                 @if(count($users) > 0)
                                     @foreach($users as $key => $value)
                                         <tr class="odd gradeX" data-id="<?= $value['id'] ?>">
+                                            <td> 
+                                                @if( $value['avatar'] && file_exists( public_path() .'/images/avatar/'. $value['avatar'] ))
+                                                    <img src="{{ asset('images/avatar/'. $value['avatar']) }}">
+                                                @else
+                                                    <img class="img" src="{{ asset('images/avatar/default.png') }}" />
+                                                @endif
+                                            </td>
                                             <td> {{ $value['email'] }} </td>
-                                            <td> {{ $value['first_name'] }} {{ $value['last_name'] }} </td>
+                                            <td> {{ $value['last_name'] }} </td>
+                                            <td> {{ $value['first_name'] }} </td>
                                             <!-- <td> {{ $value['username'] }} </td>-->
                                             <td> {{ $value['position'] }}</td>
                                             <td> {{ $value['company'] }}</td>

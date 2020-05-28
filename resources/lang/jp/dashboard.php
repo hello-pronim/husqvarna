@@ -19,6 +19,7 @@ return [
     'password_confirm' => "パスワードの確認",
     'position' => '住所',
     'company' => '会社名',
+    'phone' => '電話番号',
     'action' => '操作',
     'edit' => '編集',
     'change' => '変化する',
@@ -56,6 +57,7 @@ return [
     'window_end' => 'ウィンドウ終了日',
     'total_cases' => '総ケース数',
     'total_cost' => '総額',
+    'tracking_no' => '追跡番号',
 
     'print' => '印刷',
     'pdf' => 'PDF保存',
