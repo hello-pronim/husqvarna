@@ -59,9 +59,9 @@
                                 <thead>
                                     <tr>
                                         <th class="all"></th>
-                                        <th class="all">{{ trans('dashboard.po') }}</th>
-                                        <th class="all">{{ trans('dashboard.scrapting_status') }}</th>
+                                        <th class="all">{{ trans('dashboard.scraping_status') }}</th>
                                         <th class="all">{{ trans('dashboard.delivery_status') }}</th>
+                                        <th class="all">{{ trans('dashboard.po') }}</th>                                        
                                         <th class="min-phone-l">{{ trans('dashboard.vendor') }}</th>
                                         <th class="min-tablet">{{ trans('dashboard.ordered_on') }}</th>
                                         <th class="all">{{ trans('dashboard.ship_location') }}</th>

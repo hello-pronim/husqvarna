@@ -95,6 +95,14 @@ var DatatablesAjax = function () {
                         visible:false,      
                     },
                     {
+                        "targets":1, 
+                        className: 'dt-body-center',
+                    },
+                    {
+                        "targets":2, 
+                        className: 'dt-body-center',
+                    },
+                    {
                         "targets":1,       
                         "orderable": false,                 
                         "render":function(data, type, full, meta){                            
