@@ -129,26 +129,12 @@ var DatatablesAjax = function () {
         "bFilter": true,
         "bInfo": true,
         //"bProcessing" : true,
+        "bSortable": false,
         "bPaginate": true,
         // read the custom filters from saved state and populate the filter inputs
-        "fnStateSaveParams": function fnStateSaveParams(oSettings, sValue) {
-          $("#datatable_ajax tr.filter .form-control").each(function () {
-            sValue[$(this).attr('name')] = $(this).val();
-          });
-          return sValue;
-        },
+        "fnStateSaveParams": function fnStateSaveParams(oSettings, sValue) {},
         // read the custom filters from saved state and populate the filter inputs
-        "fnStateLoadParams": function fnStateLoadParams(oSettings, oData) {
-          //Load custom filters
-          $("#datatable_ajax tr.filter .form-control").each(function () {
-            var element = $(this);
-
-            if (oData[element.attr('name')]) {
-              element.val(oData[element.attr('name')]);
-            }
-          });
-          return true;
-        },
+        "fnStateLoadParams": function fnStateLoadParams(oSettings, oData) {},
         "lengthMenu": [[10, 20, 50, 100, 150, -1], [10, 20, 50, 100, 150, "All"] // change per page values here
         ],
         "pageLength": 20,

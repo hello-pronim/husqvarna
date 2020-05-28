@@ -39,27 +39,14 @@ var DatatablesAjax = function () {
                 "bFilter": true,
                 "bInfo": true,
                 //"bProcessing" : true,
+                "bSortable": false,
                 "bPaginate" : true,             
                 // read the custom filters from saved state and populate the filter inputs
-                 "fnStateSaveParams":    function ( oSettings, sValue ) {
-                    $("#datatable_ajax tr.filter .form-control").each(function() {
-                        sValue[$(this).attr('name')] = $(this).val();
-                    });
-                   
-                    return sValue;
+                 "fnStateSaveParams":    function ( oSettings, sValue ) {                  
                 },
 
                 // read the custom filters from saved state and populate the filter inputs
-                "fnStateLoadParams" : function ( oSettings, oData ) {
-                    //Load custom filters
-                    $("#datatable_ajax tr.filter .form-control").each(function() {
-                        var element = $(this);
-                        if (oData[element.attr('name')]) {
-                            element.val( oData[element.attr('name')] );
-                        }
-                    });
-                    
-                    return true;
+                "fnStateLoadParams" : function ( oSettings, oData ) {                   
                 },
                 "lengthMenu": [
                     [10, 20, 50, 100, 150, -1],
@@ -142,7 +129,7 @@ var DatatablesAjax = function () {
                                             +'</div>'
                     },
                     {
-                        "targets":-3,
+                        "targets":-3,                        
                         "render":function(data){
                             return "¥" + data;
                         },
