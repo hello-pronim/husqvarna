@@ -8,4 +8,7 @@ ADD COLUMN `tracking_no` VARCHAR(45) NULL AFTER `total_cost`;
 
 ALTER TABLE `husqvarna`.`users` 
 ADD COLUMN `phone` VARCHAR(45) NULL AFTER `position`;
+ALTER TABLE `husqvarna`.`users` 
+ADD COLUMN `username` VARCHAR(45) NULL AFTER `last_name`;
 
+UPDATE `husqvarna`.`users` SET `username` = 'jtsadmin' WHERE (`id` = '1');

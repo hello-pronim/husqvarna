@@ -16,13 +16,13 @@
 
                         <div class="form-group row">                            
                             <div class="col-md-6 offset-md-3">
-                                <input id="email" type="email" class="form-control form-rounded @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="{{ __('メールアドレス') }}">                                
-                                @error('email')
+                                <input id="login" type="text" class="form-control form-rounded {{ $errors->has('username') || $errors->has('email') ? ' is-invalid' : '' }}" name="login" value="{{ old('username') ?: old('email') }}" required autocomplete="login" autofocus placeholder="{{ __('メールアドレス ・ ユーザー名') }}">                                
+                                @if ($errors->has('username') || $errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>{{ $errors->first('username') ?: $errors->first('email') }}</strong>
                                     </span>
                                 @enderror                                
-                            </div>
+                            </div>        
                         </div>
 
                         <div class="form-group row">

@@ -39,25 +39,48 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-    }
+        $this->username = $this->findUsername();
+    }  
 
-    public function showLoginForm()
+    /**
+     * Get the login username to be used by the controller.
+     *
+     * @return string
+     */
+    public function findUsername()
     {
-        return view('auth.login');
+        $login = request()->input('login');
+ 
+        $fieldType = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+ 
+        request()->merge([$fieldType => $login]);
+ 
+        return $fieldType;
     }
+ 
 
     public function validateLogin(Request $request)
     {
         
         $attributes = [
-            'email' => 'メールアドレス',
+            'login' => 'ユーザー名',
             'password' => 'パスワード'
         ];
 
         $request->validate([            
-            'email' => 'required|email|string',
+            'login' => 'required|string',
             'password' => 'required|string',
         ], [], $attributes);
+    }
+
+    /**
+    * Get username property.
+    *
+    * @return string
+    */
+    public function username()
+    {
+        return $this->username;
     }
       
 }
