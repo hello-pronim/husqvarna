@@ -51,6 +51,44 @@ class Order extends Model
 
             $total_filtered = count($filter_res);    
         }
+        if($filter['order'][0]["column"]>0){
+            switch ($filter['order'][0]["column"]) {
+                case 3:
+                    $order_field = "po";                
+                    break;
+                case 4:
+                    $order_field = "vendor";                
+                    break;
+                case 5:
+                    $order_field = "ordered_on";                
+                    break;
+                case 6:
+                    $order_field = "ship_location";                
+                    break;        
+                case 7:
+                    $order_field = "window_type";                
+                    break;
+                case 8:
+                    $order_field = "window_start";                
+                    break;
+                case 9:
+                    $order_field = "window_end";                
+                    break;
+                case 10:
+                    $order_field = "total_cases";                
+                    break;
+                case 11:
+                    $order_field = "total_cost";                
+                    break;                
+                case 12:
+                    $order_field = "tracking_no";                
+                    break;                
+                default:    
+                    $order_field = "po";                
+            }
+            
+            $query->orderBy($order_field, $filter['order'][0]["dir"]);
+        }
         
         if( $filter['length'] >= 0 ){
             $data_res = $query->offset($filter['start'])->limit($filter['length'])->get();

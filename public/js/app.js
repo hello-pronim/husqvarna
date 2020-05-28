@@ -179,22 +179,18 @@ var DatatablesAjax = function () {
           visible: false
         }, {
           "targets": 1,
-          className: 'dt-body-center'
-        }, {
-          "targets": 2,
-          className: 'dt-body-center'
-        }, {
-          "targets": 1,
           "orderable": false,
           "render": function render(data, type, full, meta) {
             return '<i class="fa fa-circle green"></i>';
-          }
+          },
+          className: 'dt-body-center'
         }, {
           "targets": 2,
           "orderable": false,
           "render": function render(data, type, full, meta) {
             return '<i class="fa fa-circle red"></i>';
-          }
+          },
+          className: 'dt-body-center'
         }, {
           "targets": -1,
           "data": null,

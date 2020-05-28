@@ -169,7 +169,7 @@ var Datatable = function() {
 
             dataTable = table.DataTable(options.dataTable);
 
-            //dataTable.column(0).visible(false);
+            //dataTable.column(3).searchable(false);
 
             // revert back to default
             $.fn.dataTableExt.oStdClasses.sWrapper = tmp.sWrapper;
@@ -230,7 +230,7 @@ var Datatable = function() {
                 the.setAjaxParam($(this).attr("name"), $(this).val());
             });
 
-            dataTable.ajax.reload();
+            //dataTable.ajax.reload();
         },
 
         resetFilter: function() {
@@ -242,7 +242,7 @@ var Datatable = function() {
             });
             the.clearAjaxParams();
             the.addAjaxParam("action", tableOptions.filterCancelAction);
-            dataTable.ajax.reload();
+            //dataTable.ajax.reload();
         },
 
         getSelectedRowsCount: function() {
