@@ -33,7 +33,7 @@
     <link href="{{ asset('templates/layouts/layout2/css/custom.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" />
     <!-- END THEME LAYOUT STYLES -->
-    <link rel="shortcut icon" href="favicon.ico" /> 
+    <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}" /> 
 </head>
     <!-- END HEAD -->
 
