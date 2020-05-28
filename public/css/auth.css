@@ -10932,6 +10932,10 @@ a.text-dark:focus {
   width: 100%;
 }
 
+.caption img.page-logo {
+  max-height: 30px;
+}
+
 .dropzone_icon {
   font-size: 30px;
   margin: 30px 0px;

@@ -16,7 +16,7 @@
                 <div class="portlet light ">
                     <div class="portlet-title">
                         <div class="caption font-dark">
-                            <img src="{{ asset('images/amazon-logo.png')}}">
+                            <img class="page-logo" src="{{ asset('images/amazon-logo.png')}}">
                             <span class="caption-subject bold uppercase">アマゾンPO</span>
                         </div>
                         <!-- <div class="actions">
