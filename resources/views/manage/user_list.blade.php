@@ -30,7 +30,7 @@
                                     <!-- <th> {{ trans("dashboard.password") }} </th> -->
                                     <th> {{ trans("dashboard.phone") }} </th>
                                     <th> {{ trans("dashboard.company") }} </th>
-                                    <th align="center" width="5%"> {{ trans("dashboard.action") }} </th>
+                                    <th width="15%"> {{ trans("dashboard.user_type") }} </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -51,23 +51,15 @@
                                             <td> {{ $value['phone_number'] }}</td>
                                             <td> {{ $value['company'] }}</td>
                                            <td>
-                                                <!-- <div class="btn-group pull-right">
-                                                    <button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">{{ trans("dashboard.action") }}
-                                                        <i class="fa fa-angle-down"></i>
-                                                    </button>
-                                                    <ul class="dropdown-menu pull-right">
-                                                        <li>
-                                                            <a href="javascript:;">
-                                                                <i class="fa fa-edit"></i> {{ trans("dashboard.edit") }} </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:;" data-title="{{ trans('dashboard.remove_confirm') }}" data-type="warning" data-allow-outside-click="true" data-show-confirm-button="true" data-show-cancel-button="true" data-cancel-button-class="btn-danger" data-cancel-button-text='{{ trans("dashboard.cancel") }} ' data-confirm-button-text='{{ trans("dashboard.confirm") }} ' data-confirm-button-class="btn-info">
-                                                                <i class="fa fa-remove"></i> {{ trans("dashboard.remove") }} </a>
-                                                        </li>                                                        
-                                                    </ul>
-                                                </div>    -->     
+                                                <select name="order_status" class="form-control form-filter input-sm">
+                                                    <option value="">{{ trans('dashboard.select') }}</option>
+                                                    <option value="pending">{{ trans('dashboard.superadmin') }}</option>
+                                                    <option value="closed">{{ trans('dashboard.viewer') }}</option>
+                                                    <option value="hold">{{ trans('dashboard.warehouse') }}</option>
+                                                    <option value="fraud">{{ trans('dashboard.courier') }}</option>
+                                                </select>   
 
-                                                                                        
+                                                <se>                                        
                                             </td>
                                         </tr>
                                     @endforeach

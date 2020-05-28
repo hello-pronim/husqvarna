@@ -215,7 +215,7 @@ var DatatablesAjax = function () {
           },
           className: 'dt-body-right'
         }],
-        //"ordering": false,
+        "ordering": true,
         "order": [[3, "asc"]] // set first column as a default sort by asc
 
       }

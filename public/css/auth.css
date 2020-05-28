@@ -10942,7 +10942,10 @@ i.green {
   width: 100%;
 }
 
-#dashboard th,
+#dashboard th {
+  font-size: 10px;
+}
+
 #dashboard td {
   font-size: 12px;
 }

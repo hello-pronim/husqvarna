@@ -27,9 +27,10 @@ return [
     'update' => '更新',
     'register' => '今すぐ登録',
     'return' => '戻る',
+    'user_type' => 'ユーザータイプ',
 
     'customer_list' => 'お客様一覧',
-    'user_list' => 'ユーザー様一覧',
+    'user_list' => 'ユーザー管理',
     'add_customer' => '新規アカウント作成',
     'csv_import' => 'CSVインポート',   
 
@@ -62,6 +63,13 @@ return [
     'print' => '印刷',
     'pdf' => 'PDF保存',
     'excel' => 'エクセル出力',
-    'tools' => 'ツール', 
+    'tools' => 'ツール',
+
+    'select' => '選択して下さい。', 
+    'superadmin' => '上段管理者', 
+    'viewer' => '管理者', 
+    'warehouse' => '倉庫', 
+    'courier' => '配達会社', 
+
 
 ];
