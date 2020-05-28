@@ -71,9 +71,14 @@
                 <div class="top-menu">
                     <ul class="nav navbar-nav pull-right">                            
                         <li class="dropdown dropdown-user">
-                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                <img alt="" class="img-circle" src="{{ asset('templates/layouts/layout2/img/avatar3_small.jpg') }}" />
-                                <span class="username username-hide-on-mobile"> Admin </span>
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">                                
+                                @if( Auth::user()->avatar && file_exists( public_path() .'/images/avatar/'. Auth::user()->avatar ))
+                                    <img alt="" class="img-circle" src="{{ asset('images/avatar/'. Auth::user()->avatar) }}">
+                                @else
+                                    <img alt="" class="img-circle" src="{{ asset('images/avatar/default.png') }}" />
+                                @endif
+
+                                <span class="username username-hide-on-mobile"> {{ Auth::user()->last_name . ' '. Auth::user()->first_name }} </span>
                                 <i class="fa fa-angle-down"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-default">

@@ -28,7 +28,7 @@
                                     <th> {{ trans("dashboard.last_name") }} </th>
                                     <th> {{ trans("dashboard.first_name") }} </th>
                                     <!-- <th> {{ trans("dashboard.password") }} </th> -->
-                                    <th> {{ trans("dashboard.position") }} </th>
+                                    <th> {{ trans("dashboard.phone") }} </th>
                                     <th> {{ trans("dashboard.company") }} </th>
                                     <th align="center" width="5%"> {{ trans("dashboard.action") }} </th>
                                 </tr>
@@ -48,10 +48,10 @@
                                             <td> {{ $value['last_name'] }} </td>
                                             <td> {{ $value['first_name'] }} </td>
                                             <!-- <td> {{ $value['username'] }} </td>-->
-                                            <td> {{ $value['position'] }}</td>
+                                            <td> {{ $value['phone_number'] }}</td>
                                             <td> {{ $value['company'] }}</td>
-                                            <td>
-                                                <div class="btn-group pull-right">
+                                           <td>
+                                                <!-- <div class="btn-group pull-right">
                                                     <button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">{{ trans("dashboard.action") }}
                                                         <i class="fa fa-angle-down"></i>
                                                     </button>
@@ -65,7 +65,9 @@
                                                                 <i class="fa fa-remove"></i> {{ trans("dashboard.remove") }} </a>
                                                         </li>                                                        
                                                     </ul>
-                                                </div>                                                
+                                                </div>    -->     
+
+                                                                                        
                                             </td>
                                         </tr>
                                     @endforeach

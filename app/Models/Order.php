@@ -36,7 +36,18 @@ class Order extends Model
         $total_filtered = $totals;
 
         if($filter["search"]["value"]){
-            $filter_res = $query->where("po", "like", "%".$filter["search"]["value"]."%")->get();
+            $filter_res = $query->Where("po", "like", "%".$filter["search"]["value"]."%")
+            ->orWhere("po", "like", "%".$filter["search"]["value"]."%")
+            ->orWhere("vendor", "like", "%".$filter["search"]["value"]."%")
+            ->orWhere("ship_location", "like", "%".$filter["search"]["value"]."%")
+            ->orWhere("window_type", "like", "%".$filter["search"]["value"]."%")
+            ->orWhere("ordered_on", "like", "%".$filter["search"]["value"]."%")
+            ->orWhere("window_type", "like", "%".$filter["search"]["value"]."%")   
+            ->orWhere("window_start", "like", "%".$filter["search"]["value"]."%")   
+            ->orWhere("window_end", "like", "%".$filter["search"]["value"]."%")   
+            ->orWhere("total_cases", "like", "%".$filter["search"]["value"]."%")   
+            ->orWhere("total_cost", "like", "%".$filter["search"]["value"]."%")   
+            ->get();
 
             $total_filtered = count($filter_res);    
         }

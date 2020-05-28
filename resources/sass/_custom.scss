@@ -25,9 +25,15 @@
 	}
 }
 
+#dashboard{	
+	th, td{
+		font-size: 12px;
+	}	
+}
+
 .dropzone{
 	border: 2px dashed #E87E04;
-	
+
 	i, h3{
 		color:#E87E04;
 	}

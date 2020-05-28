@@ -5,3 +5,7 @@ ADD COLUMN `delivery_status` TINYINT(1) NULL AFTER `scraping_status`;
 
 ALTER TABLE `husqvarna`.`orders` 
 ADD COLUMN `tracking_no` VARCHAR(45) NULL AFTER `total_cost`;
+
+ALTER TABLE `husqvarna`.`users` 
+ADD COLUMN `phone` VARCHAR(45) NULL AFTER `position`;
+
