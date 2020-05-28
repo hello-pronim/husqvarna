@@ -1,0 +1,7 @@
+// 2020-05-28
+ALTER TABLE `husqvarna`.`orders` 
+ADD COLUMN `scraping_status` TINYINT(1) NULL AFTER `id`,
+ADD COLUMN `delivery_status` TINYINT(1) NULL AFTER `scraping_status`;
+
+ALTER TABLE `husqvarna`.`orders` 
+ADD COLUMN `tracking_no` VARCHAR(45) NULL AFTER `total_cost`;
