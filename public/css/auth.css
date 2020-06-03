@@ -10884,6 +10884,10 @@ a.text-dark:focus {
 
 /* Normal css */
 
+.pl-10 {
+  padding-left: 10px;
+}
+
 .pt-20 {
   padding-top: 20px;
 }
@@ -10894,6 +10898,10 @@ a.text-dark:focus {
 
 .pt-80 {
   padding-top: 80px;
+}
+
+.ml-10 {
+  margin-left: 10px;
 }
 
 /* button */
@@ -10942,11 +10950,11 @@ i.green {
   width: 100%;
 }
 
-#dashboard th {
+table.order thead th {
   font-size: 10px;
 }
 
-#dashboard td {
+table.order tbody td {
   font-size: 12px;
 }
 
@@ -10971,6 +10979,15 @@ i.green {
 
 .caption img.page-logo {
   max-height: 30px;
+}
+
+.dataTables_length label span.pageLength {
+  margin-left: 50px;
+}
+
+.tracking_box {
+  width: 170px;
+  margin: -5px auto;
 }
 
 /* form */

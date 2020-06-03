@@ -35,6 +35,14 @@ class Order extends Model
 
         $total_filtered = $totals;
 
+        if((isset($filter['start_date_val'])&& $filter['start_date_val']!='')&&(isset($filter['end_date_val'])&& $filter['end_date_val']!='')){
+            $filter_date = $query->where("ordered_on", ">=", date_format(date_create($filter['start_date_val']), 'Y/m/d'))
+                    ->where("ordered_on", "<=", date_format(date_create($filter['end_date_val']), 'Y/m/d'))
+                    ->get();
+
+            $total_filtered = count($filter_date);
+        }
+
         if($filter["search"]["value"]){
             $filter_res = $query->Where("po", "like", "%".$filter["search"]["value"]."%")
             ->orWhere("po", "like", "%".$filter["search"]["value"]."%")
@@ -51,6 +59,7 @@ class Order extends Model
 
             $total_filtered = count($filter_res);    
         }
+
         if($filter['order'][0]["column"]>0){
             switch ($filter['order'][0]["column"]) {
                 case 3:
@@ -86,8 +95,13 @@ class Order extends Model
                 default:    
                     $order_field = "po";                
             }
+
+            $order_asc = "asc";
+            if( $filter['order'][0]["dir"] ){
+                $order_asc = $filter['order'][0]["dir"];
+            }
             
-            $query->orderBy($order_field, $filter['order'][0]["dir"]);
+            $query->orderBy($order_field, $order_asc);
         }
         
         if( $filter['length'] >= 0 ){

@@ -233,6 +233,10 @@ var Datatable = function() {
             //dataTable.ajax.reload();
         },
 
+        ajax_reload: function(){
+          dataTable.ajax.reload();  
+        },
+
         resetFilter: function() {
             $('textarea.form-filter, select.form-filter, input.form-filter', table).each(function() {
                 $(this).val("");

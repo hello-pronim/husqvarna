@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 use Session;
 use App\Models\Order;
+use App\Enums\UserType;
 
 class DashboardController extends Controller
 {
@@ -27,17 +28,45 @@ class DashboardController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        $orders = Order::limit(20)->get();        
+    {                
+        if( Auth::user()->user_type == UserType::Admin ){
+            $orders = Order::limit(20)->get();                
 
+            $data = array('orders');
+            return view('dashboard.index', compact($data));            
+        }      
+        return redirect(route('orders'));  
+    }
+
+    public function orders()
+    {
+        $orders = Order::limit(20)->get();                
         $data = array('orders');
-        return view('dashboard.index', compact($data));        
+
+        return view('dashboard.orders', compact($data));        
     }
 
     public function ajax_dashbaord(Request $request)
     {
                
         $response = Order::getDataFilter($request->input());
+        
+        return response()->json($response);
+    }
+
+    public function ajax_tracking_update(Request $request)
+    {
+        if($request->input('tracking_no') && $request->input('order_id')){
+            try{
+                Order::where('id', $request->input('order_id'))->update(array( "tracking_no" => $request->input('tracking_no') ));
+
+                $response = array('success' => true , 'msg' => 'お問合せ番号が追加されました。' );   
+            } catch (Exception $e) {
+                $response = array('success' => true , 'msg' => 'お問合せ番号が追加されました。' );                   
+            }            
+        }else{
+            $response = array('success' => false , 'msg' => '空の値を挿入することはできません。' );   
+        }                       
         
         return response()->json($response);
     }

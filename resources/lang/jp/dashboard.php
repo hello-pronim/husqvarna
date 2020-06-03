@@ -36,7 +36,8 @@ return [
     'csv_import' => 'CSVインポート',   
 
     /*menu*/
-    'order_list' => '注文・PO',
+    'po_order_list' => '注文・PO',
+    'order_list' => '注文',
     'label_print' => 'ラベル印刷',
     'management' =>'管理ツール',
 
@@ -61,7 +62,7 @@ return [
     'window_end' => 'ウィンドウ終了日',
     'total_cases' => '総ケース数',
     'total_cost' => '総額',
-    'tracking_no' => '追跡番号',
+    'tracking_no' => 'お問合せ番号',
 
     'print' => '印刷',
     'pdf' => 'PDF保存',
@@ -74,5 +75,6 @@ return [
     'warehouse' => '倉庫', 
     'courier' => '配達会社', 
 
-
+    'po_list' => 'アマゾンPO',
+    'direct_list' => 'ダイレクトフルフィルメント注文',
 ];

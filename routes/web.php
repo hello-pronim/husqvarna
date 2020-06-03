@@ -20,8 +20,12 @@ Route::get('/', 'Auth\LoginController@showLoginForm')->name('home');
 Route::group(['middleware' => ['auth']], function(){
 
 	Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+	Route::get('/orders', 'DashboardController@orders')->name('orders');
+
+
 	Route::post('/po_uploadcsv', 'DashboardController@uploadCSV')->name('po_uploadcsv');
 	Route::post('/ajax_dashbaord', 'DashboardController@ajax_dashbaord')->name('ajax_dashbaord');
+	Route::post('/ajax_tracking_update', 'DashboardController@ajax_tracking_update')->name('ajax_tracking_update');
 	
 	Route::get('/manage/user', 'ManageController@user_list')->name('management.user');
 	Route::get('/manage/csv_import', 'ManageController@csv_import')->name('management.csv_import');

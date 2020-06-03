@@ -17,7 +17,7 @@
     <link href="{{ asset('templates/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN PAGE LEVEL PLUGINS -->
-    <link href="{{ asset('templates/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('templates/global/plugins/bootstrap-toastr/toastr.min.css') }}" rel="stylesheet" type="text/css" />
     
     <!-- BEGIN THEME GLOBAL STYLES -->
     <link href="{{ asset('templates/global/plugins/morris/morris.css') }}" rel="stylesheet" type="text/css" />
@@ -124,26 +124,40 @@
             <div class="page-sidebar navbar-collapse collapse">
                 <!-- BEGIN SIDEBAR MENU -->
                 <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
-                    <li class="nav-item start active open">
+                    @if(Auth::user()->user_type == App\Enums\UserType::Admin)
+                    <li class="nav-item start @if(request()->routeIs('dashboard')) active open @endif">
                         <a href="{{ route('dashboard') }}" class="nav-link nav-toggle">
                             <i class="icon-docs"></i>
-                            <span class="title">{{ trans('dashboard.order_list') }}</span>
+                            <span class="title">{{ trans('dashboard.po_order_list') }}</span>
                             <span class="selected"></span>
-                            <span class="arrow open"></span>
+                            <span class="arrow @if(request()->routeIs('dashboard')) open @endif"></span>
                         </a>                           
                     </li>
-                    <li class="nav-item  ">
+                    @endif
+                    @if(Auth::user()->user_type == App\Enums\UserType::Warehouse)
+                    <li class="nav-item @if(request()->routeIs('orders')) active open @endif">
+                        <a href="{{ route('orders') }}" class="nav-link nav-toggle">
+                            <i class="icon-briefcase"></i>
+                            <span class="title">{{ trans('dashboard.order_list') }}</span>
+                            <span class="selected"></span>
+                            <span class="arrow @if(request()->routeIs('orders')) open @endif"></span>
+                        </a>                           
+                    </li>
+                    @endif
+                    <li class="nav-item @if(request()->routeIs('print')) active open @endif">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="icon-printer"></i>
                             <span class="title">{{ trans('dashboard.label_print') }}</span>
-                            <span class="arrow"></span>
+                            <span class="selected"></span>
+                            <span class="arrow @if(request()->routeIs('print')) open @endif"></span>
                         </a>                           
                     </li>
-                    <li class="nav-item  ">
+                    <li class="nav-item @if(request()->routeIs(['management.user', 'management.csv_import'])) active open @endif">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="icon-settings"></i>
-                            <span class="title">{{ trans('dashboard.management') }}</span>                            
-                            <span class="arrow"></span>
+                            <span class="title">{{ trans('dashboard.management') }}</span>
+                            <span class="selected"></span>                            
+                            <span class="arrow @if(request()->routeIs(['management.user', 'management.csv_import'])) open @endif"></span>
                         </a>                            
                         <ul class="sub-menu">
                             <li class="nav-item">
@@ -196,7 +210,8 @@
     <!-- END CORE PLUGINS -->
     <!-- BEGIN PAGE LEVEL PLUGINS -->
     <script src="{{ asset('templates/global/plugins/moment.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('templates/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('templates/global/plugins/bootstrap-toastr/toastr.min.js') }}" type="text/javascript"></script>
+    
     <script src="{{ asset('templates/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js') }}" type="text/javascript"></script>    
     <script src="{{ asset('templates/global/plugins/morris/morris.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('templates/global/plugins/morris/raphael-min.js') }}" type="text/javascript"></script>    
