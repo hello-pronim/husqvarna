@@ -358,11 +358,12 @@ var DatatablesAjax = function () {
           visible: false
         }, {
           "targets": 1,
-          "orderable": false,
-          "render": function render(data, type, full, meta) {
-            return '<i class="fa fa-circle green"></i>';
-          },
-          className: 'dt-body-center'
+          // "orderable": false,                 
+          // "render":function(data, type, full, meta){                            
+          //     return '<i class="fa fa-circle green"></i>';
+          // },
+          // className: 'dt-body-center',
+          visible: false
         }, {
           "targets": 2,
           "orderable": false,
@@ -380,10 +381,11 @@ var DatatablesAjax = function () {
           className: 'dt-body-center'
         }, {
           "targets": -2,
-          "render": function render(data) {
-            return "¥" + data;
-          },
-          className: 'dt-body-right'
+          visible: false // "render":function(data){
+          //     return "¥" + data;
+          // },
+          // className: 'dt-body-right',
+
         }],
         "ordering": true,
         "order": [[3, "asc"]] // set first column as a default sort by asc
@@ -471,7 +473,7 @@ var DatatablesAjax = function () {
 
       if ($(this).attr('txt') == "change") {
         $(this).attr('txt', "confirm");
-        $(this).text("確認");
+        $(this).text("保存");
         $(this).removeClass('blue');
         $(this).addClass('green');
         tracking_box.find("input").prop("readonly", false);

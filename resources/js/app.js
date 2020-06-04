@@ -343,11 +343,12 @@ var DatatablesAjax = function () {
                     },                    
                     {
                         "targets":1,       
-                        "orderable": false,                 
-                        "render":function(data, type, full, meta){                            
-                            return '<i class="fa fa-circle green"></i>';
-                        },
-                        className: 'dt-body-center',
+                        // "orderable": false,                 
+                        // "render":function(data, type, full, meta){                            
+                        //     return '<i class="fa fa-circle green"></i>';
+                        // },
+                        // className: 'dt-body-center',
+                        visible:false
                     },
                     {
                         "targets":2,                        
@@ -373,11 +374,12 @@ var DatatablesAjax = function () {
                         className: 'dt-body-center',
                     },
                     {
-                        "targets":-2,                        
-                        "render":function(data){
-                            return "¥" + data;
-                        },
-                        className: 'dt-body-right',                        
+                        "targets":-2,    
+                        visible:false,                    
+                        // "render":function(data){
+                        //     return "¥" + data;
+                        // },
+                        // className: 'dt-body-right',
                     },
                 ],
                 "ordering": true,
@@ -505,7 +507,7 @@ var DatatablesAjax = function () {
             var the = $(this);
             if( $(this).attr('txt') == "change" ){
                 $(this).attr('txt', "confirm");
-                $(this).text("確認");
+                $(this).text("保存");
                 $(this).removeClass('blue');
                 $(this).addClass('green');
 

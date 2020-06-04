@@ -169,7 +169,7 @@ var Datatable = function() {
 
             dataTable = table.DataTable(options.dataTable);
 
-            //dataTable.column(3).searchable(false);
+            //dataTable.column(1).visible(false);
 
             // revert back to default
             $.fn.dataTableExt.oStdClasses.sWrapper = tmp.sWrapper;

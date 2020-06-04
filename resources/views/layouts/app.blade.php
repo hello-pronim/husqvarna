@@ -144,6 +144,7 @@
                         </a>                           
                     </li>
                     @endif
+                    @if(Auth::user()->user_type == App\Enums\UserType::Admin)
                     <li class="nav-item @if(request()->routeIs('print')) active open @endif">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="icon-printer"></i>
@@ -152,6 +153,7 @@
                             <span class="arrow @if(request()->routeIs('print')) open @endif"></span>
                         </a>                           
                     </li>
+                    @endif
                     <li class="nav-item @if(request()->routeIs(['management.user', 'management.csv_import'])) active open @endif">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="icon-settings"></i>
@@ -160,18 +162,21 @@
                             <span class="arrow @if(request()->routeIs(['management.user', 'management.csv_import'])) open @endif"></span>
                         </a>                            
                         <ul class="sub-menu">
+                            @if(Auth::user()->user_type == App\Enums\UserType::Admin)
                             <li class="nav-item">
                                 <a href="{{ route('management.user') }}" class="nav-link ">
                                     <span class="title">{{ trans('dashboard.user_list') }}</span>
                                 </a>
                             </li>
+                            @endif
                             <li class="nav-item  ">
                                 <a href="{{ route('management.csv_import') }}" class="nav-link ">
                                     <span class="title">{{ trans('dashboard.csv_import') }}</span>
                                 </a>
                             </li>                                
                         </ul>
-                    </li>                  
+                    </li>              
+                    @if(Auth::user()->user_type == App\Enums\UserType::Admin)    
                     <li class="nav-item  ">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="icon-puzzle"></i>
@@ -179,6 +184,7 @@
                             <span class="arrow"></span>
                         </a>                            
                     </li>                  
+                    @endif
                 </ul>
                 <!-- END SIDEBAR MENU -->
             </div>
@@ -211,7 +217,7 @@
     <!-- BEGIN PAGE LEVEL PLUGINS -->
     <script src="{{ asset('templates/global/plugins/moment.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('templates/global/plugins/bootstrap-toastr/toastr.min.js') }}" type="text/javascript"></script>
-    
+
     <script src="{{ asset('templates/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js') }}" type="text/javascript"></script>    
     <script src="{{ asset('templates/global/plugins/morris/morris.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('templates/global/plugins/morris/raphael-min.js') }}" type="text/javascript"></script>    
