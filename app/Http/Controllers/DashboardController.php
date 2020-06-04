@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 use Session;
 use App\Models\Order;
+use App\Models\DirectOrder;
 use App\Enums\UserType;
 
 class DashboardController extends Controller
@@ -57,8 +58,7 @@ class DashboardController extends Controller
     public function ajax_direct_order(Request $request)
     {
                
-        //$response = Order::getDataFilter($request->input());
-        $response = array('data' => [], 'recordsFiltered'=> 50, 'recordsTotal'=>50, 'draw'=>1);
+        $response = DirectOrder::getDataFilter($request->input());        
         
         return response()->json($response);
     }

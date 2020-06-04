@@ -154,12 +154,12 @@
                         </a>                           
                     </li>
                     @endif
-                    <li class="nav-item @if(request()->routeIs(['management.user', 'management.csv_import'])) active open @endif">
+                    <li class="nav-item @if(request()->routeIs(['management.user', 'management.po_csv_import', 'management.direct_csv_import'])) active open @endif">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="icon-settings"></i>
                             <span class="title">{{ trans('dashboard.management') }}</span>
                             <span class="selected"></span>                            
-                            <span class="arrow @if(request()->routeIs(['management.user', 'management.csv_import'])) open @endif"></span>
+                            <span class="arrow @if(request()->routeIs(['management.user', 'management.po_csv_import', 'management.direct_csv_import'])) open @endif"></span>
                         </a>                            
                         <ul class="sub-menu">
                             @if(Auth::user()->user_type == App\Enums\UserType::Admin)
@@ -168,10 +168,15 @@
                                     <span class="title">{{ trans('dashboard.user_list') }}</span>
                                 </a>
                             </li>
+                            <li class="nav-item  ">
+                                <a href="{{ route('management.direct_csv_import') }}" class="nav-link ">
+                                    <span class="title">{{ trans('dashboard.direct_csv_import') }}</span>
+                                </a>
+                            </li>                                
                             @endif
                             <li class="nav-item  ">
-                                <a href="{{ route('management.csv_import') }}" class="nav-link ">
-                                    <span class="title">{{ trans('dashboard.csv_import') }}</span>
+                                <a href="{{ route('management.po_csv_import') }}" class="nav-link ">
+                                    <span class="title">{{ trans('dashboard.po_csv_import') }}</span>
                                 </a>
                             </li>                                
                         </ul>

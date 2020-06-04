@@ -93,7 +93,7 @@ class Order extends Model
                     $order_field = "tracking_no";                
                     break;                
                 default:    
-                    $order_field = "po";                
+                    $order_field = "ordered_on";                
             }
 
             $order_asc = "asc";

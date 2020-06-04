@@ -33,9 +33,15 @@ class ManageController extends Controller
         return view('manage.user_list')->with($data);;
     }
 
-    public function csv_import()
+    public function po_csv_import()
     {
 
         return view('manage.csv_import');
+    }
+    
+    public function direct_csv_import()
+    {
+
+        return view('manage.direct_csv_import');
     }
 }

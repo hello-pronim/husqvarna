@@ -63,7 +63,7 @@ var DatatablesAjax = function () {
                     "lengthMenu": "&nbsp;<span class='pageLength'>表示数:</span>&nbsp; _MENU_",
                     "zeroRecords": "該当する記録が見つかりません。",
                     "info": "",
-                    "infoEmpty": "表示するレコードが見つかりませんでした。",
+                    "infoEmpty": "&nbsp;&nbsp;表示するレコードが見つかりませんでした。",
                     "emptyTable": "テーブル内のデータなし。",
                     "infoFiltered": "",
                     "paginate": {
@@ -172,7 +172,7 @@ var DatatablesAjax = function () {
             'type': 'text',
             'name': 'po_date_range',
             'value': init_date[0] + ' - ' + init_date[1],            
-            'disabled':true
+            'disabled':false
 
         }).daterangepicker({
                 opens: 'left',
@@ -225,13 +225,13 @@ var DatatablesAjax = function () {
                     'data-offstyle':"danger",
                     change: function(e){
                         if($(this).prop("checked")){
+                            grid.setAjaxParam("start_date_val", start_date_val);
+                            grid.setAjaxParam("end_date_val", end_date_val);                             
+                            datepicker.prop('disabled', false);
+                        }else{
                             grid.setAjaxParam("start_date_val", '');
                             grid.setAjaxParam("end_date_val", ''); 
                             datepicker.prop('disabled', true);
-                        }else{
-                            grid.setAjaxParam("start_date_val", start_date_val);
-                            grid.setAjaxParam("end_date_val", end_date_val); 
-                            datepicker.prop('disabled', false);
                         }
                         grid.ajax_reload();
                     }
