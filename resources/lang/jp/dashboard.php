@@ -33,7 +33,8 @@ return [
     'customer_list' => 'お客様一覧',
     'user_list' => 'ユーザー管理',
     'add_customer' => '新規アカウント作成',
-    'po_csv_import' => 'CSVインポート',       
+    'csv_import' => 'CSVインポート',       
+    'po_csv_import' => 'PO CSVインポート',       
     'direct_csv_import' => 'ダイレクトフルフィルメント注文 CSVインポート',   
 
     /*menu*/
