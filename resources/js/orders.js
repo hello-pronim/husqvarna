@@ -106,7 +106,7 @@ var DatatablesAjax = function () {
                         "render":function(data, type, full, meta){                            
                             if(data==null) data='';
                             var tracking_no_input ='<div class="input-group tracking_box" order-id="'+full[0]+'">' +
-                                    '<input type="text" value="'+data+'" class="form-control input-sm tracking_no" name="tracking_no" placeholder="0000-0000-0000" readonly>'+
+                                    '<input type="text" value="'+data+'" class="form-control input-sm tracking_no" name="tracking_no" placeholder="0000-0000-0000">'+
                                     '<span class="input-group-btn">'+
                                         '<button class="btn blue btn-sm" txt="change" type="button">保存</button>'+
                                     '</span>'+
@@ -248,14 +248,16 @@ var DatatablesAjax = function () {
         table.on('click', '.tracking_box button', function(e) {
             var tracking_box = $(this).parent().parent();
             var the = $(this);
-            if( $(this).attr('txt') == "change" ){
-                $(this).attr('txt', "confirm");
-                $(this).text("確認");
-                $(this).removeClass('blue');
-                $(this).addClass('green');
+            // if( $(this).attr('txt') == "change" ){
+            //     $(this).attr('txt', "confirm");
+            //     $(this).text("確認");
+            //     $(this).removeClass('blue');
+            //     $(this).addClass('green');
 
-                tracking_box.find("input").prop("readonly", false);
-            }else if($(this).attr('txt') == "confirm"){
+            //     tracking_box.find("input").prop("readonly", false);
+            // }
+
+            if($(this).attr('txt') == "change"){
                 $.ajax({
                     type:"post",
                     url:'/ajax_tracking_update',
@@ -267,11 +269,11 @@ var DatatablesAjax = function () {
                             toastr["error"](res.msg, "失敗!")
                         }
 
-                        the.attr('txt', "change");
-                        the.text("保存");
-                        the.removeClass('green');
-                        the.addClass('blue');
-                        tracking_box.find("input").prop("readonly", true);
+                        // the.attr('txt', "change");
+                        // the.text("保存");
+                        // the.removeClass('green');
+                        // the.addClass('blue');
+                        // tracking_box.find("input").prop("readonly", true);
                     }
                 });
             }
