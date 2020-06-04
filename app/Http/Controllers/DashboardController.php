@@ -54,6 +54,15 @@ class DashboardController extends Controller
         return response()->json($response);
     }
 
+    public function ajax_direct_order(Request $request)
+    {
+               
+        //$response = Order::getDataFilter($request->input());
+        $response = array('data' => [], 'recordsFiltered'=> 50, 'recordsTotal'=>50, 'draw'=>1);
+        
+        return response()->json($response);
+    }
+
     public function ajax_tracking_update(Request $request)
     {
         if($request->input('tracking_no') && $request->input('order_id')){

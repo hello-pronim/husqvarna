@@ -90,7 +90,48 @@
                                     <span class="caption-subject bold uppercase">{{ trans('dashboard.direct_list') }}</span>
                                 </div>                                                              
                             </div>
-                            <div class="portlet-body">                                
+                            <div class="portlet-body">
+                                <div class="table-container table-responsive">
+                                    <table class="table table-striped table-bordered table-hover dt-responsive order" width="100%" id="order_direct">
+                                        <thead>
+                                            <tr>
+                                                <th class="all"></th>
+                                                <th class="all">{{ trans('dashboard.order_number') }}</th>
+                                                <th class="all">{{ trans('dashboard.order_status') }}</th>
+                                                <th class="all">{{ trans('dashboard.store_code') }}</th>
+                                                <th class="all">{{ trans('dashboard.order_confirm_date') }}</th>
+                                                <th class="all">{{ trans('dashboard.delivery_deadline') }}</th>
+                                                <th class="all">{{ trans('dashboard.delivery_method') }}</th>
+                                                <th class="all">{{ trans('dashboard.delivery_method_code') }}</th>
+                                                <th class="all">{{ trans('dashboard.delivery_name') }}</th>
+                                                <th class="all">{{ trans('dashboard.delivery_address1') }}</th>
+                                                <th class="all">{{ trans('dashboard.delivery_address2') }}</th>
+                                                <th class="all">{{ trans('dashboard.delivery_address3') }}</th>
+                                                <th class="all">{{ trans('dashboard.delivery_city') }}</th>
+                                                <th class="all">{{ trans('dashboard.delivery_prefecture') }}</th>
+                                                <th class="all">{{ trans('dashboard.delivery_postal_code') }}</th>
+                                                <th class="all">{{ trans('dashboard.delivery_country') }}</th>
+                                                <th class="all">{{ trans('dashboard.phone_number') }}</th>
+                                                <th class="all">{{ trans('dashboard.is_gift') }}</th>
+                                                <th class="all">{{ trans('dashboard.purchase_price') }}</th>
+                                                <th class="all">{{ trans('dashboard.sku') }}</th>
+                                                <th class="all">{{ trans('dashboard.asin') }}</th>
+                                                <th class="all">{{ trans('dashboard.product_name') }}</th>
+                                                <th class="all">{{ trans('dashboard.product_quantity') }}</th>
+                                                <th class="all">{{ trans('dashboard.gift_message') }}</th>
+                                                <th class="all">{{ trans('dashboard.invoice_number') }}</th>
+                                                <th class="all">{{ trans('dashboard.delivery_date') }}</th>
+                                                <th class="all">{{ trans('dashboard.cash_delivery') }}</th>
+                                                <th class="all">{{ trans('dashboard.payment_balance') }}</th>
+                                                <th class="all">{{ trans('dashboard.delivery_quantity') }}</th>
+                                                <th class="all">{{ trans('dashboard.action') }}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                                
+                                        </tbody>
+                                    </table>
+                                </div>    
                             </div>
                         </div>
                         <!-- END EXAMPLE TABLE PORTLET-->
@@ -109,4 +150,5 @@
     <script src="{{ asset('templates/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js') }}" type="text/javascript"></script>
     <script src="{{ asset('templates/global/plugins/daterangepicker/daterangepicker.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('templates/global/plugins/bootstrap-toggle/bootstrap-toggle.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/po_dash.js') }}" type="text/javascript"></script>    
 @endsection

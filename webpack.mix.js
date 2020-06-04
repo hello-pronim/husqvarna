@@ -15,5 +15,8 @@ mix.js('resources/js/auth.js', 'public/js')
     .sass('resources/sass/auth.scss', 'public/css');
 
 mix.js('resources/js/app.js', 'public/js')    
+	.js('resources/js/po_dash.js', 'public/js')
+	.js('resources/js/orders.js', 'public/js')
 	.sass('resources/sass/app.scss', 'public/css');
+
 	
