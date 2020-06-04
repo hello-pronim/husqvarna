@@ -235,7 +235,7 @@ var DatatablesAjax = function () {
       'type': 'text',
       'name': 'po_date_range',
       'value': init_date[0] + ' - ' + init_date[1],
-      'disabled': false
+      'disabled': true
     }).daterangepicker({
       opens: 'left',
       locale: {
@@ -256,7 +256,7 @@ var DatatablesAjax = function () {
     var date_slider = $("<input>", {
       "id": "po_on_off",
       "type": "checkbox",
-      "checked": true,
+      "checked": false,
       'data-toggle': "toggle",
       'data-on': "期間",
       'data-off': "全部",

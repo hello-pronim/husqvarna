@@ -29,7 +29,7 @@ Route::group(['middleware' => ['auth']], function(){
 	Route::post('/ajax_tracking_update', 'DashboardController@ajax_tracking_update')->name('ajax_tracking_update');
 	
 	Route::get('/manage/user', 'ManageController@user_list')->name('management.user');
-	Route::get('/manage/po_csv_import', 'ManageController@po_csv_import')->name('management.po_csv_import');
+	Route::get('/manage/csv_import', 'ManageController@po_csv_import')->name('management.po_csv_import');
 	Route::get('/manage/direct_csv_import', 'ManageController@direct_csv_import')->name('management.direct_csv_import');
 });
 

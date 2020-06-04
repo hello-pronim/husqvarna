@@ -172,13 +172,13 @@
                                 <a href="{{ route('management.direct_csv_import') }}" class="nav-link ">
                                     <span class="title">{{ trans('dashboard.direct_csv_import') }}</span>
                                 </a>
-                            </li>                                
-                            @endif
+                            </li>                                                         
+                            @endif                            
                             <li class="nav-item  ">
                                 <a href="{{ route('management.po_csv_import') }}" class="nav-link ">
                                     <span class="title">{{ trans('dashboard.po_csv_import') }}</span>
                                 </a>
-                            </li>                                
+                            </li> 
                         </ul>
                     </li>              
                     @if(Auth::user()->user_type == App\Enums\UserType::Admin)    

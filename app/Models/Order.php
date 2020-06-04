@@ -23,6 +23,8 @@ class Order extends Model
         $value = DB::table('orders')->where('po', $data['po'])->get();
         if ($value->count() == 0) {
             DB::table('orders')->insert($data);
+        }else{
+            DB::table('orders')->update($data)->where('po', $data['po']);
         }
     }
 

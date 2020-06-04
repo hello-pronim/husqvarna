@@ -31,7 +31,11 @@
                     </div> -->                    
                     
                     <i class="fa fa-plus-circle dropzone_icon"></i>
-                    <h3 class="sbold">PO csvをここにドラッグアンドドロップ</h3>					
+                    @if(Auth::user()->user_type == App\Enums\UserType::Warehouse)
+                        <h3 class="sbold">お問合せ番号エックセルインポート</h3>					
+                    @else
+                        <h3 class="sbold">PO csvをここにドラッグアンドドロップ</h3>                    
+                    @endif    
                 </form>
 
                 <!-- <div class="text-center mt-30" style="margin-top: 50px;"><button type="button" id="dropzone-fileupload" class="btn btn-lg blue">輸入する</button></div> -->
