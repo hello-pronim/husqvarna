@@ -33,6 +33,8 @@ Route::group(['middleware' => ['auth']], function(){
 	Route::get('/manage/direct_csv_import', 'ManageController@direct_csv_import')->name('management.direct_csv_import');
 
 	Route::post('/user/change_usertype', 'ManageController@change_usertype')->name('change_usertype');
+	Route::post('/user/info', 'ManageController@user_info')->name('user_info');
+	Route::post('/user/edit', 'ManageController@user_edit')->name('user_edit');
 	Route::post('/user/delete', 'ManageController@delete_user')->name('delete_user');
 });
 

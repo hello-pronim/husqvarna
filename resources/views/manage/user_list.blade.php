@@ -27,7 +27,7 @@
                                     <th> {{ trans("dashboard.email") }} </th>                                    
                                     <th> {{ trans("dashboard.last_name") }} </th>
                                     <th> {{ trans("dashboard.first_name") }} </th>
-                                    <!-- <th> {{ trans("dashboard.password") }} </th> -->
+                                    <th> {{ trans("dashboard.username") }} </th>
                                     <th> {{ trans("dashboard.phone") }} </th>
                                     <th> {{ trans("dashboard.company") }} </th>
                                     <th width="150"> {{ trans("dashboard.user_type") }} </th>
@@ -48,8 +48,8 @@
                                             <td> {{ $value['email'] }} </td>
                                             <td> {{ $value['last_name'] }} </td>
                                             <td> {{ $value['first_name'] }} </td>
-                                            <!-- <td> {{ $value['username'] }} </td>-->
-                                            <td> {{ $value['phone_number'] }}</td>
+                                            <td> {{ $value['username'] }} </td>
+                                            <td> {{ $value['phone'] }}</td>
                                             <td> {{ $value['company'] }}</td>
                                            <td>
                                                 @if( App\Enums\UserType::Superadmin == Auth::user()->user_type )
@@ -69,7 +69,7 @@
                                                     </button>
                                                     <ul class="dropdown-menu pull-right">
                                                         <li>
-                                                            <a href="javascript:;" class="edit">
+                                                            <a href="javascript:;" class="edit" data-toggle="modal" data-target="#edit_role_modal">
                                                                 <i class="fa fa-edit"></i>{{ trans('dashboard.edit') }}</a>
                                                         </li>
                                                         <li>
@@ -176,40 +176,70 @@
 </div>
 
 <div id="edit_role_modal" class="modal fade" tabindex="-1" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
+     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="javascript:;">
+            <form id="user-edit" class="edit-form" action="/user/edit" method="post">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Edit Role</h4>
-                </div>
+                    <h4 class="modal-title">{{ trans("dashboard.customer_info") }}</h4>
+                </div>                
                 <div class="modal-body">
                     <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto;">
                         <div class="scroller" style="overflow: hidden; width: auto;" data-always-visible="1" data-rail-visible1="1" data-initialized="1">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="alert alert-danger" role="alert" style="display:none" id="error_msg">
-                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                        <span class="sr-only">Error:</span>
-                                        User already exists
-                                    </div>
-                                    <div class="form-group">
-                                        <label>User Name</label>
-                                        <input type="text" name="username" class="form-control" disabled />
-                                    </div>
-                                    <div class="form-group">                                        
-                                    </div>
-
-                                    <input type="hidden" name="id" class="form-control" />
+                            <input type="hidden" name="user_id" value="" />
+                            <div class="form-group">
+                                <div class="input-icon">
+                                    <i class="fa fa-envelope"></i>
+                                    <input class="form-control placeholder-no-fix" type="text" placeholder="{{ trans('dashboard.email') }} *" name="email" required /> </div>
+                            </div>
+                            <div class="form-group row">                                
+                                <div class="col-md-6">                                    
+                                    <div class="input-icon">
+                                        <i class="fa fa-font"></i>
+                                        <input class="form-control placeholder-no-fix" type="text" placeholder="{{ trans('dashboard.username') }} *" name="username" required /> </div>
                                 </div>
+                                <div class="col-md-6">                                                                        
+                                    <select user-id="{{$value['id']}}" name="user_type" class="form-control" required >
+                                        <option value="">{{ trans('dashboard.select') }} *</option>
+                                        {!! App\Enums\UserType::toOptions() !!}
+                                    </select> 
+                                </div>                  
+                            </div>
+                            <div class="form-group row">                                    
+                                <div class="col-md-6">
+                                    <div class="input-icon">
+                                        <i class="fa fa-font"></i>
+                                        <input class="form-control placeholder-no-fix" type="text" placeholder="{{ trans('dashboard.first_name') }} *" name="first_name" required /> </div>
+                                    </div>                                    
+                                <div class="col-md-6">
+                                    <div class="input-icon">
+                                        <i class="fa fa-font"></i>
+                                        <input class="form-control placeholder-no-fix" type="text" placeholder="{{ trans('dashboard.last_name') }} *" name="last_name" required /> </div>
+                                    </div>                                    
+                            </div>                           
+                            <div class="form-group">                                
+                                <div class="input-icon">
+                                    <i class="fa fa-envelope"></i>
+                                    <input class="form-control placeholder-no-fix" type="text" placeholder="{{ trans('dashboard.position') }}" name="position" /> </div>
+                            </div>       
+                            <div class="form-group row">                                    
+                                <div class="col-md-6">
+                                    <div class="input-icon">
+                                        <i class="fa fa-font"></i>
+                                        <input class="form-control placeholder-no-fix" type="text" placeholder="{{ trans('dashboard.phone') }}" name="phone" /> </div>
+                                    </div>                                    
+                                <div class="col-md-6">
+                                    <div class="input-icon">
+                                        <i class="fa fa-font"></i>
+                                        <input class="form-control placeholder-no-fix" type="text" placeholder="{{ trans('dashboard.company') }}" name="company" /> </div>
+                                    </div>                                    
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn dark btn-outline">Close</button>
-                    <button type="submit" class="btn green" id="edit_role">Edit User</button>
+                    <button type="button" data-dismiss="modal" class="btn dark btn-outline">{{ trans("dashboard.return") }}</button>
+                    <button type="submit" class="btn green" id="edit_user">{{ trans("dashboard.update") }}</button>
                 </div>
             </form>
         </div>

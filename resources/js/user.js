@@ -42,11 +42,48 @@ jQuery(document).ready(function() {
         $.ajax({
             type: "post",
             url: url,
-            data: $(this).closest("form.register-form").serialize(),
+            data: $(this).closest("form.register-form").serialize()+ '&_token=' +  $("input[name='_token']").val(),
             dataType: "json",
             success: function(res){
                 console.log(res);
                 if(res.status){
+                    window.location.reload();
+                } else {
+                    window.alert(res.msg);
+                }
+            }
+        });
+        return false;
+    });
+
+    $("#edit_user").on('click', function(e){
+        e.preventDefault();
+
+        if ($('.register-form').validate({          
+            rules : {
+                'email': {
+                    email:true
+                }
+            }
+        }).form()) {
+           
+        }else{
+            console.log("edit");
+            return false;
+        }
+
+        $username = $(this).find('input[name="username"]');
+
+        var url = '/user/edit';
+
+        $.ajax({
+            type: "post",
+            url: url,
+            data: $(this).closest("form.edit-form").serialize() + '&_token=' +  $("input[name='_token']").val(),
+            dataType: "json",
+            success: function(res){
+                console.log(res);
+                if(res.success){
                     window.location.reload();
                 } else {
                     window.alert(res.msg);
@@ -92,6 +129,33 @@ jQuery(document).ready(function() {
         }
         return false;           
     });
+
+    $("#user_table").on('click', '.edit', function (e) {
+        e.preventDefault();
+
+        var nRow = $(this).parents('tr');
+        var data_id = $(nRow).attr("data-id") ;
+
+        $.ajax({
+            type: "post",
+            url: '/user/info',
+            data: {'user_id': data_id, _token: $("input[name='_token']").val()},
+            dataType: "json",
+            success: function(res){                            
+                if(res.success){      
+                    $("#edit_role_modal").find("input[name='user_id']").val(data_id);            
+                    $("#edit_role_modal").find("input[name='email']").val(res.user[0].email);
+                    $("#edit_role_modal").find("input[name='username']").val(res.user[0].username);
+                    $("#edit_role_modal").find("select[name='user_type']").val(res.user[0].user_type);
+                    $("#edit_role_modal").find("input[name='first_name']").val(res.user[0].first_name);
+                    $("#edit_role_modal").find("input[name='last_name']").val(res.user[0].last_name);
+                    $("#edit_role_modal").find("input[name='position']").val(res.user[0].position);
+                    $("#edit_role_modal").find("input[name='phone']").val(res.user[0].phone);
+                    $("#edit_role_modal").find("input[name='company']").val(res.user[0].company);                                        
+                }
+            }
+        });
+    });  
 
     $("#user_table").on('click', '.delete', function (e) {
             e.preventDefault();

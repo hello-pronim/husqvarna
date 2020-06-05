@@ -63,6 +63,53 @@ class ManageController extends Controller
         return response()->json($response);
     }
 
+    public function user_info(Request $request)
+    {
+        
+        $response = array();  
+
+        if( $request->input('user_id') ){
+            try{
+                $user = User::where('id', $request->input('user_id'))->get();
+
+                $response = array('success' => true, 'user' => $user);   
+            } catch (Exception $e) {
+                $response = array('success' => false);                   
+            }        
+
+        }
+        return response()->json($response);
+    }
+
+    public function user_edit(Request $request)
+    {
+        
+        $response = array();  
+
+        if( $request->input('user_id') ){
+            try{
+                $data = array(
+                            'email' => $request->input('email'), 
+                            'username' => $request->input('username'), 
+                            'first_name' => $request->input('first_name'), 
+                            'last_name' => $request->input('last_name'), 
+                            'phone' => $request->input('phone'), 
+                            'position' => $request->input('position'), 
+                            'company' => $request->input('company'),
+                            'user_type' => $request->input('user_type') 
+                        );
+
+                $user = User::where('id', $request->input('user_id'))->update($data);
+
+                $response = array('success' => true);   
+            } catch (Exception $e) {
+                $response = array('success' => false);                   
+            }        
+
+        }
+        return response()->json($response);
+    }
+
     public function delete_user(Request $request)
     {
         
