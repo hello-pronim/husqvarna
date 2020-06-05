@@ -6,7 +6,7 @@
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
     <!-- BEGIN PAGE HEADER-->
-
+        @csrf
         <div class="row">
             <div class="col-md-12">
                 <div class="portlet light">
@@ -100,8 +100,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <h4 class="modal-title">{{ trans("dashboard.customer_info") }}</h4>
-                </div>
-                @csrf
+                </div>                
                 <div class="modal-body">
                     <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto;">
                         <div class="scroller" style="overflow: hidden; width: auto;" data-always-visible="1" data-rail-visible1="1" data-initialized="1">

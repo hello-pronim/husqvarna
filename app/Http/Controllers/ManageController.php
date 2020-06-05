@@ -62,4 +62,22 @@ class ManageController extends Controller
         }
         return response()->json($response);
     }
+
+    public function delete_user(Request $request)
+    {
+        
+        $response = array();  
+
+        if( $request->input('user_id') ){
+            try{
+                User::where('id', $request->input('user_id'))->delete();
+
+                $response = array('success' => true);   
+            } catch (Exception $e) {
+                $response = array('success' => false);                   
+            }        
+
+        }
+        return response()->json($response);
+    }
 }

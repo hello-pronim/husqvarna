@@ -175,9 +175,9 @@ jQuery(document).ready(function () {
               console.log(res);
 
               if (res.success) {
-                swal("更新されました!", "", "success");
+                toastr["success"]("更新されました", "成功!");
               } else {
-                swal("失敗した!", "", "error");
+                toastr["error"]("失敗した!", "失敗!");
               }
             }
           });
@@ -186,6 +186,42 @@ jQuery(document).ready(function () {
     }
 
     return false;
+  });
+  $("#user_table").on('click', '.delete', function (e) {
+    e.preventDefault();
+    var nRow = $(this).parents('tr');
+    var data_id = $(nRow).attr("data-id");
+    swal({
+      title: "",
+      text: "削除しますか？",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonClass: "btn-danger",
+      confirmButtonText: "確認",
+      cancelButtonText: "キャンセル",
+      closeOnConfirm: true,
+      closeOnCancel: true
+    }, function (isConfirm) {
+      if (isConfirm) {
+        $.ajax({
+          type: "post",
+          url: '/user/delete',
+          data: {
+            'user_id': data_id,
+            _token: $("input[name='_token']").val()
+          },
+          dataType: "json",
+          success: function success(res) {
+            if (res.success) {
+              toastr["success"](res.msg, "成功!");
+              window.location.reload();
+            } else {
+              toastr["error"](res.msg, "失敗!");
+            }
+          }
+        });
+      }
+    });
   });
 });
 
