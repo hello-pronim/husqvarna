@@ -31,10 +31,12 @@ Route::group(['middleware' => ['auth']], function(){
 	Route::get('/manage/user', 'ManageController@user_list')->name('management.user');
 	Route::get('/manage/csv_import', 'ManageController@po_csv_import')->name('management.po_csv_import');
 	Route::get('/manage/direct_csv_import', 'ManageController@direct_csv_import')->name('management.direct_csv_import');
+
+	Route::post('/user/change_usertype', 'ManageController@change_usertype')->name('change_usertype');
 });
 
 Route::get('/register', function(){
-	return false;
+	return redirect('/');
 });
 
 Route::get('/register_nl', 'Auth\RegisterController@showRegistrationForm')->name('register_nl');

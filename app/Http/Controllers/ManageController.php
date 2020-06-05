@@ -38,10 +38,28 @@ class ManageController extends Controller
 
         return view('manage.csv_import');
     }
-    
+
     public function direct_csv_import()
     {
 
         return view('manage.direct_csv_import');
+    }
+    
+    public function change_usertype(Request $request)
+    {
+        
+        $response = array();  
+
+        if( $request->input('user_type') ){
+            try{
+                User::where('id', $request->input('user_id'))->update(array( "user_type" => $request->input('user_type') ));
+
+                $response = array('success' => true , 'msg' => $request->input('user_type'));   
+            } catch (Exception $e) {
+                $response = array('success' => false , 'msg' => $e);                   
+            }        
+
+        }
+        return response()->json($response);
     }
 }

@@ -244,9 +244,19 @@ var DatatablesAjax = function () {
                 });        
 
         
+        var trader_box = $('<select>', {
+                    class: 'form-control input-sm input-xsmall input-inline mr-30',
+                    name: 'trader_type',
+                    id: 'trader_box',
+                    html : '<option value="">全部</option><option value="gardena">Gardena</option><option value="husqvarna">Husqvarna</option>',
+                    change: function(e){
+                        grid.setAjaxParam("trader_type", $(this).val());
+                        grid.ajax_reload();
+                    }
+            });
 
 
-        $(".po-data-picker").append(date_slider).append(datepicker);
+        $(".po-data-picker").append(trader_box).append(date_slider).append(datepicker);
 
         date_slider.bootstrapToggle();
         

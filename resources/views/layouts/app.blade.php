@@ -46,27 +46,15 @@
             <div class="page-logo">
                 <a href="javascript:;">
                     <img src="{{ asset('images/logo_admin.png') }}" alt="logo" class="logo-default" /> </a>
-                <div class="menu-toggler sidebar-toggler">                        
-                </div>
+                <!-- <div class="menu-toggler sidebar-toggler">                        
+                </div> -->
             </div>
             <!-- END LOGO -->
             <!-- BEGIN RESPONSIVE MENU TOGGLER -->
             <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"> </a>
             <!-- END RESPONSIVE MENU TOGGLER -->        
             <!-- BEGIN PAGE TOP -->
-            <div class="page-top">
-                <!-- BEGIN HEADER SEARCH BOX -->                    
-                <!-- <form class="search-form search-form-expanded" action="javascript:;" method="GET">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="検索..." name="query">
-                        <span class="input-group-btn">
-                            <a href="javascript:;" class="btn submit">
-                                <i class="icon-magnifier"></i>
-                            </a>
-                        </span>
-                    </div>
-                </form> -->
-                <!-- END HEADER SEARCH BOX -->
+            <div class="page-top">               
                 <!-- BEGIN TOP NAVIGATION MENU -->
                 <div class="top-menu">
                     <ul class="nav navbar-nav pull-right">                            
@@ -123,8 +111,8 @@
             <!-- END SIDEBAR -->                
             <div class="page-sidebar navbar-collapse collapse">
                 <!-- BEGIN SIDEBAR MENU -->
-                <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
-                    @if(Auth::user()->user_type == App\Enums\UserType::Admin)
+                <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">                    
+                    @if(Auth::user()->user_type <= App\Enums\UserType::Superadmin)
                     <li class="nav-item start @if(request()->routeIs('dashboard')) active open @endif">
                         <a href="{{ route('dashboard') }}" class="nav-link nav-toggle">
                             <i class="icon-docs"></i>
@@ -144,7 +132,7 @@
                         </a>                           
                     </li>
                     @endif
-                    @if(Auth::user()->user_type == App\Enums\UserType::Admin)
+                    @if(Auth::user()->user_type <= App\Enums\UserType::Admin)
                     <li class="nav-item @if(request()->routeIs('print')) active open @endif">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="icon-printer"></i>
@@ -162,7 +150,7 @@
                             <span class="arrow @if(request()->routeIs(['management.user', 'management.po_csv_import', 'management.direct_csv_import'])) open @endif"></span>
                         </a>                            
                         <ul class="sub-menu">
-                            @if(Auth::user()->user_type == App\Enums\UserType::Admin)
+                            @if(Auth::user()->user_type <= App\Enums\UserType::Admin)
                             <li class="nav-item">
                                 <a href="{{ route('management.user') }}" class="nav-link ">
                                     <span class="title">{{ trans('dashboard.user_list') }}</span>
@@ -189,7 +177,7 @@
                             @endif
                         </ul>
                     </li>              
-                    @if(Auth::user()->user_type == App\Enums\UserType::Admin)    
+                    @if(Auth::user()->user_type <= App\Enums\UserType::Admin)    
                     <li class="nav-item  ">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="icon-puzzle"></i>

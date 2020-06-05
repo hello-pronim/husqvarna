@@ -30,13 +30,14 @@
                                     <!-- <th> {{ trans("dashboard.password") }} </th> -->
                                     <th> {{ trans("dashboard.phone") }} </th>
                                     <th> {{ trans("dashboard.company") }} </th>
-                                    <th width="15%"> {{ trans("dashboard.user_type") }} </th>
+                                    <th width="150"> {{ trans("dashboard.user_type") }} </th>
+                                    <th width="50"> {{ trans("dashboard.action") }} </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @if(count($users) > 0)
                                     @foreach($users as $key => $value)
-                                        <tr class="odd gradeX" data-id="<?= $value['id'] ?>">
+                                        <tr class="odd gradeX" data-id="{{$value['id']}}">
                                             <td> 
                                                 @if( $value['avatar'] && file_exists( public_path() .'/images/avatar/'. $value['avatar'] ))
                                                     <img src="{{ asset('images/avatar/'. $value['avatar']) }}">
@@ -51,15 +52,33 @@
                                             <td> {{ $value['phone_number'] }}</td>
                                             <td> {{ $value['company'] }}</td>
                                            <td>
-                                                <select name="order_status" class="form-control form-filter input-sm">
-                                                    <option value="">{{ trans('dashboard.select') }}</option>
-                                                    <option value="pending">{{ trans('dashboard.superadmin') }}</option>
-                                                    <option value="closed">{{ trans('dashboard.viewer') }}</option>
-                                                    <option value="hold">{{ trans('dashboard.warehouse') }}</option>
-                                                    <option value="fraud">{{ trans('dashboard.courier') }}</option>
-                                                </select>   
-
+                                                @if( App\Enums\UserType::Superadmin == Auth::user()->user_type )
+                                                    @csrf
+                                                    <select user-id="{{$value['id']}}" name="user_type" class="form-control usertype form-filter input-sm">
+                                                        <option value="">{{ trans('dashboard.select') }}</option>
+                                                        {!! App\Enums\UserType::toOptions($value['user_type']) !!}
+                                                    </select>   
+                                                @else
+                                                    {{ trans('dashboard.'.$value['user_type']) }} 
+                                                @endif
                                                 <se>                                        
+                                            </td>
+                                            <td>
+                                                <div class="btn-group pull-right">
+                                                    <button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">{{ trans('dashboard.action') }}<i class="fa fa-angle-down"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu pull-right">
+                                                        <li>
+                                                            <a href="javascript:;" class="edit">
+                                                                <i class="fa fa-edit"></i>{{ trans('dashboard.edit') }}</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;" class="delete" >
+                                                                <i class="fa fa-remove"></i>{{ trans('dashboard.remove') }}</a>
+                                                        </li>                                                       
+                                                    </ul>
+                                                </div>
+
                                             </td>
                                         </tr>
                                     @endforeach
@@ -77,54 +96,74 @@
 <div id="add_user_modal" class="modal fade" tabindex="-1" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="register-form" action="/user/register" method="post">
+            <form id="user-register" class="register-form" action="/user/register" method="post">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <h4 class="modal-title">{{ trans("dashboard.customer_info") }}</h4>
                 </div>
+                @csrf
                 <div class="modal-body">
                     <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto;">
                         <div class="scroller" style="overflow: hidden; width: auto;" data-always-visible="1" data-rail-visible1="1" data-initialized="1">
                             <div class="form-group">
-                                <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
-                                <label class="control-label visible-ie8 visible-ie9">{{ trans('dashboard.email') }}</label>
                                 <div class="input-icon">
                                     <i class="fa fa-envelope"></i>
-                                    <input class="form-control placeholder-no-fix" type="text" placeholder="{{ trans('dashboard.email') }}" name="email" /> </div>
+                                    <input class="form-control placeholder-no-fix" type="text" placeholder="{{ trans('dashboard.email') }} *" name="email" required /> </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label visible-ie8 visible-ie9">{{ trans("dashboard.first_name") }}</label>
-                                <div class="input-icon">
-                                    <i class="fa fa-font"></i>
-                                    <input class="form-control placeholder-no-fix" type="text" placeholder="{{ trans('dashboard.first_name') }}" name="first_name" /> </div>
+                            <div class="form-group row">                                
+                                <div class="col-md-6">                                    
+                                    <div class="input-icon">
+                                        <i class="fa fa-font"></i>
+                                        <input class="form-control placeholder-no-fix" type="text" placeholder="{{ trans('dashboard.username') }} *" name="username" required /> </div>
+                                </div>
+                                <div class="col-md-6">                                                                        
+                                    <select user-id="{{$value['id']}}" name="user_type" class="form-control" required >
+                                        <option value="">{{ trans('dashboard.select') }} *</option>
+                                        {!! App\Enums\UserType::toOptions() !!}
+                                    </select> 
+                                </div>                  
                             </div>
-                            <div class="form-group">
-                                <label class="control-label visible-ie8 visible-ie9">{{ trans("dashboard.last_name") }}</label>
-                                <div class="input-icon">
-                                    <i class="fa fa-font"></i>
-                                    <input class="form-control placeholder-no-fix" type="text" placeholder="{{ trans('dashboard.last_name') }}" name="last_name" /> </div>
+                            <div class="form-group row">                                    
+                                <div class="col-md-6">
+                                    <div class="input-icon">
+                                        <i class="fa fa-font"></i>
+                                        <input class="form-control placeholder-no-fix" type="text" placeholder="{{ trans('dashboard.first_name') }} *" name="first_name" required /> </div>
+                                    </div>                                    
+                                <div class="col-md-6">
+                                    <div class="input-icon">
+                                        <i class="fa fa-font"></i>
+                                        <input class="form-control placeholder-no-fix" type="text" placeholder="{{ trans('dashboard.last_name') }} *" name="last_name" required /> </div>
+                                    </div>                                    
                             </div>                           
-                            <div class="form-group">
-                                <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
-                                <label class="control-label visible-ie8 visible-ie9">{{ trans("dashboard.position") }}</label>
+                            <div class="form-group">                                
                                 <div class="input-icon">
                                     <i class="fa fa-envelope"></i>
                                     <input class="form-control placeholder-no-fix" type="text" placeholder="{{ trans('dashboard.position') }}" name="position" /> </div>
-                            </div>                                                    
-                            <div class="form-group">
-                                <label class="control-label visible-ie8 visible-ie9">{{ trans("dashboard.password") }}</label>
-                                <div class="input-icon">
-                                    <i class="fa fa-lock"></i>
-                                    <input class="form-control placeholder-no-fix" type="password" autocomplete="off" id="register_password" placeholder="{{ trans('dashboard.password') }}" name="password" /> </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label visible-ie8 visible-ie9">{{ trans("dashboard.password_confirm") }}</label>
-                                <div class="controls">
+                            </div>       
+                            <div class="form-group row">                                    
+                                <div class="col-md-6">
                                     <div class="input-icon">
-                                        <i class="fa fa-check"></i>
-                                        <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="{{ trans('dashboard.password_confirm') }}" name="rpassword" /> </div>
-                                </div>
-                            </div>
+                                        <i class="fa fa-font"></i>
+                                        <input class="form-control placeholder-no-fix" type="text" placeholder="{{ trans('dashboard.phone') }}" name="phone" /> </div>
+                                    </div>                                    
+                                <div class="col-md-6">
+                                    <div class="input-icon">
+                                        <i class="fa fa-font"></i>
+                                        <input class="form-control placeholder-no-fix" type="text" placeholder="{{ trans('dashboard.company') }}" name="company" /> </div>
+                                    </div>                                    
+                            </div>                           
+                            <div class="form-group row">                                    
+                                <div class="col-md-6">
+                                    <div class="input-icon">
+                                        <i class="fa fa-font"></i>
+                                        <input class="form-control placeholder-no-fix" type="password" placeholder="{{ trans('dashboard.password') }} *" name="password" id="password" required /> </div>
+                                    </div>                                    
+                                <div class="col-md-6">
+                                    <div class="input-icon">
+                                        <i class="fa fa-font"></i>
+                                        <input class="form-control placeholder-no-fix" type="password" placeholder="{{ trans('dashboard.password_confirm') }} *" name="password_confirmation" required /> </div>
+                                    </div>                                    
+                            </div>                                                                                  
                         </div>
                     </div>
                 </div>
@@ -177,48 +216,10 @@
         </div>
     </div>
 </div>
-    
-<script type="text/javascript">
-    $(".role").change(function(){
-        if( $(this).val() == 2 ){
-            $(".type_role").show();
-        }else{
-           $(".type_role").hide();
-        }
-    });
 
-    $("#add_user").on('click', function(e){
-        e.preventDefault();
+@endsection
 
-        if ($('.register-form').validate().form()) {
-           // $('.register-form').submit();
-            console.log("ttt");
-        }else{
-            console.log("eeee");
-            return false;
-        }
-
-
-        $username = $(this).find('input[name="username"]');
-
-        var url = '/user/register';
-
-        $.ajax({
-            type: "post",
-            url: url,
-            data: $(this).closest("form.register-form").serialize(),
-            dataType: "json",
-            success: function(res){
-                console.log(res);
-                if(res.status){
-                    window.location.reload();
-                } else {
-                    window.alert(res.msg);
-                }
-            }
-        });
-        return false;
-    });
-</script>
-
+@section('additional_javascript')    
+    <script src="{{ asset('templates/global/plugins/jquery-validation/js/jquery.validate.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/user.js') }}" type="text/javascript"></script>    
 @endsection

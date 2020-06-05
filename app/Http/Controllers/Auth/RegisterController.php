@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Auth\Events\Registered;
@@ -40,7 +41,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        //$this->middleware('guest');
     }
 
     public function showRegistrationForm()
@@ -61,8 +62,7 @@ class RegisterController extends Controller
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],            
             'username' => ['required', 'string', 'max:255'],            
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone' => ['string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],            
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -74,17 +74,16 @@ class RegisterController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function register(Request $request)
-    {
+    {        
         $this->validator($request->all())->validate();
-
+       
         event(new Registered($user = $this->create($request->all())));
 
         $this->guard()->login($user);
 
         if ($response = $this->registered($request, $user)) {
             return $response;
-        }
-
+        }     
         return $request->wantsJson()
                     ? new Response('', 201)
                     : redirect($this->redirectPath());
@@ -98,13 +97,20 @@ class RegisterController extends Controller
      */
     public function create(array $data)
     {        
+        
+        $user_type = 3;
+        if($data['user_type']){
+            $user_type = $data['user_type'];
+        }
         return User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],            
-            'username' => $data['username'],
+            'username' => $data['username'],            
             'email' => $data['email'],
-            'phone' => $data['phone'],
-            'user_type' => 2,
+            'position' => $data['position'],
+            'phone' => $data['phone'],            
+            'company' => $data['company'], 
+            'user_type' => $user_type,
             'password' => Hash::make($data['password']),
         ]);
     }

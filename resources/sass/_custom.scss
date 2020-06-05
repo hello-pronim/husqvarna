@@ -1,4 +1,3 @@
-
 #app {
 	background:url('/../images/bg_auth.png') no-repeat;
 	background-size: cover;
@@ -75,6 +74,35 @@ table.order{
 .tracking_box{
 	width: 170px;
 	margin: -5px auto;	
+}
+
+.page-header.navbar .page-logo{
+	width: 100px;
+}
+
+.page-header.navbar .page-logo .logo-default{
+	margin-left: 0px;
+}
+
+.data-picker, .po-data-picker{
+	select[name='trader_type']{
+		min-width: 105px;
+	}
+	input[name='po_date_range']{
+		min-width: 165px;
+	}
+}
+
+form{
+	div.form-group{
+		input.error, select.error{
+			border-color: #e73d4a;
+		}
+		label.error{
+			color: #e73d4a;
+			font-size: 12px;
+		}
+	}
 }
 
 

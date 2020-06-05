@@ -45,6 +45,19 @@ class Order extends Model
             $total_filtered = count($filter_date);
         }
 
+        if(isset($filter['trader_type'])){
+            $tfilter_val = "";
+
+            if($filter['trader_type'] == 'husqvarna'){
+                $tfilter_val = "2U%";
+            }else if($filter['trader_type'] == 'gardena'){
+                $tfilter_val = "WP%";
+            }
+            $filter_trader = $query->where("vendor", "like", $tfilter_val)->get();
+
+            $total_filtered = count($filter_trader);
+        }
+
         if($filter["search"]["value"]){
             $filter_res = $query->Where("po", "like", "%".$filter["search"]["value"]."%")
             ->orWhere("po", "like", "%".$filter["search"]["value"]."%")

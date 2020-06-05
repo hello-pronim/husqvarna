@@ -4,5 +4,6 @@
     "/css/auth.css": "/css/auth.css",
     "/css/app.css": "/css/app.css",
     "/js/orders.js": "/js/orders.js",
-    "/js/po_dash.js": "/js/po_dash.js"
+    "/js/po_dash.js": "/js/po_dash.js",
+    "/js/user.js": "/js/user.js"
 }

@@ -6,6 +6,19 @@
 
 }
 
+@media (min-width: 992px) {	
+	.page-sidebar {
+    	width: 100px;
+    }	
+    .page-content-wrapper .page-content {
+    	margin-left: 100px;
+    	padding:15px;
+    }
+    .page-sidebar-menu.page-sidebar-menu-hover-submenu>li:hover>.sub-menu{
+    	margin-left: 100px;
+    }    
+}
+
 @media (max-width: 1200px) {
 
 }

@@ -30,7 +30,7 @@ class DashboardController extends Controller
      */
     public function index()
     {                
-        if( Auth::user()->user_type == UserType::Admin ){
+        if( Auth::user()->user_type <= UserType::Admin ){
             $orders = Order::limit(20)->get();                
 
             $data = array('orders');

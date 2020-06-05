@@ -42,7 +42,7 @@ class DirectOrder extends Model
                     ->get();
 
             $total_filtered = count($filter_date);
-        }
+        }        
 
         if($filter["search"]["value"]){
             $filter_res = $query->Where("po", "like", "%".$filter["search"]["value"]."%")

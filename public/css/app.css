@@ -20,6 +20,10 @@
   margin-left: 10px;
 }
 
+.mr-30 {
+  margin-right: 30px;
+}
+
 /* button */
 
 .form-rounded {
@@ -104,5 +108,48 @@ table.order tbody td {
 .tracking_box {
   width: 170px;
   margin: -5px auto;
+}
+
+.page-header.navbar .page-logo {
+  width: 100px;
+}
+
+.page-header.navbar .page-logo .logo-default {
+  margin-left: 0px;
+}
+
+.data-picker select[name=trader_type],
+.po-data-picker select[name=trader_type] {
+  min-width: 105px;
+}
+
+.data-picker input[name=po_date_range],
+.po-data-picker input[name=po_date_range] {
+  min-width: 165px;
+}
+
+form div.form-group input.error,
+form div.form-group select.error {
+  border-color: #e73d4a;
+}
+
+form div.form-group label.error {
+  color: #e73d4a;
+  font-size: 12px;
+}
+
+@media (min-width: 992px) {
+  .page-sidebar {
+    width: 100px;
+  }
+
+  .page-content-wrapper .page-content {
+    margin-left: 100px;
+    padding: 15px;
+  }
+
+  .page-sidebar-menu.page-sidebar-menu-hover-submenu > li:hover > .sub-menu {
+    margin-left: 100px;
+  }
 }
 

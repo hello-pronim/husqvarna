@@ -33,7 +33,7 @@ return [
     'customer_list' => 'お客様一覧',
     'user_list' => 'ユーザー管理',
     'add_customer' => '新規アカウント作成',
-    'csv_import' => 'CSVインポート',       
+    'csv_import' => 'お問合せ番号CSVインポート',       
     'po_csv_import' => 'PO CSVインポート',       
     'direct_csv_import' => 'ダイレクトフルフィルメント注文 CSVインポート',   
 
@@ -72,10 +72,15 @@ return [
     'tools' => 'ツール',
 
     'select' => '選択して下さい。', 
-    'superadmin' => '上段管理者', 
-    'viewer' => '管理者', 
-    'warehouse' => '倉庫', 
-    'courier' => '配達会社', 
+    'Superadmin' => '上段管理者', 
+    'Admin' => '管理者', 
+    'Warehouse' => '倉庫', 
+    'Carrior' => '配達会社', 
+
+    '0' => '上段管理者', 
+    '1' => '管理者', 
+    '2' => '倉庫', 
+    '3' => '配達会社', 
 
     'po_list' => 'アマゾンPO',
     'direct_list' => 'ダイレクトフルフィルメント注文',
