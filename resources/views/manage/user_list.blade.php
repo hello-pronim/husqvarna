@@ -107,13 +107,13 @@
                             <div class="form-group">
                                 <div class="input-icon">
                                     <i class="fa fa-envelope"></i>
-                                    <input class="form-control placeholder-no-fix" type="text" placeholder="{{ trans('dashboard.email') }} *" name="email" required /> </div>
+                                    <input class="form-control placeholder-no-fix" type="text" placeholder="{{ trans('dashboard.email') }} *" autocomplete="off" name="email" required /> </div>
                             </div>
                             <div class="form-group row">                                
                                 <div class="col-md-6">                                    
                                     <div class="input-icon">
                                         <i class="fa fa-font"></i>
-                                        <input class="form-control placeholder-no-fix" type="text" placeholder="{{ trans('dashboard.username') }} *" name="username" required /> </div>
+                                        <input class="form-control placeholder-no-fix" type="text" placeholder="{{ trans('dashboard.username') }} *" name="username" autocomplete="off" required /> </div>
                                 </div>
                                 <div class="col-md-6">                                                                        
                                     <select user-id="{{$value['id']}}" name="user_type" class="form-control" required >
@@ -126,41 +126,41 @@
                                 <div class="col-md-6">
                                     <div class="input-icon">
                                         <i class="fa fa-font"></i>
-                                        <input class="form-control placeholder-no-fix" type="text" placeholder="{{ trans('dashboard.first_name') }} *" name="first_name" required /> </div>
+                                        <input class="form-control placeholder-no-fix" type="text" placeholder="{{ trans('dashboard.first_name') }} *" autocomplete="off" name="first_name" required /> </div>
                                     </div>                                    
                                 <div class="col-md-6">
                                     <div class="input-icon">
                                         <i class="fa fa-font"></i>
-                                        <input class="form-control placeholder-no-fix" type="text" placeholder="{{ trans('dashboard.last_name') }} *" name="last_name" required /> </div>
+                                        <input class="form-control placeholder-no-fix" type="text" placeholder="{{ trans('dashboard.last_name') }} *" name="last_name" autocomplete="off" required /> </div>
                                     </div>                                    
                             </div>                           
                             <div class="form-group">                                
                                 <div class="input-icon">
                                     <i class="fa fa-envelope"></i>
-                                    <input class="form-control placeholder-no-fix" type="text" placeholder="{{ trans('dashboard.position') }}" name="position" /> </div>
+                                    <input class="form-control placeholder-no-fix" type="text" placeholder="{{ trans('dashboard.position') }}" name="position" autocomplete="off" /> </div>
                             </div>       
                             <div class="form-group row">                                    
                                 <div class="col-md-6">
                                     <div class="input-icon">
                                         <i class="fa fa-font"></i>
-                                        <input class="form-control placeholder-no-fix" type="text" placeholder="{{ trans('dashboard.phone') }}" name="phone" /> </div>
+                                        <input class="form-control placeholder-no-fix" type="text" placeholder="{{ trans('dashboard.phone') }}" name="phone" autocomplete="off" /> </div>
                                     </div>                                    
                                 <div class="col-md-6">
                                     <div class="input-icon">
                                         <i class="fa fa-font"></i>
-                                        <input class="form-control placeholder-no-fix" type="text" placeholder="{{ trans('dashboard.company') }}" name="company" /> </div>
+                                        <input class="form-control placeholder-no-fix" type="text" placeholder="{{ trans('dashboard.company') }}" name="company" autocomplete="off" /> </div>
                                     </div>                                    
                             </div>                           
                             <div class="form-group row">                                    
                                 <div class="col-md-6">
                                     <div class="input-icon">
                                         <i class="fa fa-font"></i>
-                                        <input class="form-control placeholder-no-fix" type="password" placeholder="{{ trans('dashboard.password') }} *" name="password" id="password" required /> </div>
+                                        <input class="form-control placeholder-no-fix" type="password" placeholder="{{ trans('dashboard.password') }} *" name="password" id="password" autocomplete="off" required /> </div>
                                     </div>                                    
                                 <div class="col-md-6">
                                     <div class="input-icon">
                                         <i class="fa fa-font"></i>
-                                        <input class="form-control placeholder-no-fix" type="password" placeholder="{{ trans('dashboard.password_confirm') }} *" name="password_confirmation" required /> </div>
+                                        <input class="form-control placeholder-no-fix" type="password" placeholder="{{ trans('dashboard.password_confirm') }} *" autocomplete="off" name="password_confirmation" required /> </div>
                                     </div>                                    
                             </div>                                                                                  
                         </div>
