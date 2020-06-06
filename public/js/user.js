@@ -136,10 +136,11 @@ jQuery(document).ready(function () {
       success: function success(res) {
         console.log(res);
 
-        if (res.status) {
+        if (res.success) {
+          toastr["success"]("更新されました", "成功!");
           window.location.reload();
         } else {
-          window.alert(res.msg);
+          toastr["error"]("失敗した!", "失敗!");
         }
       }
     });
@@ -170,9 +171,10 @@ jQuery(document).ready(function () {
         console.log(res);
 
         if (res.success) {
+          toastr["success"]("更新されました", "成功!");
           window.location.reload();
         } else {
-          window.alert(res.msg);
+          toastr["error"]("失敗した!", "失敗!");
         }
       }
     });
