@@ -36,8 +36,17 @@ table.order{
 			font-size: 12px;
 			//white-space: nowrap;
 		}		
-	}	
+	}		
 }
+
+table.dataTable{
+	thead{
+		.sorting_asc:after, .sorting_desc:after{
+			color: #00008b;
+			opacity: 0.8;
+		}	
+	} 	
+} 
 
 .dropzone{
 	border: 2px dashed #E87E04;
