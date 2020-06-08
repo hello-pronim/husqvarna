@@ -34,6 +34,12 @@
   border-radius: 25px;
 }
 
+/* width */
+
+.w-50 {
+  width: 50%;
+}
+
 /* icon font */
 
 i.red {
@@ -42,6 +48,10 @@ i.red {
 
 i.green {
   color: #32c5d2;
+}
+
+.nowrap {
+  white-space: nowrap;
 }
 
 #app {
@@ -70,6 +80,11 @@ i.green {
   width: 100%;
 }
 
+table.detail thead th,
+table.detail tbody td {
+  font-size: 16px;
+}
+
 table.order thead th {
   font-size: 10px;
 }
@@ -82,6 +97,14 @@ table.dataTable thead .sorting_asc:after,
 table.dataTable thead .sorting_desc:after {
   color: #00008b;
   opacity: 0.8;
+}
+
+#detail .portlet.light .portlet-title .caption .caption-subject {
+  font-size: 24px;
+}
+
+#detail .portlet.light .portlet-body .panel-title {
+  font-size: 22px;
 }
 
 .dropzone {

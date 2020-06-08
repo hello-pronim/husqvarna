@@ -25,10 +25,19 @@
 	border-radius: 25px;
 }
 
+/* width */
+.w-50{
+	width: 50%;
+}
+
 /* icon font */
 i.red{
 	color:#e73d4a;
 }
 i.green{
 	color:#32c5d2;
+}
+
+.nowrap{
+	white-space: nowrap;
 }

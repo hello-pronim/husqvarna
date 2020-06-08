@@ -47,6 +47,16 @@ class DashboardController extends Controller
         return view('dashboard.orders', compact($data));        
     }
 
+    public function order_detail($po="")
+    {
+        if($po){
+
+        }
+        $data = array('po');
+
+        return view('dashboard.order_detail', compact($data));        
+    }    
+
     public function ajax_dashbaord(Request $request)
     {
                

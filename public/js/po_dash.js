@@ -186,6 +186,11 @@ var DatatablesAjax = function () {
           },
           className: 'dt-body-center'
         }, {
+          "targets": 3,
+          "render": function render(data, type, full, meta) {
+            return '<a href="/order/' + data + '">' + data + '</a>';
+          }
+        }, {
           "targets": -1,
           "data": null,
           "orderable": false,

@@ -24,6 +24,12 @@
 	}
 }
 
+table.detail{
+	thead th, tbody td{
+		font-size: 16px;
+	}	
+}
+
 table.order{	
 	thead {
 		th{
@@ -47,6 +53,23 @@ table.dataTable{
 		}	
 	} 	
 } 
+
+#detail{
+	.portlet.light{
+		.portlet-title{
+			.caption{
+				.caption-subject{
+					font-size: 24px;
+				}
+			}
+		}	
+		.portlet-body{
+			.panel-title{
+				font-size: 22px;
+			}
+		}
+	}
+}
 
 .dropzone{
 	border: 2px dashed #E87E04;
