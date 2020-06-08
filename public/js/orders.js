@@ -124,7 +124,11 @@ var DatatablesAjax = function () {
         // read the custom filters from saved state and populate the filter inputs
         "fnStateSaveParams": function fnStateSaveParams(oSettings, sValue) {},
         // read the custom filters from saved state and populate the filter inputs
-        "fnStateLoadParams": function fnStateLoadParams(oSettings, oData) {},
+        "fnStateLoadParams": function fnStateLoadParams(oSettings, oData) {
+          oData.search.search = "";
+          oData.order = [5, "desc"];
+          return true;
+        },
         "lengthMenu": [[10, 20, 50, 100, 150, -1], [10, 20, 50, 100, 150, "All"] // change per page values here
         ],
         "pageLength": 20,
@@ -199,7 +203,7 @@ var DatatablesAjax = function () {
 
         }],
         "ordering": true,
-        "order": [[3, "asc"]] // set first column as a default sort by asc
+        "order": [[5, "asc"]] // set first column as a default sort by asc
 
       }
     });

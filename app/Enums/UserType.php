@@ -13,7 +13,7 @@ final class UserType extends Enum
     const Superadmin =   1;
     const Admin =   2;    
     const Warehouse =   3;    
-    const Carrior =   4;
+    const Courier =   4;
 
     public static function toOptions($selected = ""): string
     {
@@ -24,7 +24,7 @@ final class UserType extends Enum
 					'Superadmin' => '上段管理者', 
 				    'Admin' => '管理者', 
 				    'Warehouse' => '倉庫', 
-				    'Carrior' => '配達会社'
+				    'Courier' => '配達会社'
 				);        
 
         foreach($data as $key => $value) {

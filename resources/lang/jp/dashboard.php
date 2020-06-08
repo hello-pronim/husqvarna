@@ -44,8 +44,8 @@ return [
     'management' =>'管理ツール',
 
     'customer_info' =>"ユーザー情報",
-    'first_name' =>"姓",
-    'last_name' =>"名",
+    'first_name' =>"名",
+    'last_name' =>"姓",
 
     'remove_confirm' => '削除しますか？',
     'confirm' => '確認',
@@ -75,12 +75,12 @@ return [
     'Superadmin' => '上段管理者', 
     'Admin' => '管理者', 
     'Warehouse' => '倉庫', 
-    'Carrior' => '配達会社', 
+    'Courier' => '配達会社', 
 
-    '0' => '上段管理者', 
-    '1' => '管理者', 
-    '2' => '倉庫', 
-    '3' => '配達会社', 
+    '1' => '上段管理者', 
+    '2' => '管理者', 
+    '3' => '倉庫', 
+    '4' => '配達会社', 
 
     'po_list' => 'アマゾンPO',
     'direct_list' => 'ダイレクトフルフィルメント注文',

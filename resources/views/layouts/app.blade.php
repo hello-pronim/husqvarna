@@ -112,7 +112,7 @@
             <div class="page-sidebar navbar-collapse collapse">
                 <!-- BEGIN SIDEBAR MENU -->
                 <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">                    
-                    @if(Auth::user()->user_type <= App\Enums\UserType::Superadmin)
+                    @if(Auth::user()->user_type <= App\Enums\UserType::Admin)
                     <li class="nav-item start @if(request()->routeIs('dashboard')) active open @endif">
                         <a href="{{ route('dashboard') }}" class="nav-link nav-toggle">
                             <i class="icon-docs"></i>

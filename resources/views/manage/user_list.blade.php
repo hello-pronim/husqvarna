@@ -24,9 +24,9 @@
                             <thead>
                                 <tr>
                                     <th> </th>
-                                    <th> {{ trans("dashboard.email") }} </th>                                    
-                                    <th> {{ trans("dashboard.last_name") }} </th>
-                                    <th> {{ trans("dashboard.first_name") }} </th>
+                                    <th> {{ trans("dashboard.email") }} </th>    
+                                    <th> {{ trans("dashboard.last_name") }} </th>                                
+                                    <th> {{ trans("dashboard.first_name") }} </th>                                    
                                     <th> {{ trans("dashboard.username") }} </th>
                                     <th> {{ trans("dashboard.phone") }} </th>
                                     <th> {{ trans("dashboard.company") }} </th>
@@ -45,7 +45,7 @@
                                                     <img class="img" src="{{ asset('images/avatar/default.png') }}" />
                                                 @endif
                                             </td>
-                                            <td> {{ $value['email'] }} </td>
+                                            <td> {{ $value['email'] }} </td>                                            
                                             <td> {{ $value['last_name'] }} </td>
                                             <td> {{ $value['first_name'] }} </td>
                                             <td> {{ $value['username'] }} </td>
