@@ -21,11 +21,11 @@ class Order extends Model
     public static function insertData($data)
     {
         $value = DB::table('orders')->where('po', $data['po'])->get();
-        if ($value->count() == 0) {
-            DB::table('orders')->insert($data);
+        if ($value->count() > 0) {
+            DB::table('orders')->where('po', $data['po'])->update($data);
         }else{
-            DB::table('orders')->update($data)->where('po', $data['po']);
-        }
+            DB::table('orders')->insert($data);
+        }        
     }
 
      public static function getDataFilter($filter)
