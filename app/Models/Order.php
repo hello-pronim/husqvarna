@@ -59,18 +59,22 @@ class Order extends Model
         }
 
         if($filter["search"]["value"]){
-            $filter_res = $query->Where("po", "like", "%".$filter["search"]["value"]."%")
-            ->orWhere("po", "like", "%".$filter["search"]["value"]."%")
-            ->orWhere("vendor", "like", "%".$filter["search"]["value"]."%")
-            ->orWhere("ship_location", "like", "%".$filter["search"]["value"]."%")
-            ->orWhere("window_type", "like", "%".$filter["search"]["value"]."%")
-            ->orWhere("ordered_on", "like", "%".$filter["search"]["value"]."%")
-            ->orWhere("window_type", "like", "%".$filter["search"]["value"]."%")   
-            ->orWhere("window_start", "like", "%".$filter["search"]["value"]."%")   
-            ->orWhere("window_end", "like", "%".$filter["search"]["value"]."%")   
-            ->orWhere("total_cases", "like", "%".$filter["search"]["value"]."%")   
-            ->orWhere("total_cost", "like", "%".$filter["search"]["value"]."%")   
-            ->get();
+            $search_val = $filter["search"]["value"];
+
+            $filter_res = $query->where(function($q) use($search_val) {
+      
+                            $q->Where("po", "like", "%".$search_val."%")
+                                ->orWhere("vendor", "like", "%".$search_val."%")
+                                ->orWhere("ship_location", "like", "%".$search_val."%")
+                                ->orWhere("window_type", "like", "%".$search_val."%")
+                                ->orWhere("ordered_on", "like", "%".$search_val."%")
+                                ->orWhere("window_type", "like", "%".$search_val."%")   
+                                ->orWhere("window_start", "like", "%".$search_val."%")   
+                                ->orWhere("window_end", "like", "%".$search_val."%")   
+                                ->orWhere("total_cases", "like", "%".$search_val."%")   
+                                ->orWhere("total_cost", "like", "%".$search_val."%");
+
+                          })->get();
 
             $total_filtered = count($filter_res);    
         }

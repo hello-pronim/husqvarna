@@ -279,7 +279,7 @@ var DatatablesAjax = function () {
       "class": 'form-control input-sm input-xsmall input-inline mr-30',
       name: 'trader_type',
       id: 'trader_box',
-      html: '<option value="">全部</option><option value="gardena">Gardena</option><option value="husqvarna">Husqvarna</option>',
+      html: '<option value="">全部</option><option value="gardena">ガルデナ</option><option value="husqvarna">ハスクバーナ</option>',
       change: function change(e) {
         grid.setAjaxParam("trader_type", $(this).val());
         grid.ajax_reload();
