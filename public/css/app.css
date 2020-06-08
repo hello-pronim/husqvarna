@@ -85,6 +85,11 @@ table.detail tbody td {
   font-size: 16px;
 }
 
+table.product thead th,
+table.product tbody td {
+  font-size: 12px;
+}
+
 table.order thead th {
   font-size: 10px;
 }

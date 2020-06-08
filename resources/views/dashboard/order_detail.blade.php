@@ -133,7 +133,7 @@
                                 <h3 class="panel-title bold">{{ trans('detail.po_product') }} (<span>{{ 4 }}</span>)</h3>
                             </div>                            
                             <!-- List group -->
-                            <table class="table table-striped table-bordered table-hover">
+                            <table class="table table-striped table-bordered table-hover product">
                             	<thead>
                             		<tr>
                             			<th class="nowrap">{{ trans('detail.asin') }} </th>
