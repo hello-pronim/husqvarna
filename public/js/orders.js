@@ -203,7 +203,7 @@ var DatatablesAjax = function () {
 
         }],
         "ordering": true,
-        "order": [[5, "asc"]] // set first column as a default sort by asc
+        "order": [[5, "desc"]] // set first column as a default sort by asc
 
       }
     });

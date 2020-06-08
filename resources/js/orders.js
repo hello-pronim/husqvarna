@@ -32,7 +32,7 @@ var DatatablesAjax = function () {
                 "bSortable": false,
                 "bPaginate" : true,             
                 // read the custom filters from saved state and populate the filter inputs
-                 "fnStateSaveParams":    function ( oSettings, sValue ) {                  
+                "fnStateSaveParams":    function ( oSettings, sValue ) {                  
                 },
 
                 // read the custom filters from saved state and populate the filter inputs
@@ -130,7 +130,7 @@ var DatatablesAjax = function () {
                 ],
                 "ordering": true,
                 "order": [
-                    [5, "asc"]
+                    [5, "desc"]
                 ]// set first column as a default sort by asc
             }
         });
