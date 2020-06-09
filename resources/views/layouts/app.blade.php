@@ -122,7 +122,7 @@
                         </a>                           
                     </li>
                     @endif
-                    @if(Auth::user()->user_type == App\Enums\UserType::Warehouse)
+                    @if(Auth::user()->user_type >= App\Enums\UserType::Warehouse)
                     <li class="nav-item @if(request()->routeIs('orders')) active open @endif">
                         <a href="{{ route('orders') }}" class="nav-link nav-toggle">
                             <i class="icon-briefcase"></i>

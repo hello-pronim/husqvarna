@@ -60,6 +60,12 @@ table.dataTable{
 	} 	
 } 
 
+tr.child {
+	table{
+		margin-bottom: 0px;
+	}
+}
+
 #detail{
 	.portlet.light{
 		.portlet-title{

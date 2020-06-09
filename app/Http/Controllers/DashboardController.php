@@ -90,18 +90,41 @@ class DashboardController extends Controller
         return response()->json($response);
     }
 
-    public function ajax_order_product(Request $request)
+    public function ajax_order_products(Request $request)
     {
-        if($request->input('tracking_no') && $request->input('order_id')){
-            try{
-                Order::where('id', $request->input('order_id'))->update(array( "tracking_no" => $request->input('tracking_no') ));
-
-                $response = array('success' => true , 'msg' => 'お問合せ番号が追加されました。' );   
-            } catch (Exception $e) {
-                $response = array('success' => true , 'msg' => 'お問合せ番号が追加されました。' );                   
-            }            
+        if($request->input('order_id')){
+            $response = [
+                            array( 'asin' => 'B01M361GRY',
+                                'external_id' => '4078500023658',
+                                'mordel_number' => '08951-20.000.00',
+                                'title' => 'GARDENA(ガルデナ) ハンドスコップ 6cm 08951-20',
+                                'blockordered' => '不可',
+                                'window_type' => '着荷ウィンドウ (元払い)',
+                                'expected_date' => '2020/05/29',
+                                'quantity_request' => '1',
+                                'accepted_quantity' => '1',
+                                'quantity_received' => '0',
+                                'quantity_outstand' => '1',
+                                'unit_cost' => '386',
+                                'total_cost' =>  '386'
+                            ),
+                            array( 'asin' => 'B01FE8M1QI',
+                                'external_id' => '4078500018746',
+                                'mordel_number' => '08904-20.000.00',
+                                'title' => 'GARDENA(ガルデナ) 園芸用はさみ (直径24mmまでの枝や花を楽にカット) 08904-20',
+                                'blockordered' => '不可',
+                                'window_type' => '着荷ウィンドウ (元払い)',
+                                'expected_date' => '2020/05/29',
+                                'quantity_request' => '1',
+                                'accepted_quantity' => '1',
+                                'quantity_received' => '0',
+                                'quantity_outstand' => '1',
+                                'unit_cost' => '1831',
+                                'total_cost' =>  '1831'
+                            )
+                        ];    
         }else{
-            $response = array('success' => false , 'msg' => '空の値を挿入することはできません。' );   
+            $response = array('success' => false , 'msg' => '注文IDが必要です。' );   
         }                       
         
         return response()->json($response);

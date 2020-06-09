@@ -27,7 +27,7 @@ Route::group(['middleware' => ['auth']], function(){
 	Route::post('/ajax_dashbaord', 'DashboardController@ajax_dashbaord')->name('ajax_dashbaord');
 	Route::post('/ajax_direct_order', 'DashboardController@ajax_direct_order')->name('ajax_direct_order');
 	Route::post('/ajax_tracking_update', 'DashboardController@ajax_tracking_update')->name('ajax_tracking_update');
-	Route::post('/ajax_order_product', 'DashboardController@ajax_order_product')->name('ajax_order_product');
+	Route::post('/ajax_order_products', 'DashboardController@ajax_order_products')->name('ajax_order_products');
 	
 	Route::get('/manage/user', 'ManageController@user_list')->name('management.user');
 	Route::get('/manage/csv_import', 'ManageController@po_csv_import')->name('management.po_csv_import');

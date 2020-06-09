@@ -30,7 +30,7 @@ var DatatablesAjax = function () {
                 "bInfo": true,
                 //"bProcessing" : true,
                 "bSortable": false,
-                "bPaginate" : true,             
+                "bPaginate" : true,                   
                 // read the custom filters from saved state and populate the filter inputs
                 "fnStateSaveParams":    function ( oSettings, sValue ) {                  
                 },

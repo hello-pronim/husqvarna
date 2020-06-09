@@ -10988,6 +10988,10 @@ table.dataTable thead .sorting_desc:after {
   opacity: 0.8;
 }
 
+tr.child table {
+  margin-bottom: 0px;
+}
+
 #detail .portlet.light .portlet-title .caption .caption-subject {
   font-size: 24px;
 }

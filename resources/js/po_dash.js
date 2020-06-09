@@ -30,7 +30,7 @@ var DatatablesAjax = function () {
                 "bInfo": true,
                 //"bProcessing" : true,
                 "bSortable": true,
-                "bPaginate" : true,                    
+                "bPaginate" : true,                     
                 // read the custom filters from saved state and populate the filter inputs
                  "fnStateSaveParams":    function ( oSettings, sValue ) {                  
                 },
@@ -181,21 +181,74 @@ var DatatablesAjax = function () {
             });
         });
 
-        table.on('click', 'tr', function (e) {
-            e.preventDefault();
-            
-            var data_id = $(this).attr("data-id") ;
-            var the = $(this);
+        table.on('click', 'tbody tr', function (e) {
 
-            $.ajax({
-                url:'/ajax_order_product',
-                type:'post',
-                data:{order_id: data_id},
-                dataType: 'json',
-                success: function(res){
-                    console.log(res);
-                }
-            });
+            if( $(this).find(">td").eq(2).text() == $(e.target).text() ){                
+                return;
+            }     
+            e.preventDefault();       
+            
+            if( $(this).hasClass("open") ){
+                $(this).removeClass("open");
+                $(this).next().fadeOut(100, function() { $(this).remove() });
+            }else{
+                var data_id = $(this).attr("data-id") ;
+                var the = $(this);
+
+                table.find("tbody tr.child").fadeOut(100, function() { $(this).remove() });
+
+                $.ajax({
+                    url:'/ajax_order_products',
+                    type:'post',
+                    data:{order_id: data_id},
+                    dataType: 'json',
+                    success: function(res){
+                        //console.log(res);
+
+                        var p_html = "<tr class='child'><td class='child' colspan='"+ the.find('>td').length +"'><table class='table table-bordered'>";
+
+                            p_html += "<thead><tr>"+
+                                        "<td>ASIN</td>" +
+                                        "<td>製品コード</td>" +
+                                        "<td>モデル番号</td>" +
+                                        "<td>商品名</td>" +
+                                        "<td>入荷待ち</td>" +
+                                        "<td>ウィンドウの種類</td>" +
+                                        "<td>予定日</td>" +
+                                        "<td>依頼数量</td>" +
+                                        "<td>承認済みの数量</td>" +
+                                        "<td>受領済みの数量</td>" +
+                                        "<td>未処理の数量</td>" +
+                                        "<td>仕入価格</td>" +
+                                        "<td>総額</td>" +
+                                    "</tr></thead><tbody>";
+                        
+                        $.each(res, function(key, product){
+                            p_html += "<tr><td>"+ product.asin +"</td>" +
+                                        "<td>"+ product.external_id +"</td>" +
+                                        "<td>"+ product.mordel_number +"</td>" +
+                                        "<td>"+ product.title +"</td>" +
+                                        "<td>"+ product.blockordered +"</td>" +
+                                        "<td>"+ product.window_type +"</td>" +
+                                        "<td>"+ product.expected_date +"</td>" +
+                                        "<td>"+ product.quantity_request +"</td>" +
+                                        "<td>"+ product.accepted_quantity +"</td>" +
+                                        "<td>"+ product.quantity_received +"</td>" +
+                                        "<td>"+ product.quantity_outstand +"</td>" +
+                                        "<td>"+ product.unit_cost +"</td>" +
+                                        "<td>"+ product.total_cost +"</td></tr>" ;
+
+                        });
+
+                        p_html+= "</tbody></table></td></tr>";
+
+
+                        $(p_html).fadeIn(100, function(){ $(this).insertAfter(the); });
+
+                        the.addClass("open");
+                    }
+                });
+            }
 
         });
 
@@ -322,7 +375,8 @@ var DatatablesAjax = function () {
                 "bInfo": true,
                 //"bProcessing" : true,
                 "bSortable": false,
-                "bPaginate" : true,             
+                "bPaginate" : true,     
+                "responsive" : true,
                 // read the custom filters from saved state and populate the filter inputs
                  "fnStateSaveParams":    function ( oSettings, sValue ) {                  
                 },
