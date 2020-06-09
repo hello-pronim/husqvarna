@@ -263,7 +263,7 @@ var DatatablesAjax = function () {
           success: function success(res) {
             //console.log(res);
             var p_html = "<tr class='child'><td class='child' colspan='" + the.find('>td').length + "'><table class='table table-bordered'>";
-            p_html += "<thead><tr>" + "<td>ASIN</td>" + "<td>製品コード</td>" + "<td>モデル番号</td>" + "<td>商品名</td>" + "<td>入荷待ち</td>" + "<td>ウィンドウの種類</td>" + "<td>予定日</td>" + "<td>依頼数量</td>" + "<td>承認済みの数量</td>" + "<td>受領済みの数量</td>" + "<td>未処理の数量</td>" + "<td>仕入価格</td>" + "<td>総額</td>" + "</tr></thead><tbody>";
+            p_html += "<thead><tr>" + "<td class='nowrap'>ASIN</td>" + "<td class='nowrap'>製品コード</td>" + "<td class='nowrap'>モデル番号</td>" + "<td class='nowrap'>商品名</td>" + "<td class='nowrap'>入荷待ち</td>" + "<td class='nowrap'>ウィンドウの種類</td>" + "<td class='nowrap'>予定日</td>" + "<td class='nowrap'>依頼数量</td>" + "<td class='nowrap'>承認済みの数量</td>" + "<td class='nowrap'>受領済みの数量</td>" + "<td class='nowrap'>未処理の数量</td>" + "<td class='nowrap'>仕入価格</td>" + "<td class='nowrap'>総額</td>" + "</tr></thead><tbody>";
             $.each(res, function (key, product) {
               p_html += "<tr><td>" + product.asin + "</td>" + "<td>" + product.external_id + "</td>" + "<td>" + product.mordel_number + "</td>" + "<td>" + product.title + "</td>" + "<td>" + product.blockordered + "</td>" + "<td>" + product.window_type + "</td>" + "<td>" + product.expected_date + "</td>" + "<td>" + product.quantity_request + "</td>" + "<td>" + product.accepted_quantity + "</td>" + "<td>" + product.quantity_received + "</td>" + "<td>" + product.quantity_outstand + "</td>" + "<td>" + product.unit_cost + "</td>" + "<td>" + product.total_cost + "</td></tr>";
             });
