@@ -181,6 +181,24 @@ var DatatablesAjax = function () {
             });
         });
 
+        table.on('click', 'tr', function (e) {
+            e.preventDefault();
+            
+            var data_id = $(this).attr("data-id") ;
+            var the = $(this);
+
+            $.ajax({
+                url:'/ajax_order_product',
+                type:'post',
+                data:{order_id: data_id},
+                dataType: 'json',
+                success: function(res){
+                    console.log(res);
+                }
+            });
+
+        });
+
         var init_date = init_daterange();
         var start_date_val = init_date[0];
         var end_date_val = init_date[1];        

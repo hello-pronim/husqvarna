@@ -90,6 +90,23 @@ class DashboardController extends Controller
         return response()->json($response);
     }
 
+    public function ajax_order_product(Request $request)
+    {
+        if($request->input('tracking_no') && $request->input('order_id')){
+            try{
+                Order::where('id', $request->input('order_id'))->update(array( "tracking_no" => $request->input('tracking_no') ));
+
+                $response = array('success' => true , 'msg' => 'お問合せ番号が追加されました。' );   
+            } catch (Exception $e) {
+                $response = array('success' => true , 'msg' => 'お問合せ番号が追加されました。' );                   
+            }            
+        }else{
+            $response = array('success' => false , 'msg' => '空の値を挿入することはできません。' );   
+        }                       
+        
+        return response()->json($response);
+    }
+
     public function uploadCSV(Request $request)
     {        
         
