@@ -191,6 +191,25 @@ var DatatablesAjax = function () {
             return '<a href="/order/' + data + '">' + data + '</a>';
           }
         }, {
+          "targets": -2,
+          "orderable": false,
+          "render": function render(data, type, full, meta) {
+            if (data == null) data = '';
+
+            if (data != "") {
+              var tracking_no_input = '<select class="tracking_box form-control input-small input-sm input-inline mr-10">';
+              $.each(data.split(','), function (key, elem) {
+                if (elem) {
+                  tracking_no_input += "<option>" + elem + "</option>";
+                }
+              });
+              tracking_no_input += "</select>";
+              return tracking_no_input;
+            } else {
+              return data;
+            }
+          }
+        }, {
           "targets": -1,
           "data": null,
           "orderable": false,
@@ -236,7 +255,7 @@ var DatatablesAjax = function () {
       });
     });
     table.on('click', 'tbody tr', function (e) {
-      if ($(this).find(">td").eq(2).text() == $(e.target).text()) {
+      if ($(this).find(">td").eq(2).text() == $(e.target).text() || $(e.target).find(".tracking_box").length > 0) {
         return;
       }
 
