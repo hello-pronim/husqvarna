@@ -108,16 +108,22 @@ var DatatablesAjax = function () {
                         "targets":-1,
                         "render":function(data, type, full, meta){                            
                             if(data==null) data='';
-                            var tracking_no_input ='<div class="input-group tracking_box" order-id="'+full[0]+'">' +
-                                    '<input type="text" value="'+data+'" class="form-control input-sm tracking_no" name="tracking_no" placeholder="0000-0000-0000">'+
-                                    '<span class="input-group-btn">'+
-                                        '<button class="btn blue btn-sm" txt="change" type="button">保存</button>'+
-                                    '</span>'+
-                                '</div>';                            
+                            var tracking_no_input ='<div class="input-group tracking_box" order-id="'+full[0]+'">';
+                            
+                            tracking_no_input +='<div><select class="form-control input-small input-sm input-inline mr-10">'
+
+                            $.each(data.split(','), function(key, elem){
+                                if(elem){
+                                    tracking_no_input += "<option>" + elem + "</option>";
+                                }
+                            })
+                            tracking_no_input += "</select><a class='add_track'><i class='fa fa-plus-circle'></i></a></div>";
+                                                            
+                            tracking_no_input += '</div>';                            
 
                             return tracking_no_input;
                         },
-                        className: 'dt-body-center',
+                        className: 'tracking_number',
                     },
                     {
                         "targets":-2,    
@@ -256,9 +262,23 @@ var DatatablesAjax = function () {
 
         date_slider.bootstrapToggle();
 
-
-        table.on('click', '.tracking_box button', function(e) {
+        table.on('click', '.tracking_box a.add_track', function(e) {
             var tracking_box = $(this).parent().parent();
+            if(tracking_box.find("div>input").length <=0){
+                tracking_box.append(
+                    '<div><input type="text" class="form-control input-sm input-small tracking_no input-inline" name="tracking_no" placeholder="0000-0000-0000">'+
+                        '<span class="input-group-btn">'+
+                            '<button class="btn blue btn-sm" txt="change" type="button">保存</button>'+
+                        '</span>'+
+                    '</div>'
+                ); 
+                tracking_box.find(".tracking_no").inputmask("mask", {
+                    "mask": "9999-9999-9999"
+                });                                   
+            }            
+        });
+        table.on('click', '.tracking_box button', function(e) {
+            var tracking_box = $(this).closest('.tracking_box');
             var the = $(this);
             // if( $(this).attr('txt') == "change" ){
             //     $(this).attr('txt', "confirm");
@@ -275,11 +295,14 @@ var DatatablesAjax = function () {
                     url:'/ajax_tracking_update',
                     data:{order_id: tracking_box.attr('order-id'), tracking_no: tracking_box.find("input").val()},
                     success: function(res){
-                        if(res.success==true){
+                        if(res.success==true){                            
+                            tracking_box.find("select").prepend("<option selected>"+tracking_box.find("input").val()+"</option>");
                             toastr["success"](res.msg, "成功!")
                         }else{
                             toastr["error"](res.msg, "失敗!")
                         }
+
+                        the.parent().parent().remove();
 
                         // the.attr('txt', "change");
                         // the.text("保存");

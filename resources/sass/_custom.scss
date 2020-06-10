@@ -115,9 +115,24 @@ tr.child {
 	}	
 }
 
-.tracking_box{
-	width: 170px;
-	margin: -5px auto;	
+.tracking_box{	
+	margin: -5px 0;	
+	div{
+		float: left;
+		select{
+			width: 120px !important;
+			padding: 6px 4px;
+		}
+		a{
+			font-size: 20px;
+			line-height: 32px;
+			margin-right: 5px;
+		}	
+		input{
+			width: 114px !important;
+		}
+	}	
+	
 }
 
 .page-header.navbar .page-logo{

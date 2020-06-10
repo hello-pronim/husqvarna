@@ -20,6 +20,10 @@
   margin-left: 10px;
 }
 
+.mr-10 {
+  margin-right: 10px;
+}
+
 .mr-30 {
   margin-right: 30px;
 }
@@ -144,8 +148,26 @@ tr.child table {
 }
 
 .tracking_box {
-  width: 170px;
-  margin: -5px auto;
+  margin: -5px 0;
+}
+
+.tracking_box div {
+  float: left;
+}
+
+.tracking_box div select {
+  width: 120px !important;
+  padding: 6px 4px;
+}
+
+.tracking_box div a {
+  font-size: 20px;
+  line-height: 32px;
+  margin-right: 5px;
+}
+
+.tracking_box div input {
+  width: 114px !important;
 }
 
 .page-header.navbar .page-logo {

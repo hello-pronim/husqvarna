@@ -77,7 +77,15 @@ class DashboardController extends Controller
     {
         if($request->input('tracking_no') && $request->input('order_id')){
             try{
-                Order::where('id', $request->input('order_id'))->update(array( "tracking_no" => $request->input('tracking_no') ));
+                $order = Order::find($request->input('order_id'));
+
+                if($order->tracking_no == "" || $order->tracking_no == null){
+                    $order->tracking_no = $request->input('tracking_no');
+                }else{
+                    $order->tracking_no = $request->input('tracking_no') .",".$order->tracking_no ;
+                }
+                
+                $order->save();
 
                 $response = array('success' => true , 'msg' => 'お問合せ番号が追加されました。' );   
             } catch (Exception $e) {
