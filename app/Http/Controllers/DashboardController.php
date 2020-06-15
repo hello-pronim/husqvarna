@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Session;
 use App\Models\Order;
 use App\Models\DirectOrder;
+use App\Models\ProductTracking;
 use App\Enums\UserType;
 
 class DashboardController extends Controller
@@ -101,40 +102,63 @@ class DashboardController extends Controller
     public function ajax_order_products(Request $request)
     {
         if($request->input('order_id')){
-            $response = [
-                            array( 'asin' => 'B01M361GRY',
-                                'external_id' => '4078500023658',
-                                'mordel_number' => '08951-20.000.00',
-                                'title' => 'GARDENA(ガルデナ) ハンドスコップ 6cm 08951-20',
-                                'blockordered' => '不可',
-                                'window_type' => '着荷ウィンドウ (元払い)',
-                                'expected_date' => '2020/05/29',
-                                'quantity_request' => '1',
-                                'accepted_quantity' => '1',
-                                'quantity_received' => '0',
-                                'quantity_outstand' => '1',
-                                'unit_cost' => '386',
-                                'total_cost' =>  '386'
-                            ),
-                            array( 'asin' => 'B01FE8M1QI',
-                                'external_id' => '4078500018746',
-                                'mordel_number' => '08904-20.000.00',
-                                'title' => 'GARDENA(ガルデナ) 園芸用はさみ (直径24mmまでの枝や花を楽にカット) 08904-20',
-                                'blockordered' => '不可',
-                                'window_type' => '着荷ウィンドウ (元払い)',
-                                'expected_date' => '2020/05/29',
-                                'quantity_request' => '1',
-                                'accepted_quantity' => '1',
-                                'quantity_received' => '0',
-                                'quantity_outstand' => '1',
-                                'unit_cost' => '1831',
-                                'total_cost' =>  '1831'
-                            )
-                        ];    
+            $response = array(
+                            'products' => [
+                                array( 
+                                    'id' => 1,
+                                    'asin' => 'B01M361GRY',
+                                    'external_id' => '4078500023658',
+                                    'mordel_number' => '08951-20.000.00',
+                                    'title' => 'GARDENA(ガルデナ) ハンドスコップ 6cm 08951-20',
+                                    'blockordered' => '不可',
+                                    'window_type' => '着荷ウィンドウ (元払い)',
+                                    'expected_date' => '2020/05/29',
+                                    'quantity_request' => '1',
+                                    'accepted_quantity' => '1',
+                                    'quantity_received' => '0',
+                                    'quantity_outstand' => '1',
+                                    'unit_cost' => '386',
+                                    'total_cost' =>  '386',
+                                    'tracking_no' => ProductTracking::Where(array('order_id'=>$request->input('order_id'), 'product_id'=>1))->get()->count()>0? ProductTracking::Where(array('order_id'=>$request->input('order_id'), 'product_id'=>1))->first()['tracking_no']:''
+                                ),
+                                array( 
+                                    'id' => 2,
+                                    'asin' => 'B01FE8M1QI',
+                                    'external_id' => '4078500018746',
+                                    'mordel_number' => '08904-20.000.00',
+                                    'title' => 'GARDENA(ガルデナ) 園芸用はさみ (直径24mmまでの枝や花を楽にカット) 08904-20',
+                                    'blockordered' => '不可',
+                                    'window_type' => '着荷ウィンドウ (元払い)',
+                                    'expected_date' => '2020/05/29',
+                                    'quantity_request' => '1',
+                                    'accepted_quantity' => '1',
+                                    'quantity_received' => '0',
+                                    'quantity_outstand' => '1',
+                                    'unit_cost' => '1831',
+                                    'total_cost' =>  '1831',
+                                    'tracking_no' => ProductTracking::Where(array('order_id'=>$request->input('order_id'), 'product_id'=>2))->count()>0? ProductTracking::Where(array('order_id'=>$request->input('order_id'), 'product_id'=>1))->first()['tracking_no']:''
+                                )
+                            ],
+                            'tracking_number' => Order::find($request->input('order_id'))->tracking_no                            
+                        );    
         }else{
             $response = array('success' => false , 'msg' => '注文IDが必要です。' );   
         }                       
         
+        return response()->json($response);
+    }
+
+    public function ajax_product_tracking(Request $request)
+    { 
+        if($request->input('product_id')){           
+
+            ProductTracking::insertData($request->input());
+
+            $response = array('success' => true );   
+        }else{
+            $response = array('success' => false );    
+        }    
+
         return response()->json($response);
     }
 

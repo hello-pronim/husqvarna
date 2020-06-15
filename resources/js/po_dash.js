@@ -118,7 +118,7 @@ var DatatablesAjax = function () {
                             if(data==null) data='';
                             
                             if(data != ""){
-                                var tracking_no_input ='<select class="tracking_box form-control input-small input-sm input-inline mr-10">';                            
+                                var tracking_no_input ='<select class="tracking_box form-control input-small input-sm input-inline mr-10 no-product">';
                                 $.each(data.split(','), function(key, elem){
                                     if(elem){
                                         tracking_no_input += "<option>" + elem + "</option>";
@@ -131,7 +131,8 @@ var DatatablesAjax = function () {
                                 return data;
                             }
                             
-                        }
+                        },
+                        className: "no-product"
                     },
                     {
                         "targets": -1,  
@@ -151,7 +152,8 @@ var DatatablesAjax = function () {
                                                             +'<i class="fa fa-remove"></i> 削除 </a>'
                                                     +'</li>'                                                        
                                                 +'</ul>'
-                                            +'</div>'
+                                            +'</div>',
+                        className: "no-product"                                            
                     },
                     {
                         "targets":-3,                        
@@ -205,7 +207,7 @@ var DatatablesAjax = function () {
 
         table.on('click', 'tbody tr', function (e) {
 
-            if( $(this).find(">td").eq(2).text() == $(e.target).text() || $(e.target).find(".tracking_box").length >0  ){                
+            if( $(e.target).closest("td").hasClass("no-product") ){                
                 return;
             }     
             e.preventDefault();       
@@ -245,7 +247,7 @@ var DatatablesAjax = function () {
                                         "<td class='nowrap'>総額</td>" +
                                     "</tr></thead><tbody>";
                         
-                        $.each(res, function(key, product){
+                        $.each(res.products, function(key, product){
                             p_html += "<tr><td>"+ product.asin +"</td>" +
                                         "<td>"+ product.external_id +"</td>" +
                                         "<td>"+ product.mordel_number +"</td>" +

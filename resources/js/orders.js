@@ -20,6 +20,11 @@ var DatatablesAjax = function () {
             },
             onDataLoad: function(grid) {                
                 // execute some code on ajax data load
+
+                $(".tracking_no").inputmask("mask", {
+                    "mask": "9999-9999-9999"
+                });    
+                return true;
             },
             loadingMessage: '読み込んでいます...',
             dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options                 
@@ -117,13 +122,19 @@ var DatatablesAjax = function () {
                                     tracking_no_input += "<option>" + elem + "</option>";
                                 }
                             })
-                            tracking_no_input += "</select><a class='add_track'><i class='fa fa-plus-circle'></i></a></div>";
-                                                            
-                            tracking_no_input += '</div>';                            
+                            tracking_no_input += "</select>" // + "<a class='add_track'><i class='fa fa-plus-circle'></i></a></div>";
+                            
+                            tracking_no_input += '<div><input type="text" class="form-control input-sm input-small tracking_no input-inline" name="tracking_no" placeholder="0000-0000-0000">'+
+                                                    '<span class="input-group-btn">'+
+                                                        '<button class="btn blue btn-sm" txt="change" type="button">保存</button>'+
+                                                    '</span>'+
+                                                '</div>';
+
+                            tracking_no_input += '</div>';
 
                             return tracking_no_input;
                         },
-                        className: 'tracking_number',
+                        className: 'product_tracking tracking_number',
                     },
                     {
                         "targets":-2,    
@@ -170,6 +181,120 @@ var DatatablesAjax = function () {
                     swal("キャンセル", "", "error");
                 }
             });
+        });
+
+        table.on('click', 'tbody tr', function (e) {
+            
+            if( $(e.target).closest("td").hasClass("product_tracking")){                
+                return;
+            }     
+            e.preventDefault();       
+            
+            if( $(this).hasClass("open") ){
+                $(this).removeClass("open");
+                $(this).next().fadeOut(100, function() { $(this).remove() });
+            }else{
+                var data_id = $(this).attr("data-id") ;
+                var the = $(this);
+
+                table.find("tbody tr.child").fadeOut(100, function() { $(this).remove() });
+
+                $.ajax({
+                    url:'/ajax_order_products',
+                    type:'post',
+                    data:{order_id: data_id},
+                    dataType: 'json',
+                    success: function(res){
+                        //console.log(res);
+                        function assign_product(_this){
+                            console.log("ssssssss");
+                            $.ajax({
+                                url:'/ajax_product_tracking',
+                                type:'post',
+                                data:{ product_id: $(this).closest("tr").attr("product-id"), tracking_no: $(_this).val() },
+                                dataType: 'json', 
+                                success:function(res){
+                                    console.log(res)
+                                }
+                            });    
+
+                        };
+
+
+                        var p_html = "<tr class='child'><td class='child' colspan='"+ the.find('>td').length +"'><table class='table table-bordered'>";
+
+                            p_html += "<thead><tr>"+
+                                        "<td class='nowrap'>ASIN</td>" +
+                                        "<td class='nowrap'>製品コード</td>" +
+                                        "<td class='nowrap'>モデル番号</td>" +
+                                        "<td class='nowrap'>商品名</td>" +
+                                        "<td class='nowrap'>入荷待ち</td>" +
+                                        "<td class='nowrap'>ウィンドウの種類</td>" +
+                                        "<td class='nowrap'>予定日</td>" +
+                                        "<td class='nowrap'>依頼数量</td>" +
+                                        "<td class='nowrap'>承認済みの数量</td>" +
+                                        "<td class='nowrap'>受領済みの数量</td>" +
+                                        "<td class='nowrap'>未処理の数量</td>" +
+                                        "<td class='nowrap'>お問合せ番号</td>" +                                        
+                                    "</tr></thead><tbody>";
+                        
+                        
+
+                        $.each(res.products, function(key, product){   
+                            var option = "<option>0000-0000-0000</option>";
+                            if(res.tracking_number){
+                                $.each(res.tracking_number.split(","), function(key, ele){
+                                    if(ele){                                        
+                                        if(product.tracking_no == ele){
+                                            option += "<option value='"+ele+"' selected>"+ ele +"</option>";        
+                                        }else{
+                                            option += "<option value='"+ele+"'>"+ ele +"</option>";    
+                                        }
+                                    }
+                                });    
+                            }      
+
+                            var tracking_no_box = "<select class='form-control input-small input-sm input-inline'>" +option+ "</select>";
+                                                
+
+                            p_html += "<tr product-id='"+product.id+"'><td>"+ product.asin +"</td>" +
+                                        "<td>"+ product.external_id +"</td>" +
+                                        "<td>"+ product.mordel_number +"</td>" +
+                                        "<td>"+ product.title +"</td>" +
+                                        "<td>"+ product.blockordered +"</td>" +
+                                        "<td>"+ product.window_type +"</td>" +
+                                        "<td>"+ product.expected_date +"</td>" +
+                                        "<td>"+ product.quantity_request +"</td>" +
+                                        "<td>"+ product.accepted_quantity +"</td>" +
+                                        "<td>"+ product.quantity_received +"</td>" +
+                                        "<td>"+ product.quantity_outstand +"</td>" +
+                                        "<td class='product_tracking'>"+tracking_no_box+"</td>";
+
+                        });
+
+                        p_html+= "</tbody></table></td></tr>";                        
+
+                        $(p_html).fadeIn(100, function(){ 
+                            $(this).find(".product_tracking select").change(function(){
+                                $.ajax({
+                                    url:'/ajax_product_tracking',
+                                    type:'post',
+                                    data:{ order_id: data_id, product_id: $(this).closest("tr").attr("product-id"), tracking_no: $(this).val() },
+                                    dataType: 'json', 
+                                    success:function(res){
+                                        console.log(res)
+                                    } 
+                                });
+                            });
+
+                            $(this).insertAfter(the); 
+                        });
+
+                        the.addClass("open");
+                    }
+                });
+            }
+
         });
 
         var init_date = init_daterange();
@@ -262,21 +387,21 @@ var DatatablesAjax = function () {
 
         date_slider.bootstrapToggle();
 
-        table.on('click', '.tracking_box a.add_track', function(e) {
-            var tracking_box = $(this).parent().parent();
-            if(tracking_box.find("div>input").length <=0){
-                tracking_box.append(
-                    '<div><input type="text" class="form-control input-sm input-small tracking_no input-inline" name="tracking_no" placeholder="0000-0000-0000">'+
-                        '<span class="input-group-btn">'+
-                            '<button class="btn blue btn-sm" txt="change" type="button">保存</button>'+
-                        '</span>'+
-                    '</div>'
-                ); 
-                tracking_box.find(".tracking_no").inputmask("mask", {
-                    "mask": "9999-9999-9999"
-                });                                   
-            }            
-        });
+        // table.on('click', '.tracking_box a.add_track', function(e) {
+        //     var tracking_box = $(this).parent().parent();
+        //     if(tracking_box.find("div>input").length <=0){
+        //         tracking_box.append(
+        //             '<div><input type="text" class="form-control input-sm input-small tracking_no input-inline" name="tracking_no" placeholder="0000-0000-0000">'+
+        //                 '<span class="input-group-btn">'+
+        //                     '<button class="btn blue btn-sm" txt="change" type="button">保存</button>'+
+        //                 '</span>'+
+        //             '</div>'
+        //         ); 
+        //         tracking_box.find(".tracking_no").inputmask("mask", {
+        //             "mask": "9999-9999-9999"
+        //         });                                   
+        //     }            
+        // });
         table.on('click', '.tracking_box button', function(e) {
             var tracking_box = $(this).closest('.tracking_box');
             var the = $(this);

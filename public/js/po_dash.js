@@ -197,7 +197,7 @@ var DatatablesAjax = function () {
             if (data == null) data = '';
 
             if (data != "") {
-              var tracking_no_input = '<select class="tracking_box form-control input-small input-sm input-inline mr-10">';
+              var tracking_no_input = '<select class="tracking_box form-control input-small input-sm input-inline mr-10 no-product">';
               $.each(data.split(','), function (key, elem) {
                 if (elem) {
                   tracking_no_input += "<option>" + elem + "</option>";
@@ -208,12 +208,14 @@ var DatatablesAjax = function () {
             } else {
               return data;
             }
-          }
+          },
+          className: "no-product"
         }, {
           "targets": -1,
           "data": null,
           "orderable": false,
-          "defaultContent": '<div class="btn-group pull-right">' + '<button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">操作' + '<i class="fa fa-angle-down"></i>' + '</button>' + '<ul class="dropdown-menu pull-right">' + '<li>' + '<a href="javascript:;" class="edit">' + '<i class="fa fa-edit"></i>編集</a>' + '</li>' + '<li>' + '<a href="javascript:;" class="delete" >' + '<i class="fa fa-remove"></i> 削除 </a>' + '</li>' + '</ul>' + '</div>'
+          "defaultContent": '<div class="btn-group pull-right">' + '<button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">操作' + '<i class="fa fa-angle-down"></i>' + '</button>' + '<ul class="dropdown-menu pull-right">' + '<li>' + '<a href="javascript:;" class="edit">' + '<i class="fa fa-edit"></i>編集</a>' + '</li>' + '<li>' + '<a href="javascript:;" class="delete" >' + '<i class="fa fa-remove"></i> 削除 </a>' + '</li>' + '</ul>' + '</div>',
+          className: "no-product"
         }, {
           "targets": -3,
           "render": function render(data) {
@@ -255,7 +257,7 @@ var DatatablesAjax = function () {
       });
     });
     table.on('click', 'tbody tr', function (e) {
-      if ($(this).find(">td").eq(2).text() == $(e.target).text() || $(e.target).find(".tracking_box").length > 0) {
+      if ($(e.target).closest("td").hasClass("no-product")) {
         return;
       }
 
@@ -283,7 +285,7 @@ var DatatablesAjax = function () {
             //console.log(res);
             var p_html = "<tr class='child'><td class='child' colspan='" + the.find('>td').length + "'><table class='table table-bordered'>";
             p_html += "<thead><tr>" + "<td class='nowrap'>ASIN</td>" + "<td class='nowrap'>製品コード</td>" + "<td class='nowrap'>モデル番号</td>" + "<td class='nowrap'>商品名</td>" + "<td class='nowrap'>入荷待ち</td>" + "<td class='nowrap'>ウィンドウの種類</td>" + "<td class='nowrap'>予定日</td>" + "<td class='nowrap'>依頼数量</td>" + "<td class='nowrap'>承認済みの数量</td>" + "<td class='nowrap'>受領済みの数量</td>" + "<td class='nowrap'>未処理の数量</td>" + "<td class='nowrap'>仕入価格</td>" + "<td class='nowrap'>総額</td>" + "</tr></thead><tbody>";
-            $.each(res, function (key, product) {
+            $.each(res.products, function (key, product) {
               p_html += "<tr><td>" + product.asin + "</td>" + "<td>" + product.external_id + "</td>" + "<td>" + product.mordel_number + "</td>" + "<td>" + product.title + "</td>" + "<td>" + product.blockordered + "</td>" + "<td>" + product.window_type + "</td>" + "<td>" + product.expected_date + "</td>" + "<td>" + product.quantity_request + "</td>" + "<td>" + product.accepted_quantity + "</td>" + "<td>" + product.quantity_received + "</td>" + "<td>" + product.quantity_outstand + "</td>" + "<td>" + product.unit_cost + "</td>" + "<td>" + product.total_cost + "</td></tr>";
             });
             p_html += "</tbody></table></td></tr>";

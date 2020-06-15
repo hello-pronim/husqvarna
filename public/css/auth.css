@@ -11031,6 +11031,10 @@ tr.child table {
   margin-left: 50px;
 }
 
+.tracking_number {
+  width: 270px;
+}
+
 .tracking_box {
   margin: -5px 0;
 }

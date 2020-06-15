@@ -15,6 +15,7 @@ class VerifyCsrfToken extends Middleware
         'ajax_dashbaord',
         'ajax_tracking_update',
         'ajax_direct_order',
-        'ajax_order_products'
+        'ajax_order_products',
+        'ajax_product_tracking'
     ];
 }
