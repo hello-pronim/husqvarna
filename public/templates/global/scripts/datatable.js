@@ -46,7 +46,7 @@ var Datatable = function() {
                     "language": { // language settings
                         // metronic spesific
                         "metronicGroupActions": "_TOTAL_ records selected:  ",
-                        "metronicAjaxRequestGeneralError": "Could not complete request. Please check your internet connection",
+                        "metronicAjaxRequestGeneralError": "現在はメンテナンス中...",
 
                         // data tables spesific
                         "lengthMenu": "<span class='seperator'>|</span>View _MENU_ records",
@@ -126,7 +126,7 @@ var Datatable = function() {
                             }
 
                             App.alert({
-                                type: 'danger',
+                                type: 'success',
                                 icon: 'warning',
                                 message: tableOptions.dataTable.language.metronicAjaxRequestGeneralError,
                                 container: tableWrapper,
