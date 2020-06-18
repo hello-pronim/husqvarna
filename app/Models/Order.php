@@ -180,28 +180,31 @@ class Order extends Model
 
                     $response = curl_exec($curl);
 
-                    curl_close($curl);            
-                    $dom = HtmlDomParser::str_get_html( $response );
-                    $tracking_data ="";
+                    curl_close($curl); 
+                    if($response){
+                        $dom = HtmlDomParser::str_get_html( $response );
+                        $tracking_data ="";
 
-                    for ($i=1; $i <=10 ; $i++) { 
-                        $tracking_no = $dom->find("input[name='main:no".$i."']");
-                        $tracking_date = $dom->find("input[name='main:h-date".$i."']");
-                        $tracking_status = $dom->find("input[name='main:h-status".$i."']");    
-                        $res[] = [$tracking_no[0]->value, $tracking_date[0]->value,  $tracking_status[0]->value];
-                    }  
+                        for ($i=1; $i <=10 ; $i++) { 
+                            $tracking_no = $dom->find("input[name='main:no".$i."']");
+                            $tracking_date = $dom->find("input[name='main:h-date".$i."']");
+                            $tracking_status = $dom->find("input[name='main:h-status".$i."']");    
+                            $res[] = [$tracking_no[0]->value, $tracking_date[0]->value,  $tracking_status[0]->value];
+                        }  
 
-                    $q=0;
+                        $q=0;
 
-                    for($j=$temp_key; $j<$key; $j++){
-                        $q_data = explode(',', $data[$j][12]);
-                        if($data[$j][12]){
-                            foreach ($q_data as $v => $qv) {
-                                $data[$j][2][]=$res[$q];
-                                $q++;
-                            }    
-                        }
-                    }    
+                        for($j=$temp_key; $j<$key; $j++){
+                            $q_data = explode(',', $data[$j][12]);
+                            if($data[$j][12]){
+                                foreach ($q_data as $v => $qv) {
+                                    $data[$j][2][]=$res[$q];
+                                    $q++;
+                                }    
+                            }
+                        }    
+                    }           
+                    
 
                     $temp_key= $key;  
                 }   
