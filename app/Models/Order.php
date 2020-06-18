@@ -196,9 +196,9 @@ class Order extends Model
                     for($j=$temp_key; $j<$key; $j++){
                         $q_data = explode(',', $data[$j][12]);
                         if($data[$j][12]){
-                            foreach ($q_data as $v => $qv) {                            
-                                $q++;                            
+                            foreach ($q_data as $v => $qv) {
                                 $data[$j][2][]=$res[$q];
+                                $q++;
                             }    
                         }
                     }    

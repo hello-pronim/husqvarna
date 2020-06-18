@@ -105,11 +105,11 @@ var DatatablesAjax = function () {
                             if(data){
                                 $.each(data, function(key, elem){
                                     var status = elem[2].split(":");
-                                    if( status =="Not picked up"){
+                                    if( status[0] =="Not picked up"){
                                         $res += '<i class="fa fa-circle red" data-toggle="tooltip" data-theme="dark" title="'+elem[0]+': 集まらない"></i>';
-                                    }else if( status =="In Transit"){
+                                    }else if( status[0] =="In Transit"){
                                         $res += '<i class="fa fa-circle orange" data-toggle="tooltip" data-theme="dark" title="'+elem[0]+': 輸送中"></i>';
-                                    }else if( status =="Delivered"){
+                                    }else if( status[0] =="Delivered"){
                                         $res += '<i class="fa fa-circle green" data-toggle="tooltip" data-theme="dark" title="'+elem[0]+': 配達完了 - '+elem[1]+'"></i>';
                                     }else{
                                         $res += '<i class="fa fa-circle" data-toggle="tooltip" data-theme="dark" title="'+elem[0]+': 該当なし"></i>';    
