@@ -10942,6 +10942,10 @@ i.orange {
   color: #ffc107;
 }
 
+i.grey {
+  color: #bac3d0;
+}
+
 .nowrap {
   white-space: nowrap;
 }
