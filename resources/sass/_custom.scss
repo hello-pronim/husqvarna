@@ -136,7 +136,12 @@ tr.child {
 			width: 114px !important;
 		}
 	}	
-	
+}
+.tracking_status i{
+	margin-right: 10px;
+	&:last-child{
+		margin-right: 0px;
+	}
 }
 
 .page-header.navbar .page-logo{

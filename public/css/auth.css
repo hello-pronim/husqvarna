@@ -10935,7 +10935,11 @@ i.red {
 }
 
 i.green {
-  color: #32c5d2;
+  color: #28a745;
+}
+
+i.orange {
+  color: #ffc107;
 }
 
 .nowrap {
@@ -11056,6 +11060,14 @@ tr.child table {
 
 .tracking_box div input {
   width: 114px !important;
+}
+
+.tracking_status i {
+  margin-right: 10px;
+}
+
+.tracking_status i:last-child {
+  margin-right: 0px;
 }
 
 .page-header.navbar .page-logo {

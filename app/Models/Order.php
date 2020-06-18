@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
+use KubAT\PhpSimple\HtmlDomParser;
+
 class Order extends Model
 {
     protected $primaryKey = 'id';
@@ -137,8 +139,129 @@ class Order extends Model
             }
         }
 
+        $count = 0;
+        $temp_key=0;
+        $tracking_data = "";
+        foreach ($data as $key => $order) {
+            
+            if($order[12]){
+                $order_tracking = explode(",", $order[12]);
+                if($order[12]!=""){
+                    foreach ($order_tracking as $k => $ot) {
+                        $count ++;
+                        $tracking_data .= "&main:no".($count)."=".$ot;    
+                    }                
+                }                
+            }           
+
+            if(($count%10==0 || $key>=(count($data)-1)) && $count>0 ){               
+                $res = array();
+
+                if($tracking_data != ""){                    
+                    $curl = curl_init();
+
+                    $query = "jsf_tree_64=".urlencode( env("SAGAWA_JSF_TREE_64", "") )."&jsf_state_64=".urlencode( env("SAGAWA_JSF_STATE_64", "") ) . "&jsf_viewid=".urlencode('/web/okurijosearcheng.jsp')."&main:correlation=1&main:toiStart=".urlencode('Track it')."&main_SUBMIT=1" . $tracking_data;    
+                    
+                    curl_setopt_array($curl, array(
+                        CURLOPT_URL => "https://k2k.sagawa-exp.co.jp/p/sagawa/web/okurijosearcheng.jsp",            
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_ENCODING => "",
+                        CURLOPT_MAXREDIRS => 10,
+                        CURLOPT_TIMEOUT => 0,
+                        CURLOPT_FOLLOWLOCATION => true,
+                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                        CURLOPT_CUSTOMREQUEST => "POST",
+                        CURLOPT_POSTFIELDS => $query,
+                        CURLOPT_HTTPHEADER => array(
+                            "Content-Type: application/x-www-form-urlencoded; charset=UTF-8",
+                            'Content-Length: ' . strlen( $query )        
+                        ),
+                    ));
+
+                    $response = curl_exec($curl);
+
+                    curl_close($curl);            
+                    $dom = HtmlDomParser::str_get_html( $response );
+                    $tracking_data ="";
+
+                    for ($i=1; $i <=10 ; $i++) { 
+                        $tracking_no = $dom->find("input[name='main:no".$i."']");
+                        $tracking_date = $dom->find("input[name='main:h-date".$i."']");
+                        $tracking_status = $dom->find("input[name='main:h-status".$i."']");    
+                        $res[] = [$tracking_no[0]->value, $tracking_date[0]->value,  $tracking_status[0]->value];
+                    }  
+
+                    $q=0;
+
+                    for($j=$temp_key; $j<$key; $j++){
+                        $q_data = explode(',', $data[$j][12]);
+                        if($data[$j][12]){
+                            foreach ($q_data as $v => $qv) {                            
+                                $q++;                            
+                                $data[$j][2][]=$res[$q];
+                            }    
+                        }
+                    }    
+
+                    $temp_key= $key;  
+                }   
+            }                              
+
+        }
+
         $result = array('data' => $data, 'recordsFiltered'=> $total_filtered, 'recordsTotal'=>$totals, 'draw'=>$filter['draw']);        
 
         return $result;
     }
+
+    public static function get_tracking_status($orders){
+
+        $result = array();
+
+        $tracking_data = "";
+        foreach ($orders as $key => $order) {
+            if($order->tracking_no){                
+                $tracking_data .= "&main:no".($key+1)."=".$order->tracking_no;
+            }else{
+                $tracking_data .= "&main:no".($key+1)."=000000000000";
+            }           
+        }
+
+        if($tracking_data != ""){
+            $curl = curl_init();
+
+            $query = "jsf_tree_64=".urlencode( env("SAGAWA_JSF_TREE_64", "") )."&jsf_state_64=".urlencode( env("SAGAWA_JSF_STATE_64", "") ) . "&jsf_viewid=".urlencode('/web/okurijosearcheng.jsp')."&main:correlation=1&main:toiStart=".urlencode('Track it')."&main_SUBMIT=1" . $tracking_data;    
+            
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => "https://k2k.sagawa-exp.co.jp/p/sagawa/web/okurijosearcheng.jsp",            
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POSTFIELDS => $query,
+                CURLOPT_HTTPHEADER => array(
+                    "Content-Type: application/x-www-form-urlencoded; charset=UTF-8",
+                    'Content-Length: ' . strlen( $query )        
+                ),
+            ));
+
+            $response = curl_exec($curl);
+
+            curl_close($curl);            
+            $dom = HtmlDomParser::str_get_html( $response );
+            
+             for ($i=1; $i <=10 ; $i++) { 
+                $tracking_date = $dom->find("input[name='main:h-date".$i."']");
+                $tracking_status = $dom->find("input[name='main:h-status".$i."']");    
+                $result[] = [$tracking_date[0]->value,  $tracking_status[0]->value];
+            }        
+        }        
+             
+        var_dump($result);     
+        exit;
+    }
+
 }

@@ -11,6 +11,7 @@ use App\Models\DirectOrder;
 use App\Models\ProductTracking;
 use App\Enums\UserType;
 
+
 class DashboardController extends Controller
 {
     /**
@@ -30,11 +31,13 @@ class DashboardController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {                
+    {   
         if( Auth::user()->user_type <= UserType::Admin ){
-            $orders = Order::limit(20)->get();                
+            $orders = Order::limit(10)->get();
 
-            $data = array('orders');
+            //Order::get_tracking_status($orders);
+
+            $data = array();
             return view('dashboard.index', compact($data));            
         }      
         return redirect(route('orders'));  

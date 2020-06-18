@@ -434,13 +434,13 @@ var DatatablesAjax = function () {
               toastr["success"](res.msg, "成功!");
             } else {
               toastr["error"](res.msg, "失敗!");
-            }
-
-            the.parent().parent().remove(); // the.attr('txt', "change");
+            } //the.parent().parent().remove();
+            // the.attr('txt', "change");
             // the.text("保存");
             // the.removeClass('green');
             // the.addClass('blue');
             // tracking_box.find("input").prop("readonly", true);
+
           }
         });
       }

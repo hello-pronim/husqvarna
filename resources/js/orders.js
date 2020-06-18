@@ -427,7 +427,7 @@ var DatatablesAjax = function () {
                             toastr["error"](res.msg, "失敗!")
                         }
 
-                        the.parent().parent().remove();
+                        //the.parent().parent().remove();
 
                         // the.attr('txt', "change");
                         // the.text("保存");

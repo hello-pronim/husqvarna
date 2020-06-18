@@ -182,9 +182,27 @@ var DatatablesAjax = function () {
           "targets": 2,
           "orderable": false,
           "render": function render(data, type, full, meta) {
-            return '<i class="fa fa-circle red"></i>';
+            $res = "";
+
+            if (data) {
+              $.each(data, function (key, elem) {
+                var status = elem[2].split(":");
+
+                if (status == "Not picked up") {
+                  $res += '<i class="fa fa-circle red" data-toggle="tooltip" data-theme="dark" title="' + elem[0] + ': 集まらない"></i>';
+                } else if (status == "In Transit") {
+                  $res += '<i class="fa fa-circle orange" data-toggle="tooltip" data-theme="dark" title="' + elem[0] + ': 輸送中"></i>';
+                } else if (status == "Delivered") {
+                  $res += '<i class="fa fa-circle green" data-toggle="tooltip" data-theme="dark" title="' + elem[0] + ': 配達完了 - ' + elem[1] + '"></i>';
+                } else {
+                  $res += '<i class="fa fa-circle" data-toggle="tooltip" data-theme="dark" title="' + elem[0] + ': 該当なし"></i>';
+                }
+              });
+            }
+
+            return $res;
           },
-          className: 'dt-body-center'
+          className: 'dt-body-center tracking_status'
         }, {
           "targets": 3,
           "render": function render(data, type, full, meta) {
