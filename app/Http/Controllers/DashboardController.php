@@ -165,6 +165,11 @@ class DashboardController extends Controller
         return response()->json($response);
     }
 
+    public function change_date_format(Request $request)
+    { 
+        Order::change_date_format();
+    }
+
     public function uploadCSV(Request $request)
     {        
         
@@ -228,11 +233,11 @@ class DashboardController extends Controller
                             $insertData = array(
                                 "po" => $importData[0],
                                 "vendor"     => $importData[1],
-                                "ordered_on"   => $importData[2],
+                                "ordered_on"   => date('Y/m/d', strtotime($importData[2])),
                                 "ship_location"    => $importData[3],
                                 "window_type"    => $importData[4],
-                                "window_start"    => $importData[5],
-                                "window_end"    => $importData[6],
+                                "window_start"    => date('Y/m/d', strtotime($importData[5])),
+                                "window_end"    => date('Y/m/d', strtotime($importData[6])),
                                 "total_cases"    => $importData[7],
                                 "total_cost"    => $importData[8],
                                 "created_at" => date("Y-m-d H:i:s"),

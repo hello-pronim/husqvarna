@@ -22,6 +22,7 @@ Route::group(['middleware' => ['auth']], function(){
 	Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 	Route::get('/orders', 'DashboardController@orders')->name('orders');
 	Route::get('/order/{po}', 'DashboardController@order_detail')->name('order_detail');
+	Route::get('/orders/change_date_format', 'DashboardController@change_date_format');
 
 	Route::post('/po_uploadcsv', 'DashboardController@uploadCSV')->name('po_uploadcsv');
 	Route::post('/ajax_dashbaord', 'DashboardController@ajax_dashbaord')->name('ajax_dashbaord');
@@ -32,7 +33,7 @@ Route::group(['middleware' => ['auth']], function(){
 	
 	Route::get('/manage/user', 'ManageController@user_list')->name('management.user');
 	Route::get('/manage/csv_import', 'ManageController@po_csv_import')->name('management.po_csv_import');
-	Route::get('/manage/direct_csv_import', 'ManageController@direct_csv_import')->name('management.direct_csv_import');
+	Route::get('/manage/direct_csv_import', 'ManageController@direct_csv_import')->name('management.direct_csv_import');	
 
 	Route::post('/user/change_usertype', 'ManageController@change_usertype')->name('change_usertype');
 	Route::post('/user/info', 'ManageController@user_info')->name('user_info');

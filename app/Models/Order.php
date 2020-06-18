@@ -30,7 +30,24 @@ class Order extends Model
         }        
     }
 
-     public static function getDataFilter($filter)
+    public static function change_date_format(){
+        $query = DB::table('orders')->get();
+
+        foreach ($query as $key => $value) {
+            $data = array(               
+                "ordered_on"   => date('Y/m/d', strtotime($value->ordered_on)),               
+                "window_start"    => date('Y/m/d', strtotime($value->window_start)),
+                "window_end"    => date('Y/m/d', strtotime($value->window_end))
+            );
+
+            DB::table('orders')->where('id', $value->id)->update($data);
+
+        }
+
+        echo "Ok";
+    }
+
+    public static function getDataFilter($filter)
     {
         $data = [];           
         $query = DB::table('orders');
@@ -171,6 +188,7 @@ class Order extends Model
                         CURLOPT_FOLLOWLOCATION => true,
                         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                         CURLOPT_CUSTOMREQUEST => "POST",
+                        CURLOPT_SSL_VERIFYPEER => false,
                         CURLOPT_POSTFIELDS => $query,
                         CURLOPT_HTTPHEADER => array(
                             "Content-Type: application/x-www-form-urlencoded; charset=UTF-8",
