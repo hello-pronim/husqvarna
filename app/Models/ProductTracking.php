@@ -21,10 +21,10 @@ class ProductTracking extends Model
     public static function insertData($data)
     {
         $value = DB::table('product_trackings')->where( 'order_id', $data['order_id']) 
-        				->where('product_id', $data['product_id'])->get();
+        				->where('product_id', $data['product_id'])->first();
 
-        if ($value->count() > 0) {
-            DB::table('product_trackings')->where('po', $value->id)->update($data);
+        if ($value) {
+            DB::table('product_trackings')->where('id', $value->id)->update($data);
         }else{
             DB::table('product_trackings')->insert(array(
             	'order_id' => $data['order_id'],
