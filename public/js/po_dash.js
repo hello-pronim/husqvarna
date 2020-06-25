@@ -234,7 +234,7 @@ var DatatablesAjax = function () {
           "targets": -1,
           "data": null,
           "orderable": false,
-          "defaultContent": '<div class="btn-group pull-right">' + '<button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">操作' + '<i class="fa fa-angle-down"></i>' + '</button>' + '<ul class="dropdown-menu pull-right">' + '<li>' + '<a href="javascript:;" class="edit">' + '<i class="fa fa-edit"></i>編集</a>' + '</li>' + '<li>' + '<a href="javascript:;" class="delete" >' + '<i class="fa fa-remove"></i> 削除 </a>' + '</li>' + '</ul>' + '</div>',
+          "defaultContent": '<div class="btn-group pull-right">' + '<button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">操作' + '<i class="fa fa-angle-down"></i>' + '</button>' + '<ul class="dropdown-menu pull-right">' + '<li>' + '<form class="po_detail_form" method="post" action="/ajax_import_po_csv" enctype="multipart/form-data">' + '<div class="fileinput fileinput-po" data-provides="fileinput">' + '<span class="btn btn-file">' + '<span class="fileinput-po"><i class="fa fa-file-excel-o"></i>CSVをインポート</a></span>' + '<input type="file" name="po_detail_csv" accept=".csv"> </span>' + '</div></form>' + '</li>' + '<li>' + '<a href="javascript:;" class="edit">' + '<i class="fa fa-edit"></i>編集</a>' + '</li>' + '<li>' + '<a href="javascript:;" class="delete" >' + '<i class="fa fa-remove"></i>削除</a>' + '</li>' + '</ul>' + '</div>',
           className: "no-product"
         }, {
           "targets": -3,
@@ -276,6 +276,29 @@ var DatatablesAjax = function () {
         }
       });
     });
+    table.on('submit', 'form.po_detail_form', function (e) {
+      e.preventDefault();
+      var fd = new FormData();
+      var files = $(this).find('input[name="po_detail_csv"]')[0].files[0];
+      fd.append('file', files);
+      fd.append('order_id', $(this).closest('tr').attr('data-id'));
+      $.ajax({
+        url: '/ajax_import_po_csv',
+        type: 'post',
+        data: fd,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function success(res) {
+          if (res.success == true) {
+            toastr["success"](res.msg, "成功!");
+          } else {
+            toastr["error"](res.msg, "失敗!");
+          }
+        }
+      });
+      return false;
+    });
     table.on('click', 'tbody tr', function (e) {
       if ($(e.target).closest("td").hasClass("no-product")) {
         return;
@@ -306,7 +329,7 @@ var DatatablesAjax = function () {
             var p_html = "<tr class='child'><td class='child' colspan='" + the.find('>td').length + "'><table class='table table-bordered'>";
             p_html += "<thead><tr>" + "<td class='nowrap'>ASIN</td>" + "<td class='nowrap'>製品コード</td>" + "<td class='nowrap'>モデル番号</td>" + "<td class='nowrap'>商品名</td>" + "<td class='nowrap'>入荷待ち</td>" + "<td class='nowrap'>ウィンドウの種類</td>" + "<td class='nowrap'>予定日</td>" + "<td class='nowrap'>依頼数量</td>" + "<td class='nowrap'>承認済みの数量</td>" + "<td class='nowrap'>受領済みの数量</td>" + "<td class='nowrap'>未処理の数量</td>" + "<td class='nowrap'>仕入価格</td>" + "<td class='nowrap'>総額</td>" + "</tr></thead><tbody>";
             $.each(res.products, function (key, product) {
-              p_html += "<tr><td>" + product.asin + "</td>" + "<td>" + product.external_id + "</td>" + "<td>" + product.mordel_number + "</td>" + "<td>" + product.title + "</td>" + "<td>" + product.blockordered + "</td>" + "<td>" + product.window_type + "</td>" + "<td>" + product.expected_date + "</td>" + "<td>" + product.quantity_request + "</td>" + "<td>" + product.accepted_quantity + "</td>" + "<td>" + product.quantity_received + "</td>" + "<td>" + product.quantity_outstand + "</td>" + "<td>" + product.unit_cost + "</td>" + "<td>" + product.total_cost + "</td></tr>";
+              p_html += "<tr product-id='" + product.id + "'><td>" + product.asin + "</td>" + "<td>" + product.external_id + "</td>" + "<td>" + product.mordel_number + "</td>" + "<td>" + product.title + "</td>" + "<td>" + product.blockordered + "</td>" + "<td>" + product.window_type + "</td>" + "<td>" + product.expected_date + "</td>" + "<td>" + product.quantity_request + "</td>" + "<td>" + product.accepted_quantity + "</td>" + "<td>" + product.quantity_received + "</td>" + "<td>" + product.quantity_outstand + "</td>" + "<td>" + product.unit_cost + "</td>" + "<td>" + product.total_cost + "</td></tr>";
             });
             p_html += "</tbody></table></td></tr>";
             $(p_html).fadeIn(100, function () {

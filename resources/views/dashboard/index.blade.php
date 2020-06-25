@@ -48,7 +48,7 @@
                                             <a href="javascript:;">
                                                 <i class="fa fa-file-excel-o"></i> {{ trans('dashboard.excel') }} </a>
                                         </li>
-                                    </ul>
+                                    </ul>                                    
                                 </div>
                             </div>
                             <div class="portlet-body">

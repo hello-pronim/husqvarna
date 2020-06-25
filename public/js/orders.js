@@ -204,7 +204,7 @@ var DatatablesAjax = function () {
             });
             tracking_no_input += "</select>"; // + "<a class='add_track'><i class='fa fa-plus-circle'></i></a></div>";
 
-            tracking_no_input += '<div><input type="text" class="form-control input-sm input-small tracking_no input-inline" name="tracking_no" placeholder="0000-0000-0000">' + '<span class="input-group-btn">' + '<button class="btn blue btn-sm" txt="change" type="button">保存</button>' + '</span>' + '</div>';
+            tracking_no_input += '<div><input type="text" class="form-control input-sm input-small tracking_no input-inline" name="tracking_no" placeholder="">' + '<span class="input-group-btn">' + '<button class="btn blue btn-sm" txt="change" type="button">保存</button>' + '</span>' + '</div>';
             tracking_no_input += '</div>';
             return tracking_no_input;
           },
@@ -274,7 +274,6 @@ var DatatablesAjax = function () {
           success: function success(res) {
             //console.log(res);
             function assign_product(_this) {
-              console.log("ssssssss");
               $.ajax({
                 url: '/ajax_product_tracking',
                 type: 'post',
@@ -293,7 +292,7 @@ var DatatablesAjax = function () {
             var p_html = "<tr class='child'><td class='child' colspan='" + the.find('>td').length + "'><table class='table table-bordered'>";
             p_html += "<thead><tr>" + "<td class='nowrap'>ASIN</td>" + "<td class='nowrap'>製品コード</td>" + "<td class='nowrap'>モデル番号</td>" + "<td class='nowrap'>商品名</td>" + "<td class='nowrap'>入荷待ち</td>" + "<td class='nowrap'>ウィンドウの種類</td>" + "<td class='nowrap'>予定日</td>" + "<td class='nowrap'>依頼数量</td>" + "<td class='nowrap'>承認済みの数量</td>" + "<td class='nowrap'>受領済みの数量</td>" + "<td class='nowrap'>未処理の数量</td>" + "<td class='nowrap'>お問合せ番号</td>" + "</tr></thead><tbody>";
             $.each(res.products, function (key, product) {
-              var option = "<option>0000-0000-0000</option>";
+              var option = "<option></option>";
 
               if (res.tracking_number) {
                 $.each(res.tracking_number.split(","), function (key, ele) {

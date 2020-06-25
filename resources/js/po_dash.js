@@ -162,12 +162,20 @@ var DatatablesAjax = function () {
                                                 +'</button>'
                                                 +'<ul class="dropdown-menu pull-right">'
                                                     +'<li>'
+                                                        +'<form class="po_detail_form" method="post" action="/ajax_import_po_csv" enctype="multipart/form-data">'
+                                                        +'<div class="fileinput fileinput-po" data-provides="fileinput">'
+                                                            +'<span class="btn btn-file">'
+                                                            +'<span class="fileinput-po"><i class="fa fa-file-excel-o"></i>CSVをインポート</a></span>'
+                                                                +'<input type="file" name="po_detail_csv" accept=".csv"> </span>'                                                            
+                                                        +'</div></form>' 
+                                                    +'</li>'      
+                                                    +'<li>'
                                                         +'<a href="javascript:;" class="edit">'
                                                             +'<i class="fa fa-edit"></i>編集</a>'
                                                     +'</li>'
                                                     +'<li>'
                                                         +'<a href="javascript:;" class="delete" >'
-                                                            +'<i class="fa fa-remove"></i> 削除 </a>'
+                                                            +'<i class="fa fa-remove"></i>削除</a>'
                                                     +'</li>'                                                        
                                                 +'</ul>'
                                             +'</div>',
@@ -223,6 +231,33 @@ var DatatablesAjax = function () {
             });
         });
 
+        table.on('submit', 'form.po_detail_form', function (e) {
+            e.preventDefault();
+         
+            var fd = new FormData();
+            var files = $(this).find('input[name="po_detail_csv"]')[0].files[0];
+            fd.append('file',files);
+            fd.append('order_id', $(this).closest('tr').attr('data-id'));
+
+            $.ajax({
+                    url:'/ajax_import_po_csv',
+                    type:'post',
+                    data:fd,
+                    contentType: false,
+                    processData: false,
+                    dataType: 'json',
+                    success: function(res){
+                        if(res.success==true){                            
+                            toastr["success"](res.msg, "成功!")
+                        }else{
+                            toastr["error"](res.msg, "失敗!")
+                        }
+                    }
+                });
+            
+            return false;
+        });
+
         table.on('click', 'tbody tr', function (e) {
 
             if( $(e.target).closest("td").hasClass("no-product") ){                
@@ -266,7 +301,7 @@ var DatatablesAjax = function () {
                                     "</tr></thead><tbody>";
                         
                         $.each(res.products, function(key, product){
-                            p_html += "<tr><td>"+ product.asin +"</td>" +
+                            p_html += "<tr product-id='"+product.id+"'><td>"+ product.asin +"</td>" +
                                         "<td>"+ product.external_id +"</td>" +
                                         "<td>"+ product.mordel_number +"</td>" +
                                         "<td>"+ product.title +"</td>" +

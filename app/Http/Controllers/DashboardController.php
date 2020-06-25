@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 use Session;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\DirectOrder;
 use App\Models\ProductTracking;
 use App\Enums\UserType;
@@ -105,45 +106,8 @@ class DashboardController extends Controller
     public function ajax_order_products(Request $request)
     {
         if($request->input('order_id')){
-            $response = array(
-                            'products' => [
-                                array( 
-                                    'id' => 1,
-                                    'asin' => 'B01M361GRY',
-                                    'external_id' => '4078500023658',
-                                    'mordel_number' => '08951-20.000.00',
-                                    'title' => 'GARDENA(ガルデナ) ハンドスコップ 6cm 08951-20',
-                                    'blockordered' => '不可',
-                                    'window_type' => '着荷ウィンドウ (元払い)',
-                                    'expected_date' => '2020/05/29',
-                                    'quantity_request' => '1',
-                                    'accepted_quantity' => '1',
-                                    'quantity_received' => '0',
-                                    'quantity_outstand' => '1',
-                                    'unit_cost' => '386',
-                                    'total_cost' =>  '386',
-                                    'tracking_no' => ProductTracking::Where(array('order_id'=>$request->input('order_id'), 'product_id'=>1))->get()->count()>0? ProductTracking::Where(array('order_id'=>$request->input('order_id'), 'product_id'=>1))->first()['tracking_no']:''
-                                ),
-                                array( 
-                                    'id' => 2,
-                                    'asin' => 'B01FE8M1QI',
-                                    'external_id' => '4078500018746',
-                                    'mordel_number' => '08904-20.000.00',
-                                    'title' => 'GARDENA(ガルデナ) 園芸用はさみ (直径24mmまでの枝や花を楽にカット) 08904-20',
-                                    'blockordered' => '不可',
-                                    'window_type' => '着荷ウィンドウ (元払い)',
-                                    'expected_date' => '2020/05/29',
-                                    'quantity_request' => '1',
-                                    'accepted_quantity' => '1',
-                                    'quantity_received' => '0',
-                                    'quantity_outstand' => '1',
-                                    'unit_cost' => '1831',
-                                    'total_cost' =>  '1831',
-                                    'tracking_no' => ProductTracking::Where(array('order_id'=>$request->input('order_id'), 'product_id'=>2))->count()>0? ProductTracking::Where(array('order_id'=>$request->input('order_id'), 'product_id'=>1))->first()['tracking_no']:''
-                                )
-                            ],
-                            'tracking_number' => Order::find($request->input('order_id'))->tracking_no                            
-                        );    
+            $products = Product::getProductInfo($request->input('order_id'));
+            $response = array('success' => true , 'products' => $products );                   
         }else{
             $response = array('success' => false , 'msg' => '注文IDが必要です。' );   
         }                       
@@ -271,5 +235,107 @@ class DashboardController extends Controller
         return response()->json($result);
 
     }
+
+    public function ajax_import_po_csv(Request $request){
+
+        $file = $request->file("file");
+        
+        $result=array('success' => true, 'msg' =>$file );
+
+        if($file){
+                // File Details
+                $filename  = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension();
+                $tempPath  = $file->getRealPath();
+                $fileSize  = $file->getSize();
+                $mimeType  = $file->getMimeType();
+
+                // Valid File Extensions
+                $valid_extension = array("csv");
+
+                // 2MB in Bytes
+                $maxFileSize = 2097152;
+
+                // Check file extension
+                if (in_array(strtolower($extension), $valid_extension)) {
+
+                    // Check file size
+                    if ($fileSize <= $maxFileSize) {
+
+                        // File upload location
+                        $location = public_path('uploads/po_detail');
+
+                        $filepath = $location . "/" . $filename;
+
+                        if(file_exists($filepath)) unlink($filepath);
+                        // Upload file
+                        $file->move($location, $filename);
+
+                        // Reading file
+                        $file = fopen($filepath, "r");
+
+                        $importData_arr = array();
+                        $i              = 0;
+
+                        while (($filedata = fgetcsv($file, 1000, ",")) !== false) {
+                            $num = count($filedata);
+
+                            //Skip first row (Remove below comment if you want to skip the first row)
+                            if($i == 0){
+                                $i++;
+                                continue;
+                            }
+                            for ($c = 0; $c < $num; $c++) {
+                                $importData_arr[$i][] = $filedata[$c];
+                            }
+                            $i++;
+                        }
+                        fclose($file);
+
+                        // Insert to MySQL database
+                        foreach ($importData_arr as $importData) {
+
+                            $insertData = array(
+                                'order_id' => $request->input('order_id'),
+                                'asin' => $importData[0],
+                                'external_id' => $importData[1],
+                                'mordel_number' => $importData[2],
+                                'title' => $importData[3],
+                                'blockordered' => $importData[4],
+                                'window_type' => $importData[5],
+                                'expected_date' => $importData[6],
+                                'quantity_request' => $importData[7],
+                                'accepted_quantity' => $importData[8],
+                                'quantity_received' => $importData[9],
+                                'quantity_outstand' => $importData[10],
+                                'unit_cost' => $importData[11],
+                                'total_cost' => $importData[12],
+                                "created_at" => date("Y-m-d H:i:s"),
+                                "updated_at" => date("Y-m-d H:i:s")
+                            );
+
+                            Product::insertData($insertData);
+
+                        }
+
+                        //Session::flash('message', 'インポートに成功しました。');
+                        $result=array('success' => true, 'msg' =>'インポートに成功しました。' );
+                    } else {
+                        //Session::flash('message', 'フィアルは大きすぎる。 ファイルは2MB未満でなければなりません。');
+                        $result=array('success' => false, 'msg' =>'フィアルは大きすぎる。 ファイルは2MB未満でなければなりません。' );
+                    }
+
+                } else {
+                    //Session::flash('message', '無効なファイル拡張子。');
+                    $result=array('success' => false, 'msg' =>'無効なファイル拡張子。' );
+                }
+            }else{
+
+                //Session::flash('message', 'ファイルのアップロードに失敗しました。');
+                $result=array('success' => false, 'msg' =>'ファイルのアップロードに失敗しました。' );
+            }    
+
+        return response()->json( $result );
+    }    
 
 }

@@ -124,7 +124,7 @@ var DatatablesAjax = function () {
                             })
                             tracking_no_input += "</select>" // + "<a class='add_track'><i class='fa fa-plus-circle'></i></a></div>";
                             
-                            tracking_no_input += '<div><input type="text" class="form-control input-sm input-small tracking_no input-inline" name="tracking_no" placeholder="0000-0000-0000">'+
+                            tracking_no_input += '<div><input type="text" class="form-control input-sm input-small tracking_no input-inline" name="tracking_no" placeholder="">'+
                                                     '<span class="input-group-btn">'+
                                                         '<button class="btn blue btn-sm" txt="change" type="button">保存</button>'+
                                                     '</span>'+
@@ -206,8 +206,7 @@ var DatatablesAjax = function () {
                     dataType: 'json',
                     success: function(res){
                         //console.log(res);
-                        function assign_product(_this){
-                            console.log("ssssssss");
+                        function assign_product(_this){                            
                             $.ajax({
                                 url:'/ajax_product_tracking',
                                 type:'post',
@@ -241,7 +240,7 @@ var DatatablesAjax = function () {
                         
 
                         $.each(res.products, function(key, product){   
-                            var option = "<option>0000-0000-0000</option>";
+                            var option = "<option></option>";
                             if(res.tracking_number){
                                 $.each(res.tracking_number.split(","), function(key, ele){
                                     if(ele){                                        

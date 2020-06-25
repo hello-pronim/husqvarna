@@ -218,6 +218,20 @@ form div.form-group label.error {
   font-size: 12px;
 }
 
+div.fileinput-po {
+  display: block;
+  color: #6f6f6f;
+}
+
+div.fileinput-po > span {
+  width: 100%;
+  text-align: left;
+}
+
+div.fileinput-po input[type=file] {
+  cursor: pointer;
+}
+
 @media (min-width: 992px) {
   .page-sidebar {
     width: 100px;

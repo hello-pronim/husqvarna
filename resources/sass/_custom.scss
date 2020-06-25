@@ -173,4 +173,14 @@ form{
 	}
 }
 
-
+div.fileinput-po{
+	display: block;
+	color: #6f6f6f;
+	>span{
+		width: 100%;
+    	text-align: left;
+	}
+	input[type='file']{
+		cursor: pointer;
+	}
+}
