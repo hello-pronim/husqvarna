@@ -31,19 +31,21 @@ class Product extends Model
 
     public static function getProductInfo($order_id)
     {
-    	$query = Product::with("productTracking")
-    	 		->where('order_id', $order_id)
+    	$query = Product::select('products.*', 'product_trackings.*')
+    			->leftjoin('product_trackings', 'products.id', '=', 'product_trackings.product_id')
+    	 		->where('products.order_id', $order_id)    	 		
+    	 		->where('product_trackings.order_id', $order_id)
     	 		->get();
 
     	return $query; 		
     }
 
     public function productTracking(){
-        return $this->hasOne('App\Models\ProductTracking', 'id', 'product_id');
+        return $this->hasOne('App\Models\ProductTracking', 'product_id', 'id');
     }
 
     public function order(){
-        return $this->hasMany('App\Models\Order', 'id', 'order_id');
+        return $this->hasMany('App\Models\Order', 'order_id', 'id');
     }    
 
 }

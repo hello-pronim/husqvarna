@@ -104,10 +104,28 @@ var DatatablesAjax = function () {
                     {
                         "targets":2,                        
                         "orderable": false,
-                        "render":function(data, type, full, meta){                            
-                            return '<i class="fa fa-circle red"></i>';
+                        "render":function(data, type, full, meta){
+                            $res = "";
+                            if(data){
+                                $.each(data, function(key, elem){
+                                    var status = elem[2].split(":");
+                                    if( status[0] =="Not picked up"){
+                                        $res += '<i class="fa fa-circle red" data-toggle="tooltip" data-theme="dark" title="'+elem[0]+': 集まらない"></i>';
+                                    }else if( status[0] =="In Transit"){
+                                        $res += '<i class="fa fa-circle orange" data-toggle="tooltip" data-theme="dark" title="'+elem[0]+': 輸送中"></i>';
+                                    }else if( status[0] =="Delivered"){
+                                        $res += '<i class="fa fa-circle green" data-toggle="tooltip" data-theme="dark" title="'+elem[0]+': 配達完了 - '+elem[1]+'"></i>';
+                                    }else if( status[0] =="Exception"){
+                                        $res += '<i class="fa fa-circle grey" data-toggle="tooltip" data-theme="dark" title="'+elem[0]+': お問合せ - '+elem[1]+'"></i>';
+                                    }else{
+                                        $res += '<i class="fa fa-circle" data-toggle="tooltip" data-theme="dark" title="'+elem[0]+': 該当なし"></i>';    
+                                    }                                    
+                                });
+                            }
+
+                            return $res;
                         },
-                        className: 'dt-body-center',
+                        className: 'dt-body-center tracking_status',
                     },                   
                     {
                         "targets":-1,
@@ -213,12 +231,14 @@ var DatatablesAjax = function () {
                                 data:{ product_id: $(this).closest("tr").attr("product-id"), tracking_no: $(_this).val() },
                                 dataType: 'json', 
                                 success:function(res){
-                                    console.log(res)
+                                    if(res.success==true){
+                                        toastr["success"](res.msg, "成功!")
+                                    }else{
+                                        toastr["error"](res.msg, "失敗!")
+                                    }
                                 }
-                            });    
-
+                            });  
                         };
-
 
                         var p_html = "<tr class='child'><td class='child' colspan='"+ the.find('>td').length +"'><table class='table table-bordered'>";
 
@@ -236,8 +256,6 @@ var DatatablesAjax = function () {
                                         "<td class='nowrap'>未処理の数量</td>" +
                                         "<td class='nowrap'>お問合せ番号</td>" +                                        
                                     "</tr></thead><tbody>";
-                        
-                        
 
                         $.each(res.products, function(key, product){   
                             var option = "<option></option>";
@@ -281,7 +299,11 @@ var DatatablesAjax = function () {
                                     data:{ order_id: data_id, product_id: $(this).closest("tr").attr("product-id"), tracking_no: $(this).val() },
                                     dataType: 'json', 
                                     success:function(res){
-                                        console.log(res)
+                                        if(res.success==true){
+                                            toastr["success"](res.msg, "成功!")
+                                        }else{
+                                            toastr["error"](res.msg, "失敗!")
+                                        }
                                     } 
                                 });
                             });

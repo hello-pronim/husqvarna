@@ -28,8 +28,7 @@ class CreateProductsTable extends Migration
             $table->integer('quantity_received')->nullable();
             $table->integer('quantity_outstand')->nullable();
             $table->float('unit_cost')->nullable();
-            $table->float('total_cost')->nullable();
-            $table->string('tracking_no')->nullable();
+            $table->float('total_cost')->nullable();            
 
             $table->timestamps();
         });

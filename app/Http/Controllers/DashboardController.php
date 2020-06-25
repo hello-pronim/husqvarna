@@ -107,7 +107,10 @@ class DashboardController extends Controller
     {
         if($request->input('order_id')){
             $products = Product::getProductInfo($request->input('order_id'));
-            $response = array('success' => true , 'products' => $products );                   
+            $response = array(
+                            'products' => $products,
+                            'tracking_number' => Order::find($request->input('order_id'))->tracking_no                    
+                        );                   
         }else{
             $response = array('success' => false , 'msg' => '注文IDが必要です。' );   
         }                       
@@ -121,9 +124,9 @@ class DashboardController extends Controller
 
             ProductTracking::insertData($request->input());
 
-            $response = array('success' => true );   
+            $response = array('success' => true, '更新成功');   
         }else{
-            $response = array('success' => false );    
+            $response = array('success' => false, '失敗した');    
         }    
 
         return response()->json($response);
