@@ -31,10 +31,15 @@ class Product extends Model
 
     public static function getProductInfo($order_id)
     {
-    	$query = Product::select('products.*', 'product_trackings.*')
-    			->leftjoin('product_trackings', 'products.id', '=', 'product_trackings.product_id')
-    	 		->where('products.order_id', $order_id)    	 		
-    	 		->where('product_trackings.order_id', $order_id)
+    	$query = Product::select('products.*', 'product_trackings.tracking_no')
+    			->leftjoin('product_trackings', function($join)
+                         {
+                             $join->on('product_trackings.product_id', '=', 'products.id');
+                             $join->on('product_trackings.order_id','=', 'products.order_id');
+                             
+                         })
+    	 		->where('products.order_id', $order_id)    	 		    	 		
+    	 		->distinct('products.id')
     	 		->get();
 
     	return $query; 		
