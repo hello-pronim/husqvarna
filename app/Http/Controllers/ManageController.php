@@ -39,6 +39,11 @@ class ManageController extends Controller
         return view('manage.csv_import');
     }
 
+    public function po_tracking_import()
+    {
+        return view('manage.tracking_import');
+    }
+
     public function direct_csv_import()
     {
 

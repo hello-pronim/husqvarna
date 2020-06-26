@@ -18,11 +18,8 @@
             	@if(Session::get('message'))
             	<p class="alert alert-danger fade in">{{ Session::get('message') }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
             	@endif
-                @if(Auth::user()->user_type == App\Enums\UserType::Warehouse)
-            	   <form method='post' action='{{ route("tracking_uploadcsv") }}' enctype='multipart/form-data' class="dropzone dropzone-file-area" id="my-dropzone" style="width: 60%; margin-top: 50px;">
-                @else
-                    <form method='post' action='{{ route("po_uploadcsv") }}' enctype='multipart/form-data' class="dropzone dropzone-file-area" id="my-dropzone" style="width: 60%; margin-top: 50px;">
-                @endif    
+
+            	<form method='post' action='{{ route("po_uploadcsv") }}' enctype='multipart/form-data' class="dropzone dropzone-file-area" id="my-dropzone" style="width: 60%; margin-top: 50px;">
                     {{ csrf_field() }}
                     <!-- <div class="fileinput fileinput-new" data-provides="fileinput">
                         <span class="btn green btn-file">
@@ -32,14 +29,13 @@
                         <span class="fileinput-filename"> </span> &nbsp;
                         <a href="javascript:;" class="close fileinput-exists" data-dismiss="fileinput"> </a>
                     </div> -->                    
-                    <div class="dz-default dz-message">
-                        <i class="fa fa-plus-circle dropzone_icon"></i>
-                        @if(Auth::user()->user_type == App\Enums\UserType::Warehouse)
-                            <h3 class="sbold">お問合せ番号エックセルインポート</h3>					
-                        @else
-                            <h3 class="sbold">PO csvをここにドラッグアンドドロップ</h3>                    
-                        @endif    
-                    </div>
+                    
+                    <i class="fa fa-plus-circle dropzone_icon"></i>
+                    @if(Auth::user()->user_type == App\Enums\UserType::Warehouse)
+                        <h3 class="sbold">お問合せ番号エックセルインポート</h3>					
+                    @else
+                        <h3 class="sbold">PO csvをここにドラッグアンドドロップ</h3>                    
+                    @endif    
                 </form>
 
                 <!-- <div class="text-center mt-30" style="margin-top: 50px;"><button type="button" id="dropzone-fileupload" class="btn btn-lg blue">輸入する</button></div> -->

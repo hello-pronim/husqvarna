@@ -7,7 +7,7 @@ var FormDropzone = function () {
 
             Dropzone.options.myDropzone = {
                 dictDefaultMessage: "",
-                acceptedFiles: '.csv',
+                acceptedFiles: '.csv,.xlsx',
                 //autoProcessQueue: false,
                 maxFiles:1,
                 renameFile:"po_csv",

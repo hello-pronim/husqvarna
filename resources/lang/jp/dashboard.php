@@ -35,6 +35,7 @@ return [
     'add_customer' => '新規アカウント作成',
     'csv_import' => 'お問合せ番号CSVインポート',       
     'po_csv_import' => 'PO CSVインポート',       
+    'po_tracking_import' => 'お問合せ番号CSVインポート',
     'direct_csv_import' => 'ダイレクトフルフィルメント注文 CSVインポート',   
 
     /*menu*/

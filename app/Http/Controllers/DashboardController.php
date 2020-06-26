@@ -11,7 +11,8 @@ use App\Models\Product;
 use App\Models\DirectOrder;
 use App\Models\ProductTracking;
 use App\Enums\UserType;
-
+use App\Imports\OrderImport;
+use Excel;
 
 class DashboardController extends Controller
 {
@@ -137,6 +138,7 @@ class DashboardController extends Controller
         Order::change_date_format();
     }
 
+    /*IMPORT PO LIST*/
     public function uploadCSV(Request $request)
     {        
         
@@ -239,6 +241,70 @@ class DashboardController extends Controller
 
     }
 
+    /*IMPORT TRACKING LIST*/
+    public function uploadTrackingCSV(Request $request)
+    {        
+        
+        //if ($request->input('submit') != null) {
+
+            $file = $request->file('file');
+
+            if($file){
+                // File Details
+                $filename  = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension();
+                $tempPath  = $file->getRealPath();
+                $fileSize  = $file->getSize();
+                $mimeType  = $file->getMimeType();
+
+                // Valid File Extensions
+                $valid_extension = array("csv", "xls","xlsx");
+
+                // 2MB in Bytes
+                $maxFileSize = 2097152;
+
+                // Check file extension
+                if (in_array(strtolower($extension), $valid_extension)) {
+
+                    // Check file size
+                    if ($fileSize <= $maxFileSize) {
+
+                        // File upload location
+                        $location = public_path('uploads/po_tracking');
+
+                        $filepath = $location . "/" . $filename;
+
+                        if(file_exists($filepath)) unlink($filepath);
+                        // Upload file
+                        $file->move($location, $filename);
+
+                        Excel::import(new OrderImport, $filepath);                       
+                       
+                        //Session::flash('message', 'インポートに成功しました。');
+                        $result=array('success' => true, 'msg' =>'インポートに成功しました。' );
+                    } else {
+                        //Session::flash('message', 'フィアルは大きすぎる。 ファイルは2MB未満でなければなりません。');
+                        $result=array('success' => false, 'msg' =>'フィアルは大きすぎる。 ファイルは2MB未満でなければなりません。' );
+                    }
+
+                } else {
+                    //Session::flash('message', '無効なファイル拡張子。');
+                    $result=array('success' => false, 'msg' =>'無効なファイル拡張子。' );
+                }
+            }else{
+
+                //Session::flash('message', 'ファイルのアップロードに失敗しました。');
+                $result=array('success' => false, 'msg' =>'ファイルのアップロードに失敗しました。' );
+            }    
+        //}
+
+        // Redirect to index
+        //return redirect(route('management.csv_import'));
+        return response()->json($result);
+
+    }
+
+    /*IMPORT PO DETAILS*/
     public function ajax_import_po_csv(Request $request){
 
         $file = $request->file("file");
