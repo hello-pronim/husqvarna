@@ -30,6 +30,32 @@ class Order extends Model
         }        
     }
 
+    public static function insertTracking($data)
+    {
+        $value = DB::table('orders')->where('po', $data[0])->first();
+        if($value){
+            if($value->tracking_no){
+                $tracking_no = explode(',', $this->clean($value->tracking_no));
+                if(in_array( $this->clean($data[1]), $tracking_no )){
+                    if(count($tracking_no) >0){
+                        DB::table('orders')->where('po', $data[0])->update(array('tracking_no'=> $value->tracking_no .','.$data[1] ));
+                    }else{
+                        DB::table('orders')->where('po', $data[0])->update(array('tracking_no'=> $data[1] ));
+                    }            
+                }                
+            }else{
+                DB::table('orders')->where('po', $data[0])->update(array('tracking_no'=> $data[1] ));
+            }
+            
+        }        
+    }
+
+    function clean($string) {
+       //$string = str_replace(' ', '-', $string); 
+
+       return preg_replace('/[^0-9\-,]/', '', $string); 
+    }
+
     public static function change_date_format(){
         $query = DB::table('orders')->get();
 
@@ -198,7 +224,7 @@ class Order extends Model
 
                     $response = curl_exec($curl);
 
-                    curl_close($curl); 
+                    curl_close($curl);                     
                     if($response){ 
                         $dom = HtmlDomParser::str_get_html( $response );
                         $tracking_data ="";
@@ -212,8 +238,9 @@ class Order extends Model
 
                         $q=0;
 
-                        for($j=$temp_key; $j<$key; $j++){
+                        for($j=$temp_key; $j<=$key; $j++){
                             $q_data = explode(',', $data[$j][12]);
+                            
                             if($data[$j][12]){
                                 foreach ($q_data as $v => $qv) {
                                     $data[$j][2][]=$res[$q];
@@ -224,7 +251,7 @@ class Order extends Model
                     }           
                     
 
-                    $temp_key= $key;  
+                    $temp_key= $key+1;  
                 }   
             }                              
 

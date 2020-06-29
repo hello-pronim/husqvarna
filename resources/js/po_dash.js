@@ -104,7 +104,7 @@ var DatatablesAjax = function () {
                             $res = "";
                             if(data){
                                 $.each(data, function(key, elem){
-                                    var status = elem[2].split(":");
+                                    var status = elem[2].split(":");                                    
                                     if( status[0] =="Not picked up"){
                                         $res += '<i class="fa fa-circle red" data-toggle="tooltip" data-theme="dark" title="'+elem[0]+': 集まらない"></i>';
                                     }else if( status[0] =="In Transit"){
