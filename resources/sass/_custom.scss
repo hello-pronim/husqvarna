@@ -144,13 +144,17 @@ tr.child {
 	}
 }
 
-.page-header.navbar .page-logo{
-	width: 100px;
-}
-
-.page-header.navbar .page-logo .logo-default{
-	margin-left: 0px;
-}
+.page-header.navbar{
+	.page-logo{
+		width: 100px;
+		padding:0 10px;
+		 .logo-default{
+			width: 100%;
+			margin-top: 15px;
+			margin-left: 0px;
+		}
+	}	
+} 
 
 .data-picker, .po-data-picker{
 	select[name='trader_type']{
@@ -182,5 +186,12 @@ div.fileinput-po{
 	}
 	input[type='file']{
 		cursor: pointer;
+	}
+}
+
+form.po_detail_form{
+	overflow: hidden;
+	input[type='file']{
+		font-size: 500px;
 	}
 }

@@ -46,6 +46,7 @@
             <div class="page-logo">
                 <a href="javascript:;">
                     <img src="{{ asset('images/logo_admin.png') }}" alt="logo" class="logo-default" /> </a>
+                    
                 <!-- <div class="menu-toggler sidebar-toggler">                        
                 </div> -->
             </div>

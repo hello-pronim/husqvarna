@@ -11076,9 +11076,12 @@ tr.child table {
 
 .page-header.navbar .page-logo {
   width: 100px;
+  padding: 0 10px;
 }
 
 .page-header.navbar .page-logo .logo-default {
+  width: 100%;
+  margin-top: 15px;
   margin-left: 0px;
 }
 
@@ -11114,6 +11117,14 @@ div.fileinput-po > span {
 
 div.fileinput-po input[type=file] {
   cursor: pointer;
+}
+
+form.po_detail_form {
+  overflow: hidden;
+}
+
+form.po_detail_form input[type=file] {
+  font-size: 500px;
 }
 
 @media (min-width: 992px) {
