@@ -46,7 +46,7 @@
             <div class="page-logo">
                 <a href="javascript:;">
                     <img src="{{ asset('images/logo_admin.png') }}" alt="logo" class="logo-default" /> </a>
-                    
+
                 <!-- <div class="menu-toggler sidebar-toggler">                        
                 </div> -->
             </div>
@@ -58,7 +58,15 @@
             <div class="page-top">               
                 <!-- BEGIN TOP NAVIGATION MENU -->
                 <div class="top-menu">
-                    <ul class="nav navbar-nav pull-right">                            
+                    <ul class="nav navbar-nav"> 
+                        <li class="lang-flag">
+                            <a href="javascript:;"><img src="{{ asset('images/flags/jp.png') }}"></a>                         
+                        </li> 
+                        <li class="lang-flag">
+                            <a href="javascript:;"><img src="{{ asset('images/flags/uk.png') }}"></a>
+                        </li>
+                    </ul>    
+                    <ul class="nav navbar-nav pull-right"> 
                         <li class="dropdown dropdown-user">
                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">                                
                                 @if( Auth::user()->avatar && file_exists( public_path() .'/images/avatar/'. Auth::user()->avatar ))
