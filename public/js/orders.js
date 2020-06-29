@@ -109,9 +109,9 @@ var DatatablesAjax = function () {
       onError: function onError(grid) {// execute some code on network or other general error  
       },
       onDataLoad: function onDataLoad(grid) {
-        // execute some code on ajax data load
-        $(".tracking_no").inputmask("mask", {
-          "mask": "9999-9999-9999"
+        // execute some code on ajax data load                
+        $(".tracking_no").inputmask({
+          "mask": ["####-####-####", "9999-9999-9999", "9999-9999-9999-999"]
         });
         return true;
       },
@@ -279,6 +279,7 @@ var DatatablesAjax = function () {
           $(this).remove();
         });
       } else {
+        table.find('tbody tr').removeClass("open");
         var data_id = $(this).attr("data-id");
         var the = $(this);
         table.find("tbody tr.child").fadeOut(100, function () {
@@ -331,7 +332,7 @@ var DatatablesAjax = function () {
               }
 
               var tracking_no_box = "<select class='form-control input-small input-sm input-inline'>" + option + "</select>";
-              p_html += "<tr product-id='" + product.id + "'><td>" + product.asin + "</td>" + "<td>" + product.external_id + "</td>" + "<td>" + product.mordel_number + "</td>" + "<td>" + product.title + "</td>" + "<td>" + product.blockordered + "</td>" + "<td>" + product.window_type + "</td>" + "<td>" + product.expected_date + "</td>" + "<td>" + product.quantity_request + "</td>" + "<td>" + product.accepted_quantity + "</td>" + "<td>" + product.quantity_received + "</td>" + "<td>" + product.quantity_outstand + "</td>" + "<td class='product_tracking'>" + tracking_no_box + "</td>";
+              p_html += "<tr product-id='" + product.id + "'><td>" + product.asin + "</td>" + "<td>" + product.external_id + "</td>" + "<td>" + product.mordel_number + "</td>" + "<td>" + product.title + "</td>" + "<td>" + product.blockordered + "</td>" + "<td>" + product.window_type + "</td>" + "<td>" + product.expected_date + "</td>" + "<td>" + product.quantity_request + "</td>" + "<td>" + product.accepted_quantity + "</td>" + "<td>" + product.quantity_received + "</td>" + "<td>" + product.quantity_outstand + "</td>" + "<td class='product_tracking'>" + tracking_no_box + "</td></tr>";
             });
             p_html += "</tbody></table></td></tr>";
             $(p_html).fadeIn(100, function () {

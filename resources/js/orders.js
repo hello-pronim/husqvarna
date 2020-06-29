@@ -19,11 +19,8 @@ var DatatablesAjax = function () {
                 // execute some code on network or other general error  
             },
             onDataLoad: function(grid) {                
-                // execute some code on ajax data load
-
-                $(".tracking_no").inputmask("mask", {
-                    "mask": "9999-9999-9999"
-                });    
+                // execute some code on ajax data load                
+                $(".tracking_no").inputmask({ "mask" : ["####-####-####", "9999-9999-9999", "9999-9999-9999-999"]});  
                 return true;
             },
             loadingMessage: '読み込んでいます...',
@@ -212,6 +209,7 @@ var DatatablesAjax = function () {
                 $(this).removeClass("open");
                 $(this).next().fadeOut(100, function() { $(this).remove() });
             }else{
+                table.find('tbody tr').removeClass("open");
                 var data_id = $(this).attr("data-id") ;
                 var the = $(this);
 
@@ -285,7 +283,7 @@ var DatatablesAjax = function () {
                                         "<td>"+ product.accepted_quantity +"</td>" +
                                         "<td>"+ product.quantity_received +"</td>" +
                                         "<td>"+ product.quantity_outstand +"</td>" +
-                                        "<td class='product_tracking'>"+tracking_no_box+"</td>";
+                                        "<td class='product_tracking'>"+tracking_no_box+"</td></tr>";
 
                         });
 

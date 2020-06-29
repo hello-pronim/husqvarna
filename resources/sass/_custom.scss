@@ -116,11 +116,11 @@ tr.child {
 }
 
 .tracking_number{
-	width: 270px;
+	min-width: 280px;
 }
 
 .tracking_box{	
-	margin: -5px 0;	
+	margin: -5px 0;		
 	div{
 		float: left;
 		select{

@@ -20,6 +20,9 @@ var DatatablesAjax = function () {
             },
             onDataLoad: function(grid) {                
                 // execute some code on ajax data load
+                //$(".tracking_no").inputmask({ mask: ["9+9", "99+99", "99+99+99"]});
+                $(".tracking_no").inputmask({ "mask" : ["####-####-####", "9999-9999-9999", "9999-9999-9999-999"]});  
+                return true;
             },
             loadingMessage: '読み込んでいます...',
             dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options                 
@@ -132,25 +135,30 @@ var DatatablesAjax = function () {
                     {
                         "targets": -2,                        
                         "orderable": false,
-                        "render":function(data, type, full, meta){
+                        "render":function(data, type, full, meta){                            
                             if(data==null) data='';
+                            var tracking_no_input ='<div class="input-group tracking_box" order-id="'+full[0]+'">';
                             
-                            if(data != ""){
-                                var tracking_no_input ='<select class="tracking_box form-control input-small input-sm input-inline mr-10 no-product">';
-                                $.each(data.split(','), function(key, elem){
-                                    if(elem){
-                                        tracking_no_input += "<option>" + elem + "</option>";
-                                    }
-                                })
-                                tracking_no_input += "</select>";                            
+                            tracking_no_input +='<div><select class="form-control input-small input-sm input-inline mr-10">'
 
-                                return tracking_no_input;                                
-                            }else{
-                                return data;
-                            }
+                            $.each(data.split(','), function(key, elem){
+                                if(elem){
+                                    tracking_no_input += "<option>" + elem + "</option>";
+                                }
+                            })
+                            tracking_no_input += "</select>" // + "<a class='add_track'><i class='fa fa-plus-circle'></i></a></div>";
                             
+                            tracking_no_input += '<div><input type="text" class="form-control input-sm input-small tracking_no input-inline" name="tracking_no" placeholder="">'+
+                                                    '<span class="input-group-btn">'+
+                                                        '<button class="btn blue btn-sm" txt="change" type="button">保存</button>'+
+                                                    '</span>'+
+                                                '</div>';
+
+                            tracking_no_input += '</div>';
+
+                            return tracking_no_input;
                         },
-                        className: "no-product"
+                        className: 'product_tracking tracking_number',
                     },
                     {
                         "targets": -1,  
@@ -260,15 +268,17 @@ var DatatablesAjax = function () {
 
         table.on('click', 'tbody tr', function (e) {
 
-            if( $(e.target).closest("td").hasClass("no-product") ){                
+            if( $(e.target).closest("td").hasClass("product_tracking") ){                
                 return;
             }     
             e.preventDefault();       
             
+
             if( $(this).hasClass("open") ){
                 $(this).removeClass("open");
                 $(this).next().fadeOut(100, function() { $(this).remove() });
             }else{
+                table.find('tbody tr').removeClass("open");
                 var data_id = $(this).attr("data-id") ;
                 var the = $(this);
 
@@ -298,9 +308,25 @@ var DatatablesAjax = function () {
                                         "<td class='nowrap'>未処理の数量</td>" +
                                         "<td class='nowrap'>仕入価格</td>" +
                                         "<td class='nowrap'>総額</td>" +
+                                        "<td class='nowrap'>お問合せ番号</td>" +
                                     "</tr></thead><tbody>";
                         
                         $.each(res.products, function(key, product){
+                            var option = "<option></option>";
+                            if(res.tracking_number){
+                                $.each(res.tracking_number.split(","), function(key, ele){
+                                    if(ele){                                        
+                                        if(product.tracking_no == ele){
+                                            option += "<option value='"+ele+"' selected>"+ ele +"</option>";        
+                                        }else{
+                                            option += "<option value='"+ele+"'>"+ ele +"</option>";    
+                                        }
+                                    }
+                                });    
+                            }      
+
+                            var tracking_no_box = "<select class='form-control input-small input-sm input-inline'>" +option+ "</select>";
+                                                
                             p_html += "<tr product-id='"+product.id+"'><td>"+ product.asin +"</td>" +
                                         "<td>"+ product.external_id +"</td>" +
                                         "<td>"+ product.mordel_number +"</td>" +
@@ -313,14 +339,33 @@ var DatatablesAjax = function () {
                                         "<td>"+ product.quantity_received +"</td>" +
                                         "<td>"+ product.quantity_outstand +"</td>" +
                                         "<td>"+ product.unit_cost +"</td>" +
-                                        "<td>"+ product.total_cost +"</td></tr>" ;
+                                        "<td>"+ product.total_cost +"</td>"+
+                                        "<td class='product_tracking'>"+tracking_no_box+"</td></tr>";
 
                         });
 
                         p_html+= "</tbody></table></td></tr>";
 
 
-                        $(p_html).fadeIn(100, function(){ $(this).insertAfter(the); });
+                        $(p_html).fadeIn(100, function(){ 
+                            $(this).find(".product_tracking select").change(function(){
+                                $.ajax({
+                                    url:'/ajax_product_tracking',
+                                    type:'post',
+                                    data:{ order_id: data_id, product_id: $(this).closest("tr").attr("product-id"), tracking_no: $(this).val() },
+                                    dataType: 'json', 
+                                    success:function(res){
+                                        if(res.success==true){
+                                            toastr["success"](res.msg, "成功!")
+                                        }else{
+                                            toastr["error"](res.msg, "失敗!")
+                                        }
+                                    } 
+                                });
+                            });
+
+                            $(this).insertAfter(the); 
+                        });
 
                         the.addClass("open");
                     }
@@ -419,6 +464,27 @@ var DatatablesAjax = function () {
         $(".po-data-picker").append(trader_box).append(date_slider).append(datepicker);
 
         date_slider.bootstrapToggle();
+
+        table.on('click', '.tracking_box button', function(e) {
+            var tracking_box = $(this).closest('.tracking_box');
+            var the = $(this);          
+
+            if($(this).attr('txt') == "change"){
+                $.ajax({
+                    type:"post",
+                    url:'/ajax_tracking_update',
+                    data:{order_id: tracking_box.attr('order-id'), tracking_no: tracking_box.find("input").val()},
+                    success: function(res){
+                        if(res.success==true){                            
+                            tracking_box.find("select").prepend("<option selected>"+tracking_box.find("input").val()+"</option>");
+                            toastr["success"](res.msg, "成功!")
+                        }else{
+                            toastr["error"](res.msg, "失敗!")
+                        }
+                    }
+                });
+            }
+        });
         
     }
 

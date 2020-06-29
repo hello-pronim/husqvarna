@@ -156,7 +156,7 @@ tr.child table {
 }
 
 .tracking_number {
-  width: 270px;
+  min-width: 280px;
 }
 
 .tracking_box {
