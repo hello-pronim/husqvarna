@@ -11074,26 +11074,26 @@ tr.child table {
   margin-right: 0px;
 }
 
-.page-header .navbar .page-logo {
+.page-header.navbar .page-logo {
   width: 100px;
   padding: 0 10px;
 }
 
-.page-header .navbar .page-logo .logo-default {
+.page-header.navbar .page-logo .logo-default {
   width: 100%;
   margin-top: 15px;
   margin-left: 0px;
 }
 
-.page-header .nav li {
+.page-header.navbar .nav li {
   padding: 4px 0px;
 }
 
-.page-header .nav li a:hover {
+.page-header.navbar .nav li a:hover {
   background-color: transparent;
 }
 
-.page-header .nav li a:hover img {
+.page-header.navbar .nav li a:hover img {
   box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
 }
 
