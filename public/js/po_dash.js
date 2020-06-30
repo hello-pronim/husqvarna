@@ -352,7 +352,7 @@ var DatatablesAjax = function () {
               }
 
               var tracking_no_box = "<select class='form-control input-small input-sm input-inline'>" + option + "</select>";
-              p_html += "<tr product-id='" + product.id + "'><td>" + product.asin + "</td>" + "<td>" + product.external_id + "</td>" + "<td>" + product.mordel_number + "</td>" + "<td>" + product.title + "</td>" + "<td>" + product.blockordered + "</td>" + "<td>" + product.window_type + "</td>" + "<td>" + product.expected_date + "</td>" + "<td>" + product.quantity_request + "</td>" + "<td>" + product.accepted_quantity + "</td>" + "<td>" + product.quantity_received + "</td>" + "<td>" + product.quantity_outstand + "</td>" + "<td>" + product.unit_cost + "</td>" + "<td>" + product.total_cost + "</td>" + "<td class='product_tracking'>" + tracking_no_box + "</td></tr>";
+              p_html += "<tr product-id='" + product.id + "'><td>" + product.asin + "</td>" + "<td>" + product.external_id + "</td>" + "<td>" + product.mordel_number + "</td>" + "<td>" + product.title + "</td>" + "<td>" + product.blockordered + "</td>" + "<td>" + product.window_type + "</td>" + "<td>" + product.expected_date + "</td>" + "<td>" + product.quantity_request + "</td>" + "<td>" + product.accepted_quantity + "</td>" + "<td>" + product.quantity_received + "</td>" + "<td>" + product.quantity_outstand + "</td>" + "<td>" + product.unit_cost + "</td>" + "<td>" + product.total_cost + "</td>" + "<td class='product_tracking no-product'>" + tracking_no_box + "</td></tr>";
             });
             p_html += "</tbody></table></td></tr>";
             $(p_html).fadeIn(100, function () {

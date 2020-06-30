@@ -342,7 +342,7 @@ var DatatablesAjax = function () {
                                         "<td>"+ product.quantity_outstand +"</td>" +
                                         "<td>"+ product.unit_cost +"</td>" +
                                         "<td>"+ product.total_cost +"</td>"+
-                                        "<td class='product_tracking'>"+tracking_no_box+"</td></tr>";
+                                        "<td class='product_tracking no-product'>"+tracking_no_box+"</td></tr>";
 
                         });
 
