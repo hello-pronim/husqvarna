@@ -160,7 +160,7 @@ var DatatablesAjax = function () {
 
                             return tracking_no_input;
                         },
-                        className: 'product_tracking tracking_number',
+                        className: 'product_tracking tracking_number no-product',
                     },
                     {
                         "targets": -1,  
@@ -270,7 +270,7 @@ var DatatablesAjax = function () {
 
         table.on('click', 'tbody tr', function (e) {
 
-            if( $(e.target).closest("td").hasClass("product_tracking") ){                
+            if( $(e.target).closest("td").hasClass("no-product") ){                
                 return;
             }     
             e.preventDefault();       
