@@ -96,7 +96,7 @@ var DatatablesAjax = function () {
                         "targets":1,       
                         "orderable": false,                 
                         "render":function(data, type, full, meta){                            
-                            return '<i class="fa fa-circle green"></i>';
+                            return '<i class="fa fa-circle red"></i>';
                         },
                         className: 'dt-body-center',
                     },
@@ -117,9 +117,11 @@ var DatatablesAjax = function () {
                                     }else if( status[0] =="Exception"){
                                         $res += '<i class="fa fa-circle grey" data-toggle="tooltip" data-theme="dark" title="'+elem[0]+': お問合せ - '+elem[1]+'"></i>';
                                     }else{
-                                        $res += '<i class="fa fa-circle" data-toggle="tooltip" data-theme="dark" title="'+elem[0]+': 該当なし"></i>';    
+                                        $res += '<i class="fa fa-circle red" data-toggle="tooltip" data-theme="dark" title="'+elem[0]+': 該当なし"></i>';    
                                     }                                    
                                 });
+                            }else{
+                                $res += '<i class="fa fa-circle" data-toggle="tooltip" data-theme="dark" title="'+elem[0]+': 該当なし"></i>';    
                             }
 
                             return $res;
