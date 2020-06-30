@@ -196,7 +196,7 @@ var DatatablesAjax = function () {
 
                 if (status[0] == "Not picked up") {
                   $res += '<i class="fa fa-circle red" data-toggle="tooltip" data-theme="dark" title="' + elem[0] + ': 集まらない"></i>';
-                } else if (status[0] == "In Transit") {
+                } else if (status[0] == "On vehicle for delivery") {
                   $res += '<i class="fa fa-circle orange" data-toggle="tooltip" data-theme="dark" title="' + elem[0] + ': 輸送中"></i>';
                 } else if (status[0] == "Delivered") {
                   $res += '<i class="fa fa-circle green" data-toggle="tooltip" data-theme="dark" title="' + elem[0] + ': 配達完了 - ' + elem[1] + '"></i>';
