@@ -207,7 +207,7 @@ var DatatablesAjax = function () {
                 }
               });
             } else {
-              $res += '<i class="fa fa-circle" data-toggle="tooltip" data-theme="dark" title="' + elem[0] + ': 該当なし"></i>';
+              $res += '<i class="fa fa-circle" data-toggle="tooltip" data-theme="dark" title="該当なし"></i>';
             }
 
             return $res;
