@@ -45,7 +45,7 @@
             <!-- BEGIN LOGO -->
             <div class="page-logo">
                 <a href="javascript:;">
-                    <img src="{{ asset('images/logo_admin.png') }}" alt="logo" class="logo-default" /> </a>
+                    <img src="{{ asset('images/logo_admin.png') }}" srcset="{{ asset('images/logo_admin@2x.png') }} 2x, {{ asset('images/logo_admin@3x.png') }} 3x, {{ asset('images/logo_admin@4x.png') }} 4x" alt="logo" class="logo-default" /> </a>
 
                 <!-- <div class="menu-toggler sidebar-toggler">                        
                 </div> -->
@@ -60,10 +60,10 @@
                 <div class="top-menu">
                     <ul class="nav navbar-nav"> 
                         <li class="lang-flag">
-                            <a href="javascript:;"><img src="{{ asset('images/flags/jp.png') }}"></a>                         
+                            <a href="javascript:;"><img src="{{ asset('images/flags/jp.png') }}" srcset="{{ asset('images/flags/jp@2x.png') }} 2x, {{ asset('images/flags/jp@3x.png') }} 3x"></a>                         
                         </li> 
                         <li class="lang-flag">
-                            <a href="javascript:;"><img src="{{ asset('images/flags/uk.png') }}"></a>
+                               <a href="javascript:;"><img src="{{ asset('images/flags/uk.png') }}" srcset="{{ asset('images/flags/uk@2x.png') }} 2x, {{ asset('images/flags/uk@3x.png') }} 3x"></a>    
                         </li>
                     </ul>    
                     <ul class="nav navbar-nav pull-right"> 
