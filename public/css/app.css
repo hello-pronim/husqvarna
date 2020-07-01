@@ -183,11 +183,7 @@ tr.child table {
 }
 
 .tracking_status i {
-  margin-right: 10px;
-}
-
-.tracking_status i:last-child {
-  margin-right: 0px;
+  margin: 0 5px;
 }
 
 .page-header.navbar .page-logo {
@@ -203,6 +199,11 @@ tr.child table {
 
 .page-header.navbar .nav li {
   padding: 4px 0px;
+}
+
+.page-header.navbar .nav li a img {
+  margin-top: 5px;
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
 }
 
 .page-header.navbar .nav li a:hover {
