@@ -11108,6 +11108,10 @@ tr.child table {
   min-width: 165px;
 }
 
+.tab-content .portlet-body {
+  overflow-x: scroll;
+}
+
 form div.form-group input.error,
 form div.form-group select.error {
   border-color: #e73d4a;

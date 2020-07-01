@@ -135,6 +135,10 @@ var DatatablesAjax = function () {
                         }
                     },
                     {
+                        "targets":[6,7],
+                        className:'nowrap'
+                    },
+                    {
                         "targets": -2,                        
                         "orderable": false,
                         "render":function(data, type, full, meta){                            

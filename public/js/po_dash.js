@@ -219,6 +219,9 @@ var DatatablesAjax = function () {
             return '<a href="/order/' + data + '">' + data + '</a>';
           }
         }, {
+          "targets": [6, 7],
+          className: 'nowrap'
+        }, {
           "targets": -2,
           "orderable": false,
           "render": function render(data, type, full, meta) {

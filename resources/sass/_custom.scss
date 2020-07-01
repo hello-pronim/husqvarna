@@ -186,6 +186,12 @@ tr.child {
 	}
 }
 
+.tab-content{
+	.portlet-body{
+		overflow-x: scroll;
+	}	
+}
+
 form{
 	div.form-group{
 		input.error, select.error{
