@@ -37397,15 +37397,27 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+/***/ "./resources/sass/font.scss":
+/*!**********************************!*\
+  !*** ./resources/sass/font.scss ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ 0:
-/*!*****************************************************************************************!*\
-  !*** multi ./resources/js/auth.js ./resources/sass/auth.scss ./resources/sass/app.scss ***!
-  \*****************************************************************************************/
+/*!********************************************************************************************************************!*\
+  !*** multi ./resources/js/auth.js ./resources/sass/auth.scss ./resources/sass/font.scss ./resources/sass/app.scss ***!
+  \********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! /media/benz/Source/Benz/Husqvarna/husqvarna/resources/js/auth.js */"./resources/js/auth.js");
 __webpack_require__(/*! /media/benz/Source/Benz/Husqvarna/husqvarna/resources/sass/auth.scss */"./resources/sass/auth.scss");
+__webpack_require__(/*! /media/benz/Source/Benz/Husqvarna/husqvarna/resources/sass/font.scss */"./resources/sass/font.scss");
 module.exports = __webpack_require__(/*! /media/benz/Source/Benz/Husqvarna/husqvarna/resources/sass/app.scss */"./resources/sass/app.scss");
 
 

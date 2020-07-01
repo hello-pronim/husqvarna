@@ -2,6 +2,7 @@
     "/js/app.js": "/js/app.js",
     "/js/auth.js": "/js/auth.js",
     "/css/auth.css": "/css/auth.css",
+    "/css/font.css": "/css/font.css",
     "/css/app.css": "/css/app.css",
     "/js/orders.js": "/js/orders.js",
     "/js/po_dash.js": "/js/po_dash.js",
