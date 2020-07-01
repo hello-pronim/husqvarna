@@ -53,8 +53,8 @@
                                         <th class="all">{{ trans('dashboard.po') }}</th>                                        
                                         <th class="min-phone-l">{{ trans('dashboard.vendor') }}</th>
                                         <th class="min-tablet">{{ trans('dashboard.ordered_on') }}</th>
-                                        <th class="all">{{ trans('dashboard.ship_location') }}</th>
-                                        <th class="all">{{ trans('dashboard.window_type') }}</th>
+                                        <th class="all nowrap">{{ trans('dashboard.ship_location') }}</th>
+                                        <th class="all nowrap">{{ trans('dashboard.window_type') }}</th>
                                         <th class="all">{{ trans('dashboard.window_start') }}</th>
                                         <th class="all">{{ trans('dashboard.window_end') }}</th>
                                         <th class="all">{{ trans('dashboard.total_cases') }}</th>

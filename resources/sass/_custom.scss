@@ -36,11 +36,15 @@ table.product{
 	}	
 }
 
-table.order{	
-	thead {
+table.order{
+	thead {		
 		th{
 			font-size: 10px;
 			//white-space: nowrap;
+			line-height: 1.5em;
+		    height: 3em;       /* height is 2x line-height, so two lines will display */
+		    overflow: hidden; 
+		    min-width: 40px;
 		}	
 	}
 	tbody{
@@ -48,7 +52,12 @@ table.order{
 			font-size: 12px;
 			//white-space: nowrap;
 		}		
-	}		
+	}	
+	.po_details{
+		thead tr td{
+			font-size: 10px;
+		}
+	}	
 }
 
 table.dataTable{
@@ -121,6 +130,7 @@ tr.child {
 
 .tracking_box{	
 	margin: -5px 0;		
+	min-width: 296px;
 	div{
 		float: left;
 		select{

@@ -104,10 +104,19 @@ table.product tbody td {
 
 table.order thead th {
   font-size: 10px;
+  line-height: 1.5em;
+  height: 3em;
+  /* height is 2x line-height, so two lines will display */
+  overflow: hidden;
+  min-width: 40px;
 }
 
 table.order tbody td {
   font-size: 12px;
+}
+
+table.order .po_details thead tr td {
+  font-size: 10px;
 }
 
 table.dataTable thead .sorting_asc:after,
@@ -161,6 +170,7 @@ tr.child table {
 
 .tracking_box {
   margin: -5px 0;
+  min-width: 296px;
 }
 
 .tracking_box div {

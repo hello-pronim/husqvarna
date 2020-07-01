@@ -238,7 +238,7 @@ var DatatablesAjax = function () {
                             });  
                         };
 
-                        var p_html = "<tr class='child'><td class='child' colspan='"+ the.find('>td').length +"'><table class='table table-bordered'>";
+                        var p_html = "<tr class='child'><td class='child' colspan='"+ the.find('>td').length +"'><table class='table table-bordered po_details'>";
 
                             p_html += "<thead><tr>"+
                                         "<td class='nowrap'>ASIN</td>" +
