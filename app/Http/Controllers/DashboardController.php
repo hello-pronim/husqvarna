@@ -345,6 +345,7 @@ class DashboardController extends Controller
 
                         $importData_arr = array();
                         $i              = 0;
+                        $import_title = array();
 
                         while (($filedata = fgetcsv($file, 1000, ",")) !== false) {
                             $num = count($filedata);
@@ -352,40 +353,64 @@ class DashboardController extends Controller
                             //Skip first row (Remove below comment if you want to skip the first row)
                             if($i == 0){
                                 $i++;
+                                $import_title=$filedata;
                                 continue;
                             }
-                            for ($c = 0; $c < $num; $c++) {
-                                $importData_arr[$i][] = $filedata[$c];
-                            }
-                            $i++;
+                            
+                            for($j=0; $j< count($import_title); $j++){
+
+                                switch ($import_title[$j]) {
+                                    case '"ASIN"':
+                                        $insertData['asin'] = $filedata[$j];
+                                        break; 
+                                    case '製品コード':
+                                        $insertData['external_id'] = $filedata[$j];
+                                        break; 
+                                    case 'モデル番号':
+                                        $insertData['mordel_number'] = $filedata[$j];
+                                        break;
+                                    case '商品名':
+                                        $insertData['title'] = $filedata[$j];
+                                        break;
+                                    case '入荷待ち':
+                                        $insertData['blockordered'] = $filedata[$j];
+                                        break;    
+                                    case 'ウィンドウの種類':
+                                        $insertData['window_type'] = $filedata[$j];
+                                        break;
+                                    case '予定日':
+                                        $insertData['expected_date'] = $filedata[$j];
+                                        break;                                        
+                                    case '依頼数量':
+                                        $insertData['quantity_request'] = $filedata[$j];
+                                        break;
+                                    case '承認済みの数量':
+                                        $insertData['accepted_quantity'] = $filedata[$j];
+                                        break;    
+                                    case '受領済みの数量':
+                                        $insertData['quantity_received'] = $filedata[$j];
+                                        break;
+                                    case '未処理の数量':
+                                        $insertData['quantity_outstand'] = $filedata[$j];
+                                        break;
+                                    case '仕入価格':
+                                        $insertData['unit_cost'] = $filedata[$j];
+                                        break;
+                                    case '総額':
+                                        $insertData['total_cost'] = $filedata[$j];
+                                        break;                                           
+                                    default:
+                                        $insertData['asin'] = $filedata[0];
+                                        break;
+                                }
+                                $insertData['order_id'] = $request->input('order_id');
+                                $insertData['created_at'] = date("Y-m-d H:i:s");   
+                                $insertData['updated_at'] = date("Y-m-d H:i:s");   
+                            }  
+                         
+                            Product::insertData($insertData); 
                         }
                         fclose($file);
-
-                        // Insert to MySQL database
-                        foreach ($importData_arr as $importData) {
-
-                            $insertData = array(
-                                'order_id' => $request->input('order_id'),
-                                'asin' => $importData[0],
-                                'external_id' => $importData[1],
-                                'mordel_number' => $importData[2],
-                                'title' => $importData[3],
-                                'blockordered' => $importData[4],
-                                'window_type' => $importData[5],
-                                'expected_date' => $importData[6],
-                                'quantity_request' => $importData[7],
-                                'accepted_quantity' => $importData[8],
-                                'quantity_received' => $importData[9],
-                                'quantity_outstand' => $importData[10],
-                                'unit_cost' => $importData[11],
-                                'total_cost' => $importData[12],
-                                "created_at" => date("Y-m-d H:i:s"),
-                                "updated_at" => date("Y-m-d H:i:s")
-                            );
-
-                            Product::insertData($insertData);
-
-                        }
 
                         //Session::flash('message', 'インポートに成功しました。');
                         $result=array('success' => true, 'msg' =>'インポートに成功しました。' );

@@ -266,6 +266,9 @@ var DatatablesAjax = function () {
                         }else{
                             toastr["error"](res.msg, "失敗!")
                         }
+                    },
+                    error:function(xhr, status, error){                        
+                        toastr["error"]("インポートできません。", "失敗!");
                     }
                 });
             
