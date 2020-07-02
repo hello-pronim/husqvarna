@@ -34,4 +34,18 @@ class ProductTracking extends Model
         }        
     }
 
+    public static function autoinsertData($tracking_no, $order_id)
+    {
+        $products = DB::table('products')->where( 'order_id', $order_id)->get();
+
+        foreach ($products  as $key => $product) {
+            $data = array(
+                    "order_id" => $order_id,
+                    "tracking_no" => $tracking_no,
+                    "product_id" => $product->id
+            );
+            self::insertData($data);
+        }       
+    }
+
 }

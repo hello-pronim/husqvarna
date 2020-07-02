@@ -87,6 +87,8 @@ class DashboardController extends Controller
 
                 if($order->tracking_no == "" || $order->tracking_no == null){
                     $order->tracking_no = $request->input('tracking_no');
+
+                    ProductTracking::autoinsertData($request->input('tracking_no'), $request->input('order_id'));
                 }else{
                     $order->tracking_no = $request->input('tracking_no') .",".$order->tracking_no ;
                 }
