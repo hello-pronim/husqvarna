@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('external_id')->nullable();
             $table->string('mordel_number')->nullable();
             $table->string('title')->nullable();
+            $table->float('stock')->nullable();
             $table->string('blockordered')->nullable();
             $table->string('window_type')->nullable();
             $table->string('expected_date')->nullable();

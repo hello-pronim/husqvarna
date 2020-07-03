@@ -16,3 +16,6 @@ UPDATE `husqvarna`.`users` SET `username` = 'jtsadmin' WHERE (`id` = '1');
 // 2020-06-03
 ALTER TABLE `husqvarna`.`users` ADD COLUMN `user_type` TINYINT NULL AFTER `updated_at`;
 
+//2020-07-03
+ALTER TABLE `husqvarna`.`products` ADD COLUMN `stock` FLOAT NULL AFTER `title`;
+

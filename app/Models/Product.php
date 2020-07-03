@@ -17,7 +17,7 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'order_id', 'asin', 'external_id', 'mordel_number', 'title', 'blockordered', 'window_type', 'expected_date', 'quantity_request', 'accepted_quantity', 'quantity_received', 'quantity_outstand', 'unit_cost', 'total_cost', 'tracking_no'];
+        'id', 'order_id', 'asin', 'external_id', 'mordel_number', 'title', 'stock','blockordered', 'window_type', 'expected_date', 'quantity_request', 'accepted_quantity', 'quantity_received', 'quantity_outstand', 'unit_cost', 'total_cost', 'tracking_no'];
 
     public static function insertData($data)
     {

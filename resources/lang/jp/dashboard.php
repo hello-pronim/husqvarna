@@ -116,5 +116,6 @@ return [
     'payment_balance' => 'お支払い残高',
     'care' => '気付',
     'billing_name' => '請求先名',
-    'delivery_quantity' => '出荷済み数量'
+    'delivery_quantity' => '出荷済み数量',
+    'stock' => '在庫'
 ];
