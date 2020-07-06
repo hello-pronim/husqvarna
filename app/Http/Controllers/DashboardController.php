@@ -145,7 +145,7 @@ class DashboardController extends Controller
     {        
         
         //if ($request->input('submit') != null) {
-
+echo "string"; exit;
             $file = $request->file('file');
 
             if($file){
