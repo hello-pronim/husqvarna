@@ -66,6 +66,19 @@ i.grey {
   white-space: nowrap;
 }
 
+.flex-row {
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+.align-items-center {
+  align-items: center !important;
+}
+
+.justify-content-center {
+  justify-content: center !important;
+}
+
 #app {
   background: url("/../images/bg_auth.png") no-repeat;
   background-size: cover;
@@ -275,6 +288,24 @@ form.po_detail_form {
 
 form.po_detail_form input[type=file] {
   font-size: 500px;
+}
+
+#apis .api-to-list-container {
+  width: 100%;
+}
+
+#apis .api-to-list-container .api-to-list {
+  list-style: none;
+  padding-left: 0px;
+  margin-bottom: 0px;
+}
+
+#apis .api-to-list-container input {
+  width: 120px;
+}
+
+#apis .api-to-list-container i {
+  cursor: pointer;
 }
 
 @media (min-width: 992px) {

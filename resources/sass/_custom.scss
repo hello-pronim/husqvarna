@@ -1,3 +1,13 @@
+.flex-row{
+	display: flex!important;
+	flex-direction: row!important;
+}
+.align-items-center{
+	align-items: center!important;
+}
+.justify-content-center{
+	justify-content: center!important;
+}
 #app {
 	background:url('/../images/bg_auth.png') no-repeat;
 	background-size: cover;
@@ -234,5 +244,19 @@ form.po_detail_form{
 	overflow: hidden;
 	input[type='file']{
 		font-size: 500px;
+	}
+}
+#apis .api-to-list-container{
+	width: 100%;
+	.api-to-list{
+		list-style: none;
+		padding-left: 0px;
+		margin-bottom: 0px;
+	}
+	input{
+		width: 120px;
+	}
+	i{
+		cursor: pointer;
 	}
 }
