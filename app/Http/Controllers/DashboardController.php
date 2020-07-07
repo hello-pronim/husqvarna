@@ -95,6 +95,8 @@ class DashboardController extends Controller
                 
                 $order->save();
 
+                Order::get_tracking_status($request->input("tracking_no"));
+
                 $response = array('success' => true , 'msg' => 'お問合せ番号が追加されました。' );   
             } catch (Exception $e) {
                 $response = array('success' => true , 'msg' => 'お問合せ番号が追加されました。' );                   
@@ -405,8 +407,6 @@ class DashboardController extends Controller
                                     $insertData['created_at'] = date("Y-m-d H:i:s");   
                                     $insertData['updated_at'] = date("Y-m-d H:i:s");   
                                 } 
-                                // var_dump($insertData);
-                                // exit;
                                 Product::insertData($insertData); 
                             }                         
                         }

@@ -158,10 +158,16 @@ tr.child {
 	.page-logo{
 		width: 100px;
 		padding:0 10px;
-		 .logo-default{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		.logo-default{
 			width: 100%;
 			margin-top: 15px;
 			margin-left: 0px;
+		}
+		.logo-sm{
+			width: 30px;
 		}
 	}
 	.nav{

@@ -45,8 +45,9 @@
             <!-- BEGIN LOGO -->
             <div class="page-logo">
                 <a href="javascript:;">
-                    <img src="{{ asset('images/logo_admin.png') }}" srcset="{{ asset('images/logo_admin@2x.png') }} 2x, {{ asset('images/logo_admin@3x.png') }} 3x, {{ asset('images/logo_admin@4x.png') }} 4x" alt="logo" class="logo-default" /> </a>
-
+                    <!-- <img src="{{ asset('images/logo_admin.png') }}" srcset="{{ asset('images/logo_admin@2x.png') }} 2x, {{ asset('images/logo_admin@3x.png') }} 3x, {{ asset('images/logo_admin@4x.png') }} 4x" alt="logo" class="logo-default" /> </a> -->
+                    <img src="{{asset('images/husqvarna.png')}}" alt="logo_husgvarna" class="logo-sm">
+                    <img src="{{asset('images/gardena.png')}}" alt="logo_gardena" class="logo-sm">
                 <!-- <div class="menu-toggler sidebar-toggler">                        
                 </div> -->
             </div>

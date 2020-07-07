@@ -142,14 +142,14 @@ var DatatablesAjax = function () {
           "url": "/ajax_dashbaord" // ajax source
 
           /*"dataSrc": function(res){
-               for ( var i=0, ien=res.data.length ; i<ien ; i++ ) {
+                for ( var i=0, ien=res.data.length ; i<ien ; i++ ) {
                   
                   res.data[i] = $.map(res.data[i], function(value, index) {                                            
                                   return [value];
                                 });
               }         
-               App.unblockUI(table.parents(".table-container"));
-                              return res.data;                        
+                App.unblockUI(table.parents(".table-container"));
+                               return res.data;                        
           }*/
 
         },
@@ -524,7 +524,7 @@ jQuery(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /media/benz/Source/Benz/Husqvarna/husqvarna/resources/js/orders.js */"./resources/js/orders.js");
+module.exports = __webpack_require__(/*! E:\web\Laravel\Huqvarna\husqvarna-amazonapi\resources\js\orders.js */"./resources/js/orders.js");
 
 
 /***/ })
