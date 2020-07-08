@@ -13,6 +13,7 @@ use App\Models\ProductTracking;
 use App\Enums\UserType;
 use App\Imports\OrderImport;
 use Excel;
+use PDF;
 
 class DashboardController extends Controller
 {
@@ -51,6 +52,13 @@ class DashboardController extends Controller
         $data = array('orders');
 
         return view('dashboard.orders', compact($data));        
+    }
+
+    public function downloadPODetailsPDF(Request $request){
+        $order_id = $request->id;
+        $orders = Order::join('products', 'orders.id', '=', 'products.order_id')->where('orders.id', $order_id)->get();
+        $pdf = PDF::loadView('dashboard.order_detail_pdf', compact('orders'));
+        return $pdf->download('PO_details.pdf');      
     }
 
     public function order_detail($po="")

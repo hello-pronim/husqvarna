@@ -29,7 +29,7 @@ var DatatablesAjax = function () {
                 "bFilter": true,
                 "bInfo": true,
                 //"bProcessing" : true,
-                "bSortable": true,
+                "bSortable": false,
                 "bPaginate" : true,     
                 "responsive" : true,
                 // read the custom filters from saved state and populate the filter inputs
@@ -37,7 +37,7 @@ var DatatablesAjax = function () {
                 },
 
                 // read the custom filters from saved state and populate the filter inputs
-                "fnStateLoadParams" : function ( oSettings, oData ) {                   
+                "fnStateLoadParams" : function ( oSettings, oData ) {                  
                 },
                 "lengthMenu": [
                     [10, 20, 50, 100, 150, -1],
@@ -124,10 +124,7 @@ var DatatablesAjax = function () {
                         },
                     },
                 ],
-                "ordering": true,
-                "order": [
-                    [4, "asc"]
-                ]// set first column as a default sort by asc
+                "ordering": false,
             }
         });
         var table = grid.getTable();

@@ -170,7 +170,9 @@ var DatatablesAjax = function () {
                         "targets": -1,  
                         "data":null,                      
                         "orderable": false,
-                        "defaultContent": '<div class="btn-group pull-right">'
+                        "render": function(data, type, full, meta){
+
+                            return '<div class="btn-group pull-right">'
                                                 +'<button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">操作'
                                                     +'<i class="fa fa-angle-down"></i>'
                                                 +'</button>'
@@ -184,6 +186,10 @@ var DatatablesAjax = function () {
                                                         +'</div></form>' 
                                                     +'</li>'      
                                                     +'<li>'
+                                                        +'<a href="/downloadPODetailsPDF/'+full[0]+'" download>'
+                                                            +'<i class="fa fa-file-pdf-o"></i>PDF保存</a>'
+                                                    +'</li>'
+                                                    +'<li>'
                                                         +'<a href="javascript:;" class="edit">'
                                                             +'<i class="fa fa-edit"></i>編集</a>'
                                                     +'</li>'
@@ -192,7 +198,8 @@ var DatatablesAjax = function () {
                                                             +'<i class="fa fa-remove"></i>削除</a>'
                                                     +'</li>'                                                        
                                                 +'</ul>'
-                                            +'</div>',
+                                            +'</div>';
+                        },
                         className: "no-product"                                            
                     },
                     {

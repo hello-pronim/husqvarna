@@ -119,7 +119,7 @@ var DatatablesAjax = function () {
         "bFilter": true,
         "bInfo": true,
         //"bProcessing" : true,
-        "bSortable": true,
+        "bSortable": false,
         "bPaginate": true,
         "responsive": true,
         // read the custom filters from saved state and populate the filter inputs
@@ -203,9 +203,7 @@ var DatatablesAjax = function () {
             return data;
           }
         }],
-        "ordering": true,
-        "order": [[4, "asc"]] // set first column as a default sort by asc
-
+        "ordering": false
       }
     });
     var table = grid.getTable();
