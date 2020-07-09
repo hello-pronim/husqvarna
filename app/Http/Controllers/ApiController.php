@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-use App\Enums\UserType;
 use App\Models\Order;
 use App\Models\Product;
+use App\Imports\OrderImport;
+use Excel;
 
 class ApiController extends Controller
 {
-    public function uploadCSV(Request $request){        
+    public function uploadCSV(Request $request){   
         
         //if ($request->input('submit') != null) {
             $file = $request->file('file');
@@ -44,48 +44,8 @@ class ApiController extends Controller
                         if(file_exists($filepath)) unlink($filepath);
                         // Upload file
                         $file->move($location, $filename);
-
-                        // Reading file
-                        $file = fopen($filepath, "r");
-
-                        $importData_arr = array();
-                        $i              = 0;
-
-                        while (($filedata = fgetcsv($file, 1000, ",")) !== false) {
-                            $num = count($filedata);
-
-                            //Skip first row (Remove below comment if you want to skip the first row)
-                            if($i == 0){
-                                $i++;
-                                continue;
-                            }
-                            for ($c = 0; $c < $num; $c++) {
-                                $importData_arr[$i][] = $filedata[$c];
-                            }
-                            $i++;
-                        }
-                        fclose($file);
-
-                        // Insert to MySQL database
-                        foreach ($importData_arr as $importData) {
-
-                            $insertData = array(
-                                "po" => $importData[0],
-                                "vendor"     => $importData[1],
-                                "ordered_on"   => date('Y/m/d', strtotime($importData[2])),
-                                "ship_location"    => $importData[3],
-                                "window_type"    => $importData[4],
-                                "window_start"    => date('Y/m/d', strtotime($importData[5])),
-                                "window_end"    => date('Y/m/d', strtotime($importData[6])),
-                                "total_cases"    => $importData[7],
-                                "total_cost"    => $importData[8],
-                                "created_at" => date("Y-m-d H:i:s"),
-                                "updated_at" => date("Y-m-d H:i:s")
-                            );
-
-                            Order::insertData($insertData);
-
-                        }
+                        
+                        Excel::import(new OrderImport, $filepath); 
 
                         //Session::flash('message', 'インポートに成功しました。');
                         $result=array('success' => true, 'msg' =>'インポートに成功しました。' );
