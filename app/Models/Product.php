@@ -29,6 +29,15 @@ class Product extends Model
         }        
     }   
 
+    public static function insertAPIData($data)
+    {
+        $order_id = DB::table('orders')->select('id')->where('po', $data['order_id'])->first();
+
+        $data['order_id'] = $order_id->id;
+        
+        self::insertData($data);
+    }   
+
     public static function getProductInfo($order_id)
     {
     	$query = Product::select('products.*', 'product_trackings.tracking_no')

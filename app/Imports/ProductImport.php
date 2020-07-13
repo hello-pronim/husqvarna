@@ -73,7 +73,7 @@ class ProductImport implements ToCollection
                     $insertData['updated_at'] = date("Y-m-d H:i:s");   
                 } 
                 
-        		Product::insertData($insertData);	        	        	
+        		Product::insertAPIData($insertData);	        	        	
         	
         	}
         }
