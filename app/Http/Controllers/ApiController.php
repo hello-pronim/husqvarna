@@ -7,13 +7,25 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Product;
 use App\Imports\OrderImport;
+use App\Imports\ProductImport;
 use Excel;
 
 class ApiController extends Controller
 {
-    public function uploadCSV(Request $request){   
+    public function uploadOrder(Request $request){   
+                
+        return response()->json( $this->readcsv($request, new OrderImport, 'po_csv') );        
+
+    }
+
+    public function uploadProduct(Request $request){       	
         
-        //if ($request->input('submit') != null) {
+        return response()->json( $this->readcsv($request, new ProductImport($request->input('order_id')), 'po_detail') );
+
+    }
+
+    private function readcsv($request, $import, $upload_path){
+    	//if ($request->input('submit') != null) {
             $file = $request->file('file');
 
             if($file){
@@ -37,7 +49,7 @@ class ApiController extends Controller
                     if ($fileSize <= $maxFileSize) {
 
                         // File upload location
-                        $location = public_path('uploads/po_csv');
+                     	$location = public_path('uploads/'.$upload_path);
 
                         $filepath = $location . "/" . $filename;
 
@@ -45,7 +57,7 @@ class ApiController extends Controller
                         // Upload file
                         $file->move($location, $filename);
                         
-                        Excel::import(new OrderImport, $filepath); 
+                        Excel::import($import, $filepath); 
 
                         //Session::flash('message', 'インポートに成功しました。');
                         $result=array('success' => true, 'msg' =>'インポートに成功しました。' );
@@ -67,7 +79,7 @@ class ApiController extends Controller
 
         // Redirect to index
         //return redirect(route('management.csv_import'));
-        return response()->json($result);
-
+        return $result;
     }
+
 }
