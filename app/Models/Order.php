@@ -23,6 +23,7 @@ class Order extends Model
     public static function insertData($data)
     {
         $value = DB::table('orders')->where('po', $data['po'])->get();
+        
         if ($value->count() > 0) {
             DB::table('orders')->where('po', $data['po'])->update($data);
         }else{
