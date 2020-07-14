@@ -57,7 +57,7 @@ class DashboardController extends Controller
 
     public function downloadPODetailsPDF(Request $request){
         $order_id = $request->id;
-        $orders = Order::join('products', 'orders.id', '=', 'products.order_id')->get();
+        $orders = Order::join('products', 'orders.id', '=', 'products.order_id')->where('orders.order_id', $order_id)->get();
         $limit_per_page = 9;
         $page_count = ceil(count($orders)/(float)$limit_per_page);
         $data = array('orders', 'limit_per_page', 'page_count');
