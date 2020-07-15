@@ -57,13 +57,16 @@ class DashboardController extends Controller
 
     public function downloadPODetailsPDF(Request $request){
         $order_id = $request->id;
+        $order = Order::where('id', $order_id)->get()->first();
         $orders = Order::join('products', 'orders.id', '=', 'products.order_id')->where('orders.id', $order_id)->get();
         $limit_per_page = 9;
         $page_count = ceil(count($orders)/(float)$limit_per_page);
         $data = array('orders', 'limit_per_page', 'page_count');
         $pdf = PDF::loadView('dashboard.order_detail_pdf', compact($data))->setOptions(['defaultFont'=>'mgenplus'])
                     ->setPaper('a4', 'landscape');
-        return $pdf->download('PO_details.pdf');
+        $warehouse_id = explode(" - ", $order->ship_location)[0];
+        $po_number = $order->po;
+        return $pdf->download($warehouse_id."_".$po_number.'.pdf');
 
         // return view('dashboard.order_detail_pdf', compact($data));
     }
