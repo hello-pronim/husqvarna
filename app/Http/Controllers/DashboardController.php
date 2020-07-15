@@ -61,11 +61,11 @@ class DashboardController extends Controller
         $limit_per_page = 9;
         $page_count = ceil(count($orders)/(float)$limit_per_page);
         $data = array('orders', 'limit_per_page', 'page_count');
-        $pdf = PDF::loadView('dashboard.order_detail_pdf', compact($data))->setOptions(['defaultFont'=>'mgenplus'])
-                    ->setPaper('a4', 'landscape');
-        return $pdf->download('PO_details.pdf');
+        // $pdf = PDF::loadView('dashboard.order_detail_pdf', compact($data))->setOptions(['defaultFont'=>'mgenplus'])
+        //             ->setPaper('a4', 'landscape');
+        // return $pdf->download('PO_details.pdf');
 
-        // return view('dashboard.order_detail_pdf', compact($data));
+        return view('dashboard.order_detail_pdf', compact($data));
     }
 
     public function order_detail($po="")
