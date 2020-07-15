@@ -31,6 +31,19 @@ class Order extends Model
         }        
     }
 
+    public static function updateStatus($po, $status){
+
+        $value = DB::table('orders')->where('po', $po)->get();
+        
+        if ($value->count() > 0) {
+            DB::table('orders')->where('po', $po)->update( array('scraping_status'=> $status));
+            return array('success' => true);
+        }else{
+            return array('success' => false, 'msg' => "The order does not exist." );
+        }        
+
+    }
+
     public static function insertTracking($data)
     {
         $value = DB::table('orders')->where('po', $data[0])->first();

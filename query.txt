@@ -19,3 +19,7 @@ ALTER TABLE `husqvarna`.`users` ADD COLUMN `user_type` TINYINT NULL AFTER `updat
 //2020-07-03
 ALTER TABLE `husqvarna`.`products` ADD COLUMN `stock` FLOAT NULL AFTER `title`;
 
+//2020-07-15
+ALTER TABLE `husqvarna`.`orders` CHANGE COLUMN `scraping_status` `scraping_status` VARCHAR(45) NULL DEFAULT NULL ;
+
+

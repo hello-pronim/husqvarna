@@ -24,6 +24,12 @@ class ApiController extends Controller
 
     }
 
+    public function updatePoStatus(Request $request){       	        
+
+        return response()->json( Order::updateStatus($request->input('order_id'), $request->input('status')) );
+
+    }
+
     private function readcsv($request, $import, $upload_path){
     	//if ($request->input('submit') != null) {
             $file = $request->file('file');

@@ -95,8 +95,19 @@ var DatatablesAjax = function () {
                     {
                         "targets":1,       
                         "orderable": false,                 
-                        "render":function(data, type, full, meta){                            
-                            return '<i class="fa fa-circle red"></i>';
+                        "render":function(data, type, full, meta){   
+                            $res = "";
+                            if(data){                                                             
+                                if( data=="new" ){
+                                    $res += '<i class="fa fa-circle red" data-toggle="tooltip" data-theme="dark" title=""></i>';
+                                }else if( data=="processed" ){
+                                    $res += '<i class="fa fa-circle orange" data-toggle="tooltip" data-theme="dark" title=""></i>';
+                                }else if( data=="confirmed" ){
+                                    $res += '<i class="fa fa-circle green" data-toggle="tooltip" data-theme="dark" title=""></i>';
+                                }                                                                 
+                            }
+
+                            return $res;
                         },
                         className: 'dt-body-center',
                     },

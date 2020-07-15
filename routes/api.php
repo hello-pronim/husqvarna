@@ -17,8 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['before.call']], function(){
 
 	Route::post('/importPoList', 'ApiController@uploadOrder');
-
 	Route::post('/importPoDetail', 'ApiController@uploadProduct');
+	Route::post('/updatePoStatus', 'ApiController@updatePoStatus');
 
 });
 

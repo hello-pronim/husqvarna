@@ -142,14 +142,14 @@ var DatatablesAjax = function () {
           "url": "/ajax_dashbaord" // ajax source
 
           /*"dataSrc": function(res){
-                for ( var i=0, ien=res.data.length ; i<ien ; i++ ) {
+               for ( var i=0, ien=res.data.length ; i<ien ; i++ ) {
                   
                   res.data[i] = $.map(res.data[i], function(value, index) {                                            
                                   return [value];
                                 });
               }         
-                App.unblockUI(table.parents(".table-container"));
-                               return res.data;                        
+               App.unblockUI(table.parents(".table-container"));
+                              return res.data;                        
           }*/
 
         },
@@ -188,6 +188,7 @@ var DatatablesAjax = function () {
           "targets": 2,
           "orderable": false,
           "render": function render(data, type, full, meta) {
+            console.log(data);
             $res = "";
 
             if (data) {
@@ -203,9 +204,11 @@ var DatatablesAjax = function () {
                 } else if (status[0] == "Exception") {
                   $res += '<i class="fa fa-circle grey" data-toggle="tooltip" data-theme="dark" title="' + elem[0] + ': お問合せ - ' + elem[1] + '"></i>';
                 } else {
-                  $res += '<i class="fa fa-circle" data-toggle="tooltip" data-theme="dark" title="' + elem[0] + ': 該当なし"></i>';
+                  $res += '<i class="fa fa-circle red" data-toggle="tooltip" data-theme="dark" title="' + elem[0] + ': 該当なし"></i>';
                 }
               });
+            } else {
+              $res += '<i class="fa fa-circle" data-toggle="tooltip" data-theme="dark" title="該当なし"></i>';
             }
 
             return $res;
@@ -524,7 +527,7 @@ jQuery(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\web\Laravel\Huqvarna\husqvarna-amazonapi\resources\js\orders.js */"./resources/js/orders.js");
+module.exports = __webpack_require__(/*! /media/benz/Source/Benz/Husqvarna/husqvarna/resources/js/orders.js */"./resources/js/orders.js");
 
 
 /***/ })

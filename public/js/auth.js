@@ -37415,10 +37415,10 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\web\Laravel\Huqvarna\husqvarna-amazonapi\resources\js\auth.js */"./resources/js/auth.js");
-__webpack_require__(/*! E:\web\Laravel\Huqvarna\husqvarna-amazonapi\resources\sass\auth.scss */"./resources/sass/auth.scss");
-__webpack_require__(/*! E:\web\Laravel\Huqvarna\husqvarna-amazonapi\resources\sass\font.scss */"./resources/sass/font.scss");
-module.exports = __webpack_require__(/*! E:\web\Laravel\Huqvarna\husqvarna-amazonapi\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /media/benz/Source/Benz/Husqvarna/husqvarna/resources/js/auth.js */"./resources/js/auth.js");
+__webpack_require__(/*! /media/benz/Source/Benz/Husqvarna/husqvarna/resources/sass/auth.scss */"./resources/sass/auth.scss");
+__webpack_require__(/*! /media/benz/Source/Benz/Husqvarna/husqvarna/resources/sass/font.scss */"./resources/sass/font.scss");
+module.exports = __webpack_require__(/*! /media/benz/Source/Benz/Husqvarna/husqvarna/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -102,10 +102,11 @@ var DatatablesAjax = function () {
                         "targets":2,                        
                         "orderable": false,
                         "render":function(data, type, full, meta){
+                            console.log(data);
                             $res = "";
                             if(data){
                                 $.each(data, function(key, elem){
-                                    var status = elem[2].split(":");
+                                    var status = elem[2].split(":");                                    
                                     if( status[0] =="Not picked up"){
                                         $res += '<i class="fa fa-circle red" data-toggle="tooltip" data-theme="dark" title="'+elem[0]+': 集まらない"></i>';
                                     }else if( status[0] =="On vehicle for delivery"){
@@ -115,15 +116,17 @@ var DatatablesAjax = function () {
                                     }else if( status[0] =="Exception"){
                                         $res += '<i class="fa fa-circle grey" data-toggle="tooltip" data-theme="dark" title="'+elem[0]+': お問合せ - '+elem[1]+'"></i>';
                                     }else{
-                                        $res += '<i class="fa fa-circle" data-toggle="tooltip" data-theme="dark" title="'+elem[0]+': 該当なし"></i>';    
+                                        $res += '<i class="fa fa-circle red" data-toggle="tooltip" data-theme="dark" title="'+elem[0]+': 該当なし"></i>';    
                                     }                                    
                                 });
+                            }else{
+                                $res += '<i class="fa fa-circle" data-toggle="tooltip" data-theme="dark" title="該当なし"></i>';    
                             }
 
                             return $res;
                         },
                         className: 'dt-body-center tracking_status',
-                    },                   
+                    },               
                     {
                         "targets":-1,
                         "render":function(data, type, full, meta){                            

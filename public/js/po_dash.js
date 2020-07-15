@@ -143,14 +143,14 @@ var DatatablesAjax = function () {
           "url": "/ajax_dashbaord" // ajax source
 
           /*"dataSrc": function(res){
-                for ( var i=0, ien=res.data.length ; i<ien ; i++ ) {
+               for ( var i=0, ien=res.data.length ; i<ien ; i++ ) {
                   
                   res.data[i] = $.map(res.data[i], function(value, index) {                                            
                                   return [value];
                                 });
               }         
-                App.unblockUI(table.parents(".table-container"));
-                               return res.data;                        
+               App.unblockUI(table.parents(".table-container"));
+                              return res.data;                        
           }*/
 
         },
@@ -181,7 +181,19 @@ var DatatablesAjax = function () {
           "targets": 1,
           "orderable": false,
           "render": function render(data, type, full, meta) {
-            return '<i class="fa fa-circle red"></i>';
+            $res = "";
+
+            if (data) {
+              if (data == "new") {
+                $res += '<i class="fa fa-circle red" data-toggle="tooltip" data-theme="dark" title=""></i>';
+              } else if (data == "processed") {
+                $res += '<i class="fa fa-circle orange" data-toggle="tooltip" data-theme="dark" title=""></i>';
+              } else if (data == "confirmed") {
+                $res += '<i class="fa fa-circle green" data-toggle="tooltip" data-theme="dark" title=""></i>';
+              }
+            }
+
+            return $res;
           },
           className: 'dt-body-center'
         }, {
@@ -522,14 +534,14 @@ var DatatablesAjax = function () {
           "url": "/ajax_direct_order" // ajax source
 
           /*"dataSrc": function(res){
-                for ( var i=0, ien=res.data.length ; i<ien ; i++ ) {
+               for ( var i=0, ien=res.data.length ; i<ien ; i++ ) {
                   
                   res.data[i] = $.map(res.data[i], function(value, index) {                                            
                                   return [value];
                                 });
               }         
-                App.unblockUI(table.parents(".table-container"));
-                               return res.data;                        
+               App.unblockUI(table.parents(".table-container"));
+                              return res.data;                        
           }*/
 
         },
@@ -699,7 +711,7 @@ jQuery(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\web\Laravel\Huqvarna\husqvarna-amazonapi\resources\js\po_dash.js */"./resources/js/po_dash.js");
+module.exports = __webpack_require__(/*! /media/benz/Source/Benz/Husqvarna/husqvarna/resources/js/po_dash.js */"./resources/js/po_dash.js");
 
 
 /***/ })
