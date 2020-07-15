@@ -38,6 +38,9 @@ var FormDropzone = function () {
                 },
                 success:function(res){
                   console.log(res);
+                  if(res.status=="success")
+                    toastr["success"]("成功!")
+                  else toastr["error"]("失敗!")
                 }      
             }
 
@@ -51,5 +54,19 @@ var FormDropzone = function () {
 }();
 
 jQuery(document).ready(function() {    
+  toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "positionClass": "toast-top-right",
+    "onclick": null,
+    "showDuration": "1000",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+  }   
    FormDropzone.init();
 });

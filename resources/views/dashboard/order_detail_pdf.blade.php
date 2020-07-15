@@ -23,6 +23,9 @@
         padding: 10px;
         height: 45px;
       }
+      table#table-order-detail tbody tr td:first-child{
+        border:1px solid #CCC;
+      }
       @font-face {
         font-family: mspgothic;
         font-style: normal;
