@@ -318,7 +318,7 @@ var DatatablesAjax = function () {
 
             ;
             var p_html = "<tr class='child'><td class='child' colspan='" + the.find('>td').length + "'><table class='table table-bordered po_details'>";
-            p_html += "<thead><tr>" + "<td class='nowrap'>ASIN</td>" + "<td class='nowrap'>製品コード</td>" + "<td class='nowrap'>モデル番号</td>" + "<td class='nowrap'>商品名</td>" + "<td class='nowrap'>在庫</td>" + "<td class='nowrap'>入荷待ち</td>" + "<td class='nowrap'>ウィンドウの種類</td>" + "<td class='nowrap'>予定日</td>" + "<td class='nowrap'>依頼数量</td>" + "<td class='nowrap'>承認済みの数量</td>" + "<td class='nowrap'>受領済みの数量</td>" + "<td class='nowrap'>未処理の数量</td>" + "<td class='nowrap'>お問合せ番号</td>" + "</tr></thead><tbody>";
+            p_html += "<thead><tr>" + "<td class='nowrap'>ASIN</td>" + "<td class='nowrap'>製品コード</td>" + "<td class='nowrap'>モデル番号</td>" + "<td class='nowrap'>商品名</td>" + "<td class='nowrap'>在庫</td>" + "<td class='nowrap'>納期回答</td>" + "<td class='nowrap'>入荷待ち</td>" + "<td class='nowrap'>ウィンドウの種類</td>" + "<td class='nowrap'>予定日</td>" + "<td class='nowrap'>依頼数量</td>" + "<td class='nowrap'>承認済みの数量</td>" + "<td class='nowrap'>受領済みの数量</td>" + "<td class='nowrap'>未処理の数量</td>" + "<td class='nowrap'>お問合せ番号</td>" + "</tr></thead><tbody>";
             $.each(res.products, function (key, product) {
               var option = "<option></option>";
 
@@ -340,7 +340,11 @@ var DatatablesAjax = function () {
                 product.stock = 10;
               }
 
-              p_html += "<tr product-id='" + product.id + "'><td>" + product.asin + "</td>" + "<td>" + product.external_id + "</td>" + "<td>" + product.mordel_number + "</td>" + "<td>" + product.title + "</td>" + "<td>" + product.stock + "</td>" + "<td>" + (product.blockordered ? product.blockordered : '') + "</td>" + "<td>" + product.window_type + "</td>" + "<td>" + product.expected_date + "</td>" + "<td>" + product.quantity_request + "</td>" + "<td>" + product.accepted_quantity + "</td>" + "<td>" + product.quantity_received + "</td>" + "<td>" + product.quantity_outstand + "</td>" + "<td class='product_tracking'>" + tracking_no_box + "</td></tr>";
+              if (!product.available_date) {
+                product.available_date = "";
+              }
+
+              p_html += "<tr product-id='" + product.id + "'><td>" + product.asin + "</td>" + "<td>" + product.external_id + "</td>" + "<td>" + product.mordel_number + "</td>" + "<td>" + product.title + "</td>" + "<td>" + product.stock + "</td>" + "<td>" + product.available_date + "</td>" + "<td>" + (product.blockordered ? product.blockordered : '') + "</td>" + "<td>" + product.window_type + "</td>" + "<td>" + product.expected_date + "</td>" + "<td>" + product.quantity_request + "</td>" + "<td>" + product.accepted_quantity + "</td>" + "<td>" + product.quantity_received + "</td>" + "<td>" + product.quantity_outstand + "</td>" + "<td class='product_tracking'>" + tracking_no_box + "</td></tr>";
             });
             p_html += "</tbody></table></td></tr>";
             $(p_html).fadeIn(100, function () {

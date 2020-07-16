@@ -23,5 +23,5 @@ ALTER TABLE `husqvarna`.`products` ADD COLUMN `stock` FLOAT NULL AFTER `title`;
 ALTER TABLE `husqvarna`.`orders` CHANGE COLUMN `scraping_status` `scraping_status` VARCHAR(45) NULL DEFAULT NULL ;
 
 //2020-07-16
-ALTER TABLE `husqvarna`.`products` CHANGE COLUMN `available_date` `available_date` VARCHAR(45) NULL AFTER `stock`;
+ALTER TABLE `husqvarna`.`products` ADD COLUMN `available_date` VARCHAR(45) NULL AFTER `stock`;
 

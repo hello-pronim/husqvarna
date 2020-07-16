@@ -249,6 +249,7 @@ var DatatablesAjax = function () {
                                         "<td class='nowrap'>モデル番号</td>" +
                                         "<td class='nowrap'>商品名</td>" +
                                         "<td class='nowrap'>在庫</td>" +
+                                        "<td class='nowrap'>納期回答</td>" +
                                         "<td class='nowrap'>入荷待ち</td>" +
                                         "<td class='nowrap'>ウィンドウの種類</td>" +
                                         "<td class='nowrap'>予定日</td>" +
@@ -278,12 +279,16 @@ var DatatablesAjax = function () {
                             if(!product.stock){
                                 product.stock=10;
                             }
+                            if(!product.available_date){
+                                product.available_date="";
+                            }
 
                             p_html += "<tr product-id='"+product.id+"'><td>"+ product.asin +"</td>" +
                                         "<td>"+ product.external_id +"</td>" +
                                         "<td>"+ product.mordel_number +"</td>" +
                                         "<td>"+ product.title +"</td>" +
                                         "<td>"+ product.stock +"</td>" +
+                                        "<td>"+ product.available_date +"</td>" +
                                         "<td>"+ (product.blockordered?product.blockordered:'') +"</td>" +
                                         "<td>"+ product.window_type +"</td>" +
                                         "<td>"+ product.expected_date +"</td>" +
