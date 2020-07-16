@@ -98,7 +98,7 @@
       }
       table#table-order-detail thead td{
         text-align:center;
-        padding: 0px 20px;
+        padding: 5px 20px;
       }
       table#table-order-detail tbody tr{
         height: 64px;
@@ -159,8 +159,8 @@
             <td align="left">{{$orders[$i*$limit_per_page+$j]->ship_location}}</td>
             <td align="center" class="text-bold p-0-20">{{$orders[$i*$limit_per_page+$j]->asin}}</td>
             <td align="left">{{$orders[$i*$limit_per_page+$j]->title}}</td>
-            <td align="right" class="text-bold fs-20 p-0-15">{{$orders[$i*$limit_per_page+$j]->quantity_request}}</td>
-            <td align="right" class="text-bold fs-18 p-0-15">{{$orders[$i*$limit_per_page+$j]->unit_cost}}</td>
+            <td align="right" class="text-bold fs-24 p-0-15">{{$orders[$i*$limit_per_page+$j]->quantity_request}}</td>
+            <td align="right" class="text-bold fs-20 p-0-15">{{$orders[$i*$limit_per_page+$j]->unit_cost}}</td>
           </tr>
           @endif
         @endfor
