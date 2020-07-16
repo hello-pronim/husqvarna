@@ -54,7 +54,7 @@ return [
 
     'csv_upload' => 'CSVから追加',
 
-    'scraping_status' => 'アマゾン操作完了',
+    'scraping_status' => 'PO操作状況',
     'delivery_status' => '配達状況',
     'po' => 'アマゾンPO番号',
     'vendor' => '取引業者',
