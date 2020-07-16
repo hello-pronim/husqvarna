@@ -8,6 +8,13 @@ use App\Models\Order;
 
 class OrderImport implements ToCollection
 {
+    public $status;
+
+    public function  __construct($status)
+    {
+        $this->status= $status;
+    }
+
     /**
     * @param Collection $row
     */
@@ -16,6 +23,7 @@ class OrderImport implements ToCollection
         foreach ($rows as $key => $row) {
         	if(count($row)>0 && $key >0 ){        		
     			$data = array(
+                    "scraping_status" => $this->status,
                     "po" => $row[0],
                     "vendor"     => $row[1],
                     "ordered_on"   => date('Y/m/d', strtotime($row[2])),

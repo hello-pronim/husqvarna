@@ -14,7 +14,7 @@ class ApiController extends Controller
 {
     public function uploadOrder(Request $request){   
                 
-        return response()->json( $this->readcsv($request, new OrderImport, 'po_csv') );        
+        return response()->json( $this->readcsv($request, new OrderImport($request->input('status')), 'po_csv') );        
 
     }
 
