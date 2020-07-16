@@ -277,7 +277,7 @@ var DatatablesAjax = function () {
                             var tracking_no_box = "<select class='form-control input-small input-sm input-inline'>" +option+ "</select>";
                                                 
                             if(!product.stock){
-                                product.stock=10;
+                                product.stock=0;
                             }
                             if(!product.available_date){
                                 product.available_date="";
