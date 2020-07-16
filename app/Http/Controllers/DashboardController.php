@@ -62,7 +62,9 @@ class DashboardController extends Controller
         $limit_per_page = 9;
         $page_count = ceil(count($orders)/(float)$limit_per_page);
         $data = array('orders', 'limit_per_page', 'page_count');
-        $pdf = PDF::loadView('dashboard.order_detail_pdf', compact($data))->setOptions(['defaultFont'=>'mgenplus'])
+        $pdf = PDF::setOptions(['defaultFont' => 'dejavu serif'])
+                    ->loadView('dashboard.order_detail_pdf', compact($data))
+                    ->setOptions(['defaultFont'=>'mgenplus'])
                     ->setPaper('a4', 'landscape');
         $warehouse_id = explode(" - ", $order->ship_location)[0];
         $po_number = $order->po;
