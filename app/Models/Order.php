@@ -37,7 +37,7 @@ class Order extends Model
         
         if ($value->count() > 0) {
             DB::table('orders')->where('po', $po)->update( array('scraping_status'=> $status));
-            return array('success' => true);
+            return array('success' => true, 'msg'=> 'インポート');
         }else{
             return array('success' => false, 'msg' => "The order does not exist." );
         }        
