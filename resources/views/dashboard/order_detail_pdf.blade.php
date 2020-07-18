@@ -13,30 +13,6 @@
         font-weight: 400;
         src: url('{{public_path('fonts/mspgothic.ttf')}}');
       }
-      @font-face {
-        font-family: kochi-gothic;
-        font-style: normal;
-        font-weight: 400;
-        src: url('{{public_path('fonts/kochi-gothic-subst.ttf')}}');
-      }
-      @font-face {
-        font-family: kochi-mincho;
-        font-style: normal;
-        font-weight: 400;
-        src: url('{{public_path('fonts/kochi-mincho-subst-original.ttf')}}');
-      }
-      @font-face {
-        font-family: tahoma;
-        font-style: normal;
-        font-weight: 400;
-        src: url('{{public_path('fonts/Tahoma Regular font.ttf')}}');
-      }
-      @font-face {
-        font-family: arial;
-        font-style: normal;
-        font-weight: 400;
-        src: url('{{public_path('fonts/arial.ttf')}}');
-      }
       *{ 
         font-family: mspgothic!important;
         color: #3E3E3E;
