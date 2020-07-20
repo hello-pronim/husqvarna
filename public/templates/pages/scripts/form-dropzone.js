@@ -7,7 +7,7 @@ var FormDropzone = function () {
 
             Dropzone.options.myDropzone = {
                 dictDefaultMessage: "",
-                acceptedFiles: '.csv,.xlsx',
+                acceptedFiles: '.csv,.xls,.xlsx',
                 //autoProcessQueue: false,
                 maxFiles:1,
                 renameFile:"po_csv",
@@ -38,9 +38,16 @@ var FormDropzone = function () {
                 },
                 success:function(res){
                   console.log(res);
-                  if(res.status=="success")
-                    toastr["success"]("成功!")
-                  else toastr["error"]("失敗!")
+                  if(res.status=="success"){
+                    var response = JSON.parse(res.xhr.response);
+                    if(response.success){
+                      toastr["success"](response.msg);  
+                    }else{
+                      toastr["error"](response.msg);  
+                    }
+                  }else{
+                    toastr["error"]("失敗!")
+                  } 
                 }      
             }
 

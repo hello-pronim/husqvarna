@@ -30,7 +30,7 @@ class ApiController extends Controller
 
     }
 
-    private function readcsv($request, $import, $upload_path){
+    public static function readcsv($request, $import, $upload_path){
     	//if ($request->input('submit') != null) {
             $file = $request->file('file');
 
@@ -43,7 +43,7 @@ class ApiController extends Controller
                 $mimeType  = $file->getMimeType();
 
                 // Valid File Extensions
-                $valid_extension = array("csv");
+                $valid_extension = array("csv","xls","xlsx");
 
                 // 2MB in Bytes
                 $maxFileSize = 2097152;

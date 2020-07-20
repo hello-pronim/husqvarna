@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Enums\UserType;
+use App\Http\Controllers\ApiController;
+use App\Imports\AwsCustomerList;
 
 class ManageController extends Controller
 {
@@ -48,6 +50,11 @@ class ManageController extends Controller
     {
 
         return view('manage.direct_csv_import');
+    }
+
+    public function aws_customer_csv_import()
+    {
+        return view('manage.aws_customer_list');
     }
     
     public function change_usertype(Request $request)
@@ -131,5 +138,12 @@ class ManageController extends Controller
 
         }
         return response()->json($response);
+    }
+
+    /*IMPORT AWS Customer LIST*/
+    public function awsCustomerCSV(Request $request)
+    {   
+        return response()->json( ApiController::readcsv($request, new AwsCustomerList(), 'aws_customer') );
+
     }
 }

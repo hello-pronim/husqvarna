@@ -27,6 +27,8 @@ Route::group(['middleware' => ['auth']], function(){
 
 	Route::post('/po_uploadcsv', 'DashboardController@uploadCSV')->name('po_uploadcsv');
 	Route::post('/tracking_uploadcsv', 'DashboardController@uploadTrackingCSV')->name('tracking_uploadcsv');
+	Route::post('/aws_customer_csv', 'ManageController@awsCustomerCSV')->name('aws_customer_csv');
+
 	Route::post('/ajax_dashbaord', 'DashboardController@ajax_dashbaord')->name('ajax_dashbaord');
 	Route::post('/ajax_direct_order', 'DashboardController@ajax_direct_order')->name('ajax_direct_order');
 	Route::post('/ajax_tracking_update', 'DashboardController@ajax_tracking_update')->name('ajax_tracking_update');
@@ -38,6 +40,7 @@ Route::group(['middleware' => ['auth']], function(){
 	Route::get('/manage/user', 'ManageController@user_list')->name('management.user');
 	Route::get('/manage/csv_import', 'ManageController@po_csv_import')->name('management.po_csv_import');	
 	Route::get('/manage/direct_csv_import', 'ManageController@direct_csv_import')->name('management.direct_csv_import');	
+	Route::get('/manage/aws_customer_csv_import', 'ManageController@aws_customer_csv_import')->name('management.aws_customer_csv_import');	
 
 	Route::post('/user/change_usertype', 'ManageController@change_usertype')->name('change_usertype');
 	Route::post('/user/info', 'ManageController@user_info')->name('user_info');

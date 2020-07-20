@@ -10,6 +10,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\DirectOrder;
 use App\Models\ProductTracking;
+use App\Models\AwsCustomer;
 use App\Enums\UserType;
 use App\Imports\OrderImport;
 use App\Imports\OrderTrackingImport;
@@ -59,9 +60,12 @@ class DashboardController extends Controller
         $order_id = $request->id;
         $order = Order::where('id', $order_id)->get()->first();
         $orders = Order::join('products', 'orders.id', '=', 'products.order_id')->where('orders.id', $order_id)->get();
+        $aws_code = AwsCustomer::where('vendor_code', $order->vendor)
+                                ->where('shipping_code', trim(explode('-', $order->ship_location)[0] ))
+                                ->first();
         $limit_per_page = 9;
         $page_count = ceil(count($orders)/(float)$limit_per_page);
-        $data = array('orders', 'limit_per_page', 'page_count');
+        $data = array('orders', 'limit_per_page', 'page_count', 'aws_code');
 
         if($page_count >0){
             $pdf = PDF::setOptions(['defaultFont' => 'dejavu serif'])
