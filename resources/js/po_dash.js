@@ -197,7 +197,7 @@ var DatatablesAjax = function () {
                                                         +'</div></form>' 
                                                     +'</li>'      
                                                     +'<li>'
-                                                        +'<a href="/downloadPODetailsPDF/'+full[0]+'" download>'
+                                                        +'<a href="/po_detail_pdf/'+full[0]+'" download>'
                                                             +'<i class="fa fa-file-pdf-o"></i>PDF保存</a>'
                                                     +'</li>'
                                                     +'<li>'

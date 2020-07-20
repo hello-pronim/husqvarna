@@ -22,7 +22,7 @@ Route::group(['middleware' => ['auth']], function(){
 	Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 	Route::get('/orders', 'DashboardController@orders')->name('orders');
 	Route::get('/order/{po}', 'DashboardController@order_detail')->name('order_detail');
-	Route::get('/downloadPODetailsPDF/{id}','DashboardController@downloadPODetailsPDF')->name('downloadPODetailsPDF');
+	Route::get('/po_detail_pdf/{id}','DashboardController@po_detail_pdf')->name('po_detail_pdf');
 	Route::get('/orders/change_date_format', 'DashboardController@change_date_format');
 
 	Route::post('/po_uploadcsv', 'DashboardController@uploadCSV')->name('po_uploadcsv');

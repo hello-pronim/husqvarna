@@ -8,17 +8,29 @@
     <title></title>
     <style type="text/css">
       @font-face {
-        font-family: mspgothic;
+        font-family: "Tahoma-Bold";
+        font-style: bold;
+        font-weight: 700;
+        src: url('{{public_path('fonts/tahomabd.ttf')}}');
+      }
+      @font-face {
+        font-family: "Verdana";
+        font-style: normal;
+        font-weight: 400;
+        src: url('{{public_path('fonts/Verdana.ttf')}}');
+      }   
+      @font-face {
+        font-family: "Ms Gothic";
         font-style: normal;
         font-weight: 400;
         src: url('{{public_path('fonts/mspgothic.ttf')}}');
       }
       *{ 
-        font-family: mspgothic!important;
-        color: #3E3E3E;
+        font-family: arial;
+        color: #3f3f3f;
       }
       @page { 
-        margin: 72px 24px; 
+        margin: 58px 24px; 
         position: relative;
       }
       #pdf-header { 
@@ -34,57 +46,27 @@
       }
       .text-black{
         color: black!important;
-      }
-      .p-0-15{
-        padding: 0px 15px!important;
-      }
-      .p-0-20{
-        padding: 0px 20px!important;
-      }
-      .fs-28{
-        font-size: 28px!important;
-      }
-      .fs-24{
-        font-size: 24px!important;
-      }
-      .fs-20{
-        font-size: 20px!important;
-      }
-      .fs-18{
-        font-size: 18px!important;
-      }
-      .fs-16{
-        font-size: 16px!important;
-      }
-      .fs-14{
-        font-size: 14px!important;
-      }
-      .mr-30{
-        margin-right: 30px!important;
-      }
-      .mr-20{
-        margin-right: 20px!important;
-      }
+      }     
       table#table-order-detail{
         width: 100%;
         padding:0px;
-        font-size:16px;
-        table-collapse:collapse !important;
+        font-size:16px;        
         page-break-inside: avoid;
+        border-collapse: collapse;
       }
       table#table-order-detail thead td{
         text-align:center;
-        padding: 5px 20px;
+        padding: 1px 20px;       
       }
       table#table-order-detail tbody tr{
         height: 64px;
         min-height: 64px;
       }
       table#table-order-detail tbody td{
-        padding: 0px 5px;
+        padding: 0px 1px;
         height: 64px;
         min-height: 64px;
-        vertical-align: top;
+        vertical-align: top;        
       }
       .pdf-header-item{
         display: inline-block;
@@ -93,50 +75,51 @@
   </head>
   <body>
     <div id="pdf-header">
-      <table style="width: 100%">
+      <table style="width: 100%; color:#000;">
         <tr class="fs-24">
-          <td>
-            <span class="fs-28 text-black text-bold mr-30">Amazon</span><span class="fs-24">0715000</span>
+          <td style="width:28%;">
+            <span style="font-size: 25.5px; font-weight: 700; font-family: 'Tahoma-Bold'; margin-right:14px; color: #000;">Amazon</span> <span style="font-size: 21px; font-family:Verdana; color:#000; padding-bottom: 5px;">0715000</span>
           </td>
           <td align="center">
-            <p class="text-black">
-              <span class="mr-20">配送先:</span><span class="mr-30 fs-24">{{explode(" - ", $orders[0]->ship_location)[0]}}</span>
-              <span class="mr-20">コード:</span><span class="fs-24">0715025</span>
+            <p>
+              <span style="margin-right: 10px; margin-top: -5px; font-size: 21px; font-family: MS Gothic; color: #000;">配送先 : </span><span style="margin-right: 10px; font-size: 23px; font-family: Verdana; color: #000;">{{explode(" - ", $orders[0]->ship_location)[0]}}</span>
+              <span style="margin-right: 14px; font-size: 21px; font-family: MS Gothic; color: #000;">コード : </span><span style="margin-right: 30px; font-size: 23.5px; font-family: Verdana; color: #000;">0715025</span>
             </p>
           </td>
-          <td class="fs-20" align="right">
-            <span class="mr-20 text-black">出力日: </span>
-            <span class="mr-20">{{date('Y/m/d')}}</span>
-            <span class="mr-20">{{date('H:i:s')}}</span>
+          <td align="right">
+            <span style="margin-right: 15px; margin-top: -5px; font-size: 19.5px; font-family: MS Gothic; color: #000;">出力日 : </span>
+            <span style="margin-right: 15px; font-size: 18.5px; font-family: Verdana; color: #3f3f3f;">{{date('Y/m/d')}}</span>
+            <span style="margin-right: 15px; font-size: 18.5px; font-family: Verdana; color: #3f3f3f;">{{date('H:i:s')}}</span>
           </td>
         </tr>
       </table>
     </div>
-    <div id="pdf-body">
+    <div id="pdf-body">      
+    @if($page_count > 0)
       @for($i=0; $i<$page_count; $i++)
-      <table class="table table-bordered" id="table-order-detail">
+      <table class="table table-bordered" id="table-order-detail" style="color: #474747; margin-top: 20px;">
         <thead>
           <tr>
-            <td></td>
-            <td><b>PO</b></td>
-            <td>配送センター</td>
-            <td>ASIN</td>
-            <td>商品名</td>
-            <td>数量</td>
-            <td>価格</td>
+            <td width="3%"></td>
+            <td style="font-family: 'Tahoma-Bold'; font-weight: 700; font-size: 16px; padding-left: 20px;"align="center" width="13%">PO</td>
+            <td style="font-family: 'Ms Gothic'; font-size: 16px" width="18%">配送センター</td>
+            <td style="font-family: 'Ms Gothic'; font-size: 16px" width="14%">ASIN</td>
+            <td style="font-family: 'Ms Gothic'; font-size: 16px;" width="33%">商品名</td>
+            <td style="font-family: 'Ms Gothic'; font-size: 16px" width="8%">数量</td>
+            <td style="font-family: 'Ms Gothic'; font-size: 16px" width="11%">価格</td>
           </tr>
         </thead>
         <tbody>
         @for($j=0; $j<$limit_per_page; $j++)
           @if(isset($orders[$i*$limit_per_page+$j]))
-          <tr class="fs-16">
-            <td align="center">{{$i*$limit_per_page+$j+1}}</td>
-            <td align="center" class="text-bold p-0-20">{{$orders[$i*$limit_per_page+$j]->po}}</td>
-            <td align="left">{{$orders[$i*$limit_per_page+$j]->ship_location}}</td>
-            <td align="center" class="text-bold p-0-20">{{$orders[$i*$limit_per_page+$j]->asin}}</td>
-            <td align="left">{{$orders[$i*$limit_per_page+$j]->title}}</td>
-            <td align="right" class="text-bold fs-24 p-0-15">{{$orders[$i*$limit_per_page+$j]->quantity_request}}</td>
-            <td align="right" class="text-bold fs-20 p-0-15">{{$orders[$i*$limit_per_page+$j]->unit_cost}}</td>
+          <tr>
+            <td align="center" style="font-family: 'Verdana'; font-size: 16px;" width="3%">{{$i*$limit_per_page+$j+1}}</td>
+            <td align="center" style="font-family: 'Tahoma-Bold'; font-weight: bold; font-size: 15.5px;">{{$orders[$i*$limit_per_page+$j]->po}}</td>
+            <td align="left" style="font-family: 'MS Gothic'; font-size: 16px;">{{$orders[$i*$limit_per_page+$j]->ship_location}}</td>
+            <td align="center" style="font-family: 'Tahoma-Bold'; font-weight: bold; font-size: 15.5px;">{{$orders[$i*$limit_per_page+$j]->asin}}</td>
+            <td align="left" style="font-family: 'MS Gothic'; font-size: 16px;">{{$orders[$i*$limit_per_page+$j]->title}}</td>
+            <td align="right" style="font-family: 'Tahoma-Bold'; font-weight: bold; font-size: 22px; padding-right: 14px;">{{$orders[$i*$limit_per_page+$j]->quantity_request}}</td>
+            <td align="right" style="font-family: 'Tahoma-Bold'; font-weight: bold; font-size: 16px; padding-right: 14px;">{{$orders[$i*$limit_per_page+$j]->unit_cost}}</td>
           </tr>
           @endif
         @endfor
@@ -146,6 +129,7 @@
       <div style="page-break-before: always;"></div>
       @endif
       @endfor
+    @endif  
     </div>
   </body>
 </html>

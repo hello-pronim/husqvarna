@@ -143,14 +143,14 @@ var DatatablesAjax = function () {
           "url": "/ajax_dashbaord" // ajax source
 
           /*"dataSrc": function(res){
-                for ( var i=0, ien=res.data.length ; i<ien ; i++ ) {
+               for ( var i=0, ien=res.data.length ; i<ien ; i++ ) {
                   
                   res.data[i] = $.map(res.data[i], function(value, index) {                                            
                                   return [value];
                                 });
               }         
-                App.unblockUI(table.parents(".table-container"));
-                               return res.data;                        
+               App.unblockUI(table.parents(".table-container"));
+                              return res.data;                        
           }*/
 
         },
@@ -258,7 +258,7 @@ var DatatablesAjax = function () {
           "data": null,
           "orderable": false,
           "render": function render(data, type, full, meta) {
-            return '<div class="btn-group pull-right">' + '<button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">操作' + '<i class="fa fa-angle-down"></i>' + '</button>' + '<ul class="dropdown-menu pull-right">' + '<li>' + '<form class="po_detail_form" method="post" action="/ajax_import_po_csv" enctype="multipart/form-data">' + '<div class="fileinput fileinput-po" data-provides="fileinput">' + '<span class="btn btn-file">' + '<span class="fileinput-po"><i class="fa fa-file-excel-o"></i>CSVをインポート</a></span>' + '<input type="file" name="po_detail_csv" accept=".csv"> </span>' + '</div></form>' + '</li>' + '<li>' + '<a href="/downloadPODetailsPDF/' + full[0] + '" download>' + '<i class="fa fa-file-pdf-o"></i>PDF保存</a>' + '</li>' + '<li>' + '<a href="javascript:;" class="edit">' + '<i class="fa fa-edit"></i>編集</a>' + '</li>' + '<li>' + '<a href="javascript:;" class="delete" >' + '<i class="fa fa-remove"></i>削除</a>' + '</li>' + '</ul>' + '</div>';
+            return '<div class="btn-group pull-right">' + '<button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">操作' + '<i class="fa fa-angle-down"></i>' + '</button>' + '<ul class="dropdown-menu pull-right">' + '<li>' + '<form class="po_detail_form" method="post" action="/ajax_import_po_csv" enctype="multipart/form-data">' + '<div class="fileinput fileinput-po" data-provides="fileinput">' + '<span class="btn btn-file">' + '<span class="fileinput-po"><i class="fa fa-file-excel-o"></i>CSVをインポート</a></span>' + '<input type="file" name="po_detail_csv" accept=".csv"> </span>' + '</div></form>' + '</li>' + '<li>' + '<a href="/po_detail_pdf/' + full[0] + '" download>' + '<i class="fa fa-file-pdf-o"></i>PDF保存</a>' + '</li>' + '<li>' + '<a href="javascript:;" class="edit">' + '<i class="fa fa-edit"></i>編集</a>' + '</li>' + '<li>' + '<a href="javascript:;" class="delete" >' + '<i class="fa fa-remove"></i>削除</a>' + '</li>' + '</ul>' + '</div>';
           },
           className: "no-product"
         }, {
@@ -538,14 +538,14 @@ var DatatablesAjax = function () {
           "url": "/ajax_direct_order" // ajax source
 
           /*"dataSrc": function(res){
-                for ( var i=0, ien=res.data.length ; i<ien ; i++ ) {
+               for ( var i=0, ien=res.data.length ; i<ien ; i++ ) {
                   
                   res.data[i] = $.map(res.data[i], function(value, index) {                                            
                                   return [value];
                                 });
               }         
-                App.unblockUI(table.parents(".table-container"));
-                               return res.data;                        
+               App.unblockUI(table.parents(".table-container"));
+                              return res.data;                        
           }*/
 
         },
@@ -715,7 +715,7 @@ jQuery(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\web\Laravel\Huqvarna\husqvarna-amazonapi\resources\js\po_dash.js */"./resources/js/po_dash.js");
+module.exports = __webpack_require__(/*! /media/benz/Source/Benz/Husqvarna/husqvarna/resources/js/po_dash.js */"./resources/js/po_dash.js");
 
 
 /***/ })
