@@ -258,7 +258,7 @@ var DatatablesAjax = function () {
           "data": null,
           "orderable": false,
           "render": function render(data, type, full, meta) {
-            return '<div class="btn-group pull-right">' + '<button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">操作' + '<i class="fa fa-angle-down"></i>' + '</button>' + '<ul class="dropdown-menu pull-right">' + '<li>' + '<form class="po_detail_form" method="post" action="/ajax_import_po_csv" enctype="multipart/form-data">' + '<div class="fileinput fileinput-po" data-provides="fileinput">' + '<span class="btn btn-file">' + '<span class="fileinput-po"><i class="fa fa-file-excel-o"></i>CSVをインポート</a></span>' + '<input type="file" name="po_detail_csv" accept=".csv"> </span>' + '</div></form>' + '</li>' + '<li>' + '<a href="/po_detail_pdf/' + full[0] + '" download>' + '<i class="fa fa-file-pdf-o"></i>PDF保存</a>' + '</li>' + '<li>' + '<a href="javascript:;" class="edit">' + '<i class="fa fa-edit"></i>編集</a>' + '</li>' + '<li>' + '<a href="javascript:;" class="delete" >' + '<i class="fa fa-remove"></i>削除</a>' + '</li>' + '</ul>' + '</div>';
+            return '<div class="btn-group pull-right">' + '<button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">操作' + '<i class="fa fa-angle-down"></i>' + '</button>' + '<ul class="dropdown-menu pull-right">' + '<li>' + '<form class="po_detail_form" method="post" action="/ajax_import_po_csv" enctype="multipart/form-data">' + '<div class="fileinput fileinput-po" data-provides="fileinput">' + '<span class="btn btn-file">' + '<span class="fileinput-po"><i class="fa fa-file-excel-o"></i>CSVをインポート</a></span>' + '<input type="file" name="po_detail_csv" accept=".csv"> </span>' + '</div></form>' + '</li>' + '<li>' + '<a href="/po_detail_pdf/' + full[0] + '" class="pdf_link" download>' + '<i class="fa fa-file-pdf-o"></i>PDF保存</a>' + '</li>' + '<li>' + '<a href="javascript:;" class="edit">' + '<i class="fa fa-edit"></i>編集</a>' + '</li>' + '<li>' + '<a href="javascript:;" class="delete" >' + '<i class="fa fa-remove"></i>削除</a>' + '</li>' + '</ul>' + '</div>';
           },
           className: "no-product"
         }, {
@@ -326,6 +326,26 @@ var DatatablesAjax = function () {
         }
       });
       return false;
+    });
+    table.on('click', '.pdf_link', function (e) {
+      e.preventDefault();
+      var the = $(this);
+      var data_id = $(this).closest("tr").attr("data-id");
+      $.ajax({
+        url: '/ajax_order_products',
+        type: 'post',
+        data: {
+          order_id: data_id
+        },
+        dateType: 'json',
+        success: function success(res) {
+          if (res.products.length > 0) {
+            window.location.href = the.attr("href");
+          } else {
+            toastr["error"]("注文の詳細を挿入してください。", "失敗!");
+          }
+        }
+      });
     });
     table.on('click', 'tbody tr', function (e) {
       if ($(e.target).closest("td").hasClass("no-product")) {

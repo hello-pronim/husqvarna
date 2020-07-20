@@ -197,7 +197,7 @@ var DatatablesAjax = function () {
                                                         +'</div></form>' 
                                                     +'</li>'      
                                                     +'<li>'
-                                                        +'<a href="/po_detail_pdf/'+full[0]+'" download>'
+                                                        +'<a href="/po_detail_pdf/'+full[0]+'" class="pdf_link" download>'
                                                             +'<i class="fa fa-file-pdf-o"></i>PDF保存</a>'
                                                     +'</li>'
                                                     +'<li>'
@@ -291,6 +291,26 @@ var DatatablesAjax = function () {
                 });
             
             return false;
+        });
+
+        table.on('click', '.pdf_link', function(e){
+            e.preventDefault();
+            var the = $(this);
+
+            var data_id = $(this).closest("tr").attr("data-id");
+            $.ajax({
+                url:'/ajax_order_products',
+                type:'post',
+                data:{order_id: data_id},
+                dateType: 'json',
+                success: function(res){
+                    if( res.products.length > 0){
+                        window.location.href = the.attr("href");
+                    }else{
+                        toastr["error"]("注文の詳細を挿入してください。", "失敗!");
+                    }
+                }
+            });
         });
 
         table.on('click', 'tbody tr', function (e) {

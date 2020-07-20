@@ -59,9 +59,10 @@ class DashboardController extends Controller
     public function po_detail_pdf(Request $request){                
         $order_id = $request->id;
         $order = Order::where('id', $order_id)->get()->first();
+        $warehouse_code = trim(explode('-', $order->ship_location)[0] );
         $orders = Order::join('products', 'orders.id', '=', 'products.order_id')->where('orders.id', $order_id)->get();
         $aws_code = AwsCustomer::where('vendor_code', $order->vendor)
-                                ->where('shipping_code', trim(explode('-', $order->ship_location)[0] ))
+                                ->where('shipping_code', $warehouse_code)
                                 ->first();
         $limit_per_page = 9;
         $page_count = ceil(count($orders)/(float)$limit_per_page);
@@ -71,11 +72,10 @@ class DashboardController extends Controller
             $pdf = PDF::setOptions(['defaultFont' => 'dejavu serif'])
                         ->loadView('dashboard.order_detail_pdf', compact($data))
                         ->setOptions(['defaultFont'=>'mgenplus'])
-                        ->setPaper('a4', 'landscape');
-            $warehouse_id = explode(" - ", $order->ship_location)[0];
+                        ->setPaper('a4', 'landscape');            
             $po_number = $order->po;
             
-            return $pdf->download($warehouse_id ."_".$po_number.'.pdf');
+            return $pdf->download($warehouse_code ."_".$po_number.'.pdf');
         }
 
         // return redirect(route("dashboard"));
