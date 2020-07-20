@@ -30,13 +30,13 @@
         color: #3f3f3f;
       }
       @page { 
-        margin: 58px 24px; 
+        margin: 65px 24px; 
         position: relative;
       }
       #pdf-header { 
         position: fixed; 
         left: 0px; 
-        top: -64px; 
+        top: -71px; 
         right: 0px; 
         height: 36px;
         line-height: 36px;
@@ -66,7 +66,7 @@
         padding: 0px 1px;
         height: 64px;
         min-height: 64px;
-        vertical-align: top;        
+        vertical-align: top;           
       }
       .pdf-header-item{
         display: inline-block;
@@ -97,23 +97,23 @@
     <div id="pdf-body">      
     @if($page_count > 0)
       @for($i=0; $i<$page_count; $i++)
-      <table class="table table-bordered" id="table-order-detail" style="color: #474747; margin-top: 20px;">
+      <table class="table table-bordered" id="table-order-detail" style="color: #474747;">
         <thead>
           <tr>
-            <td width="3%"></td>
+            <td width="3%" style="max-width: 20px;"></td>
             <td style="font-family: 'Tahoma-Bold'; font-weight: 700; font-size: 16px; padding-left: 20px;"align="center" width="13%">PO</td>
-            <td style="font-family: 'Ms Gothic'; font-size: 16px" width="18%">配送センター</td>
+            <td style="font-family: 'Ms Gothic'; font-size: 16px" width="16%">配送センター</td>
             <td style="font-family: 'Ms Gothic'; font-size: 16px" width="14%">ASIN</td>
             <td style="font-family: 'Ms Gothic'; font-size: 16px;" width="33%">商品名</td>
-            <td style="font-family: 'Ms Gothic'; font-size: 16px" width="8%">数量</td>
-            <td style="font-family: 'Ms Gothic'; font-size: 16px" width="11%">価格</td>
+            <td style="font-family: 'Ms Gothic'; font-size: 16px" width="9%">数量</td>
+            <td style="font-family: 'Ms Gothic'; font-size: 16px" width="12%">価格</td>
           </tr>
         </thead>
         <tbody>
         @for($j=0; $j<$limit_per_page; $j++)
           @if(isset($orders[$i*$limit_per_page+$j]))
           <tr>
-            <td align="center" style="font-family: 'Verdana'; font-size: 16px;" width="3%">{{$i*$limit_per_page+$j+1}}</td>
+            <td align="center" style="font-family: 'Verdana'; font-size: 16px;">{{$i*$limit_per_page+$j+1}}</td>
             <td align="center" style="font-family: 'Tahoma-Bold'; font-weight: bold; font-size: 15.5px;">{{$orders[$i*$limit_per_page+$j]->po}}</td>
             <td align="left" style="font-family: 'MS Gothic'; font-size: 16px;">{{$orders[$i*$limit_per_page+$j]->ship_location}}</td>
             <td align="center" style="font-family: 'Tahoma-Bold'; font-weight: bold; font-size: 15.5px;">{{$orders[$i*$limit_per_page+$j]->asin}}</td>
