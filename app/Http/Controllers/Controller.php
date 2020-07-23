@@ -17,7 +17,7 @@ class Controller extends BaseController
 
     	$from = (isset($params['from'])&&$params['from'])? $params['from'] : env('SUPPORT_EMAIL');
         $to = (isset($params['to'])&&$params['to'])? $params['to'] : env('HZG_EMAIL');
-        $name = (isset($params['name'])&&$params['name'])? $params['name'] : "Husqvarna Support";
+        $name = (isset($params['name'])&&$params['name'])? $params['name'] : "HZG-AMZ System Email";
         $subject = (isset($params['subject'])&&$params['subject'])? $params['subject'] : "Subject";
 
         Mail::send('email.'.$tplName, $params,
