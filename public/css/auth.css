@@ -11012,6 +11012,16 @@ table.order tbody td {
   font-size: 12px;
 }
 
+table.order tbody td .pdf_link {
+  margin-left: -3px;
+}
+
+table.order tbody td .esker_email img {
+  width: 20px;
+  margin-top: -10px;
+  margin-right: -5px;
+}
+
 table.order .po_details thead tr td {
   font-size: 10px;
 }

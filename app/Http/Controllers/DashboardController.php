@@ -83,6 +83,53 @@ class DashboardController extends Controller
         return view('dashboard.order_detail_pdf', compact($data));
     }
 
+    public function ajax_esker_email(Request $request){
+        $order_id = $request->input('order_id');
+        if($order_id){
+            $products = Product::getProductInfo($order_id);
+            if(count($products) > 0){
+                $order = Order::where('id', $order_id)->get()->first();
+                $warehouse_code = trim(explode('-', $order->ship_location)[0] );
+                $orders = Order::join('products', 'orders.id', '=', 'products.order_id')->where('orders.id', $order_id)->get();
+                $aws_code = AwsCustomer::where('vendor_code', $order->vendor)
+                                        ->where('shipping_code', $warehouse_code)
+                                        ->first();
+                $limit_per_page = 9;
+                $page_count = ceil(count($orders)/(float)$limit_per_page);
+                $data = array('orders', 'limit_per_page', 'page_count', 'aws_code');
+
+                if($page_count >0){
+                    $pdf = PDF::setOptions(['defaultFont' => 'dejavu serif'])
+                                ->loadView('dashboard.order_detail_pdf', compact($data))
+                                ->setOptions(['defaultFont'=>'mgenplus'])
+                                ->setPaper('a4', 'landscape');            
+                    $po_number = $order->po;
+                    
+                    $filepath = public_path('uploads/esker_pdf/') . $warehouse_code ."_".$po_number.'.pdf';
+                    $pdf->save( $filepath );
+
+                    $param = array("subject" => "Esker PDF");
+                    $attach = array("name" => $warehouse_code ."_".$po_number,
+                                        "path" => $filepath,
+                                        "mime" => 'application/pdf'
+                                    );
+                    $this->sendEmail("esker_pdf", $param, $attach);
+
+                    $response = array('success' => true , 'msg' => 'メールが送信されました。' );
+                }else{
+                    $response = array('success' => false , 'msg' => '注文の詳細を挿入してください。' );                   
+                }  
+
+            }else{
+                $response = array('success' => false , 'msg' => '注文の詳細を挿入してください。' );                   
+            }
+        }else{
+            $response = array('success' => false , 'msg' => '注文IDが必要です。' );   
+        }          
+
+        return response()->json($response);                    
+    }
+
     public function order_detail($po="")
     {
         if($po){

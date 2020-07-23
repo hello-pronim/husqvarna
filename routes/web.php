@@ -33,6 +33,7 @@ Route::group(['middleware' => ['auth']], function(){
 	Route::post('/ajax_direct_order', 'DashboardController@ajax_direct_order')->name('ajax_direct_order');
 	Route::post('/ajax_tracking_update', 'DashboardController@ajax_tracking_update')->name('ajax_tracking_update');
 	Route::post('/ajax_order_products', 'DashboardController@ajax_order_products')->name('ajax_order_products');
+	Route::post('/ajax_esker_email', 'DashboardController@ajax_esker_email')->name('ajax_esker_email');
 	Route::post('/ajax_product_tracking', 'DashboardController@ajax_product_tracking')->name('ajax_product_tracking');	
 	Route::post('/ajax_import_po_csv', 'DashboardController@ajax_import_po_csv')->name('ajax_import_po_csv');	
 	Route::post('/ajax_get_apis', 'ApiManageController@ajax_get_apis')->name('ajax_get_apis');

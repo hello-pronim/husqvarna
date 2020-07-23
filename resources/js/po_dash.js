@@ -201,6 +201,10 @@ var DatatablesAjax = function () {
                                                             +'<i class="fa fa-file-pdf-o"></i>PDF保存</a>'
                                                     +'</li>'
                                                     +'<li>'
+                                                        +'<a href="javascript:;" class="esker_email">'
+                                                            +'<img src="/images/esker.png"> Eskerメール</a>'
+                                                    +'</li>'
+                                                    +'<li>'
                                                         +'<a href="javascript:;" class="edit">'
                                                             +'<i class="fa fa-edit"></i>編集</a>'
                                                     +'</li>'
@@ -308,6 +312,26 @@ var DatatablesAjax = function () {
                         window.location.href = the.attr("href");
                     }else{
                         toastr["error"]("注文の詳細を挿入してください。", "失敗!");
+                    }
+                }
+            });
+        });
+
+        table.on('click', '.esker_email', function(e){
+            e.preventDefault();
+            var the = $(this);
+
+            var data_id = $(this).closest("tr").attr("data-id");
+            $.ajax({
+                url:'/ajax_esker_email',
+                type:'post',
+                data:{order_id: data_id},
+                dateType: 'json',
+                success: function(res){                    
+                    if( res.success==true){
+                        toastr["success"]("EskerメールがPDFを含めて正常に送信されました。", "成功!");
+                    }else{
+                        toastr["error"](res.msg, "失敗!");
                     }
                 }
             });

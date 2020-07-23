@@ -61,6 +61,14 @@ table.order{
 		td{
 			font-size: 12px;
 			//white-space: nowrap;
+			.pdf_link{
+				margin-left: -3px;
+			}
+			.esker_email img{
+				width: 20px;
+				margin-top: -10px;
+				margin-right: -5px;
+			}
 		}		
 	}	
 	.po_details{
