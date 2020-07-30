@@ -109,7 +109,7 @@ class DashboardController extends Controller
                     $pdf->save( $filepath );
 
                     $param = array("subject" => "Esker PDF");
-                    $attach = array("name" => $warehouse_code ."_".$po_number,
+                    $attach = array("name" => $warehouse_code ."_".$po_number.'.pdf',
                                         "path" => $filepath,
                                         "mime" => 'application/pdf'
                                     );
