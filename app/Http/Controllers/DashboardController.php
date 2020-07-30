@@ -42,7 +42,7 @@ class DashboardController extends Controller
 
             //Order::get_tracking_status($orders);
 
-            $data = array();
+            $data = array();            
             return view('dashboard.index', compact($data));            
         }      
         return redirect(route('orders'));  
@@ -172,7 +172,7 @@ class DashboardController extends Controller
                 
                 $order->save();
 
-                Order::get_tracking_status($request->input("tracking_no"));
+                //Order::get_tracking_status($request->input("tracking_no"));
 
                 $response = array('success' => true , 'msg' => 'お問合せ番号が追加されました。' );   
             } catch (Exception $e) {
