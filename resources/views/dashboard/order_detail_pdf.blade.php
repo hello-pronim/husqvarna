@@ -115,9 +115,9 @@
           <tr>
             <td align="center" style="font-family: 'Verdana'; font-size: 16px;">{{$i*$limit_per_page+$j+1}}</td>
             <td align="center" style="font-family: 'Tahoma-Bold'; font-weight: bold; font-size: 15.5px;">{{$orders[$i*$limit_per_page+$j]->po}}</td>
-            <td align="left" style="font-family: 'MS Gothic'; font-size: 16px;">{{$orders[$i*$limit_per_page+$j]->ship_location}}</td>
-            <td align="center" style="font-family: 'Tahoma-Bold'; font-weight: bold; font-size: 15.5px;">{{$orders[$i*$limit_per_page+$j]->asin}}</td>
-            <td align="left" style="font-family: 'MS Gothic'; font-size: 16px;">{{$orders[$i*$limit_per_page+$j]->title}}</td>
+            <td align="left" style="font-family: 'MS Gothic'; font-size: 16px; padding-top: 2px;">{{$orders[$i*$limit_per_page+$j]->ship_location}}</td>
+            <td align="center" style="font-family: 'Tahoma-Bold'; font-weight: bold; font-size: 15.5px; padding-right: 4px;">{{$orders[$i*$limit_per_page+$j]->asin}}&nbsp;</td>
+            <td align="left" style="font-family: 'MS Gothic'; font-size: 16px; padding-left: 4px; padding-top: 2px; word-break: keep-all;">&nbsp;{{$orders[$i*$limit_per_page+$j]->title}}</td>
             <td align="right" style="font-family: 'Tahoma-Bold'; font-weight: bold; font-size: 22px; padding-right: 14px;">{{$orders[$i*$limit_per_page+$j]->quantity_request}}</td>
             <td align="right" style="font-family: 'Tahoma-Bold'; font-weight: bold; font-size: 16px; padding-right: 14px;">{{$orders[$i*$limit_per_page+$j]->unit_cost}}</td>
           </tr>
