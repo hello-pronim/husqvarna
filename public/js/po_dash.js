@@ -143,14 +143,14 @@ var DatatablesAjax = function () {
           "url": "/ajax_dashbaord" // ajax source
 
           /*"dataSrc": function(res){
-               for ( var i=0, ien=res.data.length ; i<ien ; i++ ) {
+                for ( var i=0, ien=res.data.length ; i<ien ; i++ ) {
                   
                   res.data[i] = $.map(res.data[i], function(value, index) {                                            
                                   return [value];
                                 });
               }         
-               App.unblockUI(table.parents(".table-container"));
-                              return res.data;                        
+                App.unblockUI(table.parents(".table-container"));
+                               return res.data;                        
           }*/
 
         },
@@ -229,6 +229,12 @@ var DatatablesAjax = function () {
           "targets": 3,
           "render": function render(data, type, full, meta) {
             return '<a href="/order/' + data + '">' + data + '</a>';
+          }
+        }, {
+          "targets": 4,
+          className: 'dt-body-center',
+          "render": function render(data, type, full, meta) {
+            if (data == "2UQ7Z") return '<img src="/images/husqvarna_tiny.png" title="2UQ7Z">';else if (data == "WP1A4") return '<img src="/images/gardena_tiny.png" title="WP1A4">';
           }
         }, // {
         //     "targets":[6,7],
@@ -578,14 +584,14 @@ var DatatablesAjax = function () {
           "url": "/ajax_direct_order" // ajax source
 
           /*"dataSrc": function(res){
-               for ( var i=0, ien=res.data.length ; i<ien ; i++ ) {
+                for ( var i=0, ien=res.data.length ; i<ien ; i++ ) {
                   
                   res.data[i] = $.map(res.data[i], function(value, index) {                                            
                                   return [value];
                                 });
               }         
-               App.unblockUI(table.parents(".table-container"));
-                              return res.data;                        
+                App.unblockUI(table.parents(".table-container"));
+                               return res.data;                        
           }*/
 
         },
@@ -755,7 +761,7 @@ jQuery(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /media/benz/Source/Benz/Husqvarna/husqvarna/resources/js/po_dash.js */"./resources/js/po_dash.js");
+module.exports = __webpack_require__(/*! E:\web\Laravel\Huqvarna\husqvarna-amazonapi\resources\js\po_dash.js */"./resources/js/po_dash.js");
 
 
 /***/ })

@@ -145,6 +145,14 @@ var DatatablesAjax = function () {
                             return '<a href="/order/'+ data +'">'+ data +'</a>';
                         }
                     },
+                    {
+                        "targets":4,
+                        className: 'dt-body-center',
+                        "render":function(data, type, full, meta){
+                            if(data=="2UQ7Z") return '<img src="/images/husqvarna_tiny.png" title="2UQ7Z">';
+                            else if(data=="WP1A4") return '<img src="/images/gardena_tiny.png" title="WP1A4">';
+                        }
+                    },
                     // {
                     //     "targets":[6,7],
                     //     className:'nowrap'
