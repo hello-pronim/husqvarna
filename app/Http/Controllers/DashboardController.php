@@ -161,20 +161,25 @@ class DashboardController extends Controller
         if($request->input('tracking_no') && $request->input('order_id')){
             try{
                 $order = Order::find($request->input('order_id'));
-
                 if($order->tracking_no == "" || $order->tracking_no == null){
-                    $order->tracking_no = $request->input('tracking_no');
+                    if($order->total_cases > 0){
+                        $order->tracking_no = $request->input('tracking_no');
 
-                    ProductTracking::autoinsertData($request->input('tracking_no'), $request->input('order_id'));
+                        ProductTracking::autoinsertData($request->input('tracking_no'), $request->input('order_id'));
+                        $order->save();
+                        $response = array('success' => true , 'msg' => 'お問合せ番号が追加されました。' );
+                    }else{
+                        $response = array('success'=>false, 'msg'=>'お問合せ番号を追加することができません');
+                    }
                 }else{
-                    $order->tracking_no = $request->input('tracking_no') .",".$order->tracking_no ;
-                }
-                
-                $order->save();
-
-                //Order::get_tracking_status($request->input("tracking_no"));
-
-                $response = array('success' => true , 'msg' => 'お問合せ番号が追加されました。' );   
+                    if($order->total_cases > count(explode(',', $order->tracking_no))){
+                        $order->tracking_no = $request->input('tracking_no') .",".$order->tracking_no ;
+                        $order->save();
+                        $response = array('success' => true , 'msg' => 'お問合せ番号が追加されました。' );
+                    }else{
+                        $response = array('success' => false, 'msg'=>'もうお問合せ番号を追加することができません');
+                    }
+                } 
             } catch (Exception $e) {
                 $response = array('success' => true , 'msg' => 'お問合せ番号が追加されました。' );                   
             }            
