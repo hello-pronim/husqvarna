@@ -93,8 +93,7 @@ var DatatablesAjax = function () {
                         visible:false,      
                     },                    
                     {
-                        "targets":1,       
-                        "orderable": false,                 
+                        "targets":1,
                         "render":function(data, type, full, meta){   
                             $res = "";
                             if(data){                                                             
@@ -112,8 +111,7 @@ var DatatablesAjax = function () {
                         className: 'dt-body-center',
                     },
                     {
-                        "targets":2,                        
-                        "orderable": false,
+                        "targets":2,
                         "render":function(data, type, full, meta){
                             $res = "";
                             if(data){

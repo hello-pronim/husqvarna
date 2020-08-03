@@ -179,7 +179,6 @@ var DatatablesAjax = function () {
           visible: false
         }, {
           "targets": 1,
-          "orderable": false,
           "render": function render(data, type, full, meta) {
             $res = "";
 
@@ -198,7 +197,6 @@ var DatatablesAjax = function () {
           className: 'dt-body-center'
         }, {
           "targets": 2,
-          "orderable": false,
           "render": function render(data, type, full, meta) {
             $res = "";
 
