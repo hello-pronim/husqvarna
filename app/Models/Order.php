@@ -140,6 +140,12 @@ class Order extends Model
 
         if($filter['order'][0]["column"]>0){
             switch ($filter['order'][0]["column"]) {
+                case 1:
+                    $order_field = "scraping_status";                
+                    break;
+                case 2:
+                    $order_field = "delivery_status";                
+                    break;
                 case 3:
                     $order_field = "po";                
                     break;

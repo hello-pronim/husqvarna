@@ -93,7 +93,8 @@ var DatatablesAjax = function () {
                         visible:false,      
                     },                    
                     {
-                        "targets":1,             
+                        "targets":1,         
+                        "orderable": true,        
                         "render":function(data, type, full, meta){   
                             $res = "";
                             if(data){                                                             
@@ -103,15 +104,15 @@ var DatatablesAjax = function () {
                                     $res += '<span>操作完了</span>';
                                 }else if( data=="confirmed" ){
                                     $res += '<span>確認済</span>';
-                                }                                                                 
-                            }
-
-                            return $res;
+                                }     
+                                return $res;                                                            
+                            }else return "";
                         },
                         className: 'dt-body-center',
                     },
                     {
-                        "targets":2,
+                        "targets":2,             
+                        "orderable": true,
                         "render":function(data, type, full, meta){
                             $res = "";
                             if(data){
@@ -138,7 +139,8 @@ var DatatablesAjax = function () {
                         className: 'dt-body-center tracking_status',
                     },
                     {
-                        "targets":3,
+                        "targets":3,    
+                        "orderable": true,
                         "render":function(data, type, full, meta){
                             return '<a href="/order/'+ data +'">'+ data +'</a>';
                         }
@@ -150,12 +152,24 @@ var DatatablesAjax = function () {
                         "render":function(data, type, full, meta){
                             if(data=="2UQ7Z") return '<img src="/images/husqvarna_tiny.png" title="2UQ7Z">';
                             else if(data=="WP1A4") return '<img src="/images/gardena_tiny.png" title="WP1A4">';
+                            else return data;
                         }
                     },
                     // {
                     //     "targets":[6,7],
                     //     className:'nowrap'
                     // },
+                    {
+                        "targets":-3,      
+                        "orderable": true,                      
+                        "render":function(data){
+                            if(data){
+                                return "¥" + data;    
+                            }
+                            return data;
+                        },
+                        className: 'dt-body-right',                        
+                    },
                     {
                         "targets": -2,                        
                         "orderable": false,
@@ -223,22 +237,11 @@ var DatatablesAjax = function () {
                         },
                         className: "no-product"                                            
                     },
-                    {
-                        "targets":-3,                        
-                        "render":function(data){
-                            if(data){
-                                return "¥" + data;    
-                            }
-                            return data;
-                        },
-                        className: 'dt-body-right',                        
-                    },
                 ],
                 "ordering": true,
                 "order": [
                     [5, "desc"]
-                ],// set first column as a default sort by asc                
-
+                ],// set first column as a default sort by asc
             }
         });
 

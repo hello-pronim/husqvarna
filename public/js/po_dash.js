@@ -179,6 +179,7 @@ var DatatablesAjax = function () {
           visible: false
         }, {
           "targets": 1,
+          "orderable": true,
           "render": function render(data, type, full, meta) {
             $res = "";
 
@@ -190,13 +191,14 @@ var DatatablesAjax = function () {
               } else if (data == "confirmed") {
                 $res += '<span>確認済</span>';
               }
-            }
 
-            return $res;
+              return $res;
+            } else return "";
           },
           className: 'dt-body-center'
         }, {
           "targets": 2,
+          "orderable": true,
           "render": function render(data, type, full, meta) {
             $res = "";
 
@@ -225,6 +227,7 @@ var DatatablesAjax = function () {
           className: 'dt-body-center tracking_status'
         }, {
           "targets": 3,
+          "orderable": true,
           "render": function render(data, type, full, meta) {
             return '<a href="/order/' + data + '">' + data + '</a>';
           }
@@ -233,13 +236,24 @@ var DatatablesAjax = function () {
           className: 'dt-body-center',
           "orderable": true,
           "render": function render(data, type, full, meta) {
-            if (data == "2UQ7Z") return '<img src="/images/husqvarna_tiny.png" title="2UQ7Z">';else if (data == "WP1A4") return '<img src="/images/gardena_tiny.png" title="WP1A4">';
+            if (data == "2UQ7Z") return '<img src="/images/husqvarna_tiny.png" title="2UQ7Z">';else if (data == "WP1A4") return '<img src="/images/gardena_tiny.png" title="WP1A4">';else return data;
           }
         }, // {
         //     "targets":[6,7],
         //     className:'nowrap'
         // },
         {
+          "targets": -3,
+          "orderable": true,
+          "render": function render(data) {
+            if (data) {
+              return "¥" + data;
+            }
+
+            return data;
+          },
+          className: 'dt-body-right'
+        }, {
           "targets": -2,
           "orderable": false,
           "render": function render(data, type, full, meta) {
@@ -266,19 +280,9 @@ var DatatablesAjax = function () {
             return '<div class="btn-group pull-right">' + '<button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">操作' + '<i class="fa fa-angle-down"></i>' + '</button>' + '<ul class="dropdown-menu pull-right">' + '<li>' + '<form class="po_detail_form" method="post" action="/ajax_import_po_csv" enctype="multipart/form-data">' + '<div class="fileinput fileinput-po" data-provides="fileinput">' + '<span class="btn btn-file">' + '<span class="fileinput-po"><i class="fa fa-file-excel-o"></i>CSVをインポート</a></span>' + '<input type="file" name="po_detail_csv" accept=".csv"> </span>' + '</div></form>' + '</li>' + '<li>' + '<a href="/po_detail_pdf/' + full[0] + '" class="pdf_link" download>' + '<i class="fa fa-file-pdf-o"></i>PDF保存</a>' + '</li>' + '<li>' + '<a href="javascript:;" class="esker_email">' + '<img src="/images/esker.png"> Eskerメール</a>' + '</li>' + '<li>' + '<a href="javascript:;" class="edit">' + '<i class="fa fa-edit"></i>編集</a>' + '</li>' + '<li>' + '<a href="javascript:;" class="delete" >' + '<i class="fa fa-remove"></i>削除</a>' + '</li>' + '</ul>' + '</div>';
           },
           className: "no-product"
-        }, {
-          "targets": -3,
-          "render": function render(data) {
-            if (data) {
-              return "¥" + data;
-            }
-
-            return data;
-          },
-          className: 'dt-body-right'
         }],
         "ordering": true,
-        "order": [[5, "desc"]] // set first column as a default sort by asc                
+        "order": [[5, "desc"]] // set first column as a default sort by asc
 
       }
     });
