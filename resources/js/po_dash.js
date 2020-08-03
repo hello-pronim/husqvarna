@@ -93,7 +93,7 @@ var DatatablesAjax = function () {
                         visible:false,      
                     },                    
                     {
-                        "targets":1,
+                        "targets":1,             
                         "render":function(data, type, full, meta){   
                             $res = "";
                             if(data){                                                             
@@ -145,7 +145,8 @@ var DatatablesAjax = function () {
                     },
                     {
                         "targets":4,
-                        className: 'dt-body-center',
+                        className: 'dt-body-center',                 
+                        "orderable": true,
                         "render":function(data, type, full, meta){
                             if(data=="2UQ7Z") return '<img src="/images/husqvarna_tiny.png" title="2UQ7Z">';
                             else if(data=="WP1A4") return '<img src="/images/gardena_tiny.png" title="WP1A4">';

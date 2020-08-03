@@ -231,6 +231,7 @@ var DatatablesAjax = function () {
         }, {
           "targets": 4,
           className: 'dt-body-center',
+          "orderable": true,
           "render": function render(data, type, full, meta) {
             if (data == "2UQ7Z") return '<img src="/images/husqvarna_tiny.png" title="2UQ7Z">';else if (data == "WP1A4") return '<img src="/images/gardena_tiny.png" title="WP1A4">';
           }
