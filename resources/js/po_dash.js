@@ -164,8 +164,7 @@ var DatatablesAjax = function () {
                             if(data==null) data='';
                             var tracking_no_input ='<div class="input-group tracking_box" order-id="'+full[0]+'">';
                             
-                            tracking_no_input +='<div><select class="form-control input-small input-sm input-inline mr-10">'
-
+                            tracking_no_input +='<div><select class="form-control input-small input-sm input-inline mr-10">';
                             $.each(data.split(','), function(key, elem){
                                 if(elem){
                                     tracking_no_input += "<option>" + elem + "</option>";
@@ -393,7 +392,7 @@ var DatatablesAjax = function () {
                                     "</tr></thead><tbody>";
                         
                         $.each(res.products, function(key, product){
-                            var option = "<option></option>";
+                            var option = "";
                             if(res.tracking_number){
                                 $.each(res.tracking_number.split(","), function(key, ele){
                                     if(ele){                                        
