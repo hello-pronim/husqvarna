@@ -54,7 +54,9 @@ table.order{
 			line-height: 1.5em;
 		    height: 3em;       /* height is 2x line-height, so two lines will display */
 		    overflow: hidden; 
-		    min-width: 40px;
+		    width: 15px;
+		    padding-left: 5px!important;
+		    padding-right: 20px!important;
 		}	
 	}
 	tbody{
