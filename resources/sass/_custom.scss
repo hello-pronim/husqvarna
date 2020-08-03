@@ -90,6 +90,10 @@ table.dataTable{
 tr.child {
 	table{
 		margin-bottom: 0px;
+		td.product_tracking select{
+			padding: 6px 4px;
+			width: 150px!important;
+		}
 	}
 }
 
@@ -152,7 +156,7 @@ tr.child {
 	div{
 		float: left;
 		select{
-			width: 120px !important;
+			width: 150px !important;
 			padding: 6px 4px;
 		}
 		a{

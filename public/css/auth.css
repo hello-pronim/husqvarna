@@ -11036,6 +11036,11 @@ tr.child table {
   margin-bottom: 0px;
 }
 
+tr.child table td.product_tracking select {
+  padding: 6px 4px;
+  width: 150px !important;
+}
+
 #detail .portlet.light .portlet-title .caption .caption-subject {
   font-size: 24px;
 }
@@ -11085,7 +11090,7 @@ tr.child table {
 }
 
 .tracking_box div select {
-  width: 120px !important;
+  width: 150px !important;
   padding: 6px 4px;
 }
 
