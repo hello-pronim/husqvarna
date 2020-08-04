@@ -60,7 +60,7 @@
                                                 <th class="all">{{ trans('dashboard.scraping_status') }}</th>
                                                 <th class="all">{{ trans('dashboard.delivery_status') }}</th>
                                                 <th class="all">{{ trans('dashboard.po') }}</th>                                        
-                                                <th class="min-phone-l">{{ trans('dashboard.vendor') }}</th>
+                                                <th class="min-phone-l" style="width: 24px">{{ trans('dashboard.vendor') }}</th>
                                                 <th class="min-tablet">{{ trans('dashboard.ordered_on') }}</th>
                                                 <th class="all nowrap">{{ trans('dashboard.ship_location') }}</th>
                                                 <th class="all nowrap">{{ trans('dashboard.window_type') }}</th>
