@@ -65,11 +65,15 @@ var DatatablesAjax = function () {
                     "search":"検索:"
                 },
                 createdRow: function (row, data, dataIndex) {                    
-                    $(row).attr('data-id', data[0]);                    
+                    $(row).attr('api-id', data[0]);                    
                 },               
                 "columnDefs": [                    
                     {
                         "targets":0,       
+                        visible:false, 
+                    },                 
+                    {
+                        "targets":1,       
                         "orderable": false,                 
                         "render":function(data, type, full, meta){      
                             return '<span class="input-group-btn">'+
@@ -79,37 +83,37 @@ var DatatablesAjax = function () {
                         className: 'dt-body-center',
                     },                   
                     {
-                        "targets":1,       
+                        "targets":2,       
                         "orderable": false,                 
                         "render":function(data, type, full, meta){        
                             return '<span class="input-group-btn">'+
-                                        '<button class="btn '+(data=="on"?"blue":"")+' btn-sm" type="button">'+data.toUpperCase()+'</button>'+
+                                        '<button class="btn '+(data==1?"blue":"")+' btn-sm btn-api-alert" alert="'+data+'" type="button">'+(data==1?"ON":"OFF")+'</button>'+
                                     '</span>';
                         },
                         className: 'dt-body-center',
                     },             
                     {
-                        "targets":2,   
+                        "targets":3,   
                         "orderable": false,                  
                         "render":function(data, type, full, meta){ 
                             var select = "";
-                            select += '<select class="form-control input-small input-sm input-inline mr-10">';
+                            select += '<select class="form-control input-small input-sm input-inline mr-10 select-api-via">';
                             select += '<option value="sms"'+(data=="sms"? 'selected':'')+'>SMS</option>';
-                            select += '<option value="eml"'+(data=="eml"? 'selected':'')+'>EML</option>';
+                            select += '<option value="email"'+(data=="email"? 'selected':'')+'>EML</option>';
                             select += '<option value="tel"'+(data=="tel"? 'selected':'')+'>TEL</option>';
                             select += '</select>';
                             return select;
                         },
                     },   
                     {
-                        "targets":3, 
+                        "targets":4, 
                         "orderable": false,                      
                         "render":function(data, type, full, meta){
                             var list="<div class='api-to-list-container'>";
                             list+="<ul class='api-to-list'>";
                             var len = data.length;
                             for(var i=0; i<len; i++){
-                                list+="<li>"+data[i]+"</li>";
+                                list+="<li>"+data[i].receiver+"</li>";
                             }
                             list+="</ul>";
                             list+="<i class='fa fa-plus-circle'></i>";
@@ -138,6 +142,34 @@ var DatatablesAjax = function () {
             e.preventDefault();
             var text = $(this).parent().parent().find('input').val();
             $(this).parent().parent().parent().replaceWith('<li>'+text+'</li>');
+        });
+        table.on('click', '.btn-api-alert', function (e) {
+            e.preventDefault();
+            var btn = $(this);
+            var alert = $(this).attr('alert');
+            var api_id = $(this).closest('tr').attr('api-id');
+            $.ajax({
+                url: '/ajax_api_alert_update',
+                data: {alert: 1-alert, api_id: api_id},
+                type: 'post',
+                dataType: 'json',
+                success: function(res){
+                    if(res.success==true){
+                        if($(btn).hasClass('blue')){
+                            $(btn).removeClass('blue');
+                            $(btn).html("OFF");
+                            $(btn).attr('alert', 0);
+                        }else{
+                            $(btn).addClass('blue');
+                            $(btn).html("ON");
+                            $(btn).attr('alert', 1);
+                        }
+                        toastr["success"](res.msg, "成功!")
+                    }else{
+                        toastr["error"](res.msg, "失敗!")
+                    }
+                }
+            })
         });
     }
 

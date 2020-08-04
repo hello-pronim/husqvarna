@@ -25,3 +25,20 @@ ALTER TABLE `husqvarna`.`orders` CHANGE COLUMN `scraping_status` `scraping_statu
 //2020-07-16
 ALTER TABLE `husqvarna`.`products` ADD COLUMN `available_date` VARCHAR(45) NULL AFTER `stock`;
 
+//2020-08-04
+CREATE TABLE `husqvarna`.`apis` ( `id` INT(11) NOT NULL AUTO_INCREMENT, `api_name` VARCHAR(128) CHARSET utf8 COLLATE utf8_general_ci, `via` VARCHAR(64) CHARSET utf8 COLLATE utf8_general_ci, `status` VARCHAR(64) CHARSET utf8 COLLATE utf8_general_ci, `alert` INT(11), PRIMARY KEY (`id`) ); 
+INSERT INTO `husqvarna`.`apis` (`api_name`, `via`, `status`, `alert`) VALUES ('Amazon Vendor Central PO Collector', 'sms', 'on', '1');
+INSERT INTO `husqvarna`.`apis` (`api_name`, `via`, `status`, `alert`) VALUES ('Amazon Vendor Central - Direct Order Collector', 'email', 'on', '1'); 
+INSERT INTO `husqvarna`.`apis` (`api_name`, `via`, `status`, `alert`) VALUES ('CSS SQL Reader', 'email', 'on', '1'); 
+INSERT INTO `husqvarna`.`apis` (`api_name`, `via`, `status`, `alert`) VALUES ('CSS SQL Writer', 'email', 'check', '1'); 
+INSERT INTO `husqvarna`.`apis` (`api_name`, `via`, `status`, `alert`) VALUES ('Amazon Vendor Central Tracking Poster', 'tel', 'on', '1');
+INSERT INTO `husqvarna`.`apis` (`api_name`, `via`, `status`, `alert`) VALUES ('Amazon Vendor Central Tracking Direct Order Poster', 'tel', 'down', '1');
+CREATE TABLE `husqvarna`.`alert_receivers` ( `id` INT(11) NOT NULL AUTO_INCREMENT, `api_id` INT(11), `receiver` VARCHAR(64), `type` VARCHAR(64), PRIMARY KEY (`id`) );
+ALTER TABLE `husqvarna`.`alert_receivers` CHANGE `receiver` `receiver` VARCHAR(64) CHARSET utf8 COLLATE utf8_general_ci NULL, CHANGE `type` `type` VARCHAR(64) CHARSET utf8 COLLATE utf8_general_ci NULL; 
+INSERT INTO `husqvarna`.`alert_receivers` (`api_id`, `receiver`) VALUES ('1', '09083466576');
+INSERT INTO `husqvarna`.`alert_receivers` (`api_id`, `receiver`, `type`) VALUES ('2', 'support@jts.ec', 'email'); 
+INSERT INTO `husqvarna`.`alert_receivers` (`api_id`, `receiver`, `type`) VALUES ('3', 'support@jts.ec', 'email'); 
+INSERT INTO `husqvarna`.`alert_receivers` (`api_id`, `receiver`, `type`) VALUES ('4', 'support@jts.ec', 'email'); 
+INSERT INTO `husqvarna`.`alert_receivers` (`api_id`, `receiver`) VALUES ('5', '0369121677'); 
+INSERT INTO `husqvarna`.`alert_receivers` (`api_id`, `receiver`) VALUES ('6', '0369121677');
+ALTER TABLE `husqvarna`.`apis` ADD COLUMN `created_at` TIMESTAMP NULL AFTER `alert`, ADD COLUMN `updated_at` TIMESTAMP NULL AFTER `created_at`;

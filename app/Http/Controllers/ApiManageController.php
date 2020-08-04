@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Enums\UserType;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Api;
+use App\Models\AlertReceiver;
 
 class ApiManageController extends Controller
 {
@@ -35,20 +37,28 @@ class ApiManageController extends Controller
         }
     }
     public function ajax_get_apis(Request $request){
-        $apis = array(
-                    array('on', 'on', 'sms', array('09083466576'), 'Amazon Vendor Central PO Collector'),
-                    array('on', 'on', 'eml', array('support@jts.ec'), 'Amazon Vendor Central - Direct Order Collector'),
-                    array('on', 'on', 'eml', array('support@jts.ec'), 'CSS SQL Reader'),
-                    array('check', 'on', 'eml', array('support@jts.ec'), 'CSS SQL Writer'),
-                    array('on', 'on', 'tel', array('0369121677'), 'Amazon Vendor Central Tracking Poster'),
-                    array('down', 'on', 'tel', array('0369121677', '09083466576', '0425555556'), 'Amazon Vendor Central Tracking Direct Order Poster')
-                );
+        $apis = array();
+        $array = Api::get()->toArray();
+        foreach ($array as $key => $api) {
+            $elem = array();
+            array_push($elem, $api['id']);
+            array_push($elem, $api['status']);
+            array_push($elem, $api['alert']);
+            array_push($elem, $api['via']);
+
+            $receivers = AlertReceiver::where('api_id', $api['id'])->get()->toArray();
+            array_push($elem, $receivers);
+
+            array_push($elem, $api['api_name']);
+            array_push($apis, $elem);
+        }
+
         $result = array();
         $searchText = "";
         if($request->input()['search']['value']) $searchText = $request->input()['search']['value'];
         if($searchText){
             foreach ($apis as $key => $api) {
-                if(strpos($api[4], $searchText)!==false)
+                if(strpos($api['5'], $searchText)!==false)
                     array_push($result, $api);
             }
         }else $result = $apis;
@@ -59,6 +69,14 @@ class ApiManageController extends Controller
             'recordsTotal' => count($apis)
         );
         
+        return response()->json($response);
+    }
+    public function updateApiAlert(Request $request){
+        $alert = $request->alert;
+        $api_id = $request->api_id;
+        Api::where('id', $api_id)->update(array('alert'=>$alert));
+        $response = array('success' => true , 'msg' => 'APIステータスは正常に更新されました' );
+
         return response()->json($response);
     }
 }

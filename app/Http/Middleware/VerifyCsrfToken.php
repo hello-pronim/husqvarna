@@ -19,6 +19,7 @@ class VerifyCsrfToken extends Middleware
         'ajax_product_tracking',
         'ajax_import_po_csv',
         'ajax_get_apis',
+        'ajax_api_alert_update',
         'ajax_esker_email'
     ];
 }

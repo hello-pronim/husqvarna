@@ -37,6 +37,7 @@ Route::group(['middleware' => ['auth']], function(){
 	Route::post('/ajax_product_tracking', 'DashboardController@ajax_product_tracking')->name('ajax_product_tracking');	
 	Route::post('/ajax_import_po_csv', 'DashboardController@ajax_import_po_csv')->name('ajax_import_po_csv');	
 	Route::post('/ajax_get_apis', 'ApiManageController@ajax_get_apis')->name('ajax_get_apis');
+	Route::post('/ajax_api_alert_update', 'ApiManageController@updateApiAlert')->name('ajax_api_alert_update');
 	
 	Route::get('/manage/user', 'ManageController@user_list')->name('management.user');
 	Route::get('/manage/csv_import', 'ManageController@po_csv_import')->name('management.po_csv_import');	

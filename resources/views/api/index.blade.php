@@ -21,6 +21,7 @@
                             <table class="table table-striped table-bordered table-hover dt-responsive order" width="100%" id="apis">
                                 <thead>
                                     <tr>
+                                        <th class="all"></th>
                                         <th class="all">{{ trans('api.status') }}</th>
                                         <th class="all">{{ trans('api.alert') }}</th>
                                         <th class="all">{{ trans('api.via') }}</th>
