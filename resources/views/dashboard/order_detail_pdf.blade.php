@@ -77,13 +77,13 @@
     <div id="pdf-header">
       <table style="width: 100%; color:#000;">
         <tr class="fs-24">
-          <td style="width:28%;">
+          <td style="width:27%;">
             <span style="font-size: 25.5px; font-weight: 700; font-family: 'Tahoma-Bold'; margin-right:14px; color: #000;">Amazon</span> <span style="font-size: 21px; font-family:Verdana; color:#000; padding-bottom: 5px;">{{$aws_code->css_customer_code}}</span>
           </td>
           <td align="center">
             <p>
               <span style="margin-right: 10px; margin-top: -5px; font-size: 21px; font-family: MS Gothic; color: #000;">配送先 : </span><span style="margin-right: 10px; font-size: 23px; font-family: Verdana; color: #000;">{{explode(" - ", $orders[0]->ship_location)[0]}}</span>
-              <span style="margin-right: 14px; font-size: 21px; font-family: MS Gothic; color: #000;">コード : </span><span style="margin-right: 30px; font-size: 23.5px; font-family: Verdana; color: #000;">{{$aws_code->css_shipping_code}}</span>
+              <span style="margin-right: 14px; font-size: 21px; font-family: MS Gothic; color: #000;">コード : </span><span style="margin-right: 28px; font-size: 23.5px; font-family: Verdana; color: #000;">{{$aws_code->css_shipping_code}}</span>
             </p>
           </td>
           <td align="right">
