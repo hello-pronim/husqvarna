@@ -25,6 +25,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        // $schedule->call(function(){
+        //     $controller = new \App\Http\Controllers\ApiManageController();
+        //     $controller->checkApis();
+        // })->dailyAt('8:00');
     }
 
     /**

@@ -79,4 +79,26 @@ class ApiManageController extends Controller
 
         return response()->json($response);
     }
+    public function updateApiVia(Request $request){
+        $via = $request->via;
+        $api_id = $request->api_id;
+        Api::where('id', $api_id)->update(array('via'=>$via));
+        $response = array('success' => true , 'msg' => '送信方式が変更されました' );
+
+        return response()->json($response);
+    }
+    public function addApiReceiver(Request $request){
+        $receiver = $request->receiver;
+        $api_id = $request->api_id;
+        AlertReceiver::create(array(
+            'api_id'=>$api_id,
+            'receiver'=>$receiver
+        ));
+        $response = array('success' => true , 'msg' => '' );
+
+        return response()->json($response);
+    }
+    public function checkApis(){
+        $apis = Api::get()->toArray();
+    }
 }

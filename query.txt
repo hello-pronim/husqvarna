@@ -42,3 +42,4 @@ INSERT INTO `husqvarna`.`alert_receivers` (`api_id`, `receiver`, `type`) VALUES 
 INSERT INTO `husqvarna`.`alert_receivers` (`api_id`, `receiver`) VALUES ('5', '0369121677'); 
 INSERT INTO `husqvarna`.`alert_receivers` (`api_id`, `receiver`) VALUES ('6', '0369121677');
 ALTER TABLE `husqvarna`.`apis` ADD COLUMN `created_at` TIMESTAMP NULL AFTER `alert`, ADD COLUMN `updated_at` TIMESTAMP NULL AFTER `created_at`;
+ALTER TABLE `husqvarna`.`alert_receivers` ADD COLUMN `created_at` TIMESTAMP NULL AFTER `type`, ADD COLUMN `updated_at` TIMESTAMP NULL AFTER `created_at`; 

@@ -168,7 +168,7 @@ var DatatablesAjax = function () {
           "targets": 2,
           "orderable": false,
           "render": function render(data, type, full, meta) {
-            return '<span class="input-group-btn">' + '<button class="btn ' + (data == 1 ? "blue" : "") + ' btn-sm btn-api-alert" alert="' + data + '" type="button">' + (data == 1 ? "ON" : "OFF") + '</button>' + '</span>';
+            return '<span class="input-group-btn">' + '<button class="btn ' + (data == 1 ? "blue" : "red") + ' btn-sm btn-api-alert" alert="' + data + '" type="button">' + (data == 1 ? "ON" : "OFF") + '</button>' + '</span>';
           },
           className: 'dt-body-center'
         }, {
@@ -188,7 +188,7 @@ var DatatablesAjax = function () {
           "orderable": false,
           "render": function render(data, type, full, meta) {
             var list = "<div class='api-to-list-container'>";
-            list += "<ul class='api-to-list'>";
+            list += "<ul class='api-to-list' api-id='" + full[0] + "'>";
             var len = data.length;
 
             for (var i = 0; i < len; i++) {
@@ -212,7 +212,8 @@ var DatatablesAjax = function () {
     var table = grid.getTable();
     table.on('click', '.api-to-list-container i', function (e) {
       e.preventDefault();
-      if (!$(this).parent().find('.api-to-list input').length) $(this).parent().find('.api-to-list').append('<li><div class="flex-row align-items-center"><input class="form-control input-sm input-small"><span class="input-group-btn"><button class="btn blue btn-sm btn-save" type="button">保存</button></span></div></li>');
+      var api_id = $(this).closest('tr').attr('api-id');
+      if (!$(this).parent().find('.api-to-list input').length) $(this).parent().find('.api-to-list').append('<li><div class="flex-row align-items-center"><input class="form-control input-sm input-small input-receiver"><span class="input-group-btn"><button class="btn blue btn-sm btn-add-receiver" type="button" api-id="' + api_id + '">保存</button></span></div></li>');
     });
     table.on('click', '.api-to-list-container button', function (e) {
       e.preventDefault();
@@ -236,14 +237,59 @@ var DatatablesAjax = function () {
           if (res.success == true) {
             if ($(btn).hasClass('blue')) {
               $(btn).removeClass('blue');
+              $(btn).addClass('red');
               $(btn).html("OFF");
               $(btn).attr('alert', 0);
             } else {
               $(btn).addClass('blue');
+              $(btn).removeClass('red');
               $(btn).html("ON");
               $(btn).attr('alert', 1);
             }
 
+            toastr["success"](res.msg, "成功!");
+          } else {
+            toastr["error"](res.msg, "失敗!");
+          }
+        }
+      });
+    });
+    table.on('change', '.select-api-via', function (e) {
+      e.preventDefault();
+      var select = $(this);
+      var via = $(this).val();
+      var api_id = $(this).closest('tr').attr('api-id');
+      $.ajax({
+        url: '/ajax_api_via_update',
+        data: {
+          via: via,
+          api_id: api_id
+        },
+        type: 'post',
+        dataType: 'json',
+        success: function success(res) {
+          if (res.success == true) {
+            toastr["success"](res.msg, "成功!");
+          } else {
+            toastr["error"](res.msg, "失敗!");
+          }
+        }
+      });
+    });
+    table.on('click', '.btn-add-receiver', function (e) {
+      e.preventDefault();
+      var api_id = $(this).attr('api-id');
+      var receiver = $(this).parent().parent().find('.input-receiver').val();
+      $.ajax({
+        url: '/ajax_api_receiver_add',
+        data: {
+          receiver: receiver,
+          api_id: api_id
+        },
+        type: 'post',
+        dataType: 'json',
+        success: function success(res) {
+          if (res.success == true) {
             toastr["success"](res.msg, "成功!");
           } else {
             toastr["error"](res.msg, "失敗!");
