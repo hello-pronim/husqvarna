@@ -1,0 +1,18 @@
+- /api/importPoList
+	parameters
+		_token: Jll7q0BSijLOrzaOSm5Dr5hW9cJRZAJKOzvDlxjKCXepwAeZ7JR6YP5zQqnw
+		file: ConfirmedPurchaseOrders.csv				
+		status: (New, Confirmed)
+
+- /api/importPoDetail
+	parameter:
+		_token: Jll7q0BSijLOrzaOSm5Dr5hW9cJRZAJKOzvDlxjKCXepwAeZ7JR6YP5zQqnw,
+		order_id: {order_id}
+		file: PurchaseOrder.csv				
+
+- /api/updatePoStatus
+	parameters
+		_token: Jll7q0BSijLOrzaOSm5Dr5hW9cJRZAJKOzvDlxjKCXepwAeZ7JR6YP5zQqnw
+		order_id: 7FVUI8NI
+		status: (new, processed, confirmed)
+
