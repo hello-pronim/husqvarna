@@ -94,7 +94,7 @@ class ApiManageController extends Controller
             'api_id'=>$api_id,
             'receiver'=>$receiver
         ));
-        $response = array('success' => true , 'msg' => '' );
+        $response = array('success' => true , 'msg' => '送信先へ正常に追加されました' );
 
         return response()->json($response);
     }
