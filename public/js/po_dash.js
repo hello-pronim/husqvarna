@@ -211,9 +211,9 @@ var DatatablesAjax = function () {
                 } else if (status[0] == "On vehicle for delivery") {
                   $res += '<label> 輸送中 </label>';
                 } else if (status[0] == "Delivered") {
-                  $res += '<label> 配達完了 - ' + elem[1] + '</label>';
+                  $res += '<label> 配達完了 <br>' + elem[1] + '</label>';
                 } else if (status[0] == "Exception") {
-                  $res += '<label> お問合せ - ' + elem[1] + '</label>';
+                  $res += '<label> お問合せ <br>' + elem[1] + '</label>';
                 } else {
                   $res += '<label>該当なし</label>';
                 }
