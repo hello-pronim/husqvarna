@@ -146,7 +146,8 @@ class ApiController extends Controller
 
                     $temp_tracking_data = "";
 
-                    if($count==10){                        
+                    if($count==10){   
+                        $count =0;                     
                         $send = true;                        
                     }                              
                 }
@@ -154,7 +155,7 @@ class ApiController extends Controller
             }           
 
 
-            if(( $send == true || $key>=(count($data)-1)) && $count>0 ){               
+            if( $send == true || $key>=(count($data)-1) ){               
                 $res = array();
 
                 if($tracking_data != ""){                    
@@ -224,7 +225,7 @@ class ApiController extends Controller
                             }
                         }    
                     }           
-                    $count =0;
+                    
                     $tracking_data ="";
                     $temp_key= $kk+1;  
                 }   
