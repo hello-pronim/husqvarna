@@ -13,21 +13,27 @@ use Excel;
 class ApiController extends Controller
 {
     public function uploadOrder(Request $request){   
-                
-        return response()->json( $this->readcsv($request, new OrderImport($request->input('status')), 'po_csv') );        
-
+        
+        if(isset($request->isApiCheck) && $request->isApiCheck) // isApiCheck param is for API checking flag
+            return "success";
+        else 
+            return response()->json( $this->readcsv($request, new OrderImport($request->input('status')), 'po_csv') );        
     }
 
     public function uploadProduct(Request $request){       	
         
-        return response()->json( $this->readcsv($request, new ProductImport($request->input('order_id')), 'po_detail') );
-
+        if(isset($request->isApiCheck) && $request->isApiCheck) // isApiCheck param is for API checking flag
+            return "success";
+        else 
+            return response()->json( $this->readcsv($request, new ProductImport($request->input('order_id')), 'po_detail') );
     }
 
     public function updatePoStatus(Request $request){       	        
-
-        return response()->json( Order::updateStatus($request->input('order_id'), $request->input('status')) );
-
+        
+        if(isset($request->isApiCheck) && $request->isApiCheck) // isApiCheck param is for API checking flag
+            return "success";
+        else 
+            return response()->json( Order::updateStatus($request->input('order_id'), $request->input('status')) );
     }
 
     public static function readcsv($request, $import, $upload_path){

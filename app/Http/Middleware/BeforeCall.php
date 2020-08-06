@@ -17,7 +17,7 @@ class BeforeCall
     {
 
         $token = "Jll7q0BSijLOrzaOSm5Dr5hW9cJRZAJKOzvDlxjKCXepwAeZ7JR6YP5zQqnw";
-                      
+
         if( isset($request->_token)){
             if ($request->_token == $token ) {
                 return $next($request);        
