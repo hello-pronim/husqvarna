@@ -119,19 +119,19 @@ var DatatablesAjax = function () {
                                 $.each(data, function(key, elem){
                                     var status = elem[2].split(":");                                    
                                     if( status[0] =="Not picked up"){
-                                        $res += '<i class="fa fa-circle red" data-toggle="tooltip" data-theme="dark" title="'+elem[0]+': 集まらない"></i>';
+                                        $res += '<label> 集まらない </label>';
                                     }else if( status[0] =="On vehicle for delivery"){
-                                        $res += '<i class="fa fa-circle orange" data-toggle="tooltip" data-theme="dark" title="'+elem[0]+': 輸送中"></i>';
+                                        $res += '<label> 輸送中 </label>';
                                     }else if( status[0] =="Delivered"){
-                                        $res += '<i class="fa fa-circle green" data-toggle="tooltip" data-theme="dark" title="'+elem[0]+': 配達完了 - '+elem[1]+'"></i>';
+                                        $res += '<label> 配達完了 - '+elem[1]+'</label>';
                                     }else if( status[0] =="Exception"){
-                                        $res += '<i class="fa fa-circle grey" data-toggle="tooltip" data-theme="dark" title="'+elem[0]+': お問合せ - '+elem[1]+'"></i>';
+                                        $res += '<label> お問合せ - '+elem[1]+'</label>';
                                     }else{
-                                        $res += '<i class="fa fa-circle red" data-toggle="tooltip" data-theme="dark" title="'+elem[0]+': 該当なし"></i>';    
+                                        $res += '<label>該当なし</label>';    
                                     }                                    
                                 });
                             }else{
-                                $res += '<i class="fa fa-circle" data-toggle="tooltip" data-theme="dark" title="該当なし"></i>';    
+                                $res += '<label>該当なし</label>';    
                             }
 
                             return $res;

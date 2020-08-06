@@ -143,14 +143,14 @@ var DatatablesAjax = function () {
           "url": "/ajax_dashbaord" // ajax source
 
           /*"dataSrc": function(res){
-                for ( var i=0, ien=res.data.length ; i<ien ; i++ ) {
+               for ( var i=0, ien=res.data.length ; i<ien ; i++ ) {
                   
                   res.data[i] = $.map(res.data[i], function(value, index) {                                            
                                   return [value];
                                 });
               }         
-                App.unblockUI(table.parents(".table-container"));
-                               return res.data;                        
+               App.unblockUI(table.parents(".table-container"));
+                              return res.data;                        
           }*/
 
         },
@@ -207,19 +207,19 @@ var DatatablesAjax = function () {
                 var status = elem[2].split(":");
 
                 if (status[0] == "Not picked up") {
-                  $res += '<i class="fa fa-circle red" data-toggle="tooltip" data-theme="dark" title="' + elem[0] + ': 集まらない"></i>';
+                  $res += '<label> 集まらない </label>';
                 } else if (status[0] == "On vehicle for delivery") {
-                  $res += '<i class="fa fa-circle orange" data-toggle="tooltip" data-theme="dark" title="' + elem[0] + ': 輸送中"></i>';
+                  $res += '<label> 輸送中 </label>';
                 } else if (status[0] == "Delivered") {
-                  $res += '<i class="fa fa-circle green" data-toggle="tooltip" data-theme="dark" title="' + elem[0] + ': 配達完了 - ' + elem[1] + '"></i>';
+                  $res += '<label> 配達完了 - ' + elem[1] + '</label>';
                 } else if (status[0] == "Exception") {
-                  $res += '<i class="fa fa-circle grey" data-toggle="tooltip" data-theme="dark" title="' + elem[0] + ': お問合せ - ' + elem[1] + '"></i>';
+                  $res += '<label> お問合せ - ' + elem[1] + '</label>';
                 } else {
-                  $res += '<i class="fa fa-circle red" data-toggle="tooltip" data-theme="dark" title="' + elem[0] + ': 該当なし"></i>';
+                  $res += '<label>該当なし</label>';
                 }
               });
             } else {
-              $res += '<i class="fa fa-circle" data-toggle="tooltip" data-theme="dark" title="該当なし"></i>';
+              $res += '<label>該当なし</label>';
             }
 
             return $res;
@@ -587,14 +587,14 @@ var DatatablesAjax = function () {
           "url": "/ajax_direct_order" // ajax source
 
           /*"dataSrc": function(res){
-                for ( var i=0, ien=res.data.length ; i<ien ; i++ ) {
+               for ( var i=0, ien=res.data.length ; i<ien ; i++ ) {
                   
                   res.data[i] = $.map(res.data[i], function(value, index) {                                            
                                   return [value];
                                 });
               }         
-                App.unblockUI(table.parents(".table-container"));
-                               return res.data;                        
+               App.unblockUI(table.parents(".table-container"));
+                              return res.data;                        
           }*/
 
         },
@@ -764,7 +764,7 @@ jQuery(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\web\Laravel\Huqvarna\husqvarna-amazonapi\resources\js\po_dash.js */"./resources/js/po_dash.js");
+module.exports = __webpack_require__(/*! /media/benz/Source/Benz/Husqvarna/husqvarna/resources/js/po_dash.js */"./resources/js/po_dash.js");
 
 
 /***/ })
