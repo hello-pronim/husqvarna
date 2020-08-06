@@ -234,7 +234,7 @@ class ApiController extends Controller
         }   
 
         foreach ($data as $key => $order) {            
-            //Order::where('po', $order[3])->update(array('delivery_status' => $order[2]));
+            Order::where('po', $order[3])->update(array('delivery_status' => $order[2]));
         }       
 
         return "success";
