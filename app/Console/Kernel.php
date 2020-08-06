@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        'App\Console\Commands\ApiChecker',
     ];
 
     /**
@@ -24,11 +24,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
-        $schedule->call(function(){
-            $controller = new \App\Http\Controllers\ApiManageController();
-            $controller->checkApis();
-        })->dailyAt('6:00');
+        $schedule->command('check:api')->dailyAt('06:00');
+        // $schedule->call(function(){
+        //     $controller = new \App\Http\Controllers\ApiManageController();
+        //     $controller->checkApis();
+        // })->everySecond();
     }
 
     /**
