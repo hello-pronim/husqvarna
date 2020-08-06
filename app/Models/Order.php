@@ -253,7 +253,7 @@ class Order extends Model
                             $tracking_no = $dom->find("input[name='main:no".$i."']");
                             $tracking_date = $dom->find("input[name='main:h-date".$i."']");
                             $tracking_status = $dom->find("input[name='main:h-status".$i."']");    
-                            $res[] = [$tracking_no[0]->value, $tracking_date[0]->value,  $tracking_status[0]->value];
+                            $res[] = [$tracking_no[0]->value, date("Y/m/d", strtotime($tracking_date[0]->value)),  $tracking_status[0]->value];
                         }  
 
                         $q=0;
