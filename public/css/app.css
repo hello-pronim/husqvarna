@@ -143,6 +143,10 @@ table.order tbody td .esker_email img {
   margin-right: -5px;
 }
 
+table.order tbody td label {
+  display: block;
+}
+
 table.order .po_details thead tr td {
   font-size: 10px;
 }
