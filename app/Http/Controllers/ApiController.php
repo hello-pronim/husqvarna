@@ -114,18 +114,47 @@ class ApiController extends Controller
         $count = 0;
         $temp_key=0;
         $tracking_data = "";
+        $send = false;
+        $temp_tracking_data = "";
+        $kk=0;
         foreach ($data as $key => $order) {
+            $send = false;
+            $kk = $key;
             if($order[12]){
                 $order_tracking = explode(",", $order[12]);
-                if($order[12]!=""){
-                    foreach ($order_tracking as $k => $ot) {
-                        $count ++;
-                        $tracking_data .= "&main:no".($count)."=".$ot;    
-                    }                
-                }                
+            
+                if( ($count + count($order_tracking)) >10 ){
+                    $send =true;
+                    $count = 0;
+
+                    if($order[12]!=""){
+                        foreach ($order_tracking as $k => $ot) {
+                            $count ++;
+                            $temp_tracking_data .= "&main:no".($count)."=".$ot;    
+                        }    
+                        $kk = $kk-1;            
+                    }                                    
+                    
+                }else{
+                    if($order[12]!=""){
+                        $tracking_data .= $temp_tracking_data;
+                        foreach ($order_tracking as $k => $ot) {
+                            $count ++;
+                            $tracking_data .= "&main:no".($count)."=".$ot;    
+                        }                                        
+                    }   
+
+                    $temp_tracking_data = "";
+
+                    if($count==10){                        
+                        $send = true;                        
+                    }                              
+                }
+                
             }           
 
-            if(($count%10==0 || $key>=(count($data)-1)) && $count>0 ){               
+
+            if(( $send == true || $key>=(count($data)-1)) && $count>0 ){               
                 $res = array();
 
                 if($tracking_data != ""){                    
@@ -154,54 +183,57 @@ class ApiController extends Controller
 
                     curl_close($curl);                     
                     if($response){ 
-                        $dom = HtmlDomParser::str_get_html( $response );
-                        $tracking_data ="";
+                        $dom = HtmlDomParser::str_get_html( $response );                        
 
                         for ($i=1; $i <=10 ; $i++) { 
                             $tracking_no = $dom->find("input[name='main:no".$i."']");
                             $tracking_date = $dom->find("input[name='main:h-date".$i."']");
                             $tracking_status = $dom->find("input[name='main:h-status".$i."']");    
-                            $res[] = [$tracking_no[0]->value, date("Y/m/d", strtotime($tracking_date[0]->value)),  $tracking_status[0]->value];
+                            if($tracking_no){
+                                $res[] = [$tracking_no[0]->value, date("Y/m/d", strtotime($tracking_date[0]->value)),  $tracking_status[0]->value];    
+                            }                            
                         }  
 
                         $q=0;
 
-                        for($j=$temp_key; $j<=$key; $j++){
+                        for($j=$temp_key; $j<=$kk; $j++){
                             $q_data = explode(',', $data[$j][12]);
                             
                             if($data[$j][12]){
                                 $tracking_status = [];
                                 foreach ($q_data as $v => $qv) {                                    
-                                    if(count($res[$q])>0){
-                                        $status[0] = explode(':', $res[$q][2]);
-                                        if( $status[0] =="Not picked up"){
-                                            $tracking_status[] = '集まらない';
-                                        }else if( $status[0] =="On vehicle for delivery"){
-                                            $tracking_status[] = '輸送中';
-                                        }else if( $status[0] =="Delivered"){
-                                            $tracking_status[] = '配達完了<br>'+date('Y/m/d', strtotime($status[1]));
-                                        }else if( $status[0] =="Exception"){
-                                            $tracking_status[] = 'お問合せ <br>'+date('Y/m/d', strtotime($status[1]));
-                                        }else{
-                                            $tracking_status[] = '該当なし';    
-                                        }  
-                                    }
+                                    //if($q<10){
+                                        if(count($res[$q])>0){
+                                            $status[0] = explode(':', $res[$q][2]);
+                                            if( $status[0] =="Not picked up"){
+                                                $tracking_status[] = '集まらない';
+                                            }else if( $status[0] =="On vehicle for delivery"){
+                                                $tracking_status[] = '輸送中';
+                                            }else if( $status[0] =="Delivered"){
+                                                $tracking_status[] = '配達完了<br>'+date('Y/m/d', strtotime($status[1]));
+                                            }else if( $status[0] =="Exception"){
+                                                $tracking_status[] = 'お問合せ <br>'+date('Y/m/d', strtotime($status[1]));
+                                            }else{
+                                                $tracking_status[] = '該当なし';    
+                                            }  
+                                        }    
+                                    //}                                    
                                     $q++;
                                 }   
                                 $data[$j][2]=implode(',', $tracking_status); 
                             }
                         }    
                     }           
-                    
-
-                    $temp_key= $key+1;  
+                    $count =0;
+                    $tracking_data ="";
+                    $temp_key= $kk+1;  
                 }   
             }            
 
         }   
 
         foreach ($data as $key => $order) {            
-            Order::where('po', $order[3])->update(array('delivery_status' => $order[2]));
+            //Order::where('po', $order[3])->update(array('delivery_status' => $order[2]));
         }       
 
         return "success";
