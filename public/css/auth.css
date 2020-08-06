@@ -11208,6 +11208,17 @@ form.po_detail_form input[type=file] {
   margin-bottom: 0px;
 }
 
+#apis .api-to-list-container .api-to-list li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+#apis .api-to-list-container .api-to-list li > i {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
 #apis .api-to-list-container input {
   width: 120px;
 }

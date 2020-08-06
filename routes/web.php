@@ -40,6 +40,9 @@ Route::group(['middleware' => ['auth']], function(){
 	Route::post('/ajax_api_alert_update', 'ApiManageController@updateApiAlert')->name('ajax_api_alert_update');
 	Route::post('/ajax_api_via_update', 'ApiManageController@updateApiVia')->name('ajax_api_via_update');
 	Route::post('/ajax_api_receiver_add', 'ApiManageController@addApiReceiver')->name('ajax_api_receiver_add');
+	Route::post('/ajax_api_receiver_edit', 'ApiManageController@editApiReceiver')->name('ajax_api_receiver_edit');
+	Route::post('/ajax_api_receiver_delete', 'ApiManageController@deleteApiReceiver')->name('ajax_api_receiver_delete');
+
 	
 	Route::get('/manage/user', 'ManageController@user_list')->name('management.user');
 	Route::get('/manage/csv_import', 'ManageController@po_csv_import')->name('management.po_csv_import');	

@@ -271,6 +271,15 @@ form.po_detail_form{
 		list-style: none;
 		padding-left: 0px;
 		margin-bottom: 0px;
+		li{
+			display: flex;
+			align-items: center;
+			margin-bottom: 5px;
+			>i{
+				margin-left: 5px;
+				margin-right: 5px;
+			}
+		}
 	}
 	input{
 		width: 120px;

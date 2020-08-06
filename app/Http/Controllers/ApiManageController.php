@@ -91,13 +91,32 @@ class ApiManageController extends Controller
     }
     public function addApiReceiver(Request $request){
         $receiver = $request->receiver;
+        $receiver_id = $request->receiver_id;
         $api_id = $request->api_id;
-        AlertReceiver::create(array(
-            'api_id'=>$api_id,
-            'receiver'=>$receiver
-        ));
-        $response = array('success' => true , 'msg' => '送信先へ正常に追加されました' );
+        if($receiver_id!=0){
+            AlertReceiver::where('id', $receiver_id)->update(array('receiver'=>$receiver));
+            $receiver = AlertReceiver::where('id', $receiver_id)->get()->first();
+            $response = array('success' => true , 'msg' => '', 'receiver_id'=>$receiver->id);
+        }else{
+            $receiver = AlertReceiver::create(array(
+                'api_id'=>$api_id,
+                'receiver'=>$receiver
+            ));
+            $response = array('success' => true , 'msg' => '送信先へ正常に追加されました', 'receiver_id'=>$receiver->id);
+        }
 
+        return response()->json($response);
+    }
+    public function deleteApiReceiver(Request $request){
+        $receiver_id = $request->receiver_id;
+        $api_id = $request->api_id;
+        $receiver = AlertReceiver::where('api_id', $api_id)->where('id', $receiver_id);
+        if($receiver){
+            $receiver->delete();
+            $response = array('success' => true , 'msg' => '' );
+        }else{
+            $response = array('success' => false , 'msg' => '' );
+        }
         return response()->json($response);
     }
     function checkEmail($email) {

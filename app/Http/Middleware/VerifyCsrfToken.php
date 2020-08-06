@@ -22,6 +22,8 @@ class VerifyCsrfToken extends Middleware
         'ajax_api_alert_update',
         'ajax_api_via_update',
         'ajax_api_receiver_add',
+        'ajax_api_receiver_edit',
+        'ajax_api_receiver_delete',
         'ajax_esker_email'
     ];
 }
