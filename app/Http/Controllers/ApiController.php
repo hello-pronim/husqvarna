@@ -211,9 +211,9 @@ class ApiController extends Controller
                                             }else if( $status[0] =="On vehicle for delivery"){
                                                 $tracking_status[] = '輸送中';
                                             }else if( $status[0] =="Delivered"){
-                                                $tracking_status[] = '配達完了<br>'+$res[$q][1];
+                                                $tracking_status[] = '配達完了<br>' . $res[$q][1];
                                             }else if( $status[0] =="Exception"){
-                                                $tracking_status[] = 'お問合せ <br>'+$res[$q][1];
+                                                $tracking_status[] = 'お問合せ <br>' . $res[$q][1];
                                             }else{
                                                 $tracking_status[] = '該当なし';    
                                             }  
