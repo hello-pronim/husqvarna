@@ -114,21 +114,10 @@ var DatatablesAjax = function () {
                         "targets":2,             
                         "orderable": true,
                         "render":function(data, type, full, meta){
-                            $res = "";
+                            $res = "";                            
                             if(data){
-                                $.each(data, function(key, elem){
-                                    var status = elem[2].split(":");                                    
-                                    if( status[0] =="Not picked up"){
-                                        $res += '<label> 集まらない </label>';
-                                    }else if( status[0] =="On vehicle for delivery"){
-                                        $res += '<label> 輸送中 </label>';
-                                    }else if( status[0] =="Delivered"){
-                                        $res += '<label> 配達完了 <br>'+elem[1]+'</label>';
-                                    }else if( status[0] =="Exception"){
-                                        $res += '<label> お問合せ <br>'+elem[1]+'</label>';
-                                    }else{
-                                        $res += '<label>該当なし</label>';    
-                                    }                                    
+                                $.each(data.split(","), function(key, elem){                                    
+                                    $res += '<label>'+elem+'</label>';                                    
                                 });
                             }else{
                                 $res += '<label>該当なし</label>';    

@@ -22,5 +22,7 @@ Route::group(['middleware' => ['before.call']], function(){
 
 });
 
+Route::get('/checkPoStatus', 'ApiController@checkTrackingStatus');
+
 
 
