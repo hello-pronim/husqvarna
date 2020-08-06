@@ -185,7 +185,7 @@
                             @endif
                         </ul>
                     </li>              
-                    @if(Auth::user()->user_type <= App\Enums\UserType::Admin)    
+                    @if(Auth::user()->user_type >= App\Enums\UserType::Superadmin)    
                     <li class="nav-item @if(request()->routeIs(['api'])) active open @endif">
                         <a href="{{route('api')}}" class="nav-link nav-toggle">
                             <i class="icon-puzzle"></i>
