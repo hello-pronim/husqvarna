@@ -123,6 +123,7 @@ class Order extends Model
             $filter_res = $query->where(function($q) use($search_val) {
       
                             $q->Where("po", "like", "%".$search_val."%")
+                                ->orWhere("delivery_status", "like", "%".$search_val."%")
                                 ->orWhere("vendor", "like", "%".$search_val."%")
                                 ->orWhere("ship_location", "like", "%".$search_val."%")
                                 ->orWhere("window_type", "like", "%".$search_val."%")
