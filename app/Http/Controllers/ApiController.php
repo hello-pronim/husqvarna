@@ -205,15 +205,15 @@ class ApiController extends Controller
                                 foreach ($q_data as $v => $qv) {                                    
                                     //if($q<10){
                                         if(count($res[$q])>0){
-                                            $status[0] = explode(':', $res[$q][2]);
+                                            $status = explode(':', $res[$q][2]);
                                             if( $status[0] =="Not picked up"){
                                                 $tracking_status[] = '集まらない';
                                             }else if( $status[0] =="On vehicle for delivery"){
                                                 $tracking_status[] = '輸送中';
                                             }else if( $status[0] =="Delivered"){
-                                                $tracking_status[] = '配達完了<br>'+date('Y/m/d', strtotime($status[1]));
+                                                $tracking_status[] = '配達完了<br>'+$res[$q][1];
                                             }else if( $status[0] =="Exception"){
-                                                $tracking_status[] = 'お問合せ <br>'+date('Y/m/d', strtotime($status[1]));
+                                                $tracking_status[] = 'お問合せ <br>'+$res[$q][1];
                                             }else{
                                                 $tracking_status[] = '該当なし';    
                                             }  
