@@ -177,7 +177,7 @@ class DashboardController extends Controller
                         $order->save();
                         $response = array('success' => true , 'msg' => 'お問合せ番号が追加されました。' );
                     }else{
-                        $response = array('success' => false, 'msg'=>'お問合せ番号を追加することができません');
+                        $response = array('success' => false, 'msg'=>'このPOはアイテム一つで二つのお問い合わせ番号は付きません。');
                     }
                 } 
             } catch (Exception $e) {
