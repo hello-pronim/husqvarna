@@ -122,6 +122,14 @@ class ApiManageController extends Controller
         }
         return response()->json($response);
     }
+    public function updateAlertType(Request $request){
+        $api_id = $request->api_id;
+        $alert_type = $request->alert_type;
+        $alert = $request->alert;
+        Api::where('id', $api_id)->update(array($alert_type=>$alert));
+        $response = array('success' => true , 'msg' => '' );
+        return response()->json($response);
+    }
     function checkEmail($email) {
         $find1 = strpos($email, '@');
         $find2 = strpos($email, '.');

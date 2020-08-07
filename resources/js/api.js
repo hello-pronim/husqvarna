@@ -157,6 +157,25 @@ var DatatablesAjax = function () {
             }
         });
         var table = grid.getTable();
+        table.on('change', 'input[type="checkbox"]', function (e) {
+            e.preventDefault();
+            var api_id = $(this).closest('tr').attr('api-id');
+            var alert_type = $(this).attr('name');
+            var alert = $(this).prop('checked');
+            $.ajax({
+                url: '/ajax_api_alert_type_update',
+                data: {api_id: api_id, alert_type: alert_type, alert: alert?1:0},
+                type: 'post',
+                dataType: 'json',
+                success: function(res){
+                    if(res.success==true){
+                        toastr["success"](res.msg, "成功!");
+                    }else{
+                        toastr["error"](res.msg, "失敗!");
+                    }
+                }
+            });
+        });
         table.on('click', '.api-to-list-container .btn-add-receiver-input', function (e) {
             e.preventDefault();
             var api_id = $(this).closest('tr').attr('api-id');
