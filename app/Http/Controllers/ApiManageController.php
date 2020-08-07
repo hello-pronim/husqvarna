@@ -45,8 +45,9 @@ class ApiManageController extends Controller
             $elem = array();
             array_push($elem, $api['id']);
             array_push($elem, $api['status']);
-            array_push($elem, $api['alert']);
-            array_push($elem, $api['via']);
+            array_push($elem, $api['alert_email']);
+            array_push($elem, $api['alert_tel']);
+            array_push($elem, $api['alert_sms']);
 
             $receivers = AlertReceiver::where('api_id', $api['id'])->get()->toArray();
             array_push($elem, $receivers);
@@ -60,7 +61,7 @@ class ApiManageController extends Controller
         if($request->input()['search']['value']) $searchText = $request->input()['search']['value'];
         if($searchText){
             foreach ($apis as $key => $api) {
-                if(strpos($api['5'], $searchText)!==false)
+                if(strpos($api['6'], $searchText)!==false)
                     array_push($result, $api);
             }
         }else $result = $apis;
@@ -92,6 +93,7 @@ class ApiManageController extends Controller
     public function addApiReceiver(Request $request){
         $receiver = $request->receiver;
         $receiver_id = $request->receiver_id;
+        $alert_type = $request->alert_type;
         $api_id = $request->api_id;
         if($receiver_id!=0){
             AlertReceiver::where('id', $receiver_id)->update(array('receiver'=>$receiver));
@@ -100,7 +102,8 @@ class ApiManageController extends Controller
         }else{
             $receiver = AlertReceiver::create(array(
                 'api_id'=>$api_id,
-                'receiver'=>$receiver
+                'receiver'=>$receiver,
+                'type'=>$alert_type
             ));
             $response = array('success' => true , 'msg' => '送信先へ正常に追加されました', 'receiver_id'=>$receiver->id);
         }

@@ -23,9 +23,10 @@
                                     <tr>
                                         <th class="all"></th>
                                         <th class="all">{{ trans('api.status') }}</th>
-                                        <th class="all">{{ trans('api.alert') }}</th>
-                                        <th class="all">{{ trans('api.via') }}</th>
-                                        <th class="all">{{ trans('api.to') }}</th>                                        
+                                        <th class="all">{{ trans('api.alert') }}(EML)</th>
+                                        <th class="all">{{ trans('api.alert') }}(TEL)</th>
+                                        <th class="all">{{ trans('api.alert') }}(SMS)</th>    
+                                        <th class="all"></th>                               
                                         <th class="all">{{ trans('api.api_name') }}</th>
                                     </tr>
                                 </thead>

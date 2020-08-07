@@ -314,6 +314,15 @@ form.po_detail_form input[type=file] {
   font-size: 500px;
 }
 
+#apis .cs-checkbox input[type=checkbox] {
+  margin-top: 0px;
+  margin-right: 5px;
+}
+
+#apis .cs-checkbox label {
+  margin-bottom: 0px;
+}
+
 #apis .api-to-list-container {
   width: 100%;
 }
@@ -322,6 +331,7 @@ form.po_detail_form input[type=file] {
   list-style: none;
   padding-left: 0px;
   margin-bottom: 0px;
+  margin-top: 10px;
 }
 
 #apis .api-to-list-container .api-to-list li {
@@ -330,7 +340,7 @@ form.po_detail_form input[type=file] {
   margin-bottom: 5px;
 }
 
-#apis .api-to-list-container .api-to-list li > i {
+#apis .api-to-list-container .api-to-list li > span {
   margin-left: 5px;
   margin-right: 5px;
 }

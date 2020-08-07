@@ -81,45 +81,70 @@ var DatatablesAjax = function () {
                                     '</span>';
                         },
                         className: 'dt-body-center',
-                    },                   
+                    },           
                     {
-                        "targets":2,       
-                        "orderable": false,                 
-                        "render":function(data, type, full, meta){        
-                            return '<span class="input-group-btn">'+
-                                        '<button class="btn '+(data==1?"blue":"red")+' btn-sm btn-api-alert" alert="'+data+'" type="button">'+(data==1?"ON":"OFF")+'</button>'+
-                                    '</span>';
-                        },
-                        className: 'dt-body-center',
-                    },             
-                    {
-                        "targets":3,   
+                        "targets":2,   
                         "orderable": false,                  
                         "render":function(data, type, full, meta){ 
-                            var select = "";
-                            select += '<select class="form-control input-small input-sm input-inline mr-10 select-api-via">';
-                            select += '<option value="sms"'+(data=="sms"? 'selected':'')+'>SMS</option>';
-                            select += '<option value="email"'+(data=="email"? 'selected':'')+'>EML</option>';
-                            select += '<option value="tel"'+(data=="tel"? 'selected':'')+'>TEL</option>';
-                            select += '</select>';
-                            return select;
-                        },
-                    },   
-                    {
-                        "targets":4, 
-                        "orderable": false,                      
-                        "render":function(data, type, full, meta){
+                            var cell = "<span class='cs-checkbox flex-row align-items-center'><input type='checkbox' name='alert_email' value='1' "+(data==1?'checked':'')+"><label>EML</label></span>";
                             var list="<div class='api-to-list-container'>";
-                            list+="<ul class='api-to-list' api-id='"+full[0]+"'>";
-                            var len = data.length;
+                            list+="<ul class='api-to-list' alert-type='email' api-id='"+full[0]+"'>";
+                            var emails = full[5];
+                            var len = emails.length;
                             for(var i=0; i<len; i++){
-                                list+="<li receiver-id='"+data[i].id+"'><i class='fa fa-minus-circle btn-remove-receiver'></i><span>"+data[i].receiver+"</span><i class='fa fa-pencil btn-edit-receiver'></i></li>";
+                                if(emails[i].type=="email")
+                                    list+="<li receiver-id='"+emails[i].id+"'><i class='fa fa-minus-circle btn-remove-receiver'></i><span>"+emails[i].receiver+"</span><i class='fa fa-pencil btn-edit-receiver'></i></li>";
                             }
                             list+="<li><i class='fa fa-plus-circle btn-add-receiver-input'></i></li>";
                             list+="</ul>";
                             list+="</div>";
-                            return list;
+                            cell+=list;
+                            return cell;
                         },
+                    },              
+                    {
+                        "targets":3,   
+                        "orderable": false,                  
+                        "render":function(data, type, full, meta){ 
+                            var cell = "<span class='cs-checkbox flex-row align-items-center'><input type='checkbox' name='alert_tel' value='1' "+(data==1?'checked':'')+"><label>TEL</label></span>";
+                            var list="<div class='api-to-list-container'>";
+                            list+="<ul class='api-to-list' alert-type='tel' api-id='"+full[0]+"'>";
+                            var nums = full[5];
+                            var len = nums.length;
+                            for(var i=0; i<len; i++){
+                                if(nums[i].type=="tel")
+                                    list+="<li receiver-id='"+nums[i].id+"'><i class='fa fa-minus-circle btn-remove-receiver'></i><span>"+nums[i].receiver+"</span><i class='fa fa-pencil btn-edit-receiver'></i></li>";
+                            }
+                            list+="<li><i class='fa fa-plus-circle btn-add-receiver-input'></i></li>";
+                            list+="</ul>";
+                            list+="</div>";
+                            cell+=list;
+                            return cell;
+                        },
+                    },              
+                    {
+                        "targets":4,   
+                        "orderable": false,                  
+                        "render":function(data, type, full, meta){ 
+                            var cell = "<span class='cs-checkbox flex-row align-items-center'><input type='checkbox' name='alert_sms' value='1' "+(data==1?'checked':'')+"><label>SMS</label></span>";
+                            var list="<div class='api-to-list-container'>";
+                            list+="<ul class='api-to-list' alert-type='sms' api-id='"+full[0]+"'>";
+                            var nums = full[5];
+                            var len = nums.length;
+                            for(var i=0; i<len; i++){
+                                if(nums[i].type=="sms")
+                                    list+="<li receiver-id='"+nums[i].id+"'><i class='fa fa-minus-circle btn-remove-receiver'></i><span>"+nums[i].receiver+"</span><i class='fa fa-pencil btn-edit-receiver'></i></li>";
+                            }
+                            list+="<li><i class='fa fa-plus-circle btn-add-receiver-input'></i></li>";
+                            list+="</ul>";
+                            list+="</div>";
+                            cell+=list;
+                            return cell;
+                        },
+                    },  
+                    {
+                        "targets":5,   
+                        visible: false
                     },
                     {
                         "targets":-1,                     
@@ -144,9 +169,10 @@ var DatatablesAjax = function () {
             var api_id = $(this).attr('api-id');
             var receiver = $(this).parent().parent().find('.input-receiver').val();
             var receiver_id = $(this).parent().parent().parent().attr('receiver-id'); 
+            var alert_type = $(this).parent().parent().parent().parent().attr('alert-type');
             $.ajax({
                 url: '/ajax_api_receiver_add',
-                data: {receiver_id: receiver_id?receiver_id:0, receiver: receiver, api_id: api_id},
+                data: {receiver_id: receiver_id?receiver_id:0, receiver: receiver, alert_type: alert_type, api_id: api_id},
                 type: 'post',
                 dataType: 'json',
                 success: function(res){
