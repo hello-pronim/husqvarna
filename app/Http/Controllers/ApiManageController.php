@@ -160,9 +160,9 @@ class ApiManageController extends Controller
                         $status = "down";
                         Api::where('api_name', $api['api_name'])->update(array('status'=>'down')); 
                     }
-                    if($api['alert']==1){
+                    if($api['alert_email']==1){
                         foreach ($receivers as $receiver) {
-                            if($this->checkEmail($receiver['receiver'])){
+                            if($receiver['type']=="email" && $this->checkEmail($receiver['receiver'])){
                                 $param = array(
                                     'to'=>$receiver['receiver'],
                                     'subject'=>"Check API status",
@@ -194,9 +194,9 @@ class ApiManageController extends Controller
                         $status = "down";
                         Api::where('api_name', $api['api_name'])->update(array('status'=>'down')); 
                     }
-                    if($api['alert']==1){
+                    if($api['alert_email']==1){
                         foreach ($receivers as $receiver) {
-                            if($this->checkEmail($receiver['receiver'])){
+                            if($receiver['type']=="email" && $this->checkEmail($receiver['receiver'])){
                                 $param = array(
                                     'to'=>$receiver['receiver'],
                                     'subject'=>"Check API status",
@@ -254,9 +254,9 @@ class ApiManageController extends Controller
                             $status = "down";
                             Api::where('api_name', $api['api_name'])->update(array('status'=>'down')); 
                         }
-                        if($api['alert']==1){
+                        if($api['alert_email']==1){
                             foreach ($receivers as $receiver) {
-                                if($this->checkEmail($receiver['receiver'])){
+                                if($receiver['type']=="email" && $this->checkEmail($receiver['receiver'])){
                                     $param = array(
                                         'to'=>$receiver['receiver'],
                                         'subject'=>"Check API status",
