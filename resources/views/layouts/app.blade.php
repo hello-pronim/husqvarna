@@ -186,8 +186,8 @@
                         </ul>
                     </li>              
                     @if(Auth::user()->user_type >= App\Enums\UserType::Superadmin)    
-                    <li class="nav-item @if(request()->routeIs(['api'])) active open @endif">
-                        <a href="{{route('api')}}" class="nav-link nav-toggle">
+                    <li class="nav-item @if(request()->routeIs(['api.settings'])) active open @endif">
+                        <a href="{{route('api.settings')}}" class="nav-link nav-toggle">
                             <i class="icon-puzzle"></i>
                             <span class="title">API状況</span>
                             <span class="arrow"></span>

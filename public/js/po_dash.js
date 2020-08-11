@@ -250,9 +250,10 @@ var DatatablesAjax = function () {
             tracking_no_input += '<div><select class="form-control input-small input-sm input-inline mr-10">';
             $.each(data.split(','), function (key, elem) {
               if (elem) {
-                tracking_no_input += "<option>" + elem + "</option>";
+                tracking_no_input += "<option value=" + elem + ">" + elem + "</option>";
               }
-            });
+            }); //tracking_no_input += "<option value=''>新しいお問合せ番号</option>";
+
             tracking_no_input += "</select>"; // + "<a class='add_track'><i class='fa fa-plus-circle'></i></a></div>";
 
             tracking_no_input += '<div><input type="text" class="form-control input-sm input-small tracking_no input-inline" name="tracking_no" placeholder="">' + '<span class="input-group-btn">' + '<button class="btn blue btn-sm" txt="change" type="button">保存</button>' + '</span>' + '</div>';
@@ -524,13 +525,26 @@ var DatatablesAjax = function () {
           },
           success: function success(res) {
             if (res.success == true) {
-              tracking_box.find("select").prepend("<option selected>" + tracking_box.find("input").val() + "</option>");
+              tracking_box.find("select").prepend("<option value=" + tracking_box.find("input").val() + ">" + tracking_box.find("input").val() + "</option>");
+              tracking_box.find("input").val("");
+              tracking_box.find("input").focus();
               toastr["success"](res.msg, "成功!");
             } else {
+              tracking_box.find("input").val("");
+              tracking_box.find("input").focus();
               toastr["error"](res.msg, "失敗!");
             }
           }
         });
+      }
+    });
+    table.on('change', '.tracking_box select', function (e) {
+      var tracking_box = $(this).closest('.tracking_box');
+      var the = $(this);
+
+      if ($(this).val()) {
+        tracking_box.find('input').val($(this).val());
+        tracking_box.find("input").focus();
       }
     });
   };

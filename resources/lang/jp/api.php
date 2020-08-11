@@ -17,5 +17,7 @@ return [
     'alert' => 'アラート',
     'via' => '送信方法',
     'to' => '送信先',
-    'api_name' => 'API名'
+    'api_name' => 'API名',
+    'api'=>'API',
+    'checks'=>'CHECKS'
 ];

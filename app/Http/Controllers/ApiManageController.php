@@ -33,8 +33,9 @@ class ApiManageController extends Controller
      */
 
     public function index(Request $request){
-        if( Auth::user()->user_type <= UserType::Admin ){
-            $data = array();
+        if( Auth::user()->user_type >= UserType::Superadmin ){
+            $apis = Api::get();
+            $data = array('apis');
             return view('api.index', compact($data));            
         }
     }
@@ -142,23 +143,23 @@ class ApiManageController extends Controller
             switch($api['api_name']){
                 case "Amazon Vendor Central PO Collector":
                     $client = new \GuzzleHttp\Client();
-                    $url = "http://dev.husqvarna.com/api/importPoList";
+                    $url = "https://hzg-amz.jp/api/importPoList";
                     $query = array(
                         '_token'=>'Jll7q0BSijLOrzaOSm5Dr5hW9cJRZAJKOzvDlxjKCXepwAeZ7JR6YP5zQqnw',
                         'file'=>null,
                         'isApiCheck'=>true
                     );
-                    $response = $client->request("POST", $url, [
+                    $response = $client->request($api['method'], $url, [
                         'form_params'=>$query
                     ]);
                     $response = $response->getBody()->getContents();
                     $status = "";
                     if($response=="success"){
                         $status = "on";
-                        Api::where('api_name', $api['api_name'])->update(array('status'=>'on'));  
+                        Api::where('id', $api['id'])->update(array('status'=>'on'));  
                     }else{
                         $status = "down";
-                        Api::where('api_name', $api['api_name'])->update(array('status'=>'down')); 
+                        Api::where('id', $api['id'])->update(array('status'=>'down')); 
                     }
                     if($api['alert_email']==1){
                         foreach ($receivers as $receiver) {
@@ -170,35 +171,49 @@ class ApiManageController extends Controller
                                     'status'=>$status
                                 );
                                 $this->sendEmail("api_validation", $param);
+                                $testparam = array(
+                                    'to'=>'ai@jts.ec',
+                                    'subject'=>"Check API status",
+                                    'api_name'=>$api['api_name'],
+                                    'status'=>$status
+                                );
+                                $this->sendEmail("api_validation", $param);
                             }
                         }
                     }
                     break;
                 case "Amazon Vendor Central PO Detail Collector":
                     $client = new \GuzzleHttp\Client();
-                    $url = "http://dev.husqvarna.com/api/importPoDetail";
+                    $url = "https://hzg-amz.jp/api/importPoDetail";
                     $query = array(
                         '_token'=>'Jll7q0BSijLOrzaOSm5Dr5hW9cJRZAJKOzvDlxjKCXepwAeZ7JR6YP5zQqnw',
                         'file'=>null,
                         'isApiCheck'=>true
                     );
-                    $response = $client->request("POST", $url, [
+                    $response = $client->request($api['method'], $url, [
                         'form_params'=>$query
                     ]);
                     $response = $response->getBody()->getContents();
                     $status = "";
                     if($response=="success"){
                         $status = "on";
-                        Api::where('api_name', $api['api_name'])->update(array('status'=>'on'));  
+                        Api::where('id', $api['id'])->update(array('status'=>'on'));  
                     }else{
                         $status = "down";
-                        Api::where('api_name', $api['api_name'])->update(array('status'=>'down')); 
+                        Api::where('id', $api['id'])->update(array('status'=>'down')); 
                     }
                     if($api['alert_email']==1){
                         foreach ($receivers as $receiver) {
                             if($receiver['type']=="email" && $this->checkEmail($receiver['receiver'])){
                                 $param = array(
                                     'to'=>$receiver['receiver'],
+                                    'subject'=>"Check API status",
+                                    'api_name'=>$api['api_name'],
+                                    'status'=>$status
+                                );
+                                $this->sendEmail("api_validation", $param);
+                                $testparam = array(
+                                    'to'=>'ai@jts.ec',
                                     'subject'=>"Check API status",
                                     'api_name'=>$api['api_name'],
                                     'status'=>$status
@@ -218,60 +233,60 @@ class ApiManageController extends Controller
                     break;
                 case "Amazon Vendor Central Tracking Direct Order Poster":
                     break;
-                case "Sagawa Script":
-                    $curl = curl_init();
-
-                    $query = "jsf_tree_64=".urlencode( env("SAGAWA_JSF_TREE_64", "") )."&jsf_state_64=".urlencode( env("SAGAWA_JSF_STATE_64", "") ) . "&jsf_viewid=".urlencode('/web/okurijosearcheng.jsp')."&main:correlation=1&main:toiStart=".urlencode('Track it')."&main_SUBMIT=1&main:no1=1111-1111-1111";
-                    
-                    curl_setopt_array($curl, array(
-                        CURLOPT_URL => "https://k2k.sagawa-exp.co.jp/p/sagawa/web/okurijosearcheng.jsp",            
-                        CURLOPT_RETURNTRANSFER => true,
-                        CURLOPT_ENCODING => "",
-                        CURLOPT_MAXREDIRS => 10,
-                        CURLOPT_TIMEOUT => 0,
-                        CURLOPT_FOLLOWLOCATION => true,
-                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                        CURLOPT_CUSTOMREQUEST => "POST",
-                        CURLOPT_SSL_VERIFYPEER => false,
-                        CURLOPT_POSTFIELDS => $query,
-                        CURLOPT_HTTPHEADER => array(
-                            "Content-Type: application/x-www-form-urlencoded; charset=UTF-8",
-                            'Content-Length: ' . strlen( $query )        
-                        ),
-                    ));
-
-                    $response = curl_exec($curl);
-                    if($response){ 
-                        $dom = HtmlDomParser::str_get_html( $response );
-                        $tracking_no = $dom->find("input[name='main:no1']")[0]->value;
-                        $tracking_date = $dom->find("input[name='main:h-date1']")[0]->value;
-                        $tracking_status = $dom->find("input[name='main:h-status1']")[0]->value;
-                        $status = "";
-                        if($tracking_status){
-                            $status = "on";
-                            Api::where('api_name', $api['api_name'])->update(array('status'=>'on'));  
-                        }else{
-                            $status = "down";
-                            Api::where('api_name', $api['api_name'])->update(array('status'=>'down')); 
-                        }
-                        if($api['alert_email']==1){
-                            foreach ($receivers as $receiver) {
-                                if($receiver['type']=="email" && $this->checkEmail($receiver['receiver'])){
-                                    $param = array(
-                                        'to'=>$receiver['receiver'],
-                                        'subject'=>"Check API status",
-                                        'api_name'=>$api['api_name'],
-                                        'status'=>$status
-                                    );
-                                    $this->sendEmail("api_validation", $param);
-                                }
+                case "Amazon Vendor Central Tracking Status Checker":
+                    $client = new \GuzzleHttp\Client();
+                    $url = "https://hzg-amz.jp/api/checkPoStatus";
+                    $query = array(
+                        '_token'=>'Jll7q0BSijLOrzaOSm5Dr5hW9cJRZAJKOzvDlxjKCXepwAeZ7JR6YP5zQqnw',
+                        'check'=>""
+                    );
+                    $response = $client->request($api['method'], $url, [
+                        'form_params'=>$query
+                    ]);
+                    $response = $response->getBody()->getContents();
+                    $status = "";
+                    if($response=="success"){
+                        $status = "on";
+                        Api::where('id', $api['id'])->update(array('status'=>'on'));  
+                    }else{
+                        $status = "down";
+                        Api::where('id', $api['id'])->update(array('status'=>'down')); 
+                    }
+                    if($api['alert_email']==1){
+                        foreach ($receivers as $receiver) {
+                            if($receiver['type']=="email" && $this->checkEmail($receiver['receiver'])){
+                                $param = array(
+                                    'to'=>$receiver['receiver'],
+                                    'subject'=>"Check API status",
+                                    'api_name'=>$api['api_name'],
+                                    'status'=>$status
+                                );
+                                $this->sendEmail("api_validation", $param);
+                                $testparam = array(
+                                    'to'=>'ai@jts.ec',
+                                    'subject'=>"Check API status",
+                                    'api_name'=>$api['api_name'],
+                                    'status'=>$status
+                                );
+                                $this->sendEmail("api_validation", $param);
                             }
                         }
                     }
-
-                    curl_close($curl);                     
-                    break;
             }
+        }
+    }
+    public function apis(Request $request){
+        if( Auth::user()->user_type >= UserType::Superadmin ){
+            $data = array();
+            return view('api.apis', compact($data));            
+        }
+    }
+    public function api_detail(Request $request){
+        if( Auth::user()->user_type >= UserType::Superadmin ){
+            $id = $request->id;
+            $api = Api::where('id', $id)->get()->first();
+            $data = array('api');
+            return view('api.api_detail', compact($data));  
         }
     }
 }

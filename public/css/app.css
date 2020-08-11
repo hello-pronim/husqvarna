@@ -79,6 +79,34 @@ i.grey {
   justify-content: center !important;
 }
 
+.justify-content-between {
+  justify-content: space-between !important;
+}
+
+.py-10 {
+  padding: 10px 0px !important;
+}
+
+.mt-10 {
+  margin-top: 10px !important;
+}
+
+.mt-20 {
+  margin-top: 20px !important;
+}
+
+.mt-30 {
+  margin-top: 30px !important;
+}
+
+.mt-50 {
+  margin-top: 50px !important;
+}
+
+.table.table-borderless td {
+  border: none;
+}
+
 #app {
   background: url("/../images/bg_auth.png") no-repeat;
   background-size: cover;
@@ -351,6 +379,25 @@ form.po_detail_form input[type=file] {
 
 #apis .api-to-list-container i {
   cursor: pointer;
+}
+
+#accordion-apis .form-params-container .table td {
+  vertical-align: middle !important;
+}
+
+#accordion-apis .form-params-container input.form-control.is-invalid {
+  border: 1px solid #e73d4a;
+}
+
+#accordion-apis .form-response-container pre.form-response {
+  background-color: #41444e;
+  color: #FFF;
+  font-size: 1.2rem;
+  border-radius: 5px !important;
+  border-width: 1px;
+  border-color: #aeaeae;
+  padding: 10px;
+  word-wrap: break-word;
 }
 
 @media (min-width: 992px) {
