@@ -37,6 +37,7 @@ class ApiChecker extends Command
      */
     public function handle()
     {
+        file_put_contents("a.txt", date('Y-m-d H:i:s'), FILE_APPEND);
         $controller = new \App\Http\Controllers\ApiManageController();
         $controller->checkApis();
     }
