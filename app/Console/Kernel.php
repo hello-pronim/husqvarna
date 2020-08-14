@@ -24,11 +24,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('check:api')->dailyAt('06:00');
-        // $schedule->call(function(){
-        //     $controller = new \App\Http\Controllers\ApiManageController();
-        //     $controller->checkApis();
-        // })->everySecond();
+        //$schedule->command('check:api')->dailyAt('06:00');
+        $schedule->command('check:api')->everyMinute();
     }
 
     /**

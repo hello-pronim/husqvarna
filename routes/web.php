@@ -29,7 +29,7 @@ Route::group(['middleware' => ['auth']], function(){
 	Route::post('/tracking_uploadcsv', 'DashboardController@uploadTrackingCSV')->name('tracking_uploadcsv');
 	Route::post('/aws_customer_csv', 'ManageController@awsCustomerCSV')->name('aws_customer_csv');
 
-	Route::post('/ajax_dashbaord', 'DashboardController@ajax_dashbaord')->name('ajax_dashbaord');
+	Route::post('/ajax_dashboard', 'DashboardController@ajax_dashboard')->name('ajax_dashboard');
 	Route::post('/ajax_direct_order', 'DashboardController@ajax_direct_order')->name('ajax_direct_order');
 	Route::post('/ajax_tracking_update', 'DashboardController@ajax_tracking_update')->name('ajax_tracking_update');
 	Route::post('/ajax_order_products', 'DashboardController@ajax_order_products')->name('ajax_order_products');

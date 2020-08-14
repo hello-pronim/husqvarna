@@ -144,6 +144,7 @@ class ApiManageController extends Controller
                 case "Amazon Vendor Central PO Collector":
                     $client = new \GuzzleHttp\Client();
                     $url = "https://hzg-amz.jp/api/importPoList";
+                    //$url = "http://dev.husqvarna.com/api/importPoList";
                     $query = array(
                         '_token'=>'Jll7q0BSijLOrzaOSm5Dr5hW9cJRZAJKOzvDlxjKCXepwAeZ7JR6YP5zQqnw',
                         'file'=>null,
@@ -177,7 +178,7 @@ class ApiManageController extends Controller
                                     'api_name'=>$api['api_name'],
                                     'status'=>$status
                                 );
-                                $this->sendEmail("api_validation", $param);
+                                $this->sendEmail("api_validation", $testparam);
                             }
                         }
                     }
@@ -185,6 +186,7 @@ class ApiManageController extends Controller
                 case "Amazon Vendor Central PO Detail Collector":
                     $client = new \GuzzleHttp\Client();
                     $url = "https://hzg-amz.jp/api/importPoDetail";
+                    //$url = "http://dev.husqvarna.com/api/importPoDetail";
                     $query = array(
                         '_token'=>'Jll7q0BSijLOrzaOSm5Dr5hW9cJRZAJKOzvDlxjKCXepwAeZ7JR6YP5zQqnw',
                         'file'=>null,
@@ -218,7 +220,7 @@ class ApiManageController extends Controller
                                     'api_name'=>$api['api_name'],
                                     'status'=>$status
                                 );
-                                $this->sendEmail("api_validation", $param);
+                                $this->sendEmail("api_validation", $testparam);
                             }
                         }
                     }
@@ -236,6 +238,7 @@ class ApiManageController extends Controller
                 case "Amazon Vendor Central Tracking Status Checker":
                     $client = new \GuzzleHttp\Client();
                     $url = "https://hzg-amz.jp/api/checkPoStatus";
+                    //$url = "http://dev.husqvarna.com/api/checkPoStatus";
                     $query = array(
                         '_token'=>'Jll7q0BSijLOrzaOSm5Dr5hW9cJRZAJKOzvDlxjKCXepwAeZ7JR6YP5zQqnw',
                         'check'=>""
@@ -268,7 +271,7 @@ class ApiManageController extends Controller
                                     'api_name'=>$api['api_name'],
                                     'status'=>$status
                                 );
-                                $this->sendEmail("api_validation", $param);
+                                $this->sendEmail("api_validation", $testparam);
                             }
                         }
                     }

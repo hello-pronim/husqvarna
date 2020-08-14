@@ -140,7 +140,7 @@ class DashboardController extends Controller
         return view('dashboard.order_detail', compact($data));        
     }    
 
-    public function ajax_dashbaord(Request $request)
+    public function ajax_dashboard(Request $request)
     {
                
         $response = Order::getDataFilter($request->input());

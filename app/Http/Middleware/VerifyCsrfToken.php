@@ -12,7 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [        
-        'ajax_dashbaord',
+        'ajax_dashboard',
         'ajax_tracking_update',
         'ajax_direct_order',
         'ajax_order_products',

@@ -139,7 +139,7 @@ var DatatablesAjax = function () {
         "pageLength": 20,
         // default record count per page
         "ajax": {
-          "url": "/ajax_dashbaord" // ajax source
+          "url": "/ajax_dashboard" // ajax source
 
           /*"dataSrc": function(res){
                 for ( var i=0, ien=res.data.length ; i<ien ; i++ ) {
