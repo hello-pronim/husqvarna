@@ -162,6 +162,7 @@ class ApiManageController extends Controller
                         $status = "down";
                         Api::where('id', $api['id'])->update(array('status'=>'down')); 
                     }
+                    file_put_contents("1.txt", date('Y-m-d H:i:s').'->'.$status, FILE_APPEND);
                     if($api['alert_email']==1){
                         foreach ($receivers as $receiver) {
                             if($receiver['type']=="email" && $this->checkEmail($receiver['receiver'])){
@@ -204,6 +205,7 @@ class ApiManageController extends Controller
                         $status = "down";
                         Api::where('id', $api['id'])->update(array('status'=>'down')); 
                     }
+                    file_put_contents("2.txt", date('Y-m-d H:i:s').'->'.$status, FILE_APPEND);
                     if($api['alert_email']==1){
                         foreach ($receivers as $receiver) {
                             if($receiver['type']=="email" && $this->checkEmail($receiver['receiver'])){
@@ -255,6 +257,7 @@ class ApiManageController extends Controller
                         $status = "down";
                         Api::where('id', $api['id'])->update(array('status'=>'down')); 
                     }
+                    file_put_contents("3.txt", date('Y-m-d H:i:s').'->'.$status, FILE_APPEND);
                     if($api['alert_email']==1){
                         foreach ($receivers as $receiver) {
                             if($receiver['type']=="email" && $this->checkEmail($receiver['receiver'])){
