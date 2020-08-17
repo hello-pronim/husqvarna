@@ -25,6 +25,9 @@ class Order extends Model
         $value = DB::table('orders')->where('po', $data['po'])->get();
         
         if ($value->count() > 0) {
+            if($data['scraping_status']==""){
+                $data['scraping_status'] = "confirmed";
+            }
             DB::table('orders')->where('po', $data['po'])->update($data);
         }else{
             DB::table('orders')->insert($data);

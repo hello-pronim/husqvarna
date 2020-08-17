@@ -18,7 +18,7 @@ class ApiController extends Controller
         if(isset($request->isApiCheck) && $request->isApiCheck) // isApiCheck param is for API checking flag
             return "success";
         else 
-            return response()->json( $this->readcsv($request, new OrderImport($request->input('status')), 'po_csv') );        
+            return response()->json( $this->readcsv($request, new OrderImport(strtolower($request->input('status'))), 'po_csv') );        
     }
 
     public function uploadProduct(Request $request){       	
