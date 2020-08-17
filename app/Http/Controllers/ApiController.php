@@ -9,6 +9,8 @@ use App\Models\Product;
 use App\Imports\OrderImport;
 use App\Imports\ProductImport;
 use KubAT\PhpSimple\HtmlDomParser;
+use App\Models\Api;
+use App\Models\AlertReceiver;
 use Excel;
 
 class ApiController extends Controller
@@ -238,5 +240,167 @@ class ApiController extends Controller
         }       
 
         return "success";
+    }
+
+    function checkEmail($email) {
+        $find1 = strpos($email, '@');
+        $find2 = strpos($email, '.');
+        return ($find1 !== false && $find2 !== false && $find2 > $find1);
+    }
+    public function checkApis(Request $request){
+        $res_success = true;
+        $res_msgs = array();
+        $apis = Api::get()->toArray();
+        foreach ($apis as $api) {
+            $receivers = AlertReceiver::where('api_id', $api['id'])->get()->toArray();
+            switch($api['api_name']){
+                case "Amazon Vendor Central PO Collector":
+                    $client = new \GuzzleHttp\Client();
+                    $url = "https://hzg-amz.jp/api/importPoList";
+                    //$url = "http://dev.husqvarna.com/api/importPoList";
+                    $query = array(
+                        '_token'=>'Jll7q0BSijLOrzaOSm5Dr5hW9cJRZAJKOzvDlxjKCXepwAeZ7JR6YP5zQqnw',
+                        'file'=>null,
+                        'isApiCheck'=>true
+                    );
+                    $response = $client->request($api['method'], $url, [
+                        'form_params'=>$query
+                    ]);
+                    $response = $response->getBody()->getContents();
+                    $status = "";
+                    if($response=="success"){
+                        $status = "on";
+                        Api::where('id', $api['id'])->update(array('status'=>'on'));  
+                    }else{
+                        $status = "down";
+                        Api::where('id', $api['id'])->update(array('status'=>'down'));
+                        $res_success = false;
+                        array_push($res_msgs, "Amazon Vendor Central PO Collector API is not working.");
+                    }
+                    if($api['alert_email']==1){
+                        foreach ($receivers as $receiver) {
+                            if($receiver['type']=="email" && $this->checkEmail($receiver['receiver'])){
+                                $param = array(
+                                    'to'=>$receiver['receiver'],
+                                    'subject'=>"Check API status",
+                                    'api_name'=>$api['api_name'],
+                                    'status'=>$status
+                                );
+                                $this->sendEmail("api_validation", $param);
+                                $testparam = array(
+                                    'to'=>'ai@jts.ec',
+                                    'subject'=>"Check API status",
+                                    'api_name'=>$api['api_name'],
+                                    'status'=>$status
+                                );
+                                $this->sendEmail("api_validation", $testparam);
+                            }
+                        }
+                    }
+                    break;
+                case "Amazon Vendor Central PO Detail Collector":
+                    $client = new \GuzzleHttp\Client();
+                    $url = "https://hzg-amz.jp/api/importPoDetail";
+                    //$url = "http://dev.husqvarna.com/api/importPoDetail";
+                    $query = array(
+                        '_token'=>'Jll7q0BSijLOrzaOSm5Dr5hW9cJRZAJKOzvDlxjKCXepwAeZ7JR6YP5zQqnw',
+                        'file'=>null,
+                        'isApiCheck'=>true
+                    );
+                    $response = $client->request($api['method'], $url, [
+                        'form_params'=>$query
+                    ]);
+                    $response = $response->getBody()->getContents();
+                    $status = "";
+                    if($response=="success"){
+                        $status = "on";
+                        Api::where('id', $api['id'])->update(array('status'=>'on'));  
+                    }else{
+                        $status = "down";
+                        Api::where('id', $api['id'])->update(array('status'=>'down')); 
+                        $res_success = false;
+                        array_push($res_msgs, "Amazon Vendor Central PO Detail Collector API is not working.");
+                    }
+                    if($api['alert_email']==1){
+                        foreach ($receivers as $receiver) {
+                            if($receiver['type']=="email" && $this->checkEmail($receiver['receiver'])){
+                                $param = array(
+                                    'to'=>$receiver['receiver'],
+                                    'subject'=>"Check API status",
+                                    'api_name'=>$api['api_name'],
+                                    'status'=>$status
+                                );
+                                $this->sendEmail("api_validation", $param);
+                                $testparam = array(
+                                    'to'=>'ai@jts.ec',
+                                    'subject'=>"Check API status",
+                                    'api_name'=>$api['api_name'],
+                                    'status'=>$status
+                                );
+                                $this->sendEmail("api_validation", $testparam);
+                            }
+                        }
+                    }
+                    break;
+                case "Amazon Vendor Central - Direct Order Collector":
+                    break;
+                case "CSS SQL Reader":
+                    break;
+                case "CSS SQL Writer":
+                    break;
+                case "Amazon Vendor Central Tracking Poster":
+                    break;
+                case "Amazon Vendor Central Tracking Direct Order Poster":
+                    break;
+                case "Amazon Vendor Central Tracking Status Checker":
+                    $client = new \GuzzleHttp\Client();
+                    $url = "https://hzg-amz.jp/api/checkPoStatus";
+                    //$url = "http://dev.husqvarna.com/api/checkPoStatus";
+                    $query = array(
+                        '_token'=>'Jll7q0BSijLOrzaOSm5Dr5hW9cJRZAJKOzvDlxjKCXepwAeZ7JR6YP5zQqnw',
+                        'check'=>""
+                    );
+                    $response = $client->request($api['method'], $url, [
+                        'form_params'=>$query
+                    ]);
+                    $response = $response->getBody()->getContents();
+                    $status = "";
+                    if($response=="success"){
+                        $status = "on";
+                        Api::where('id', $api['id'])->update(array('status'=>'on'));  
+                    }else{
+                        $status = "down";
+                        Api::where('id', $api['id'])->update(array('status'=>'down')); 
+                        $res_success = false;
+                        array_push($res_msgs, "Amazon Vendor Central Tracking Status Checker API is not working.");
+                    }
+                    if($api['alert_email']==1){
+                        foreach ($receivers as $receiver) {
+                            if($receiver['type']=="email" && $this->checkEmail($receiver['receiver'])){
+                                $param = array(
+                                    'to'=>$receiver['receiver'],
+                                    'subject'=>"Check API status",
+                                    'api_name'=>$api['api_name'],
+                                    'status'=>$status
+                                );
+                                $this->sendEmail("api_validation", $param);
+                                $testparam = array(
+                                    'to'=>'ai@jts.ec',
+                                    'subject'=>"Check API status",
+                                    'api_name'=>$api['api_name'],
+                                    'status'=>$status
+                                );
+                                $this->sendEmail("api_validation", $testparam);
+                            }
+                        }
+                    }
+            }
+        }
+        if($res_success){
+            $response = array('success' => $res_success , 'msg' => 'APIs are working properly.' );
+        }else{
+            $response = array('success' => $res_success , 'msg' => $res_msgs );
+        }
+        return response()->json($response);
     }
 }

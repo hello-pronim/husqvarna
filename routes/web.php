@@ -55,7 +55,6 @@ Route::group(['middleware' => ['auth']], function(){
 	Route::post('/user/delete', 'ManageController@delete_user')->name('delete_user');
 
 	Route::get('/api_settings', 'ApiManageController@index')->name('api.settings');
-	Route::get('/api_settings/check', 'ApiManageController@checkApis')->name('api.check');
 });
 
 Route::get('/register', function(){

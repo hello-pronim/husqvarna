@@ -37,7 +37,7 @@ class ApiChecker extends Command
      */
     public function handle()
     {
-        $controller = new \App\Http\Controllers\ApiManageController();
+        $controller = new \App\Http\Controllers\ApiController();
         $controller->checkApis();
     }
 }
