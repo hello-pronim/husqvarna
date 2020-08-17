@@ -11,7 +11,7 @@ class ProductImport implements ToCollection
     
    	public $order_id;
 
-    public function  __construct($order_id)
+    public function  __construct($order_id=0)
     {
         $this->order_id= $order_id;
     }

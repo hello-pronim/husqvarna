@@ -260,7 +260,12 @@ class DashboardController extends Controller
                         // Upload file
                         $file->move($location, $filename);
 
-                        Excel::import(new OrderImport, $filepath); 
+                        $status = "new";
+                        if (strpos($filename, 'ConfirmedPurchaseOrders') !== false) {
+                            $status = 'confirmed';
+                        }
+
+                        Excel::import(new OrderImport($status), $filepath);                         
 
                         //Session::flash('message', 'インポートに成功しました。');
                         $result=array('success' => true, 'msg' =>'インポートに成功しました。' );

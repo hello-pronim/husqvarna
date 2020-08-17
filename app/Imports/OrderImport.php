@@ -10,7 +10,7 @@ class OrderImport implements ToCollection
 {
     public $status;
 
-    public function  __construct($status)
+    public function  __construct($status="new")
     {
         $this->status= $status;
     }
