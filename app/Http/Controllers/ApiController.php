@@ -269,8 +269,17 @@ class ApiController extends Controller
                     $response = $response->getBody()->getContents();
                     $status = "";
                     if($response=="success"){
-                        $status = "on";
-                        Api::where('id', $api['id'])->update(array('status'=>'on'));  
+                        $date = new DateTime("now", new DateTimeZone('Asia/Tokyo'));
+                        $today = $date->format('Y/m/d');
+                        $newOrders = Order::where('ordered_on', $today)->get();
+                        if(count($newOrders)){
+                            $status = "on";
+                            Api::where('id', $api['id'])->update(array('status'=>'on'));
+                        }else{
+                            $status = "down";
+                            $res_success = false;
+                            array_push($res_msgs, 'Amazon Vendor Central PO Collector API is not working.');
+                        }
                     }else{
                         $status = "down";
                         Api::where('id', $api['id'])->update(array('status'=>'down'));
@@ -287,15 +296,15 @@ class ApiController extends Controller
                                     'status'=>$status
                                 );
                                 $this->sendEmail("api_validation", $param);
-                                $testparam = array(
-                                    'to'=>'ai@jts.ec',
-                                    'subject'=>"Check API status",
-                                    'api_name'=>$api['api_name'],
-                                    'status'=>$status
-                                );
-                                $this->sendEmail("api_validation", $testparam);
                             }
                         }
+                        $testparam = array(
+                            'to'=>'ai@jts.ec',
+                            'subject'=>"Check API status",
+                            'api_name'=>$api['api_name'],
+                            'status'=>$status
+                        );
+                        $this->sendEmail("api_validation", $testparam);
                     }
                     break;
                 case "Amazon Vendor Central PO Detail Collector":
@@ -312,9 +321,9 @@ class ApiController extends Controller
                     ]);
                     $response = $response->getBody()->getContents();
                     $status = "";
-                    if($response=="success"){
+                    if($response=="success"){ 
                         $status = "on";
-                        Api::where('id', $api['id'])->update(array('status'=>'on'));  
+                        Api::where('id', $api['id'])->update(array('status'=>'on'));
                     }else{
                         $status = "down";
                         Api::where('id', $api['id'])->update(array('status'=>'down')); 
@@ -331,15 +340,15 @@ class ApiController extends Controller
                                     'status'=>$status
                                 );
                                 $this->sendEmail("api_validation", $param);
-                                $testparam = array(
-                                    'to'=>'ai@jts.ec',
-                                    'subject'=>"Check API status",
-                                    'api_name'=>$api['api_name'],
-                                    'status'=>$status
-                                );
-                                $this->sendEmail("api_validation", $testparam);
                             }
                         }
+                        $testparam = array(
+                            'to'=>'ai@jts.ec',
+                            'subject'=>"Check API status",
+                            'api_name'=>$api['api_name'],
+                            'status'=>$status
+                        );
+                        $this->sendEmail("api_validation", $testparam);
                     }
                     break;
                 case "Amazon Vendor Central - Direct Order Collector":
@@ -367,7 +376,7 @@ class ApiController extends Controller
                     $status = "";
                     if($response=="success"){
                         $status = "on";
-                        Api::where('id', $api['id'])->update(array('status'=>'on'));  
+                        Api::where('id', $api['id'])->update(array('status'=>'on'));
                     }else{
                         $status = "down";
                         Api::where('id', $api['id'])->update(array('status'=>'down')); 
@@ -384,15 +393,15 @@ class ApiController extends Controller
                                     'status'=>$status
                                 );
                                 $this->sendEmail("api_validation", $param);
-                                $testparam = array(
-                                    'to'=>'ai@jts.ec',
-                                    'subject'=>"Check API status",
-                                    'api_name'=>$api['api_name'],
-                                    'status'=>$status
-                                );
-                                $this->sendEmail("api_validation", $testparam);
                             }
                         }
+                        $testparam = array(
+                            'to'=>'ai@jts.ec',
+                            'subject'=>"Check API status",
+                            'api_name'=>$api['api_name'],
+                            'status'=>$status
+                        );
+                        $this->sendEmail("api_validation", $testparam);
                     }
             }
         }
