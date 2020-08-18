@@ -12,6 +12,7 @@ use KubAT\PhpSimple\HtmlDomParser;
 use App\Models\Api;
 use App\Models\AlertReceiver;
 use Excel;
+use DateTime;
 
 class ApiController extends Controller
 {
@@ -269,8 +270,8 @@ class ApiController extends Controller
                     $response = $response->getBody()->getContents();
                     $status = "";
                     if($response=="success"){
-                        $date = new DateTime("now", new DateTimeZone('Asia/Tokyo'));
-                        $today = $date->format('Y/m/d');
+                        date_default_timezone_set('Asia/Tokyo');
+                        $today = date('Y/m/d');
                         $newOrders = Order::where('ordered_on', $today)->get();
                         if(count($newOrders)){
                             $status = "on";
