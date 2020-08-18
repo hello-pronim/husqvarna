@@ -278,6 +278,7 @@ class ApiController extends Controller
                             Api::where('id', $api['id'])->update(array('status'=>'on'));
                         }else{
                             $status = "down";
+                            Api::where('id', $api['id'])->update(array('status'=>'down'));
                             $res_success = false;
                             array_push($res_msgs, 'Amazon Vendor Central PO Collector API is not working.');
                         }
