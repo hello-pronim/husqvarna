@@ -253,6 +253,7 @@ class ApiController extends Controller
         $res_msgs = array();
         $apis = Api::get()->toArray();
         foreach ($apis as $api) {
+            $statusChanged = false;
             $receivers = AlertReceiver::where('api_id', $api['id'])->get()->toArray();
             switch($api['api_name']){
                 case "Amazon Vendor Central PO Collector":
@@ -269,26 +270,30 @@ class ApiController extends Controller
                     ]);
                     $response = $response->getBody()->getContents();
                     $status = "";
+                    $api_status = Api::where('id', $api['id'])->get()->first()->status;
                     if($response=="success"){
                         date_default_timezone_set('Asia/Tokyo');
                         $today = date('Y/m/d');
                         $newOrders = Order::where('ordered_on', $today)->get();
                         if(count($newOrders)){
                             $status = "on";
+                            if($status!=$api_status) $statusChanged = true;
                             Api::where('id', $api['id'])->update(array('status'=>'on'));
                         }else{
                             $status = "down";
+                            if($status!=$api_status) $statusChanged = true;
                             Api::where('id', $api['id'])->update(array('status'=>'down'));
                             $res_success = false;
                             array_push($res_msgs, 'Amazon Vendor Central PO Collector API is not working.');
                         }
                     }else{
                         $status = "down";
+                        if($status!=$api_status) $statusChanged = true;
                         Api::where('id', $api['id'])->update(array('status'=>'down'));
                         $res_success = false;
                         array_push($res_msgs, "Amazon Vendor Central PO Collector API is not working.");
                     }
-                    if($api['alert_email']==1){
+                    if($api['alert_email']==1 && $statusChanged){
                         foreach ($receivers as $receiver) {
                             if($receiver['type']=="email" && $this->checkEmail($receiver['receiver'])){
                                 $param = array(
@@ -325,14 +330,16 @@ class ApiController extends Controller
                     $status = "";
                     if($response=="success"){ 
                         $status = "on";
+                        if($status!=$api_status) $statusChanged = true;
                         Api::where('id', $api['id'])->update(array('status'=>'on'));
                     }else{
                         $status = "down";
+                        if($status!=$api_status) $statusChanged = true;
                         Api::where('id', $api['id'])->update(array('status'=>'down')); 
                         $res_success = false;
                         array_push($res_msgs, "Amazon Vendor Central PO Detail Collector API is not working.");
                     }
-                    if($api['alert_email']==1){
+                    if($api['alert_email']==1 && $statusChanged){
                         foreach ($receivers as $receiver) {
                             if($receiver['type']=="email" && $this->checkEmail($receiver['receiver'])){
                                 $param = array(
@@ -378,14 +385,16 @@ class ApiController extends Controller
                     $status = "";
                     if($response=="success"){
                         $status = "on";
+                        if($status!=$api_status) $statusChanged = true;
                         Api::where('id', $api['id'])->update(array('status'=>'on'));
                     }else{
                         $status = "down";
+                        if($status!=$api_status) $statusChanged = true;
                         Api::where('id', $api['id'])->update(array('status'=>'down')); 
                         $res_success = false;
                         array_push($res_msgs, "Amazon Vendor Central Tracking Status Checker API is not working.");
                     }
-                    if($api['alert_email']==1){
+                    if($api['alert_email']==1 && $statusChanged){
                         foreach ($receivers as $receiver) {
                             if($receiver['type']=="email" && $this->checkEmail($receiver['receiver'])){
                                 $param = array(

@@ -24,8 +24,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('check:api')->timezone('Asia/Tokyo')->dailyAt('08:00');
-        //$schedule->command('check:api')->everyMinute();
+        //$schedule->command('check:api')->timezone('Asia/Tokyo')->dailyAt('08:00');
+        $schedule->command('check:api')->everyMinute();
     }
 
     /**
