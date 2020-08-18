@@ -149,7 +149,7 @@ var DatatablesAjax = function () {
                     {
                         "targets":-1,                     
                         "render":function(data, type, full, meta){
-                            return "<a href='/apis/"+full[0]+"'>"+data+"</a>";
+                            return data;
                         },
                     },
                 ],
