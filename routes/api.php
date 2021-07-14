@@ -19,11 +19,10 @@ Route::group(['middleware' => ['before.call']], function(){
 	Route::post('/importPoList', 'ApiController@uploadOrder');
 	Route::post('/importPoDetail', 'ApiController@uploadProduct');
 	Route::post('/updatePoStatus', 'ApiController@updatePoStatus');
-
+	Route::get('/checkAPIStatus', 'ApiController@checkApis')->name('api.check');
 });
 
 Route::get('/checkPoStatus', 'ApiController@checkTrackingStatus');
-Route::get('/checkAPIStatus', 'ApiController@checkApis')->name('api.check');
 
 
 
